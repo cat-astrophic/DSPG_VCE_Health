@@ -21,12 +21,11 @@ library(paletteer)
 library(ggplot2)
 library(sf)
 
-setwd("C:/Users/vivia/Documents/DSPG/Repose/DSPG_VCE_Health")
+setwd("~/DSPG/Data/life_expectancy")
 
-
-ranked23_measured_data <- read_excel("~/Data/2023 County Health Rankings Virginia Data.xlsx", sheet = 4, skip= 1)
-add_23_measured_data <- read_excel("~/Data/2023 County Health Rankings Virginia Data.xlsx", sheet = 5, skip= 1)
-agent_path <- "~/Data/vce_agents.csv"
+ranked23_measured_data <- read_excel("2023 County Health Rankings Virginia Data.xlsx", sheet = 4, skip= 1)
+add_23_measured_data <- read_excel("2023 County Health Rankings Virginia Data.xlsx", sheet = 5, skip= 1)
+agent_path <- "C:/Users/vivia/Documents/DSPG/Data/vce_agents.csv"
 agents_df <- read.csv(paste(agent_path, sep = ''))
 vc <- counties(state= "Virginia")
 vt <- tracts(state= "Virginia")
