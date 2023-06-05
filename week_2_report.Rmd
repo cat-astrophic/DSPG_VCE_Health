@@ -1,0 +1,225 @@
+---
+title: "Week 2 Report"
+author: "Vivian Peregrino"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE,  message = FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is a report documenting the progress we have made so far! It will show some R skills we have learned as well as several visualizations we have created.
+
+```{r loading in data, include=FALSE}
+library(readxl)
+library(tidyverse)
+library(plotly)
+library(dplyr)
+library(tigris)
+library(paletteer)
+library(ggplot2)
+library(sf)
+
+setwd("~/DSPG/Data/life_expectancy")
+
+ranked23_measured_data <- read_excel("2023 County Health Rankings Virginia Data.xlsx", sheet = 4, skip= 1)
+add_23_measured_data <- read_excel("2023 County Health Rankings Virginia Data.xlsx", sheet = 5, skip= 1)
+agent_path <- "C:/Users/vivia/Documents/DSPG/Data/vce_agents.csv"
+agents_df <- read.csv(paste(agent_path, sep = ''))
+vc <- counties(state= "Virginia")
+vt <- tracts(state= "Virginia")
+```
+
+## Social Determinants with High Variance
+
+We selected these social determinants because we thought these variables significantly affect people's access to basic healthcare. We expect this list to grow and change as the summer progresses.
+
+  + Number of Primary Care Physicians
+  + Mental Health Provider Rate
+  + Dentists
+  + Children in Poverty 
+  + Single-Parent Households
+  + Severe Housing Problems
+  + Food Insecurity
+  + Drug Overdose Deaths 
+
+```{r counties only, echo=FALSE}
+ranked <- ranked23_measured_data %>%
+  select(County,FIPS,`# Primary Care Physicians`, `# Mental Health Providers`, `Dentist Rate`, 
+         `Severe Housing Cost Burden`, `% Children in Poverty`,`% Children in Single-Parent Households`)
+names(ranked)[names(ranked) == 'FIPS'] <- 'GEOID'
+ranked23_counties<- ranked[2:134 , ]
+
+
+add_23_clean_data <- add_23_measured_data %>%
+  select(County, FIPS, `Drug Overdose Mortality Rate`, `% Food Insecure`)
+add_23_counties <- add_23_clean_data[2:134 , ]
+names(add_23_counties)[names(add_23_counties) == 'FIPS'] <- 'GEOID'
+```
+
+## Primary Care Physicians Rate in 2023
+The data source defines Primary Care Physicians Rate as the population of the county/city per physicians. This determinant of health analyzes people's access to basic and everyday healthcare.
+
+```{r 2023 Primary Care Physicians Rate}
+physicians_2023 <- ranked23_counties %>%
+  select(County,GEOID,`# Primary Care Physicians`)
+
+```
+
+
+```{r 2023 Primary Care Physicians Rate Plot, warning= FALSE}
+names(physicians_2023)[3] = "Num_Primary_Care_Physicians"
+physicians_plot <- plot_ly(data=physicians_2023, x= ~County, y= ~Num_Primary_Care_Physicians, 
+                               type= "bar") %>%
+  layout(barmode= "overlay",
+                                  title= " VA Primary Care Physicians 2023",
+                                  xaxis= list(title='County/City', tickangle= 40),
+                                  yaxis= list(title= "Number of Primary Care Physicians"))
+
+physicians_plot
+```
+
+These are the top 10 counties/cities with the highest Primary Care Physician Rate.
+
+```{r 2023 Primary Care Physicians Rate Summary Highest, echo=FALSE}
+most_phys <- physicians_2023 %>%
+  arrange(desc(Num_Primary_Care_Physicians)) %>%
+  slice_max(Num_Primary_Care_Physicians, n= 10) %>%
+  print()
+```
+
+These are the top 10 counties/cities with the lowest Primary Care Physician Rate.
+```{r 2023 Primary Care Physicians Rate Summary Lowest, echo=FALSE}
+least_phys_ <- physicians_2023 %>%
+  arrange(desc(Num_Primary_Care_Physicians)) %>%
+  slice_min(Num_Primary_Care_Physicians, n= 10) %>%
+  print()
+
+```
+
+``` {r 2023 Primary Care Physicians Map cont., warning = FALSE}
+library(stringr)
+
+va.counties <- counties(state = 'Virginia')
+physicians_2023$GEOID <- as.character(physicians_2023$GEOID)
+va.physicians <- left_join(va.counties, physicians_2023, by = 'GEOID')
+
+nColor <- 1271
+colors <- paletteer_c(palette = 'viridis::mako', n = nColor, direction = -1)
+
+
+plot(va.physicians$geometry, col = colors[va.physicians$Num_Primary_Care_Physicians], main = 'VCE Agents and Number of Primary Care Physicians')
+points(agents_df$Long, agents_df$Lat, pch = 18, col = 'red', cex = 2)
+
+```
+
+## Number of Drug Overdose Deaths in 2023
+
+```{r Drug Overdose Deaths, echo=FALSE}
+drug_mortality_23 <- add_23_counties %>%
+  select(County,GEOID,`Drug Overdose Mortality Rate`) %>%
+  na.omit()
+
+names(drug_mortality_23)[3] = "Rate_Drug_Overdose_Deaths"
+```
+
+```{r Map of Drug Overdose Deaths, echo= FALSE, warning= FALSE}
+drug_mortality_23$GEOID <- as.character(drug_mortality_23$GEOID)
+va.drug <- left_join(va.counties, drug_mortality_23, by = 'GEOID')
+
+nColor <- 325
+colors <- paletteer_c(palette = 'scico::vanimo', n = nColor, direction = -1)
+
+plot(va.drug$geometry, col = colors[va.drug$Rate_Drug_Overdose_Deaths], main = 'VCE Agents and Rate of Drug Overdose Deaths')
+points(agents_df$Long, agents_df$Lat, pch = 18, col = 'red', cex = 2)
+```
+
+## Number of Mental Health Providers in 2023
+```{r Mental Health Providers, echo=FALSE}
+mental_health_23 <- ranked23_counties %>%
+  select(County,GEOID,`# Mental Health Providers`)
+
+names(mental_health_23)[3] = "Num_Mental_Health_Providers"
+```
+
+``` {r Map of Mental Health Providers, echo= FALSE, warning= FALSE}
+mental_health_23$GEOID <- as.character(mental_health_23$GEOID)
+va.mental <- left_join(va.counties, mental_health_23, by = 'GEOID')
+
+nColor <- 2593
+colors <- paletteer_c(palette = 'viridis::mako', n = nColor, direction = -1)
+
+
+plot(va.mental $geometry, col = colors[va.mental$Num_Mental_Health_Providers], main = 'VCE Agents and Number of Mental Health Providers')
+points(agents_df$Long, agents_df$Lat, pch = 18, col = 'red', cex = 2)
+```
+
+## Percent of Food Insecure in 2023
+```{r Food Insecurity, echo=FALSE}
+food_insecurity_23 <- add_23_counties %>%
+  select(County,GEOID,`% Food Insecure`) %>%
+  na.omit()
+
+names(food_insecurity_23)[3] = "Per_Food_Insecure"
+```
+
+```{r Food Insecurity Map, echo=FALSE, warning= FALSE}
+food_insecurity_23$GEOID <- as.character(food_insecurity_23$GEOID)
+va.food <- left_join(va.counties, food_insecurity_23, by = 'GEOID')
+
+nColor <- 21
+colors <- paletteer_c(palette = 'viridis::mako', n = nColor, direction = -1)
+
+
+plot(va.food$geometry, col = colors[va.food$Per_Food_Insecure], main = 'VCE Agents and Percent Food Insecure')
+points(agents_df$Long, agents_df$Lat, pch = 18, col = 'red', cex = 2)
+```
+
+```{r another food plot, include= FALSE}
+# library(ggplot2)
+# va.food.plot <-ggplot(va.food,aes(fill=Per_Food_Insecure)) +
+#   geom_sf()+ geom_point(data= agents_df)
+# va.food.plot
+#   #scale_fill_viridis_d()
+#   #geom_sf(data = agents_df) +
+#   #coord_sf()
+```
+## Percent of Children in Poverty in 2023
+```{r % of Children in Poverty , echo=FALSE}
+child_poverty_23 <- ranked23_counties %>%
+  select(County,GEOID,`% Children in Poverty`) %>%
+  na.omit()
+
+names(child_poverty_23)[3] = "Per_Child_Poverty"
+```
+
+```{r % of Children in Poverty map , echo=FALSE, warning= FALSE}
+child_poverty_23$GEOID <- as.character(child_poverty_23$GEOID)
+va.child <- left_join(va.counties, child_poverty_23, by = 'GEOID')
+
+nColor <- 38
+colors <- paletteer_c(palette = 'viridis::mako', n = nColor, direction = -1)
+
+
+poverty_plot <- plot(va.child$geometry, col = colors[va.child$Per_Child_Poverty], main = 'VCE Agents and Percent of Children in Poverty')
+points(agents_df$Long, agents_df$Lat, pch = 18, col = 'red', cex = 2)
+```
+
+```{r Working with Plottly, include= FALSE}
+# library(rjson)
+# poverty_plotly <- plot_ly()
+# poverty_plotly <- plot_ly %>% add_trace(
+#   type="choroplethmapbox",
+#   geojson= counties,
+#   locations=va.child$GEOID,
+#     z=va.child$Per_Child_Poverty,
+#     colorscale="Viridis",
+#     zmin=0,
+#     zmax=21,
+#     # marker=list(line=list(
+#       # width=0),
+#       # opacity=0.5
+#     )
+#   )
+```
