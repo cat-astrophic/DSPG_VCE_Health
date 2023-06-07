@@ -1,0 +1,260 @@
+---
+title: "Week 3 Progress Report"
+author: "Vivian Peregrino"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Week 3 Progress Report
+
+This is our week 3 progress report. We are updating our data visualizations using ggplots. We are zoning in on the social determinants of health and the health outcomes that we will be analyzing.
+
+```{r loading data and packages, include= FALSE}
+library(readxl)
+library(tidyverse)
+library(plotly)
+library(dplyr)
+library(tigris)
+library(paletteer)
+library(ggplot2)
+library(sf)
+library(readr)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggspatial)
+library(maps)
+library(tools)
+
+setwd("~/DSPG/Repose/DSPG_VCE_Health/Data")
+
+#County Health Rankings 2023 Data
+ranked23_measured_data <- read_excel("2023 County Health Rankings Virginia Data.xlsx", sheet = 4, skip= 1)
+add_23_measured_data <- read_excel("2023 County Health Rankings Virginia Data.xlsx", sheet = 5, skip= 1)
+
+#FCS Agent Location Data
+agent_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/vce_agents.csv"
+agents_df <- read.csv(paste(agent_path, sep = ''))
+na.omit(agents_df)
+
+#Map Built-in
+vc <- counties(state= "Virginia")
+
+#Virginia Department of Health Data
+drug_class_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/VDH-PUD-Overdose_Deaths_By-Drug-Class.csv"
+drug_class <- read.csv(paste(drug_class_path, sep = ''))
+
+```
+
+```{r cleaning data for ONLY counties and selected variables, echo=FALSE}
+
+ranked <- ranked23_measured_data %>%
+  select(County,FIPS,`% Low Birthweight`, `# Mental Health Providers`, `Dentist Rate`, 
+         `Severe Housing Cost Burden`, `% Children in Poverty`,`Years of Potential Life Lost Rate`)
+names(ranked)[names(ranked) == 'FIPS'] <- 'GEOID'
+ranked23_counties<- ranked[2:134 , ]
+
+
+add_23_clean_data <- add_23_measured_data %>%
+  select(County, FIPS, `Drug Overdose Mortality Rate`, `% Food Insecure`, `Suicide Rate (Age-Adjusted)`)
+add_23_counties <- add_23_clean_data[2:134 , ]
+names(add_23_counties)[names(add_23_counties) == 'FIPS'] <- 'GEOID'
+```
+
+## Outcomes of health
+ We have selected the follow outcomes of health to analyze:
+ 
+ + Drug Overdose Mortality Rate
+ + Suicide Rate
+ + Low Birthweight
+
+```{r loading/setting up health outcomes, echo= FALSE}
+# loading drug mortality
+drug_mortality_23 <- add_23_counties %>%
+  select(County,GEOID,`Drug Overdose Mortality Rate`) %>%
+  na.omit()
+
+names(drug_mortality_23)[3] = "Rate_Drug_Overdose_Deaths"
+
+#merging agents_df with drug mortality
+drug_mortality_23$GEOID <- as.character(drug_mortality_23$GEOID)
+va.drug <- left_join(vc, drug_mortality_23, by = 'GEOID')
+
+#loading suicide rate
+suicide_23 <- add_23_counties %>%
+  select(County,GEOID,`Suicide Rate (Age-Adjusted)`) %>%
+  na.omit()
+names(suicide_23)[3] = "Suicide_Rate"
+#merging with agents
+suicide_23$GEOID <- as.character(suicide_23$GEOID)
+va.suicide <- left_join(vc, suicide_23, by = 'GEOID')
+
+#loading suicide rate
+low_birth_23 <- ranked23_counties %>%
+  select(County,GEOID,`% Low Birthweight`) %>%
+  na.omit()
+names(low_birth_23)[3] = "per_low_birthweight"
+#merging with agents
+low_birth_23$GEOID <- as.character(low_birth_23$GEOID)
+va.low.birth <- left_join(vc, low_birth_23, by = 'GEOID')
+```
+
+```{r  fcs agents and map set up, echo= FALSE}
+
+#importing the world map built-in
+world <- ne_countries(scale = "medium", returnclass = "sf")
+states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
+
+#mapping va counties
+counties <- st_as_sf(map("county", plot = FALSE, fill = TRUE))
+counties <- counties[2785:2884,]
+
+#making agents and removing missing values
+agents_df <- agents_df %>%
+  slice(-n())
+
+#converting agents into sf
+agents_sf <- st_as_sf(agents_df, coords = c("Long", "Lat"), remove = FALSE, 
+    crs = 4326, agr = "constant")
+
+```
+
+### Drug Overdose Mortality
+#### Sources:
+
++ National Center for Health Statistics- Morality Files (2018-2020)
++ Virginia Department of Health (2017-2021)
+
+#### Data Definitions:
+
++ Rate of Drug Overdose Deaths: The number of drug poisoning deaths per 100,000 population
++ Overdose Deaths by Drug Class: The Rate per 100,000 Virginia residents for drug overdose deaths among Virginia residents by year and by drug class (all-drug, any opioids, benzodiazepines, cocaine, heroin, methadone, natural and semi-synthetic opioids, natural, semi-synthetic and synthetic opioids, prescription pain relievers, psychostimulant, and synthetic opioids other than methadone)
++ Natural and semisynthetic opioids: Includes drugs such as morphine, codeine, hydrocodone, and
+oxycodone.
++ Synthetic opioids other than methadone: Includes drugs such as fentanyl, fentanyl analogs, and tramadol
++ Psychostimulants: Drugs that causes a s sense of well-being, decreases fatigue and depression, and increases the desire to eat. Includes drugs such as methamphetamine, amphetamine,and methylphenidate
+
+#### About Virginia Drug Misuse:
+
+## Drug Overdose Mortality Rate 2023
+```{r fcs agents and drug mortality map, warning= FALSE, echo= TRUE}
+
+drug_agents_ggplot <- ggplot(data = world) +
+  geom_sf(data = states, color= "grey60", fill= "ivory1") +
+  geom_sf(data = counties, fill = NA) +
+  geom_sf(data= va.drug, aes(fill=Rate_Drug_Overdose_Deaths, text= NAME))+
+  scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
+  labs(fill= "Mortality Rate 
+Per 100,000 People")+
+  geom_sf(data = agents_sf, aes( color = "red")) +
+  guides(color= guide_legend(title= "Agent Sites")) +
+  coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("VCE FCS Agent Sites and Drug Overdose Mortality Rates of 2023") +
+  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
+        panel.background = element_rect(fill = "azure1")) 
+
+drug_agents_ggplot
+
+#plotly <- ggplotly(drug_agents_ggplot) 
+
+
+
+#plotly
+
+```
+
+##  Drug Overdose Mortality Rate by Drug Class
+Data by drug class are not mutually exclusive. Death can involve more than one drug, so deaths may be included in multiple graphs if more than one drug or class was involved in the death. 
+```{r drug morality by drug class setup, echo= FALSE}
+opiods <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Any Opioids"))
+
+heroin <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Heroin"))
+
+cocaine <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Cocaine"))
+
+synthetic_opiods <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Synthetic Opioids Other than Methadone"))
+
+benzodiazepine <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Benzodiazepine"))
+
+methadone <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Methadone"))
+
+psychostimulant <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Psychostimulant"))
+
+natural_synthetic_opioids <- drug_class %>%
+  filter(str_detect(Drug.Class.Legend, "Natural, Semi-synthetic and Synthetic Opioids"))
+```
+
+```{r drug mortality by drug class plotly}
+drug_class_plot <- plot_ly(data=opiods, x= ~Death.Year, y= ~Death.Rate, name= "Any Opiod",
+                               type= "scatter", mode= "lines", line= list(color= "#33638DFF",
+                                                                          width= 2 )) %>%
+  layout(title= " Rate of VA Drug Overdose Deaths by Drug Class",
+         xaxis= list(title='Year'),
+         yaxis= list(title= "Mortality Rate Per 100,000 People")) %>% 
+  layout(legend = list(font = list(size = 11)))
+
+drug_class_plot <- drug_class_plot %>% add_trace(y= heroin$Death.Rate, name= "Heroin", line= list(color= "#440154FF", width= 2))
+
+drug_class_plot <- drug_class_plot %>% add_trace(y= cocaine$Death.Rate, name= "Cocaine", line= list(color= "#3F4788FF", width= 2))
+
+drug_class_plot <- drug_class_plot %>% add_trace(y= synthetic_opiods$Death.Rate, name= "Synthetic Opiods", line= list(color= "#238A8DFF", width= 2))
+
+drug_class_plot <- drug_class_plot %>% add_trace(y= benzodiazepine$Death.Rate, name= "Benzodiazepine", line= list(color= "#94D840FF", width= 2))
+
+drug_class_plot <- drug_class_plot %>% add_trace(y= psychostimulant$Death.Rate, name= "Psychostimulant", line= list(color= "#FDE725FF", width= 2))
+
+drug_class_plot <- drug_class_plot %>% add_trace(y= natural_synthetic_opioids$Death.Rate, name= "Natural,
+Semi/Synthetic Opioids", line= list(color= "#29AF7FFF", width= 2)) 
+
+drug_class_plot
+```
+
+```{r fcs agents and suicide rate map, echo= FALSE, warning= FALSE}
+suicide_rate_ggplot <- ggplot(data = world) +
+  geom_sf(data = states, color= "grey60", fill= "ivory1") +
+  geom_sf(data = counties, fill = NA) +
+  geom_sf(data= va.suicide, aes(fill=Suicide_Rate, text= NAME))+
+  scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
+  labs(fill= "Suicide Rate
+Per 100,000 People")+
+  geom_sf(data = agents_sf, aes( color = "red")) +
+  guides(color= guide_legend(title= "Agent Sites")) +
+  coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("VCE FCS Agent Sites and Suicide Rates of 2023") +
+  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
+        panel.background = element_rect(fill = "azure1")) 
+
+suicide_rate_ggplot
+
+```
+
+```{r fcs agents and low birthweight map, echo= FALSE, warning= FALSE}
+low_birth__ggplot <- ggplot(data = world) +
+  geom_sf(data = states, color= "grey60", fill= "ivory1") +
+  geom_sf(data = counties, fill = NA) +
+  geom_sf(data= va.low.birth, aes(fill=per_low_birthweight, text= NAME))+
+  scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
+  labs(fill= "% Low Birthweight")+
+  geom_sf(data = agents_sf, aes( color = "red")) +
+  guides(color= guide_legend(title= "Agent Sites")) +
+  coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("VCE FCS Agent Sites and Percent Low Birthweight of 2023") +
+  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
+        panel.background = element_rect(fill = "azure1")) 
+
+low_birth__ggplot
+
+```
