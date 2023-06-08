@@ -47,6 +47,10 @@ vc <- counties(state= "Virginia")
 drug_class_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/VDH-PUD-Overdose_Deaths_By-Drug-Class.csv"
 drug_class <- read.csv(paste(drug_class_path, sep = ''))
 
+# Treatment Center Location Data
+treatment_centers_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/FindTreament_Facility_listing_2023.csv"
+
+treatment_centers <- read.csv(treatment_centers_path)
 ```
 
 ```{r cleaning data for ONLY counties and selected variables, echo=FALSE}
@@ -257,4 +261,26 @@ low_birth__ggplot <- ggplot(data = world) +
 
 low_birth__ggplot
 
+```
+
+```{r substance use treatment centers in va}
+#treatment center locations set-up
+treatment_sf <- st_as_sf(treatment_centers, coords = c("longitude", "latitude"),
+                        remove =FALSE, crs = 4326, agr = "constant")
+treatment_centers$sa <- as.integer(treatment_centers$sa)
+treatment_centers_ggplot <- ggplot(data = world) +
+  geom_sf(data = states, color= "grey60", fill= "ivory1") +
+  geom_sf(data = counties, fill = NA) +
+  geom_sf(data= va.drug, aes(fill= Rate_Drug_Overdose_Deaths))+
+  scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
+  labs(fill= "Mortality Rate 
+Per 100,000 People")+
+  geom_sf(data = treatment_sf, aes( color = "red")) +
+  guides(color= guide_legend(title= "Treatment Centers")) +
+  coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("Substance Abuse Treatment Centers and Drug Overdose Rates in 2023") +
+  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
+        panel.background = element_rect(fill = "azure1"))
+treatment_centers_ggplot 
 ```
