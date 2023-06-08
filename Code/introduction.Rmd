@@ -1,0 +1,49 @@
+---
+title: "Introduction"
+author: "Vivian Peregrino"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+### About Virginia Cooperative Extension:
+Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has 107 offices, 11 Agriculture Research Extension centers, and 6 4-H centers throughout the state. VCE agents and volunteers strive to empower youth and Virginian farmers, guide sustainable resource management, and promote public health. VCE accomplishes these goals through programs that put research-based knowledge to work in people’s lives. VCE has a variety of programs like 4-H Youth Development, Family and Consumer Sciences, Community Viability, Agriculture and Natural Resources, Food, Nutrition, and Health, etc. in every county. VCE works on unique challenges Virginians face in partnership with governments and organizations to solve these issues in a way that benefits all people. With the expertise and knowledge from Virginia Tech and Virginia State University, VCE agents are able to tackle issues and foster community growth across the state.
+
+For the purpose of this project, we will be focusing on VCE’s Family and Consumer Sciences Program and the agents that support this program. FCS programming is tied to community needs and directed toward families and individuals. Many counties’ FCS programs look different from one another, however, there are core specialty areas every program has. The specialty areas include:  Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents are responsible for partnering and collaborating with other VCE agents, agencies, nonprofits/ other organizations, and the public to meet the educational needs of local residents. Agents are tasked with determining program goals and needs by monitoring trends and issues. 
+FCS agents essentially help Virginian families make more healthy and smart decisions by applying research-based knowledge to work in people’s lives. However, this is easier said than done. A big reason why every county’s FCS programs look different is because of the unique populations and challenges every county has. This unfortunately creates a difficult job for FCS agents. They are overextended and commit a lot more time and effort than what seems to fit into the 3 FCS specialty areas. Today, FCS agents are doing a lot more than what was originally expected of them as VCE extends their work to be more public health focused.
+
+### Project Goals:
+Our team seeks to design an interactive dashboard that will aid VCE FCS agents in identifying which areas of Virginia are in need of more support. This dashboard will help our stakeholders gain a better understanding of the needs of the community, as well as their current health demographics. Agents will be able to put our research into practice by using our dashboard to identify specific areas of need for every county in Virginia. We hope that this resource will support VCE FCS agents in improving the overall health of Virginia communities.
+
+We will utilize publicly accessible data, including Virginia health rankings, to offer our stakeholders a comprehensive comprehension of the factors influencing the health of families in Virginia. Our primary focus will be on various variables that align with the five determinants of health as well as health outcomes. Additionally, we will map these variables alongside the existing data on Virginia Cooperative Extension (VCE) agents. These maps will aid in identifying areas where VCE agents can provide further support to their communities.
+
+The resulting analysis and findings will be presented in an interactive dashboard, which will serve as a valuable resource for the Virginia Cooperative Extension. Through this dashboard, VCE agents will be equipped with the necessary information to enhance their understanding of community health determinants and identify areas where their expertise can have a meaningful impact.
+
+### Project Background
+#### Virginia Public Health:
+In the past 100 years, Virginia has seen tremendous growth in its public health sector, nevertheless, there are still many areas that are in need of significant improvement. Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, gun violence, and motor vehicle crashes have plagued the welfare of the Commonwealth. Due to the contrasting urban and rural regions in Virginia, health varies drastically based on where Virginians reside. In the more wealthy and populated localities, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 counties fell below the national average. The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years. Virginia struggles to provide clean air and water, safe roadways, protection from communicable diseases, and other essential public health services to the entire population of the Commonwealth.
+
+Virginia’s unfavorable health outcomes can be attributed to the lack of public health funding and poor access to affordable healthcare. The Joint Commission on Health Care found that Virginia ranks in the bottom third of states in public health spending. Spending about $95 per Capita, the Virginia Department of Health’s budget has remained unchanged for the past 20 years, when adjusted for inflation and population growth. Additionally, federal funding sometimes do not match the specific needs of localities. Federal funding often prioritizes diseases that draw the most attention and while this benefits disease prevention, it unintentionally results in the underinvestment of many needed programs that affect the social determinants of health. Moreover, this lack of funding results in public health workforce shortages, and causes workers like VCE FCS agents to be overworked and overwhelmed by the needs of the population. Staffing shortages inhibit local health departments from carrying out their responsibilities and prevent Virginians from getting the best care available.
+
+#### Social Detminants of Health:
+The field of public health encompasses various factors that influence the health and well-being of individuals and communities. One crucial aspect that significantly shapes health outcomes is the social determinants of health. These determinants as defined by the World Health Organization (WHO) are the social, economic, and environmental conditions in which people are born, grow, live, work, and age. They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. They shape opportunities for good health, influence the distribution of resources and power in society, and create conditions that can either support or hinder individual and community health.
+
+#### Important variables: Basic Needs for Health 
+
+##### Education Attainment and Access:
+Level of education (high school, college, etc): This variable measures the level of education a person receives. Research has shown that education provides individuals with better job opportunities and higher income levels leading to more stable employment and wealth. These economic advantages allow for better healthcare access. 
+
+##### School funding adequacy: The average gap in dollars between actual and required spending per student among public school districts. Required spending is an estimate of dollars needed to achieve U.S. average test scores in each district.
+
+##### Economic Stability:
+Median Household Income: Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher-income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher-income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease.
+
+##### Unemployment rate: The unemployment rate reflects the economic and social conditions influencing an individual’s well-being. Employment provides economic stability. Unemployment, on the other hand, is a stressor that could worsen one’s health. It not only limits people’s access to quality healthcare but also is a burden on mental health as people tend to feel more depressed without a job.
+
+##### % children in poverty: This variable measures the percentage of people under the age of 18 in poverty. Children living in poverty have less access to health resources. Understanding this variable could tell us a lot more about the overall 
+
+##### Children in single-parent households: This variable measures the percentage of children that live in a household headed by a single parent. This variable is important to look into because
