@@ -41,7 +41,9 @@ agents_df <- read.csv(paste(agent_path, sep = ''))
 na.omit(agents_df)
 
 #Map Built-in
-vc <- counties(state= "Virginia")
+vc_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/virginia_counties.csv"
+vc <- read.csv(vc_path, header= TRUE)
+
 
 #Virginia Department of Health Data
 drug_class_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/VDH-PUD-Overdose_Deaths_By-Drug-Class.csv"
@@ -56,7 +58,7 @@ treatment_centers <- read.csv(treatment_centers_path)
 ```{r cleaning data for ONLY counties and selected variables, echo=FALSE}
 
 ranked <- ranked23_measured_data %>%
-  select(County,FIPS,`% Low Birthweight`, `# Mental Health Providers`, `Dentist Rate`, 
+  select(County,FIPS,`% Vaccinated`, `# Mental Health Providers`, `Dentist Rate`, 
          `Severe Housing Cost Burden`, `% Children in Poverty`,`Years of Potential Life Lost Rate`)
 names(ranked)[names(ranked) == 'FIPS'] <- 'GEOID'
 ranked23_counties<- ranked[2:134 , ]
@@ -67,7 +69,17 @@ add_23_clean_data <- add_23_measured_data %>%
 add_23_counties <- add_23_clean_data[2:134 , ]
 names(add_23_counties)[names(add_23_counties) == 'FIPS'] <- 'GEOID'
 ```
+```{r vaccine}
+vac_2023 <- ranked23_counties %>%
+  select(County,GEOID,`% Vaccinated`)
 
+names(vac_2023)[3] = "Per_Vaccinated"
+most_phys <- vac_2023 %>%
+  arrange(desc(Per_Vaccinated)) %>%
+  slice_min(Per_Vaccinated, n= 3) %>%
+  print()
+
+```
 ## Outcomes of health
  We have selected the follow outcomes of health to analyze:
  
@@ -111,6 +123,7 @@ va.low.birth <- left_join(vc, low_birth_23, by = 'GEOID')
 #importing the world map built-in
 world <- ne_countries(scale = "medium", returnclass = "sf")
 states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
+saveRDS(states, file = "us.states.Rdata")
 
 #mapping va counties
 counties <- st_as_sf(map("county", plot = FALSE, fill = TRUE))
@@ -144,34 +157,8 @@ oxycodone.
 #### About Virginia Drug Misuse:
 
 ## Drug Overdose Mortality Rate 2023
-```{r fcs agents and drug mortality map, warning= FALSE, echo= TRUE}
 
-drug_agents_ggplot <- ggplot(data = world) +
-  geom_sf(data = states, color= "grey60", fill= "ivory1") +
-  geom_sf(data = counties, fill = NA) +
-  geom_sf(data= va.drug, aes(fill=Rate_Drug_Overdose_Deaths, text= NAME))+
-  scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
-  labs(fill= "Mortality Rate 
-Per 100,000 People")+
-  geom_sf(data = agents_sf, aes( color = "red")) +
-  guides(color= guide_legend(title= "Agent Sites")) +
-  coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
-  xlab("Longitude") + ylab("Latitude") +
-  ggtitle("VCE FCS Agent Sites and Drug Overdose Mortality Rates of 2023") +
-  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
-        panel.background = element_rect(fill = "azure1")) 
-
-drug_agents_ggplot
-
-#plotly <- ggplotly(drug_agents_ggplot) 
-
-
-
-#plotly
-
-```
-
-##  Drug Overdose Mortality Rate by Drug Class
+### Drug Overdose Mortality Rate by Drug Class
 Data by drug class are not mutually exclusive. Death can involve more than one drug, so deaths may be included in multiple graphs if more than one drug or class was involved in the death. 
 ```{r drug morality by drug class setup, echo= FALSE}
 opiods <- drug_class %>%
@@ -200,13 +187,17 @@ natural_synthetic_opioids <- drug_class %>%
 ```
 
 ```{r drug mortality by drug class plotly}
+
 drug_class_plot <- plot_ly(data=opiods, x= ~Death.Year, y= ~Death.Rate, name= "Any Opiod",
-                               type= "scatter", mode= "lines", line= list(color= "#33638DFF",
-                                                                          width= 2 )) %>%
-  layout(title= " Rate of VA Drug Overdose Deaths by Drug Class",
+                           type= "scatter", mode= "lines", 
+                           line= list(color= "#33638DFF",
+                                      width= 2 )) %>%
+  layout(title= " Rate of VA Drug Overdose Deaths by Drug Class
+(Source: Virgnia Department of Health)", 
+         annotation = subtitle_annotation,
          xaxis= list(title='Year'),
          yaxis= list(title= "Mortality Rate Per 100,000 People")) %>% 
-  layout(legend = list(font = list(size = 11)))
+  layout(legend = list(font = list(size = 15)))
 
 drug_class_plot <- drug_class_plot %>% add_trace(y= heroin$Death.Rate, name= "Heroin", line= list(color= "#440154FF", width= 2))
 
@@ -222,6 +213,32 @@ drug_class_plot <- drug_class_plot %>% add_trace(y= natural_synthetic_opioids$De
 Semi/Synthetic Opioids", line= list(color= "#29AF7FFF", width= 2)) 
 
 drug_class_plot
+```
+
+```{r substance use treatment centers/vce agents/ mortality rate}
+#treatment center locations set-up
+treatment_sf <- st_as_sf(treatment_centers, coords = c("longitude", "latitude"),
+                        remove =FALSE, crs = 4326, agr = "constant")
+
+treatment_centers_ggplot <- ggplot(data = world) +
+  geom_sf(data = states, color= "grey60", fill= "ivory1") +
+  geom_sf(data = counties, fill = NA) +
+  geom_sf(data= va.drug, aes(fill= Rate_Drug_Overdose_Deaths))+
+  scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
+  labs(fill= "Mortality Rate 
+Per 100,000 People")+
+  guides(color= guide_legend(title= "Sites")) +
+  geom_sf(data = treatment_sf, aes(color= "Substance Abuse
+  Treatment Center")) +
+  geom_sf(data = agents_sf, aes(color = "FCS Agents"), size= 3) +
+  coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("FCS Agents and Substance Abuse Treatment Centers", 
+          subtitle= "Drug Overdose Mortality Rate 2018-2020") +
+  labs(caption = "Source: County Health Rankings 2023") +
+  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
+        panel.background = element_rect(fill = "azure1"))
+treatment_centers_ggplot 
 ```
 
 ```{r fcs agents and suicide rate map, echo= FALSE, warning= FALSE}
@@ -263,24 +280,3 @@ low_birth__ggplot
 
 ```
 
-```{r substance use treatment centers in va}
-#treatment center locations set-up
-treatment_sf <- st_as_sf(treatment_centers, coords = c("longitude", "latitude"),
-                        remove =FALSE, crs = 4326, agr = "constant")
-treatment_centers$sa <- as.integer(treatment_centers$sa)
-treatment_centers_ggplot <- ggplot(data = world) +
-  geom_sf(data = states, color= "grey60", fill= "ivory1") +
-  geom_sf(data = counties, fill = NA) +
-  geom_sf(data= va.drug, aes(fill= Rate_Drug_Overdose_Deaths))+
-  scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
-  labs(fill= "Mortality Rate 
-Per 100,000 People")+
-  geom_sf(data = treatment_sf, aes( color = "red")) +
-  guides(color= guide_legend(title= "Treatment Centers")) +
-  coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
-  xlab("Longitude") + ylab("Latitude") +
-  ggtitle("Substance Abuse Treatment Centers and Drug Overdose Rates in 2023") +
-  theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
-        panel.background = element_rect(fill = "azure1"))
-treatment_centers_ggplot 
-```
