@@ -63,53 +63,38 @@ library(shinycssloaders)
 
 ## 1.3 Load the data----------------------------------------------------------------
 ### 1.3.1 Load the original data----------------------------------------------------------------
+#Reading in map 
+
+va.counties <- readRDS(file = "va.counties.Rdata")
+va.counties$GEOID <- as.integer(va.counties$GEOID)
+va.counties$NAMELSAD <- str_to_title(va.counties$NAMELSAD )
+colnames(va.counties)[16] <- "Lat"
+va.counties$Lat <- as.double(va.counties$Lat)
+colnames(va.counties)[17] <- "Long"
+va.counties$Long <- as.double(va.counties$Long)
+us.states <- readRDS(file= "us.states.RData")
 #County Health Rankings 2023 Data
-ranked23_measured_data <- read_excel("./data/2023 County Health Rankings Virginia Data.xlsx", sheet = 4, skip= 1)
+all_var_path <- "~/data/final_variables.csv"
+all_var_df <- read.csv(paste(all_var_path, sep = ''))
+names(all_var_df)[names(all_var_df) == 'FIPS'] <- 'GEOID'
+all_var_df$Value <- as.numeric(all_var_df$Value)
 
-#FCS Agent Location Data
-agents_df <- read.csv(paste("./data/vce_agents.csv", sep = ''))
-na.omit(agents_df)
-
-#Map Built-in
-vc <- counties(state= "Virginia")
-# cleaning data for ONLY counties and selected variables
-ranked <- ranked23_measured_data %>%
-  select(County,FIPS,`% Low Birthweight`, `# Mental Health Providers`, `Dentist Rate`, 
-         `Severe Housing Cost Burden`, `% Children in Poverty`,`Years of Potential Life Lost Rate`)
-names(ranked)[names(ranked) == 'FIPS'] <- 'GEOID'
-ranked23_counties<- ranked[2:134 , ]
-
+good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
+                "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
+                "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White",
+                "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses","Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
 
 ### 1.3.2 Process the data---------------------------------------------------------------- 
-#loading low birhtweight rate
-low_birth_23 <- ranked23_counties %>%
-  select(County,GEOID,`% Low Birthweight`) %>%
-  na.omit()
-names(low_birth_23)[3] = "per_low_birthweight"
+
 
 
 ### 1.3.3 Merging the data(Geo)---------------------------------------------------------------- 
-#merging with agents
-low_birth_23$GEOID <- as.character(low_birth_23$GEOID)
-va.low.birth <- left_join(vc, low_birth_23, by = 'GEOID')
 
 
 
-#importing the world map built-in
-world <- ne_countries(scale = "medium", returnclass = "sf")
-states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
 
-#mapping va counties
-counties <- st_as_sf(map("county", plot = FALSE, fill = TRUE))
-counties <- counties[2785:2884,]
 
-#making agents and removing missing values
-agents_df <- agents_df %>%
-  slice(-n())
 
-#converting agents into sf
-agents_sf <- st_as_sf(agents_df, coords = c("Long", "Lat"), remove = FALSE, 
-                      crs = 4326, agr = "constant")
 
 
 ## 1.4 Define your functions -------------------------------------------------------
@@ -117,7 +102,43 @@ agents_sf <- st_as_sf(agents_df, coords = c("Long", "Lat"), remove = FALSE,
 # 1) write you functions in this file, or
 # 2) write them in a seperate file and call them in this app.R. Example: https://stackoverflow.com/questions/13548266/define-all-functions-in-one-r-file-call-them-from-another-r-file-how-if-pos
 
-
+mapping <- function(variable, year) {
+  
+  temp <- all_var_df[all_var_df$Year == year & all_var_df$Variable == variable, ]
+  
+  var.counties <- left_join(va.counties, temp, by = 'GEOID')
+  
+  idx <- which(unique(all_var_df$Variable) == variable)
+  
+  ggplot(data = var.counties) +
+    
+    geom_sf(data = us.states, color= "grey60", fill= "ivory1") +
+    
+    geom_sf(data = var.counties$geometry) +
+    
+    geom_sf(data= var.counties, aes(fill= Value), color= "brown")+
+    
+    scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
+    
+    labs(fill= good_names[idx])+
+    
+    geom_sf(data = agents_sf, aes( color = "red")) +
+    
+    guides(color= guide_legend(title= "Agent Sites")) +
+    
+    coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+    
+    xlab("Longitude") + ylab("Latitude") +
+    
+    ggtitle(paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")) +
+    
+    theme(panel.grid.major = element_line(color = gray(0.5), 
+                                          
+                                          linetype = "dashed", size = 0.5),
+          
+          panel.background = element_rect(fill = "azure1")) 
+  
+}
 
 # 2. Define UI for application ------------------------------------------------------------
 ui <- navbarPage(#title = "DSPG 2023",
@@ -181,9 +202,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                           ) 
                  ),
                  
-                 ## 2.2 Tab sociodemographics --------------------------------------------
+                 ## 2.2 Tab Health variables --------------------------------------------
                  navbarMenu("Health Variables" ,
-                            ### 2.2.0 Virginia Public Health
+                            ### 2.2.0 Subtab Virginia Public Health Overview
                             tabPanel("Public Health Overview", 
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Public Health in Virginia"), align = "center"),
@@ -193,7 +214,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      )
                             ),
                             
-                            ### 2.2.1 Subtab Goochland--------------------------------------
+                            ### 2.2.1 Subtab Health Outcomes--------------------------------------
                             tabPanel("Health Outcomes", 
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Health Outcomes"), align = "center"),
@@ -201,67 +222,29 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
                                               column(4, 
-                                                     h4(strong("Background")),
-                                                     p("Goochland County is located in the Piedmont of the Commonwealth of Virginia. It covers 281.42 square miles and is 71st in the state in size. The county is known for its fertile land and mineral deposits. 
-                                                       The James River flows along the county's southern border, supplying water to farmlands and mills. Coal was mined in the east and gold in the west. Today, agriculture is still important to the county's economy. 
-                                                       Goochland has updated its voting districts in 2022 to better represent the population of all 5 districts [1]. Goochland County also has a vast summer program with plenty of activities. The activities are located 
-                                                       across the county at different facilities, including the skate park, gymnasium, baseball fields, weight room, trails, and many more [2]."),
                                                      h4(strong("Summary Statistics")),
-                                                     p("Goochland County’s population is 23,472, which is split between 49.8% male (11,698), and 50.2% female (11,774) [3]. 23,524 identify as one race, where 19,302 are white, 3,267 are African American, 
-                                                       75 are American Indian and Alaska Native, 494 are Asian, 3 are Native Hawaiian and Other Pacific Islander, and 383 are some other race [4]." ),
-                                                     p("57.9% of the population within Goochland County is employed. The unemployment rate is 3.7% [5]."),
-                                                     p("There are 11,001 civilian citizens, with 418 employed in agriculture, forestry, fishing and hunting, and mining [6]."),
-                                                     p("There are a total of 8,711 households in Goochland County. The median income is $97,146, with a margin of error of around 8,582. Approximately 24.1% of the 6,600 households have one earner, while 46.1% have two earners [7]. 
-                                                       The largest proportion (20.5%) of earners in Goochland make between $100,000 to $149,999. 18.4% of earners in Goochland earn over $200,000 [8]."),
-                                                     p("Nearly 93.1% of the population 25 and over have graduated high school and pursued further training. The highest level of education is a graduate or professional degree attained by around 3,531 people, or 20.1% of the population 
-                                                       over 25 years old [9]."),
-                                                     p("According to the 2017 Agricultural Census, there were approximately 355 farms with an average farm size of 160 acres. This makes the total land coverage of farms to be 56,739 acres. $11,740,000 was generated from agricultural products sold. 
-                                                       46% of farms sold less than $2,500, and 3% of farms sold over $100,000. Grains, oilseeds, dry beans, and dry peas were the main crops produced for sale ($2,846,000). 
-                                                       Milk (dairy) and poultry products sold were also significant ($4,936,000) [1]."),
-                                                     p("1.0% of Goochland's population moved within the county, 8.4% moved into the county from a different county in VA, 0.7% moved from a completely different state, and 0.3% moved from abroad [10]."),
+                                                     textOutput("VariableDefinition"),
+                                          
                                               ) ,
                                               column(8, 
-                                                     h4(strong("Category 1")),
-                                                     selectInput("goochland_soc", "Select Variable:", width = "100%", choices = c(
-                                                       "Low Birthweight" = "gage",
-                                                       "Life Expectancy" = "gind",
-                                                       "Life Expectancy Gap" = "ginc",
-                                                       "Median Earnings By Educational Attainment (Age > 25 years)" = "gedu")
+                                                    
+                                                     selectInput("Health_Outcomes", "Select Variable:", width = "100%", choices = c(
+                                                       "Low Birthweight" = "per_low_birthweight",
+                                                       "Life Expectancy" = "life_expectancy",
+                                                       "Life Expectancy Gap" = "life_expectancy_gap",
+                                                       "Life Expectancy Black" = "life_expectancy_black")
                                                      ),
-                                                     radioButtons(inputId = "yearSelect_gsoc", label = "Select Year: ", 
+                                                     radioButtons(inputId = "yearSelect_outcomes", label = "Select Year: ", 
                                                                   choices = c("2017", "2018", "2019", "2020"), 
                                                                   selected = "2020", inline = TRUE),
                                                      #here is the graoh Output for----
-                                                     withSpinner(plotlyOutput("gsoc", height = "500px")) ,
-                                                     fluidRow(style = "margin: 6px;",
-                                                              align = "justify",
-                                                              h4(strong("Visualization Summaries")),
-                                                              p("The", strong("age distribution"), "graphs show that the categories consisting of age groups 45 and above have consistently been the largest in the county, making up more than 30% of the population."),
-                                                              p("The", strong("employment"), "graphs indicates that the education, health, and social services industry group has been the largest by a wide margin, and specifically saw a large 
-                                                       increase between 2017 and 2018. The agricultural, forestal, fishing, hunting, and mining industry group has consistently been the smallest, employing less than 5% of 
-                                                       the population every year."),
-                                                              p("The" ,strong("income distribution"), "graphs illustrate the consistent growth in individuals and households earning at least $100,000 each year. This growth has been accompanied 
-                                                       by a general decrease in earnings below $75,000. It is also notable that earnings above $100,000 and below $35,000 are the largest categories throughout all years."),
-                                                              p("The" ,strong("median earnings"), "graphs highlight the fact that those who have gone through some college or attained an associates degree earn the most. The median earnings for this 
-                                                       group were significantly higher than others in 2017 and 2018, but saw a significant decrease to $65,890 in 2019. This number goes back up to $75,313 in 2020; still much lower than the first two years.")),
-                                                     
+                                                     withSpinner(plotlyOutput("outcomes", height = "500px")),
+                                                   
                                               ),
                                      ),
-                                     column(12, 
-                                            h4("References: "), 
-                                            p(tags$small("[1] United States Department of Agriculture. Goochland County Virginia - county profile. National Agricultural Statistics Survey. Retrieved July 6, 2022, from https://www.nass.usda.gov/Publications/AgCensus/2017/Online_Resources/County_Profiles/Virginia/cp51075.pdf", tags$br(),
-                                                         "[2] Goochland County. (n.d.). Parks &amp;&nbsp;recreation. Goochland County, VA - Official Website. Retrieved July 25, 2022, from https://www.goochlandva.us/236/Parks-Recreation", tags$br(), 
-                                                         "[3] U.S. Census Bureau (2022). Age and sex, 2020: ACS 5-Year estimates subject tables. Retrieved July 18, 2022, from https://data.census.gov/cedsci/table?t=Populations%20and%20People&g=0500000US51075&tid=ACSST5Y2020.S0101.", tags$br(), 
-                                                         "[4] U.S. Census Bureau (2022). Race, 2020: DEC redistricting data (PL 94-171). Retrieved July 18, 2022, from https://data.census.gov/cedsci/table?t=Populations%20and%20People&g=0500000US51075." , tags$br(),
-                                                         "[5] U.S. Census Bureau (2022). Employment status, 2020: ACS 5-Year estimates subject tables. Retrieved July 18, 2022, from https://data.census.gov/cedsci/table?t=Employment%3AEmployment%20and%20Labor%20Force%20Status&g=0500000US51075&y=2020&tid=ACSST5Y2020.S2301&moe=false." , tags$br(),
-                                                         "[6] U.S. Census Bureau (2022). Industry by occupation for the civilian employed population 16 years and over, 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Occupation&g=0500000US51075&y=2020&tid=ACSST5Y2020.S2405", tags$br(),
-                                                         "[7] U.S. Census Bureau (2022). Median income in the past 12 months (in 2020 inflation-adjusted dollars), 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Income%20%28Households,%20Families,%20Individuals%29&g=0500000US51075&y=2020&tid=ACSST5Y2020.S1903", tags$br(),
-                                                         "[8] U.S. Census Bureau (2022). Income in the past 12 months (in 2020 inflation-adjusted dollars), 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Income%20%28Households,%20Families,%20Individuals%29&g=0500000US51075&y=2020", tags$br(),
-                                                         "[9] U.S. Census Bureau (2022). Educational attainment, 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Education&g=0500000US51075&y=2020", tags$br(),
-                                                         "[10] U.S. Census Bureau (2022). Geographic mobility by selected characteristics in the United States, 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Residential%20Mobility&g=0500000US51075&y=2020")),
-                                            p("", style = "padding-top:10px;")) 
+                                     
                             ), 
-                            ### 2.2.2 Subtab Powhatan--------------------------------------
+                            ### 2.2.2 Subtab Healthcare Access and Quality--------------------------------------
                             tabPanel("Healthcare Access and Quality", 
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Healthcare Access and Quality Variables"), align = "center"),
@@ -315,6 +298,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                             
                                      )
                             ),
+                            
                  ),
                  ## 2.4 Tab Agent Optimization Programming
                  tabPanel("Mathematical Programming",
@@ -324,10 +308,20 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    fluidRow(style = "margin: 6px;", align = "justify"),
                           )
                  ),
+                 tabPanel("Results", 
+                          fluidRow(style = "margin: 6px;",
+                                   h1(strong("Economic Stability Variables"), align = "center"),
+                                   p("", style = "padding-top:10px;")),
+                          fluidRow(style = "margin: 6px;",
+                                   align = "justify",
+                                   
+                          )
+                 ),
+
                  
                  
-                 ## 2.5 Tab Findings --------------------------------------------
-                 tabPanel("Findings", value = "conclusion", 
+                 ## 2.5 Tab Takeawayss --------------------------------------------
+                 tabPanel("Takeaways", value = "conclusion", 
                           fluidRow(style = "margin: 6px;",
                                    h1(strong("Project Findings and Predictions"), align = "center"),
                                    p("", style = "padding-top:10px;"),
@@ -472,24 +466,59 @@ server <- function(input, output) {
   # Execute the JavaScript code when the app is loaded--> for the DSPG logo
   shinyjs::runjs(jscode)
   
-  output$gsoc <- renderPlotly({
+  ## 3.1 Health Outcomes ------------------------------------------
+  # Create a reactive expression for health outcomes drop down
+  
+  temp_outcome <- reactive({
+    # Filter the outcome var dataset based on selected values
+    if (input$outcomes == "per_low_birthweight") {
+      filtered <- "per_low_birthweight"  # Show all data
+    } else if (input$outcomes == "life_expectancy") {
+      filtered <- "life_expectancy"
+    } else if (input$outcomes == "life_expectancy_gap") {
+      filtered <- "life_expectancy_gap"
     
-    low_birth__ggplot <- ggplot(data = world) +
-      geom_sf(data = states, color= "grey60", fill= "ivory1") +
-      geom_sf(data = counties, fill = NA) +
-      geom_sf(data= va.low.birth, aes(fill=per_low_birthweight, text= NAME))+
-      scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
-      labs(fill= "% Low Birthweight")+
-      geom_sf(data = agents_sf, aes( color = "red")) +
-      guides(color= guide_legend(title= "Agent Sites")) +
-      coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
-      xlab("Longitude") + ylab("Latitude") +
-      ggtitle("VCE FCS Agent Sites and Percent Low Birthweight of 2023") +
-      theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", size = 0.5),
-            panel.background = element_rect(fill = "azure1"))
-
-    low_birth__ggplot %>% ggplotly()
+    } else (input$outcomes == "life_expectancy_black") {
+      filtered <- "life_expectancy_black"
+    } 
+    return(filtered)
   })
+  temp_year <- reactive({
+    # Filter the outcome years dataset based on selected values
+    if (input$yearSelect_outcomes == "2017") {
+      filtered <- "2017"  # Show all data
+    } else if (input$yearSelect_outcomes == "2018") {
+      filtered <- "2018"
+    } else if (input$yearSelect_outcomes == "2019") {
+      filtered <- "2019"
+      
+    } else (input$yearSelect_outcomes == "2020") {
+      filtered <- "2020"
+    } 
+    return(filtered)
+  })
+  
+  # # Update the choices for cyl input with labels
+  # observe({
+  #   updateSelectInput(session, "cyl", choices = choices_cyl, selected = input$cyl, label = names(choices_cyl))
+  # })
+  
+  output$outcomes <- renderPlotly({
+   mapping(temp_outcome, temp_year)
+  })
+  
+  output$VariableDefinition <- renderText(
+    if (input$outcomes == "per_low_birthweight") {
+      print("Statistics for per_low_birthweight")
+    } else if (input$outcomes == "life_expectancy") {
+      print("Statistics for life_expectancy")
+    } else if (input$outcomes == "life_expectancy_gap") {
+      print("Statistics for life_expectancy")
+      
+    } else (input$outcomes == "life_expectancy_black") {
+      print("Statistics for life_expectancy")
+    } 
+  )  
      
 }
 
