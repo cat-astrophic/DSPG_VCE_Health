@@ -12,8 +12,7 @@
 
 ## 1. 1 CODE TO DETECT ORIGIN OF LINK AND CHANGE LOGO ACCORDINGLY -------------
 # JavaScript code
-jscode <- '
-    var x = document.getElementsByClassName("navbar-brand");
+jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     var dspgLink = "https://dspg.aaec.vt.edu/";
     var githubLink = "https://github.com/VT-Data-Science-for-the-Public-Good";
     var dspgLogoHTML = \'<a href="\' + dspgLink + \'"><img src="DSPG_black-01.png" alt="VT DSPG" style="height:42px;"></a>\';
@@ -65,20 +64,22 @@ library(shinycssloaders)
 ### 1.3.1 Load the original data----------------------------------------------------------------
 #Reading in map 
 
-va.counties <- readRDS(file = "va.counties.Rdata")
+va.counties <- readRDS(file = "./data/va.counties.Rdata")
 va.counties$GEOID <- as.integer(va.counties$GEOID)
 va.counties$NAMELSAD <- str_to_title(va.counties$NAMELSAD )
 colnames(va.counties)[16] <- "Lat"
 va.counties$Lat <- as.double(va.counties$Lat)
 colnames(va.counties)[17] <- "Long"
 va.counties$Long <- as.double(va.counties$Long)
-us.states <- readRDS(file= "us.states.RData")
+us.states <- readRDS(file= "./data/us.states.RData")
 #County Health Rankings 2023 Data
-all_var_path <- "~/data/final_variables.csv"
+all_var_path <- "./data/final_variables.csv"
 all_var_df <- read.csv(paste(all_var_path, sep = ''))
 names(all_var_df)[names(all_var_df) == 'FIPS'] <- 'GEOID'
 all_var_df$Value <- as.numeric(all_var_df$Value)
-
+vce_agents <- read.csv("./data/vce_agents.csv")
+agents_sf <- st_as_sf(vce_agents, coords = c("Long", "Lat"), remove = FALSE, 
+                      crs = 4326, agr = "constant")
 good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
                 "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
                 "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White",
@@ -471,31 +472,31 @@ server <- function(input, output) {
   
   temp_outcome <- reactive({
     # Filter the outcome var dataset based on selected values
-    if (input$outcomes == "per_low_birthweight") {
-      filtered <- "per_low_birthweight"  # Show all data
-    } else if (input$outcomes == "life_expectancy") {
-      filtered <- "life_expectancy"
-    } else if (input$outcomes == "life_expectancy_gap") {
-      filtered <- "life_expectancy_gap"
-    
-    } else (input$outcomes == "life_expectancy_black") {
-      filtered <- "life_expectancy_black"
-    } 
-    return(filtered)
+    # if (input$Health_Outcomes == "per_low_birthweight") {
+    #   filtered <- "per_low_birthweight"  # Show all data
+    # } else if (input$Health_Outcomes == "life_expectancy") {
+    #   filtered <- "life_expectancy"
+    # } else if (input$Health_Outcomes == "life_expectancy_gap") {
+    #   filtered <- "life_expectancy_gap"
+    # } else if (input$Health_Outcomes == "life_expectancy_black") {
+    #   filtered <- "life_expectancy_black"
+    # } 
+    # return(filtered)
+    input$Health_Outcomes
   })
   temp_year <- reactive({
     # Filter the outcome years dataset based on selected values
     if (input$yearSelect_outcomes == "2017") {
-      filtered <- "2017"  # Show all data
+      filtered <- 2017  # Show all data
     } else if (input$yearSelect_outcomes == "2018") {
-      filtered <- "2018"
+      filtered <- 2018
     } else if (input$yearSelect_outcomes == "2019") {
-      filtered <- "2019"
-      
-    } else (input$yearSelect_outcomes == "2020") {
-      filtered <- "2020"
-    } 
+      filtered <- 2019
+    } else if (input$yearSelect_outcomes == "2020") {
+      filtered <- 2020
+    }
     return(filtered)
+   
   })
   
   # # Update the choices for cyl input with labels
@@ -504,21 +505,20 @@ server <- function(input, output) {
   # })
   
   output$outcomes <- renderPlotly({
-   mapping(temp_outcome, temp_year)
+   mapping(temp_outcome(), temp_year())
   })
   
-  output$VariableDefinition <- renderText(
-    if (input$outcomes == "per_low_birthweight") {
+  output$VariableDefinition <- renderText({
+    if (input$oHealth_Outcomes == "per_low_birthweight") {
       print("Statistics for per_low_birthweight")
-    } else if (input$outcomes == "life_expectancy") {
+    } else if (input$Health_Outcomes == "life_expectancy") {
       print("Statistics for life_expectancy")
-    } else if (input$outcomes == "life_expectancy_gap") {
+    } else if (input$Health_Outcomes == "life_expectancy_gap") {
       print("Statistics for life_expectancy")
-      
-    } else (input$outcomes == "life_expectancy_black") {
+    } else if (input$Health_Outcomes == "life_expectancy_black") {
       print("Statistics for life_expectancy")
     } 
-  )  
+  })  
      
 }
 
