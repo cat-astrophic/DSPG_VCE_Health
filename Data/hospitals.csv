@@ -1,176 +1,176 @@
-Facility,Address,City,Zip,Facility_Type,Coordinates,County
-American Access Care of Richmond,"2235 Staples Mill Road Suite 104, Richmond, VA 23230",Richmond,23230,Ambulatory Surgical,"(37.58940325343317, -77.49213570391771)",Henrico
-Bon Secours Memorial Regional Medical Ctr,"8260 Atlee Road, Mechanicsville, VA 23116",Mechanicsville,23116,Acute,"(37.628908, -77.388153)",Hanover
-Bon Secours Richmond Community Hospital,"1500 North 28th Street, Richmond, VA 23223",Richmond,23223,Acute,"(37.5401185, -77.40691479074073)",Richmond City
-Bon Secours Southern Virginia Medical Center,"727 North Main Street, Emporia, VA 23847",Emporia,23847,Acute,"(36.70169405, -77.53764257006387)",Emporia City
-Bon Secours Southside Medical Center,"200 Medical Park Boulevard, Petersburg, VA 23805",Petersburg,23805,Acute,"(37.18259005, -77.35951428139832)",Petersburg City
-Bon Secours St. Francis Medical Center,"13700 St. Francis Boulevard, Midlothian, VA 23114",Midlothian,23114,Acute,"(37.46680302085927, -77.65917979733125)",Chesterfield
-Bon Secours St. Mary's Hospital,"5801 Bremo Road, Richmond, VA 23226",Richmond,23226,Acute,"(37.58395915, -77.5129112834773)",Henrico
-Boulders Ambulatory Surgery Center,"1115 Boulders Parkway, Suite 210, Richmond, VA 23225",Richmond,23225,Ambulatory Surgical,"(37.51449259031506, -77.52971370021146)",Chesterfield
-Cataract and Refractive Surgery Center,"2010 Bremo Rd, Richmond, VA 23226",Richmond,23226,Ambulatory Surgical,"(37.59117439519014, -77.50821398857256)",Henrico
-Centra Southside Community Hospital,"800 Oak Street, Farmville, VA 23901",Farmville,23901,Acute,"(37.30257949999999, -78.4040613131847)",Prince Edward
-CJW Medical Center,"7101 Jahnke Road, Richmond, VA 23225",Richmond,23225,Acute,"(37.5151396, -77.526236)",Richmond City
-Colonial Heights Surgery Center,"930 South Avenue, Colonial Heights, VA 23834",Colonial Heights,23834,Ambulatory Surgical,"(37.2431484, -77.3897938)",Colonial Heights City
-Cumberland Hospital for Children and Adolescents,"9407 Cumberland Road, New Kent, VA 23124",New Kent,23124,Children,"(37.546806849999996, -76.97846530725624)",New Kent
-Encompass Health Rehab Hosp of Petersburg,"95 Medical Park Boulevard, Petersburg, VA 23805",Petersburg,23805,Rehabilitation,"(37.18441575, -77.36398186918066)",Petersburg City
-Encompass Health Rehab Hosp of Virginia,"5700 Fitzhugh Avenue, Richmond, VA 23226",Richmond,23226,Rehabilitation,"(37.5859121, -77.5067408)",Henrico
-Henrico Doctors' Hospital,"1602 Skipwith Road, Richmond, VA 23229",Richmond,23229,Acute,"(37.603302049999996, -77.54148077846145)",Henrico
-MEDARVA Stony Point Surgery Center,"8700 Stony Point Parkway, Suite 100, Richmond, VA 23235",Richmond,23235,Ambulatory Surgical,"(37.552660321906856, -77.5626839867194)",Richmond City
-MEDARVA Surgery Center @ West Creek,"1630 Wilkes Ridge Parkway, Richmond, VA 23233",Richmond,23233,Ambulatory Surgical,"(37.66073285999086, -77.65337797322577)",Goochland
-Poplar Springs Hospital,"350 Poplar Drive, Petersburg, VA 23805",Petersburg,23805,Psychiatric,"(37.18743585, -77.35957482678464)",Petersburg City
-Sentara Halifax Regional Hospital,"2204 Wilborn Avenue, South Boston, VA 24592",South Boston,24592,Acute,"(36.71231625, -78.9144040200095)",Halifax
-Sheltering Arms Institute,"2000 Wilkes Ridge Drive, Richmond, VA 23233",Richmond,23233,Rehabilitation,"(37.6597774, -77.6565364)",Goochland
-Skin Surgery Center of Virginia,"2510 Gaskins Road, Henrico, VA 23238",Henrico,23238,Ambulatory Surgical,"(37.630096449999996, -77.57902538026218)",Henrico
-St. Mary's Ambulatory Surgery Center,"1501 Maple Avenue, Richmond, VA 23226",Richmond,23226,Ambulatory Surgical,"(37.5807547, -77.5164606)",Richmond City
-TriCities Hospital,"411 W. Randolph Road, Hopewell, VA 23860",Hopewell,23860,Acute,"(37.30799495, -77.29142531215041)",Prince George
-Urosurgical Center of Richmond,"9101 Stony Point Drive, Richmond, VA 23235",Richmond,23235,Ambulatory Surgical,"(37.5491645, -77.5675664)",Richmond City
-VCU Community Memorial Hospital,"1755 North Mecklenburg Avenue, South Hill, VA 23970",South Hill,23970,Acute,"(36.74799849503549, -78.10330574535175)",Mecklenburg
-"VCU Health Neuroscience, Orthopedic and Wellness Center","11958 W Broad Street, Henrico, VA 23233",Henrico,23233,Ambulatory Surgical,"(37.65737525, -77.62608966695291)",Henrico
-VCU Medical Center,"1250 East Marshall Street, Richmond, VA 23298",Richmond,23298,Acute,"(37.540257499999996, -77.43006310233004)",Richmond City
-Vibra Hospital of Richmond LLC,"2220 Edward Holland Drive, Richmond, VA 23230",Richmond,23230,Long Term Acute Care,"(37.59080070015928, -77.49072070206375)",Henrico
-Virginia Beach Health Center,"201 N. Hamilton St., Richmond, VA 23221",Richmond,23221,Ambulatory Surgical,"(37.55950905, -77.49036469275046)",Richmond City
-"Virginia Eye Institute, Inc.","402 Westhampton Station, Richmond, VA 23226",Richmond,23226,Ambulatory Surgical,"(37.5665553471727, -77.53998727322798)",Henrico
-Advanced Vision Surgery Center LLC,"5215 Monticello Avenue, Williamsburg, VA 23188",Williamsburg,23188,Ambulatory Surgical,"(37.275963, -76.7446519)",James City
-"Bayview Medical Center, Inc","2000 Meade Parkway, Suffolk, VA 23434",Suffolk,23434,Ambulatory Surgical,"(36.7605469, -76.5947775)",Suffolk City
-Bon Secours Mary Immaculate Hospital,"2 Bernardine Drive, Newport News, VA 23602",Newport News,23602,Acute,"(37.1427724, -76.512861)",Newport News City
-Bon Secours Maryview Medical Center,"3636 High Street, Portsmouth, VA 23707",Portsmouth,23707,Acute,"(36.836321749999996, -76.34681406558875)",Portsmouth City
-Bon Secours Rappahannock General Hospital,"101 Harris Road, Kilmarnock, VA 22482",Kilmarnock,22482,Critical Access,"(37.70126985, -76.38767389814237)",Lancaster
-Bon Secours Southampton Memorial Hospital,"100 Fairview Drive, Franklin, VA 23851",Franklin,23851,Acute,"(36.691946349999995, -76.93720259369704)",Franklin City
-"Bon Secours Surgery Center at Harbour View, L.L.C.","5818 Harbour View Blvd. D Suite 102, Suffolk, VA 23435",Suffolk,23435,Ambulatory Surgical,"(36.86953423461393, -76.44296364440775)",Suffolk City
-Bon Secours Surgery Center at Virginia Beach,"828 Healthy Way, Virginia Beach, VA 23462",Virginia Beach,23462,Ambulatory Surgical,"(36.809302200000005, -76.12985990573108)",Virginia Beach City
-Careplex Orthopaedic Ambulatory Surgery Center,"3000 Coliseum Drive, Hampton, VA 23666",Hampton,23666,Ambulatory Surgical,"(37.056504649999994, -76.39040187437062)",Hampton City
-Center for Visual Surgical Excellence,"208 Carmichael Way , Chesapeake, VA  23322",Chesapeake,23322,Ambulatory Surgical,"(36.66049775, -76.23138724359836)",Chesapeake City
-Chesapeake Regional Medical Center,"736 Battlefield Boulevard North, Chesapeake, VA 23320",Chesapeake,23320,Acute,"(36.748156249999994, -76.24709958904123)",Chesapeake City
-"Chesapeake Regional Surgery Center at Virginia Beach, LLC","229 Clearfield Avenue, Virginia Beach, VA 23462",Virginia Beach,23462,Ambulatory Surgical,"(36.84475916357605, -76.16522026747107)",Virginia Beach City
-Children's Hospital of The King's Daughters,"601 Children's Lane, Norfolk, VA 23507",Norfolk,23507,Children,"(36.86233126686254, -76.3020754174256)",Norfolk City
-CHKD Health & Surgery Center (Newport News),"11783 Rock Landing Drive, Newport News, VA 23608",Newport News,23608,Ambulatory Surgical,"(37.08930107329541, -76.4645889048459)",Newport News City
-CHKD Health & Surgery Center (Virginia Beach),"2021 Concert Drive, Virginia Beach, VA 23456",Virginia Beach,23456,Ambulatory Surgical,"(36.77694900635255, -76.1005854083276)",Virginia Beach City
-CVP Surgery Center,"200 Coporate Blvd, Norfolk, Virginia 23502",Norfolk,23502,Ambulatory Surgical,"(36.83911822223034, -76.21270543091735)",Norfolk City
-HOSPITAL AUTHORITY OF NORFOLK,"1309 Kempsville Road, Norfolk, VA 23502",Norfolk,23502,Long Term Acute Care,"(36.86716695, -76.20584786913648)",Norfolk City
-Hospital for Extended Recovery,"600 Gresham Drive, Suite 700, Norfolk, VA 23507",Norfolk,23507,Long Term Acute Care,"(36.85970737246345, -76.30331025975312)",Norfolk City
-Kempsville Center for Behavioral Health,"860 Kempsville Road, Norfolk, VA 23502",Norfolk,23502,Psychiatric,"(36.853004, -76.18962061116775)",Norfolk City
-"Leigh Orthopedic Surgery Center, LLC","6201 E. Virginia Beach Blvd, Norfolk, VA 23502",Norfolk,23502,Ambulatory Surgical,"(36.854465, -76.17965)",Norfolk City
-Mary Immaculate Ambulatory Surgery Center,"12720 McManus Boulevard, Suite 103, Newport News, VA 23602",Newport News,23602,Ambulatory Surgical,"(37.143972368100364, -76.51207444625544)",Newport News City
-Newport News Behavioral Health Center,"17579 Warwick Blvd, Newport News, VA 23603",Newport News,23603,Psychiatric,"(37.203648, -76.58363004694533)",Newport News City
-Port Warwick Surgery Center,"1031 Loftis Avenue, Newport News, VA 23606",Newport News,23606,Ambulatory Surgical,"(37.08472826758289, -76.48509637509308)",Newport News City
-"Princess Anne Ambulatory Surgery Management, LLC","1975 Glenn Mitchell Drive , Virginia Beach, VA 23456",Virginia Beach,23456,Ambulatory Surgical,"(36.7765069, -76.09763591244754)",Virginia Beach City
-Riverside Doctors Surgery Center,"120 Kings Way, Suite 1500, Williamsburg, VA 23185",Williamsburg,23185,Ambulatory Surgical,"(37.255785262699185, -76.74050455788995)",James City
-Riverside Doctors' Hospital Williamsburg,"1500 Commonwealth Avenue, Williamsburg, VA 23185",Williamsburg,23185,Acute,"(37.2506729, -76.66811018914242)",Williamsburg City
-Riverside Hampton Surgery Center,"850 Enterprise Parkway, Hampton, VA 23666",Hampton,23666,Ambulatory Surgical,"(37.058912250000006, -76.40330457065289)",Hampton City
-Riverside Peninsula Surgery Center,"12000 Warwick Boulevard, Newport News, VA 23601",Newport News,23601,Ambulatory Surgical,"(37.06042085, -76.4828822777533)",Newport News City
-Riverside Regional Medical Center,"500 J. Clyde Morris Boulevard, Newport News, VA 23601",Newport News,23601,Acute,"(37.0638974, -76.48153815)",Newport News City
-Riverside Rehabilitation Hospital,"250 Josephs Drive, Yorktown, VA 23693",Yorktown,23693,Rehabilitation,"(37.1214633, -76.45451248352691)",York
-Riverside Shore Memorial Hospital,"20480 Market Street, Onancock, VA 23417",Onancock,23417,Acute,"(37.6970757, -75.72354664321591)",Accomack
-Riverside Walter Reed Hospital,"Route 17, Gloucester, VA 23061",Gloucester,23061,Acute,"(37.42000416875499, -76.54109307323135)",Gloucester
-Select Specialty Hospital - Hampton Roads,"4th Floor East, Newport News, VA 23601",Newport News,23601,Long Term Acute Care,"(37.06363079743672, -76.48329538673066)",Newport News City
-Sentara BelleHarbour Ambulatory Surgery Center,"3910 Bridge Road, Suffolk, VA 23435",Suffolk,23435,Ambulatory Surgical,"(36.86239563636364, -76.45352963636364)",Suffolk City
-Sentara Careplex Hospital,"3000 Coliseum Drive, Hampton, VA 23666",Hampton,23666,Acute,"(37.056504649999994, -76.39040187437062)",Hampton City
-Sentara Leigh Hospital,"830 Kempsville Road, Norfolk, VA 23502",Norfolk,23502,Acute,"(36.8520428, -76.1905501)",Norfolk City
-Sentara Norfolk General Hospital,"600 Gresham Drive, Norfolk, VA 23507",Norfolk,23507,Acute,"(36.86246035, -76.30383383885481)",Norfolk City
-Sentara Obici Ambulatory Surgery LLC,"2750 Godwin Blvd, Suffolk, VA 23434",Suffolk,23434,Ambulatory Surgical,"(36.7708127, -76.58306698049559)",Suffolk City
-Sentara Obici Hospital,"2800 Godwin Boulevard, Suffolk, VA 23434",Suffolk,23434,Acute,"(36.7731923, -76.5808546660694)",Suffolk City
-Sentara Princess Anne Hospital,"2025 Glenn Mitchell Drive, Virginia Beach, VA 23456",Virginia Beach,23456,Acute,"(36.7762387, -76.09770866157105)",Virginia Beach City
-Sentara Virginia Beach Ambulatory Surgery Center,"1700 Will O Wisp Drive, Virginia Beach, VA 23454",Virginia Beach,23454,Ambulatory Surgical,"(36.86316615, -76.02716401666667)",Virginia Beach City
-Sentara Virginia Beach General Hospital,"1060 First Colonial Road, Virginia Beach, VA 23454",Virginia Beach,23454,Acute,"(36.8644904, -76.0278302)",Virginia Beach City
-Sentara Williamsburg Regional Medical Center,"100 Sentara Circle, Williamsburg, VA 23188",Williamsburg,23188,Acute,"(37.33646345, -76.74068496391735)",York
-Surgery Center of Chesapeake,"844 Battlefield Blvd., North, Chesapeake, VA 23320",Chesapeake,23320,Ambulatory Surgical,"(36.75014909558461, -76.24686920208295)",Chesapeake City
-Surgical Suites of Coastal Virginia ,"400 Sentara Circle, Williamsburg, VA 23188",Williamsburg,23188,Ambulatory Surgical,"(37.337732118668946, -76.74148285788806)",York
-The Pavilion at Williamsburg Place,"5483 Mooretown Road, Williamsburg, VA 23188",Williamsburg,23188,Psychiatric,"(37.31478275, -76.7318403816887)",James City
-VCU Health Tappahannock Hospital,"618 Hospital Road, Tappahannock, VA 22560",Tappahannock,22560,Acute,"(37.9009082, -76.87853450274353)",Essex
-Virginia Beach Eye Center,"465 North Great Neck Road, Virginia Beach, VA 23454",Virginia Beach,23454,Ambulatory Surgical,"(36.84880052048784, -76.0484261321737)",Virginia Beach City
-Virginia Beach Psychiatric Center,"1100 First Colonial Road, Virginia Beach, VA 23454",Virginia Beach,23454,Psychiatric,"(36.866252349999996, -76.02856151871265)",Virginia Beach City
-Virginia Center for Eye Surgery,"1200 First Colonial Road, Suite 104, Virginia Beach, VA 23454",Virginia Beach,23454,Ambulatory Surgical,"(36.86953500210519, -76.03163993091668)",Virginia Beach City
-Dominion Hospital,"2960 Sleepy Hollow Road, Falls Church, VA 22044",Falls Church,22044,Psychiatric,"(38.87055655, -77.15866046120973)",Fairfax
-Encompass Health Rehab Hosp of Northern Virginia,"24430 Millstream Drive, Aldie, VA 20105",Aldie,20105,Rehabilitation,"(38.9392345, -77.5531518)",Loudoun
-"Fairfax Surgical Center, LP","10730 Main Street, Fairfax, VA 22030",Fairfax,22030,Ambulatory Surgical,"(38.8497291, -77.3154206)",Fairfax City
-Haymarket Surgery Center,"15195 Heathcote Blvd Ste 210, Haymarket, VA 20169",Haymarket,20169,Ambulatory Surgical,"(38.8208321918615, -77.64222574436205)",Prince William
-"HealthQare Services ASC, LLC","1005 Glebe Road Suite 200, Arlington, VA 22201",Arlington,22201,Ambulatory Surgical,"(38.88332135238111, -77.1155696173782)",Arlington
-Inova Alexandria Hospital,"4320 Seminary Road, Alexandria, VA 22304",Alexandria,22304,Acute,"(38.8223813, -77.10473399085639)",Alexandria City
-"Inova Ambulatory Surgery Center at Lorton, LLC","9321 Sanger Street , Lorton, VA 22079",Lorton,22079,Ambulatory Surgical,"(38.70256635, -77.22689245502188)",Fairfax
-Inova Fair Oaks Hospital,"3600 Joseph Siewick Drive, Fairfax, VA 22033",Fairfax,22033,Acute,"(38.88475665, -77.38086919754149)",Fairfax
-Inova Fairfax Hospital,"3300 Gallows Road, Falls Church, VA 22042",Falls Church,22042,Acute,"(38.8574108, -77.22849480984827)",Fairfax
-"Inova Loudoun Ambulatory Surgery Center, LLC","44035 Riverside Parkway, Suite 200, Leesburg, VA 20176",Leesburg,20176,Ambulatory Surgical,"(39.07419807087214, -77.47785065970115)",Loudoun
-Inova Loudoun Hospital,"44045 Riverside Parkway, Leesburg, VA 20176",Leesburg,20176,Acute,"(39.0744725, -77.47767107767453)",Loudoun
-Inova Mount Vernon Hospital,"2501 Parker's Lane, Alexandria, VA 22306",Alexandria,22306,Acute,"(38.73997251966846, -77.07691082901881)",Fairfax
-Inova Surgery Center @ Franconia-Springfield,"6355 Walker Lane, Alexandria, VA 22310",Alexandria,22310,Ambulatory Surgical,"(38.767300615472614, -77.16080744436337)",Fairfax
-Kaiser Permanente Tysons Corner Surgery Center,"8008 Westpark Drive, McLean, VA 22102",McLean,22102,Ambulatory Surgical,"(38.929441, -77.22445660430839)",Fairfax
-"Lake Ridge Ambulatory Surgery Center, LLC","12825 Minnieville Road Suite 204, Woodbridge, VA 22192",Woodbridge,22192,Ambulatory Surgical,"(38.67307440232801, -77.27789775971077)",Prince William
-"McLean Ambulatory Surgery Center, LLC","7601 Lewinsville Road, McLean, VA 22102",McLean,22102,Ambulatory Surgical,"(38.9345737, -77.207124333553)",Fairfax
-North Spring Behavioral Healthcare,"42009 Victory Lane, Leesburg, VA 20176",Leesburg,20176,Psychiatric,"(39.145048700000004, -77.54652542257291)",Loudoun
-"Northern Virginia Eye Surgery Center, LLC","2710 Prosperity Avenue, Fairfax, VA 22031",Fairfax,22031,Ambulatory Surgical,"(38.88093476375693, -77.23444495210471)",Fairfax
-Northern Virginia Surgery Center,"3620 Joseph Siewick Drive, Fairfax, VA 22033",Fairfax,22033,Ambulatory Surgical,"(38.88517154263595, -77.38093738668799)",Fairfax
-Pediatric Specialists of Virginia Ambulatory Surgery Center,"3023 Hamaker Ct. Ste 400, Fairfax, Virginia 22031",Fairfax,22031,Ambulatory Surgical,"(38.868548171945704, -77.23573394436097)",Fairfax
-Prince William Ambulatory Surgery Center,"8644 Sudley Road, Manassas, VA 20110",Manassas,20110,Ambulatory Surgical,"(38.76761264091737, -77.48871701552704)",Manassas City
-Reston Hospital Center,"1850 Town Center Parkway, Reston, VA 20190",Reston,20190,Acute,"(38.96270805, -77.36479123609762)",Fairfax
-Reston Surgery Center,"1860 Town Center Drive, Suite G100, Reston, VA 20190",Reston,20190,Ambulatory Surgical,"(38.96186284634069, -77.36644800203115)",Fairfax
-Sentara Northern Virginia Medical Center,"2300 Opitz Boulevard, Woodbridge, VA 22191",Woodbridge,22191,Acute,"(38.637097499999996, -77.28620797902809)",Prince William
-Stone Springs Ambulatory Surgery Center,"24570 Medical Dr, Dulles, VA 20166",Dulles,20166,Ambulatory Surgical,"(38.938553, -77.5400912)",Loudoun
-Stone Springs Hospital Center,"24440 Stone Springs Blvd, Dulles, VA 20166",Dulles,20166,Acute,"(38.9404883, -77.54269874985485)",Loudoun
-UVA Haymarket Medical Center,"15225 Healthcote Blvd, Haymarket, VA 20169",Haymarket,20169,Acute,"(38.820925350605926, -77.64240670018064)",Prince William
-UVA Prince William Medical Center ,"8700 Sudley Road, Manassas, VA 20110",Manassas,20110,Acute,"(38.7672132, -77.48805041133178)",Manassas City
-Virginia Hospital Center,"1701 N. George Mason Drive, Arlington, VA 22205",Arlington,22205,Acute,"(38.88974565, -77.12797601304791)",Arlington
-Augusta Health,"78 Medical Center Drive, Fishersville, VA 22939",Fishersville,22939,Acute,"(38.0945803, -78.98643143822162)",Augusta
-Bath County Community Hospital,"PO Drawer Z, Hot Springs, VA 24445",Hot Springs,24445,Critical Access,"(37.993021278229826, -79.83197342110752)",Bath
-Carilion Rockbridge Community Hospital,"1 Health Circle, Lexington, VA 24450",Lexington,24450,Critical Access,"(37.77891505, -79.44079144135272)",Lexington City
-"Culpeper Surgery Center,LLC","541 Sunset Lane, Culpeper, VA 22701",Culpeper,22701,Ambulatory Surgical,"(38.45521486604196, -78.011799063445)",Culpeper
-Encompass Health Rehab Hosp of Fredericksburg,"300 Park Hill Drive, Fredericksburg, VA 22401",Fredericksburg,22401,Rehabilitation,"(38.3126122, -77.4869928)",Fredericksburg City
-Fauquier Hospital ,"500 Hospital Drive, Warrenton, VA 20186",Warrenton,20186,Acute,"(38.71209605, -77.80865021584926)",Fauquier
-Fredericksburg Ambulatory Surgery Center,"1201 Sam Perry Blvd, Suite 101, Fredericksburg, VA 22401",Fredericksburg,22401,Ambulatory Surgical,"(38.30965660710573, -77.48470190390091)",Fredericksburg City
-Martha Jefferson Outpatient Surgery Center,"595 Martha Jefferson Drive, Charlottesville, VA 22911",Charlottesville,22911,Ambulatory Surgical,"(38.0229772187559, -78.43989255787218)",Albemarle
-Mary Washington Hospital,"1001 Sam Perry Boulevard, Fredericksburg, VA 22401",Fredericksburg,22401,Acute,"(38.31038945, -77.4838342856807)",Fredericksburg City
-"Monticello Community Surgery Center, LLC","2331 Seminole Lane, Suite 201, Charlottesville, VA 22901",Charlottesville,22901,Ambulatory Surgical,"(38.099667959672686, -78.46049265972442)",Albemarle
-"New Women's Health Charlottesville, LLC.","2050 Abbey Road, Charlottesville, VA 22911",Charlottesville,22911,Ambulatory Surgical,"(38.028743792302244, -78.44335163274381)",Albemarle
-"Rockingham Eye Surgery Center, LLC","1690 B Spring Port Drive, Rockingham, VA 22801",Rockingham,22801,Ambulatory Surgical,"(38.4063746121754, -78.86924647320822)",Rockingham
-Sentara Martha Jefferson Hospital,"500 Martha Jefferson Drive, Charlottesville, VA 22911",Charlottesville,22911,Acute,"(38.022926999999996, -78.4443350570148)",Albemarle
-Sentara RMH Medical Center,"2010 Health Campus Drive, Harrisonburg, VA 22801",Harrisonburg,22801,Acute,"(38.40514415, -78.85524705523949)",Rockingham
-Spotsylvania Regional Medical Center,"4600 Spotsylvania Parkway, Fredericksburg, VA 22408",Fredericksburg,22408,Acute,"(38.2177284, -77.49602472296269)",Spotsylvania
-Stafford Hospital ,"101 Hospital Center Blvd, Stafford, VA 22554",Stafford,22554,Acute,"(38.41563305, -77.40704638874043)",Stafford
-Surgi-Center of Central Virginia,"1500 Dixon Street Suite 101, Fredericksburg, VA 22401",Fredericksburg,22401,Ambulatory Surgical,"(38.284683445412234, -77.45429931553859)",Fredericksburg City
-University of Virginia Medical Center,"1215 Lee Street, Charlottesville, VA 22903",Charlottesville,22903,Acute,"(38.03235898915392, -78.49827841739865)",Charlottesville City
-UVA Culpeper Medical Center,"501 Sunset Lane, Culpeper, VA 22701",Culpeper,22701,Acute,"(38.455438603662486, -78.01347637506106)",Culpeper
-UVA Encompass Health Rehabilitation Hospital,"515 Ray C. Hunt Drive, Charlottesville, VA 22903",Charlottesville,22903,Rehabilitation,"(38.02501405476496, -78.52518315787208)",Albemarle
-UVA Transitional Care Hospital,"2965 Ivy Road, Charlottesville, VA 22903",Charlottesville,22903,Long Term Acute Care,"(38.05169494764419, -78.54969018856183)",Albemarle
-Valley Health Page Memorial Hospital,"200 Memorial Drive, Luray, VA 22835",Luray,22835,Critical Access,"(38.6634775778534, -78.46858784621992)",Page
-Valley Health Shenandoah Memorial Hospital,"759 South Main Street, Woodstock, VA 22664",Woodstock,22664,Critical Access,"(38.869587957189964, -78.5126060731972)",Shenandoah
-Valley Health Surgery Center,"174 Botanical Blvd, Winchester, VA 22603",Winchester,22603,Ambulatory Surgical,"(39.19273811357737, -78.2014695173709)",Frederick
-Valley Health Warren Memorial Hospital,"351 Valley Health Way , Front Royal, VA 22630",Front Royal,22630,Acute,"(38.91974961300421, -78.15266464621378)",Warren
-Valley Health Winchester Medical Center,"1840 Amherst Street, Winchester, VA 22601",Winchester,22601,Acute,"(39.19627145, -78.18943473110079)",Winchester City
-"Winchester Eye Surgery Center, LLC","525 Amherst Street, Winchester, VA 22601",Winchester,22601,Ambulatory Surgical,"(39.18701795918368, -78.17443120408163)",Winchester City
-Bedford Memorial Hospital,"1613 Oakwood Street, Bedford, VA 24523",Bedford,24523,Acute,"(37.35204605, -79.5174875626834)",Bedford
-Blue Ridge Surgery Center,"1802 Braeburn Drive, Salem, VA 24153",Salem,24153,Ambulatory Surgical,"(37.2653986, -80.0349289)",Salem City
-Buchanan General Hospital,"1535 Slate Creek Road, Grundy, VA 24614",Grundy,24614,Acute,"(37.2850097, -82.06671576957646)",Buchanan
-Carilion Franklin Memorial Hospital,"390 South Main Street, Rocky Mount, VA 24151",Rocky Mount,24151,Acute,"(36.9936231, -79.89030483214017)",Franklin
-Carilion Giles Community Hospital,"159 Hartley Way, Pearisburg, VA 24134",Pearisburg,24134,Critical Access,"(37.33295555, -80.7128496016166)",Giles
-Carilion Medical Center,"1906 Belleview Avenue, Roanoke, VA 24014",Roanoke,24014,Acute,"(37.25180207179288, -79.94111064625301)",Roanoke City
-Carilion New River Valley,"2900 Lamb Circle, Christiansburg, VA 24073",Christiansburg,24073,Acute,"(37.0884695, -80.5049893814614)",Montgomery
-Carilion Tazewell Community Hospital,"388 Ben Bolt Avenue, Tazewell, VA 24651",Tazewell,24651,Acute,"(37.12379645, -81.48923243409072)",Tazewell
-Centra Health,"1920 Atherholt Road, Lynchburg, VA 24502",Lynchburg,24502,Acute,"(37.413863203617936, -79.16923763090406)",Lynchburg City
-Centra Specialty Hospital,"3300 Rivermont Avenue, Lynchburg, VA 24503",Lynchburg,24503,Long Term Acute Care,"(37.43799045450605, -79.18722592904952)",Lynchburg City
-Clinch Valley Medical Center,"6801 Gov. G.C. Peery Highway, Richlands, VA 24641",Richlands,24641,Acute,"(37.09490349653225, -81.81949379465891)",Tazewell
-Dickenson Community Hospital,"312 Hospital Drive, Clintwood, VA 24228",Clintwood,24228,Critical Access,"(37.16086767711355, -82.44924910207365)",Dickenson
-DLP Twin County Regional Healthcare,"200 Hospital Drive, Galax, VA 24333",Galax,24333,Acute,"(36.670883169221966, -80.92398153092101)",Galax City
-"Eye Surgery Center of Central Virginia, LLC","1835 Graves Mill Road , Forest, VA 24551",Forest,24551,Ambulatory Surgical,"(37.377693666666666, -79.24481866666666)",Bedford
-"Fairlawn Surgery Center, LLC","2030 Stephenson Avenue SW, Roanoke, VA 24014",Roanoke,24014,Ambulatory Surgical,"(37.2516154322056, -79.95026808858032)",Roanoke City
-Johnston Memorial Hospital,"16000 Johnston Memorial Drive, Abingdon, VA 24211",Abingdon,24211,Acute,"(36.723353858793004, -81.91093504441099)",Washington
-Lee County Community Hospital,"127 Health Care Drive, Pennington Gap, VA 24277",Pennington Gap,24277,Critical Access,"(36.74936089752744, -83.04927025975557)",Lee
-LewisGale Hospital - Alleghany,"1 ARH Lane, Low Moor, VA 24457",Low Moor,24457,Acute,"(37.79205105, -79.88124391538574)",Alleghany
-LewisGale Hospital Montgomery,"3700 South Main Street, Blacksburg, VA 24060",Blacksburg,24060,Acute,"(37.18858907117696, -80.4132238560041)",Montgomery
-LewisGale Hospital Pulaski ,"2400 Lee Highway, Pulaski, VA 24301",Pulaski,24301,Acute,"(37.068340361640324, -80.75706218858465)",Pulaski
-LewisGale Medical Center,"1900 Electric Road, Salem, VA 24153",Salem,24153,Acute,"(37.26337304549283, -80.03135391741642)",Roanoke
-Martinsville Center for Sight,"433 East Commonwealth Blvd, Martinsville, VA 24112",Martinsville,24112,Ambulatory Surgical,"(36.69649945406164, -79.8563777139902)",Martinsville City
-New River Valley Surgery Center,"2901 Lamb Circle, Christiansburg, VA 24073",Christiansburg,24073,Ambulatory Surgical,"(37.09130183495109, -80.50499911556635)",Montgomery
-Norton Community Hospital,"100 Fifteenth Street, NW, Norton, VA 24273",Norton,24273,Acute,"(36.933194787566585, -82.6420769444062)",Norton City
-Piedmont Day Surgery Center,"1040 Main Street, Danville, VA 24543",Danville,24543,Ambulatory Surgical,"(36.58054929056448, -79.40184427778848)",Danville City
-"Rehabilitation Hospital of Bristol, LLC","103 North Street, Bristol, VA 24201",Bristol,24201,Rehabilitation,"(36.5970858, -82.2168357)",Bristol City
-Ridgeview Pavilion (Bristol Region),"103 North Street , Bristol, Va 24201",Bristol,24201,Psychiatric,"(36.5970858, -82.2168357)",Bristol City
-Roanoke Ambulatory Surgery Center,"1102 Jefferson Street, SE, Roanoke, VA 24016",Roanoke,24016,Ambulatory Surgical,"(37.263137381595584, -79.94119778858013)",Roanoke City
-Roanoke Valley Center for Sight at Oak Grove,"2154 McVitty Rd, Roanoke, VA 24018",Roanoke,24018,Ambulatory Surgical,"(37.232107, -80.017297)",Roanoke
-Roanoke Valley Center for Sight,"438 West Main Street, Salem, VA 24153",Salem,24153,Ambulatory Surgical,"(37.29125888084636, -80.0659770830719)",Salem City
-Russell County Hospital,"PO Box 3600, Lebanon, VA 24266",Lebanon,24266,Acute,"(36.89905625010541, -82.07860641590032)",Russell
-Smyth County Community Hospital,"245 Medical Park Drive, Marion, VA 24354",Marion,24354,Acute,"(36.8513787, -81.48863717225183)",Smyth
-Southwest Virginia Center for Sight,"470 Lithia Road, Wytheville, VA 24382",Wytheville,24382,Ambulatory Surgical,"(36.951590798567054, -81.05509822432002)",Wythe
-Sovah Health - Danville,"142 South Main Street, Danville, VA 24541",Danville,24541,Acute,"(36.57750145, -79.4050444657006)",Danville City
-Sovah Health - Martinsville,"320 Hospital Drive, Martinsville, VA 24112",Martinsville,24112,Acute,"(36.697273565674735, -79.86508670411803)",Martinsville City
-"Surgery Center of Lynchburg, LLC","2401 Atherholt Road, Lynchburg, VA 24501",Lynchburg,24501,Ambulatory Surgical,"(37.4084287, -79.17794464511357)",Lynchburg City
-Wellmont Lonesome Pine Mt. View Hospital,"1990 Holton Avenue, East, Big Stone Gap, VA 24219",Big Stone Gap,24219,Acute,"(36.87719683512509, -82.75439431742518)",Wise
-Wythe County Community Hospital LLC,"600 West Ridge Road, Wytheville, VA 24382",Wytheville,24382,Acute,"(36.9546656, -81.09693440369114)",Wythe
+Facility,Address,City,Zip,Facility_Type,Coordinates,County,FIPS
+American Access Care of Richmond,"2235 Staples Mill Road Suite 104, Richmond, VA 23230",Richmond,23230,Ambulatory Surgical,"(37.58940325343317, -77.49213570391771)",Henrico,51087
+Bon Secours Memorial Regional Medical Ctr,"8260 Atlee Road, Mechanicsville, VA 23116",Mechanicsville,23116,Acute,"(37.628908, -77.388153)",Hanover,51085
+Bon Secours Richmond Community Hospital,"1500 North 28th Street, Richmond, VA 23223",Richmond,23223,Acute,"(37.5401185, -77.40691479074073)",Richmond City,51760
+Bon Secours Southern Virginia Medical Center,"727 North Main Street, Emporia, VA 23847",Emporia,23847,Acute,"(36.70169405, -77.53764257006387)",Emporia City,51595
+Bon Secours Southside Medical Center,"200 Medical Park Boulevard, Petersburg, VA 23805",Petersburg,23805,Acute,"(37.18259005, -77.35951428139832)",Petersburg City,51730
+Bon Secours St. Francis Medical Center,"13700 St. Francis Boulevard, Midlothian, VA 23114",Midlothian,23114,Acute,"(37.46680302085927, -77.65917979733125)",Chesterfield,51041
+Bon Secours St. Mary's Hospital,"5801 Bremo Road, Richmond, VA 23226",Richmond,23226,Acute,"(37.58395915, -77.5129112834773)",Henrico,51087
+Boulders Ambulatory Surgery Center,"1115 Boulders Parkway, Suite 210, Richmond, VA 23225",Richmond,23225,Ambulatory Surgical,"(37.51449259031506, -77.52971370021146)",Chesterfield,51041
+Cataract and Refractive Surgery Center,"2010 Bremo Rd, Richmond, VA 23226",Richmond,23226,Ambulatory Surgical,"(37.59117439519014, -77.50821398857256)",Henrico,51087
+Centra Southside Community Hospital,"800 Oak Street, Farmville, VA 23901",Farmville,23901,Acute,"(37.30257949999999, -78.4040613131847)",Prince Edward,51147
+CJW Medical Center,"7101 Jahnke Road, Richmond, VA 23225",Richmond,23225,Acute,"(37.5151396, -77.526236)",Richmond City,51760
+Colonial Heights Surgery Center,"930 South Avenue, Colonial Heights, VA 23834",Colonial Heights,23834,Ambulatory Surgical,"(37.2431484, -77.3897938)",Colonial Heights City,51570
+Cumberland Hospital for Children and Adolescents,"9407 Cumberland Road, New Kent, VA 23124",New Kent,23124,Children,"(37.546806849999996, -76.97846530725624)",New Kent,51127
+Encompass Health Rehab Hosp of Petersburg,"95 Medical Park Boulevard, Petersburg, VA 23805",Petersburg,23805,Rehabilitation,"(37.18441575, -77.36398186918066)",Petersburg City,51730
+Encompass Health Rehab Hosp of Virginia,"5700 Fitzhugh Avenue, Richmond, VA 23226",Richmond,23226,Rehabilitation,"(37.5859121, -77.5067408)",Henrico,51087
+Henrico Doctors' Hospital,"1602 Skipwith Road, Richmond, VA 23229",Richmond,23229,Acute,"(37.603302049999996, -77.54148077846145)",Henrico,51087
+MEDARVA Stony Point Surgery Center,"8700 Stony Point Parkway, Suite 100, Richmond, VA 23235",Richmond,23235,Ambulatory Surgical,"(37.552660321906856, -77.5626839867194)",Richmond City,51760
+MEDARVA Surgery Center @ West Creek,"1630 Wilkes Ridge Parkway, Richmond, VA 23233",Richmond,23233,Ambulatory Surgical,"(37.66073285999086, -77.65337797322577)",Goochland,51075
+Poplar Springs Hospital,"350 Poplar Drive, Petersburg, VA 23805",Petersburg,23805,Psychiatric,"(37.18743585, -77.35957482678464)",Petersburg City,51730
+Sentara Halifax Regional Hospital,"2204 Wilborn Avenue, South Boston, VA 24592",South Boston,24592,Acute,"(36.71231625, -78.9144040200095)",Halifax,51083
+Sheltering Arms Institute,"2000 Wilkes Ridge Drive, Richmond, VA 23233",Richmond,23233,Rehabilitation,"(37.6597774, -77.6565364)",Goochland,51075
+Skin Surgery Center of Virginia,"2510 Gaskins Road, Henrico, VA 23238",Henrico,23238,Ambulatory Surgical,"(37.630096449999996, -77.57902538026218)",Henrico,51087
+St. Mary's Ambulatory Surgery Center,"1501 Maple Avenue, Richmond, VA 23226",Richmond,23226,Ambulatory Surgical,"(37.5807547, -77.5164606)",Richmond City,51760
+TriCities Hospital,"411 W. Randolph Road, Hopewell, VA 23860",Hopewell,23860,Acute,"(37.30799495, -77.29142531215041)",Prince George,51149
+Urosurgical Center of Richmond,"9101 Stony Point Drive, Richmond, VA 23235",Richmond,23235,Ambulatory Surgical,"(37.5491645, -77.5675664)",Richmond City,51760
+VCU Community Memorial Hospital,"1755 North Mecklenburg Avenue, South Hill, VA 23970",South Hill,23970,Acute,"(36.74799849503549, -78.10330574535175)",Mecklenburg,51117
+"VCU Health Neuroscience, Orthopedic and Wellness Center","11958 W Broad Street, Henrico, VA 23233",Henrico,23233,Ambulatory Surgical,"(37.65737525, -77.62608966695291)",Henrico,51087
+VCU Medical Center,"1250 East Marshall Street, Richmond, VA 23298",Richmond,23298,Acute,"(37.540257499999996, -77.43006310233004)",Richmond City,51760
+Vibra Hospital of Richmond LLC,"2220 Edward Holland Drive, Richmond, VA 23230",Richmond,23230,Long Term Acute Care,"(37.59080070015928, -77.49072070206375)",Henrico,51087
+Virginia Beach Health Center,"201 N. Hamilton St., Richmond, VA 23221",Richmond,23221,Ambulatory Surgical,"(37.55950905, -77.49036469275046)",Richmond City,51760
+"Virginia Eye Institute, Inc.","402 Westhampton Station, Richmond, VA 23226",Richmond,23226,Ambulatory Surgical,"(37.5665553471727, -77.53998727322798)",Henrico,51087
+Advanced Vision Surgery Center LLC,"5215 Monticello Avenue, Williamsburg, VA 23188",Williamsburg,23188,Ambulatory Surgical,"(37.275963, -76.7446519)",James City,51095
+"Bayview Medical Center, Inc","2000 Meade Parkway, Suffolk, VA 23434",Suffolk,23434,Ambulatory Surgical,"(36.7605469, -76.5947775)",Suffolk City,51800
+Bon Secours Mary Immaculate Hospital,"2 Bernardine Drive, Newport News, VA 23602",Newport News,23602,Acute,"(37.1427724, -76.512861)",Newport News City,51700
+Bon Secours Maryview Medical Center,"3636 High Street, Portsmouth, VA 23707",Portsmouth,23707,Acute,"(36.836321749999996, -76.34681406558875)",Portsmouth City,51740
+Bon Secours Rappahannock General Hospital,"101 Harris Road, Kilmarnock, VA 22482",Kilmarnock,22482,Critical Access,"(37.70126985, -76.38767389814237)",Lancaster,51103
+Bon Secours Southampton Memorial Hospital,"100 Fairview Drive, Franklin, VA 23851",Franklin,23851,Acute,"(36.691946349999995, -76.93720259369704)",Franklin City,51620
+"Bon Secours Surgery Center at Harbour View, L.L.C.","5818 Harbour View Blvd. D Suite 102, Suffolk, VA 23435",Suffolk,23435,Ambulatory Surgical,"(36.86953423461393, -76.44296364440775)",Suffolk City,51800
+Bon Secours Surgery Center at Virginia Beach,"828 Healthy Way, Virginia Beach, VA 23462",Virginia Beach,23462,Ambulatory Surgical,"(36.809302200000005, -76.12985990573108)",Virginia Beach City,51810
+Careplex Orthopaedic Ambulatory Surgery Center,"3000 Coliseum Drive, Hampton, VA 23666",Hampton,23666,Ambulatory Surgical,"(37.056504649999994, -76.39040187437062)",Hampton City,51650
+Center for Visual Surgical Excellence,"208 Carmichael Way , Chesapeake, VA  23322",Chesapeake,23322,Ambulatory Surgical,"(36.66049775, -76.23138724359836)",Chesapeake City,51550
+Chesapeake Regional Medical Center,"736 Battlefield Boulevard North, Chesapeake, VA 23320",Chesapeake,23320,Acute,"(36.748156249999994, -76.24709958904123)",Chesapeake City,51550
+"Chesapeake Regional Surgery Center at Virginia Beach, LLC","229 Clearfield Avenue, Virginia Beach, VA 23462",Virginia Beach,23462,Ambulatory Surgical,"(36.84475916357605, -76.16522026747107)",Virginia Beach City,51810
+Children's Hospital of The King's Daughters,"601 Children's Lane, Norfolk, VA 23507",Norfolk,23507,Children,"(36.86233126686254, -76.3020754174256)",Norfolk City,51710
+CHKD Health & Surgery Center (Newport News),"11783 Rock Landing Drive, Newport News, VA 23608",Newport News,23608,Ambulatory Surgical,"(37.08930107329541, -76.4645889048459)",Newport News City,51700
+CHKD Health & Surgery Center (Virginia Beach),"2021 Concert Drive, Virginia Beach, VA 23456",Virginia Beach,23456,Ambulatory Surgical,"(36.77694900635255, -76.1005854083276)",Virginia Beach City,51810
+CVP Surgery Center,"200 Coporate Blvd, Norfolk, Virginia 23502",Norfolk,23502,Ambulatory Surgical,"(36.83911822223034, -76.21270543091735)",Norfolk City,51710
+HOSPITAL AUTHORITY OF NORFOLK,"1309 Kempsville Road, Norfolk, VA 23502",Norfolk,23502,Long Term Acute Care,"(36.86716695, -76.20584786913648)",Norfolk City,51710
+Hospital for Extended Recovery,"600 Gresham Drive, Suite 700, Norfolk, VA 23507",Norfolk,23507,Long Term Acute Care,"(36.85970737246345, -76.30331025975312)",Norfolk City,51710
+Kempsville Center for Behavioral Health,"860 Kempsville Road, Norfolk, VA 23502",Norfolk,23502,Psychiatric,"(36.853004, -76.18962061116775)",Norfolk City,51710
+"Leigh Orthopedic Surgery Center, LLC","6201 E. Virginia Beach Blvd, Norfolk, VA 23502",Norfolk,23502,Ambulatory Surgical,"(36.854465, -76.17965)",Norfolk City,51710
+Mary Immaculate Ambulatory Surgery Center,"12720 McManus Boulevard, Suite 103, Newport News, VA 23602",Newport News,23602,Ambulatory Surgical,"(37.143972368100364, -76.51207444625544)",Newport News City,51700
+Newport News Behavioral Health Center,"17579 Warwick Blvd, Newport News, VA 23603",Newport News,23603,Psychiatric,"(37.203648, -76.58363004694533)",Newport News City,51700
+Port Warwick Surgery Center,"1031 Loftis Avenue, Newport News, VA 23606",Newport News,23606,Ambulatory Surgical,"(37.08472826758289, -76.48509637509308)",Newport News City,51700
+"Princess Anne Ambulatory Surgery Management, LLC","1975 Glenn Mitchell Drive , Virginia Beach, VA 23456",Virginia Beach,23456,Ambulatory Surgical,"(36.7765069, -76.09763591244754)",Virginia Beach City,51810
+Riverside Doctors Surgery Center,"120 Kings Way, Suite 1500, Williamsburg, VA 23185",Williamsburg,23185,Ambulatory Surgical,"(37.255785262699185, -76.74050455788995)",James City,51095
+Riverside Doctors' Hospital Williamsburg,"1500 Commonwealth Avenue, Williamsburg, VA 23185",Williamsburg,23185,Acute,"(37.2506729, -76.66811018914242)",Williamsburg City,51830
+Riverside Hampton Surgery Center,"850 Enterprise Parkway, Hampton, VA 23666",Hampton,23666,Ambulatory Surgical,"(37.058912250000006, -76.40330457065289)",Hampton City,51650
+Riverside Peninsula Surgery Center,"12000 Warwick Boulevard, Newport News, VA 23601",Newport News,23601,Ambulatory Surgical,"(37.06042085, -76.4828822777533)",Newport News City,51700
+Riverside Regional Medical Center,"500 J. Clyde Morris Boulevard, Newport News, VA 23601",Newport News,23601,Acute,"(37.0638974, -76.48153815)",Newport News City,51700
+Riverside Rehabilitation Hospital,"250 Josephs Drive, Yorktown, VA 23693",Yorktown,23693,Rehabilitation,"(37.1214633, -76.45451248352691)",York,51199
+Riverside Shore Memorial Hospital,"20480 Market Street, Onancock, VA 23417",Onancock,23417,Acute,"(37.6970757, -75.72354664321591)",Accomack,51001
+Riverside Walter Reed Hospital,"Route 17, Gloucester, VA 23061",Gloucester,23061,Acute,"(37.42000416875499, -76.54109307323135)",Gloucester,51073
+Select Specialty Hospital - Hampton Roads,"4th Floor East, Newport News, VA 23601",Newport News,23601,Long Term Acute Care,"(37.06363079743672, -76.48329538673066)",Newport News City,51700
+Sentara BelleHarbour Ambulatory Surgery Center,"3910 Bridge Road, Suffolk, VA 23435",Suffolk,23435,Ambulatory Surgical,"(36.86239563636364, -76.45352963636364)",Suffolk City,51800
+Sentara Careplex Hospital,"3000 Coliseum Drive, Hampton, VA 23666",Hampton,23666,Acute,"(37.056504649999994, -76.39040187437062)",Hampton City,51650
+Sentara Leigh Hospital,"830 Kempsville Road, Norfolk, VA 23502",Norfolk,23502,Acute,"(36.8520428, -76.1905501)",Norfolk City,51710
+Sentara Norfolk General Hospital,"600 Gresham Drive, Norfolk, VA 23507",Norfolk,23507,Acute,"(36.86246035, -76.30383383885481)",Norfolk City,51710
+Sentara Obici Ambulatory Surgery LLC,"2750 Godwin Blvd, Suffolk, VA 23434",Suffolk,23434,Ambulatory Surgical,"(36.7708127, -76.58306698049559)",Suffolk City,51800
+Sentara Obici Hospital,"2800 Godwin Boulevard, Suffolk, VA 23434",Suffolk,23434,Acute,"(36.7731923, -76.5808546660694)",Suffolk City,51800
+Sentara Princess Anne Hospital,"2025 Glenn Mitchell Drive, Virginia Beach, VA 23456",Virginia Beach,23456,Acute,"(36.7762387, -76.09770866157105)",Virginia Beach City,51810
+Sentara Virginia Beach Ambulatory Surgery Center,"1700 Will O Wisp Drive, Virginia Beach, VA 23454",Virginia Beach,23454,Ambulatory Surgical,"(36.86316615, -76.02716401666667)",Virginia Beach City,51810
+Sentara Virginia Beach General Hospital,"1060 First Colonial Road, Virginia Beach, VA 23454",Virginia Beach,23454,Acute,"(36.8644904, -76.0278302)",Virginia Beach City,51810
+Sentara Williamsburg Regional Medical Center,"100 Sentara Circle, Williamsburg, VA 23188",Williamsburg,23188,Acute,"(37.33646345, -76.74068496391735)",York,51199
+Surgery Center of Chesapeake,"844 Battlefield Blvd., North, Chesapeake, VA 23320",Chesapeake,23320,Ambulatory Surgical,"(36.75014909558461, -76.24686920208295)",Chesapeake City,51550
+Surgical Suites of Coastal Virginia ,"400 Sentara Circle, Williamsburg, VA 23188",Williamsburg,23188,Ambulatory Surgical,"(37.337732118668946, -76.74148285788806)",York,51199
+The Pavilion at Williamsburg Place,"5483 Mooretown Road, Williamsburg, VA 23188",Williamsburg,23188,Psychiatric,"(37.31478275, -76.7318403816887)",James City,51095
+VCU Health Tappahannock Hospital,"618 Hospital Road, Tappahannock, VA 22560",Tappahannock,22560,Acute,"(37.9009082, -76.87853450274353)",Essex,51057
+Virginia Beach Eye Center,"465 North Great Neck Road, Virginia Beach, VA 23454",Virginia Beach,23454,Ambulatory Surgical,"(36.84880052048784, -76.0484261321737)",Virginia Beach City,51810
+Virginia Beach Psychiatric Center,"1100 First Colonial Road, Virginia Beach, VA 23454",Virginia Beach,23454,Psychiatric,"(36.866252349999996, -76.02856151871265)",Virginia Beach City,51810
+Virginia Center for Eye Surgery,"1200 First Colonial Road, Suite 104, Virginia Beach, VA 23454",Virginia Beach,23454,Ambulatory Surgical,"(36.86953500210519, -76.03163993091668)",Virginia Beach City,51810
+Dominion Hospital,"2960 Sleepy Hollow Road, Falls Church, VA 22044",Falls Church,22044,Psychiatric,"(38.87055655, -77.15866046120973)",Fairfax,51059
+Encompass Health Rehab Hosp of Northern Virginia,"24430 Millstream Drive, Aldie, VA 20105",Aldie,20105,Rehabilitation,"(38.9392345, -77.5531518)",Loudoun,51107
+"Fairfax Surgical Center, LP","10730 Main Street, Fairfax, VA 22030",Fairfax,22030,Ambulatory Surgical,"(38.8497291, -77.3154206)",Fairfax City,51600
+Haymarket Surgery Center,"15195 Heathcote Blvd Ste 210, Haymarket, VA 20169",Haymarket,20169,Ambulatory Surgical,"(38.8208321918615, -77.64222574436205)",Prince William,51153
+"HealthQare Services ASC, LLC","1005 Glebe Road Suite 200, Arlington, VA 22201",Arlington,22201,Ambulatory Surgical,"(38.88332135238111, -77.1155696173782)",Arlington,51013
+Inova Alexandria Hospital,"4320 Seminary Road, Alexandria, VA 22304",Alexandria,22304,Acute,"(38.8223813, -77.10473399085639)",Alexandria City,51510
+"Inova Ambulatory Surgery Center at Lorton, LLC","9321 Sanger Street , Lorton, VA 22079",Lorton,22079,Ambulatory Surgical,"(38.70256635, -77.22689245502188)",Fairfax,51059
+Inova Fair Oaks Hospital,"3600 Joseph Siewick Drive, Fairfax, VA 22033",Fairfax,22033,Acute,"(38.88475665, -77.38086919754149)",Fairfax,51059
+Inova Fairfax Hospital,"3300 Gallows Road, Falls Church, VA 22042",Falls Church,22042,Acute,"(38.8574108, -77.22849480984827)",Fairfax,51059
+"Inova Loudoun Ambulatory Surgery Center, LLC","44035 Riverside Parkway, Suite 200, Leesburg, VA 20176",Leesburg,20176,Ambulatory Surgical,"(39.07419807087214, -77.47785065970115)",Loudoun,51107
+Inova Loudoun Hospital,"44045 Riverside Parkway, Leesburg, VA 20176",Leesburg,20176,Acute,"(39.0744725, -77.47767107767453)",Loudoun,51107
+Inova Mount Vernon Hospital,"2501 Parker's Lane, Alexandria, VA 22306",Alexandria,22306,Acute,"(38.73997251966846, -77.07691082901881)",Fairfax,51059
+Inova Surgery Center @ Franconia-Springfield,"6355 Walker Lane, Alexandria, VA 22310",Alexandria,22310,Ambulatory Surgical,"(38.767300615472614, -77.16080744436337)",Fairfax,51059
+Kaiser Permanente Tysons Corner Surgery Center,"8008 Westpark Drive, McLean, VA 22102",McLean,22102,Ambulatory Surgical,"(38.929441, -77.22445660430839)",Fairfax,51059
+"Lake Ridge Ambulatory Surgery Center, LLC","12825 Minnieville Road Suite 204, Woodbridge, VA 22192",Woodbridge,22192,Ambulatory Surgical,"(38.67307440232801, -77.27789775971077)",Prince William,51153
+"McLean Ambulatory Surgery Center, LLC","7601 Lewinsville Road, McLean, VA 22102",McLean,22102,Ambulatory Surgical,"(38.9345737, -77.207124333553)",Fairfax,51059
+North Spring Behavioral Healthcare,"42009 Victory Lane, Leesburg, VA 20176",Leesburg,20176,Psychiatric,"(39.145048700000004, -77.54652542257291)",Loudoun,51107
+"Northern Virginia Eye Surgery Center, LLC","2710 Prosperity Avenue, Fairfax, VA 22031",Fairfax,22031,Ambulatory Surgical,"(38.88093476375693, -77.23444495210471)",Fairfax,51059
+Northern Virginia Surgery Center,"3620 Joseph Siewick Drive, Fairfax, VA 22033",Fairfax,22033,Ambulatory Surgical,"(38.88517154263595, -77.38093738668799)",Fairfax,51059
+Pediatric Specialists of Virginia Ambulatory Surgery Center,"3023 Hamaker Ct. Ste 400, Fairfax, Virginia 22031",Fairfax,22031,Ambulatory Surgical,"(38.868548171945704, -77.23573394436097)",Fairfax,51059
+Prince William Ambulatory Surgery Center,"8644 Sudley Road, Manassas, VA 20110",Manassas,20110,Ambulatory Surgical,"(38.76761264091737, -77.48871701552704)",Manassas City,51683
+Reston Hospital Center,"1850 Town Center Parkway, Reston, VA 20190",Reston,20190,Acute,"(38.96270805, -77.36479123609762)",Fairfax,51059
+Reston Surgery Center,"1860 Town Center Drive, Suite G100, Reston, VA 20190",Reston,20190,Ambulatory Surgical,"(38.96186284634069, -77.36644800203115)",Fairfax,51059
+Sentara Northern Virginia Medical Center,"2300 Opitz Boulevard, Woodbridge, VA 22191",Woodbridge,22191,Acute,"(38.637097499999996, -77.28620797902809)",Prince William,51153
+Stone Springs Ambulatory Surgery Center,"24570 Medical Dr, Dulles, VA 20166",Dulles,20166,Ambulatory Surgical,"(38.938553, -77.5400912)",Loudoun,51107
+Stone Springs Hospital Center,"24440 Stone Springs Blvd, Dulles, VA 20166",Dulles,20166,Acute,"(38.9404883, -77.54269874985485)",Loudoun,51107
+UVA Haymarket Medical Center,"15225 Healthcote Blvd, Haymarket, VA 20169",Haymarket,20169,Acute,"(38.820925350605926, -77.64240670018064)",Prince William,51153
+UVA Prince William Medical Center ,"8700 Sudley Road, Manassas, VA 20110",Manassas,20110,Acute,"(38.7672132, -77.48805041133178)",Manassas City,51683
+Virginia Hospital Center,"1701 N. George Mason Drive, Arlington, VA 22205",Arlington,22205,Acute,"(38.88974565, -77.12797601304791)",Arlington,51013
+Augusta Health,"78 Medical Center Drive, Fishersville, VA 22939",Fishersville,22939,Acute,"(38.0945803, -78.98643143822162)",Augusta,51015
+Bath County Community Hospital,"PO Drawer Z, Hot Springs, VA 24445",Hot Springs,24445,Critical Access,"(37.993021278229826, -79.83197342110752)",Bath,51017
+Carilion Rockbridge Community Hospital,"1 Health Circle, Lexington, VA 24450",Lexington,24450,Critical Access,"(37.77891505, -79.44079144135272)",Lexington City,51678
+"Culpeper Surgery Center,LLC","541 Sunset Lane, Culpeper, VA 22701",Culpeper,22701,Ambulatory Surgical,"(38.45521486604196, -78.011799063445)",Culpeper,51047
+Encompass Health Rehab Hosp of Fredericksburg,"300 Park Hill Drive, Fredericksburg, VA 22401",Fredericksburg,22401,Rehabilitation,"(38.3126122, -77.4869928)",Fredericksburg City,51630
+Fauquier Hospital ,"500 Hospital Drive, Warrenton, VA 20186",Warrenton,20186,Acute,"(38.71209605, -77.80865021584926)",Fauquier,51061
+Fredericksburg Ambulatory Surgery Center,"1201 Sam Perry Blvd, Suite 101, Fredericksburg, VA 22401",Fredericksburg,22401,Ambulatory Surgical,"(38.30965660710573, -77.48470190390091)",Fredericksburg City,51630
+Martha Jefferson Outpatient Surgery Center,"595 Martha Jefferson Drive, Charlottesville, VA 22911",Charlottesville,22911,Ambulatory Surgical,"(38.0229772187559, -78.43989255787218)",Albemarle,51003
+Mary Washington Hospital,"1001 Sam Perry Boulevard, Fredericksburg, VA 22401",Fredericksburg,22401,Acute,"(38.31038945, -77.4838342856807)",Fredericksburg City,51630
+"Monticello Community Surgery Center, LLC","2331 Seminole Lane, Suite 201, Charlottesville, VA 22901",Charlottesville,22901,Ambulatory Surgical,"(38.099667959672686, -78.46049265972442)",Albemarle,51003
+"New Women's Health Charlottesville, LLC.","2050 Abbey Road, Charlottesville, VA 22911",Charlottesville,22911,Ambulatory Surgical,"(38.028743792302244, -78.44335163274381)",Albemarle,51003
+"Rockingham Eye Surgery Center, LLC","1690 B Spring Port Drive, Rockingham, VA 22801",Rockingham,22801,Ambulatory Surgical,"(38.4063746121754, -78.86924647320822)",Rockingham,51165
+Sentara Martha Jefferson Hospital,"500 Martha Jefferson Drive, Charlottesville, VA 22911",Charlottesville,22911,Acute,"(38.022926999999996, -78.4443350570148)",Albemarle,51003
+Sentara RMH Medical Center,"2010 Health Campus Drive, Harrisonburg, VA 22801",Harrisonburg,22801,Acute,"(38.40514415, -78.85524705523949)",Rockingham,51165
+Spotsylvania Regional Medical Center,"4600 Spotsylvania Parkway, Fredericksburg, VA 22408",Fredericksburg,22408,Acute,"(38.2177284, -77.49602472296269)",Spotsylvania,51177
+Stafford Hospital ,"101 Hospital Center Blvd, Stafford, VA 22554",Stafford,22554,Acute,"(38.41563305, -77.40704638874043)",Stafford,51179
+Surgi-Center of Central Virginia,"1500 Dixon Street Suite 101, Fredericksburg, VA 22401",Fredericksburg,22401,Ambulatory Surgical,"(38.284683445412234, -77.45429931553859)",Fredericksburg City,51630
+University of Virginia Medical Center,"1215 Lee Street, Charlottesville, VA 22903",Charlottesville,22903,Acute,"(38.03235898915392, -78.49827841739865)",Charlottesville City,51540
+UVA Culpeper Medical Center,"501 Sunset Lane, Culpeper, VA 22701",Culpeper,22701,Acute,"(38.455438603662486, -78.01347637506106)",Culpeper,51047
+UVA Encompass Health Rehabilitation Hospital,"515 Ray C. Hunt Drive, Charlottesville, VA 22903",Charlottesville,22903,Rehabilitation,"(38.02501405476496, -78.52518315787208)",Albemarle,51003
+UVA Transitional Care Hospital,"2965 Ivy Road, Charlottesville, VA 22903",Charlottesville,22903,Long Term Acute Care,"(38.05169494764419, -78.54969018856183)",Albemarle,51003
+Valley Health Page Memorial Hospital,"200 Memorial Drive, Luray, VA 22835",Luray,22835,Critical Access,"(38.6634775778534, -78.46858784621992)",Page,51139
+Valley Health Shenandoah Memorial Hospital,"759 South Main Street, Woodstock, VA 22664",Woodstock,22664,Critical Access,"(38.869587957189964, -78.5126060731972)",Shenandoah,51171
+Valley Health Surgery Center,"174 Botanical Blvd, Winchester, VA 22603",Winchester,22603,Ambulatory Surgical,"(39.19273811357737, -78.2014695173709)",Frederick,51069
+Valley Health Warren Memorial Hospital,"351 Valley Health Way , Front Royal, VA 22630",Front Royal,22630,Acute,"(38.91974961300421, -78.15266464621378)",Warren,51187
+Valley Health Winchester Medical Center,"1840 Amherst Street, Winchester, VA 22601",Winchester,22601,Acute,"(39.19627145, -78.18943473110079)",Winchester City,51840
+"Winchester Eye Surgery Center, LLC","525 Amherst Street, Winchester, VA 22601",Winchester,22601,Ambulatory Surgical,"(39.18701795918368, -78.17443120408163)",Winchester City,51840
+Bedford Memorial Hospital,"1613 Oakwood Street, Bedford, VA 24523",Bedford,24523,Acute,"(37.35204605, -79.5174875626834)",Bedford,51019
+Blue Ridge Surgery Center,"1802 Braeburn Drive, Salem, VA 24153",Salem,24153,Ambulatory Surgical,"(37.2653986, -80.0349289)",Salem City,51775
+Buchanan General Hospital,"1535 Slate Creek Road, Grundy, VA 24614",Grundy,24614,Acute,"(37.2850097, -82.06671576957646)",Buchanan,51027
+Carilion Franklin Memorial Hospital,"390 South Main Street, Rocky Mount, VA 24151",Rocky Mount,24151,Acute,"(36.9936231, -79.89030483214017)",Franklin,51067
+Carilion Giles Community Hospital,"159 Hartley Way, Pearisburg, VA 24134",Pearisburg,24134,Critical Access,"(37.33295555, -80.7128496016166)",Giles,51071
+Carilion Medical Center,"1906 Belleview Avenue, Roanoke, VA 24014",Roanoke,24014,Acute,"(37.25180207179288, -79.94111064625301)",Roanoke City,51770
+Carilion New River Valley,"2900 Lamb Circle, Christiansburg, VA 24073",Christiansburg,24073,Acute,"(37.0884695, -80.5049893814614)",Montgomery,51121
+Carilion Tazewell Community Hospital,"388 Ben Bolt Avenue, Tazewell, VA 24651",Tazewell,24651,Acute,"(37.12379645, -81.48923243409072)",Tazewell,51185
+Centra Health,"1920 Atherholt Road, Lynchburg, VA 24502",Lynchburg,24502,Acute,"(37.413863203617936, -79.16923763090406)",Lynchburg City,51680
+Centra Specialty Hospital,"3300 Rivermont Avenue, Lynchburg, VA 24503",Lynchburg,24503,Long Term Acute Care,"(37.43799045450605, -79.18722592904952)",Lynchburg City,51680
+Clinch Valley Medical Center,"6801 Gov. G.C. Peery Highway, Richlands, VA 24641",Richlands,24641,Acute,"(37.09490349653225, -81.81949379465891)",Tazewell,51185
+Dickenson Community Hospital,"312 Hospital Drive, Clintwood, VA 24228",Clintwood,24228,Critical Access,"(37.16086767711355, -82.44924910207365)",Dickenson,51051
+DLP Twin County Regional Healthcare,"200 Hospital Drive, Galax, VA 24333",Galax,24333,Acute,"(36.670883169221966, -80.92398153092101)",Galax City,51640
+"Eye Surgery Center of Central Virginia, LLC","1835 Graves Mill Road , Forest, VA 24551",Forest,24551,Ambulatory Surgical,"(37.377693666666666, -79.24481866666666)",Bedford,51019
+"Fairlawn Surgery Center, LLC","2030 Stephenson Avenue SW, Roanoke, VA 24014",Roanoke,24014,Ambulatory Surgical,"(37.2516154322056, -79.95026808858032)",Roanoke City,51770
+Johnston Memorial Hospital,"16000 Johnston Memorial Drive, Abingdon, VA 24211",Abingdon,24211,Acute,"(36.723353858793004, -81.91093504441099)",Washington,51191
+Lee County Community Hospital,"127 Health Care Drive, Pennington Gap, VA 24277",Pennington Gap,24277,Critical Access,"(36.74936089752744, -83.04927025975557)",Lee,51105
+LewisGale Hospital - Alleghany,"1 ARH Lane, Low Moor, VA 24457",Low Moor,24457,Acute,"(37.79205105, -79.88124391538574)",Alleghany,51005
+LewisGale Hospital Montgomery,"3700 South Main Street, Blacksburg, VA 24060",Blacksburg,24060,Acute,"(37.18858907117696, -80.4132238560041)",Montgomery,51121
+LewisGale Hospital Pulaski ,"2400 Lee Highway, Pulaski, VA 24301",Pulaski,24301,Acute,"(37.068340361640324, -80.75706218858465)",Pulaski,51155
+LewisGale Medical Center,"1900 Electric Road, Salem, VA 24153",Salem,24153,Acute,"(37.26337304549283, -80.03135391741642)",Roanoke,51161
+Martinsville Center for Sight,"433 East Commonwealth Blvd, Martinsville, VA 24112",Martinsville,24112,Ambulatory Surgical,"(36.69649945406164, -79.8563777139902)",Martinsville City,51690
+New River Valley Surgery Center,"2901 Lamb Circle, Christiansburg, VA 24073",Christiansburg,24073,Ambulatory Surgical,"(37.09130183495109, -80.50499911556635)",Montgomery,51121
+Norton Community Hospital,"100 Fifteenth Street, NW, Norton, VA 24273",Norton,24273,Acute,"(36.933194787566585, -82.6420769444062)",Norton City,51720
+Piedmont Day Surgery Center,"1040 Main Street, Danville, VA 24543",Danville,24543,Ambulatory Surgical,"(36.58054929056448, -79.40184427778848)",Danville City,51590
+"Rehabilitation Hospital of Bristol, LLC","103 North Street, Bristol, VA 24201",Bristol,24201,Rehabilitation,"(36.5970858, -82.2168357)",Bristol City,51520
+Ridgeview Pavilion (Bristol Region),"103 North Street , Bristol, Va 24201",Bristol,24201,Psychiatric,"(36.5970858, -82.2168357)",Bristol City,51520
+Roanoke Ambulatory Surgery Center,"1102 Jefferson Street, SE, Roanoke, VA 24016",Roanoke,24016,Ambulatory Surgical,"(37.263137381595584, -79.94119778858013)",Roanoke City,51770
+Roanoke Valley Center for Sight at Oak Grove,"2154 McVitty Rd, Roanoke, VA 24018",Roanoke,24018,Ambulatory Surgical,"(37.232107, -80.017297)",Roanoke,51161
+Roanoke Valley Center for Sight,"438 West Main Street, Salem, VA 24153",Salem,24153,Ambulatory Surgical,"(37.29125888084636, -80.0659770830719)",Salem City,51775
+Russell County Hospital,"PO Box 3600, Lebanon, VA 24266",Lebanon,24266,Acute,"(36.89905625010541, -82.07860641590032)",Russell,51167
+Smyth County Community Hospital,"245 Medical Park Drive, Marion, VA 24354",Marion,24354,Acute,"(36.8513787, -81.48863717225183)",Smyth,51173
+Southwest Virginia Center for Sight,"470 Lithia Road, Wytheville, VA 24382",Wytheville,24382,Ambulatory Surgical,"(36.951590798567054, -81.05509822432002)",Wythe,51197
+Sovah Health - Danville,"142 South Main Street, Danville, VA 24541",Danville,24541,Acute,"(36.57750145, -79.4050444657006)",Danville City,51590
+Sovah Health - Martinsville,"320 Hospital Drive, Martinsville, VA 24112",Martinsville,24112,Acute,"(36.697273565674735, -79.86508670411803)",Martinsville City,51690
+"Surgery Center of Lynchburg, LLC","2401 Atherholt Road, Lynchburg, VA 24501",Lynchburg,24501,Ambulatory Surgical,"(37.4084287, -79.17794464511357)",Lynchburg City,51680
+Wellmont Lonesome Pine Mt. View Hospital,"1990 Holton Avenue, East, Big Stone Gap, VA 24219",Big Stone Gap,24219,Acute,"(36.87719683512509, -82.75439431742518)",Wise,51195
+Wythe County Community Hospital LLC,"600 West Ridge Road, Wytheville, VA 24382",Wytheville,24382,Acute,"(36.9546656, -81.09693440369114)",Wythe,51197
