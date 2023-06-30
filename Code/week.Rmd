@@ -1,0 +1,508 @@
+---
+title: "week_5"
+author: "Vivian Peregrino"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Week 5
+Code for week 5! Adding more cool stuff to our visualizations.
+
+```{r loading in data and packages, echo= FALSE, warning = FALSE, include= FALSE}
+library(readxl)
+library(tidyverse)
+library(plotly)
+library(dplyr)
+library(tigris)
+library(paletteer)
+library(ggplot2)
+library(sf)
+library(readr)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggspatial)
+library(maps)
+library(tools)
+library(stringr)
+
+setwd("~/DSPG/Repose/DSPG_VCE_Health/Data")
+
+#Reading in map 
+va.counties <- readRDS(file = "va.counties.Rdata")
+va.counties$GEOID <- as.integer(va.counties$GEOID)
+va.counties$NAMELSAD <- str_to_title(va.counties$NAMELSAD )
+colnames(va.counties)[16] <- "Lat"
+va.counties$Lat <- as.double(va.counties$Lat)
+colnames(va.counties)[17] <- "Long"
+va.counties$Long <- as.double(va.counties$Long)
+us.states <- readRDS(file= "us.states.RData")
+
+#County Health Rankings 2023 Data
+all_var_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/final_variables.csv"
+all_var_df <- read.csv(paste(all_var_path, sep = ''))
+names(all_var_df)[names(all_var_df) == 'FIPS'] <- 'GEOID'
+all_var_df$Value <- as.numeric(all_var_df$Value)
+
+#FCS Agent Location Data with solutions
+#I am commenting these lines out because I have created a csv file witht the merged data
+
+solution_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions.csv"
+solution_df <- read.csv(paste(solution_path, sep = ''))
+agents.counties <- left_join(va.counties, solution_df, by = 'NAMELSAD')
+
+# file_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/solutions_with_shapes.Rdata"
+# saveRDS(agents.counties, file = file_path)
+agents.counties <- readRDS(file = "solutions_with_shapes.Rdata")
+
+#substance abuse treatment centers
+treatment_centers_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/FindTreament_Facility_listing_2023.csv"
+treatment_centers <- read.csv(treatment_centers_path)
+
+#converting agents into sf
+agents_sf <- st_as_sf(solution_df, coords = c("Long", "Lat"), remove = FALSE, 
+    crs = 4326, agr = "constant")
+#variable names for title
+  good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking",
+                "Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
+                "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
+"Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White",
+"Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses","Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
+```
+
+```{r mapping fun, warning = FALSE}
+mapping <- function(variable, year) {
+  temp <- all_var_df[all_var_df$Year == year & all_var_df$Variable == variable, ]
+  var.counties <- left_join(va.counties, temp, by = 'GEOID')
+  idx <- which(unique(all_var_df$Variable) == variable)
+  ggplot(data = var.counties) +
+    geom_sf(data = us.states, color= "grey60", fill= "ivory1") +
+    geom_sf(data = var.counties$geometry) +
+    geom_sf(data= var.counties, aes(fill= Value), color= "brown")+
+    scale_fill_viridis_c(trans= "sqrt", alpha= .4, direction= -1) +
+    labs(fill= good_names[idx])+
+    geom_sf(data = agents_sf, aes( color = "red")) +
+    guides(color= guide_legend(title= "Agent Sites")) +
+    coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle(paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")) +
+    theme(panel.grid.major = element_line(color = gray(0.5), 
+    linetype = "dashed", size = 0.5),
+    panel.background = element_rect(fill = "azure1")) 
+}
+
+#running function
+mapping("per_vaccinated", "2020")
+```
+
+
+## Territory Functions
+```{r territory function for baseline agents}
+#setting up 40 colors
+agent_colors <- c("Roanoke" = "blue",             
+ "Floyd"  =  "yellow",                
+ "Newport News City" =  "lightblue",  
+ "Newport News City North"  = "purple",
+"Spotsylvania"  = "pink" ,          
+"Petersburg City" = "magenta" ,         
+ "Henrico"   = "beige",              
+ "Washington"  = "mediumvioletred",          
+ "Patrick"   =    "lightsteelblue",            
+"Arlington"     = "navy",           
+"Albemarle"      = "lightgoldenrod" ,         
+"Gloucester"  =  "lightgrey",             
+"Augusta"   = "hotpink",               
+"Greensville"  = "darkolivegreen",           
+"Warren"    = "dodgerblue",               
+"Amherst"     ="forestgreen",            
+"King George"   = "gold",           
+"Lancaster" = "lavenderblush",                
+"Richmond City"  = "darkgrey",           
+"Northeast District Office" =  "orange",
+"Fairfax"  =     "brown2",              
+"Orange"   =  "darkseagreen2",                 
+"Mecklenburg"  = "hotpink4",            
+"Chesapeake City" =   "khaki",        
+"Pulaski"  =     "lightcyan",            
+"Rockingham"   = "mediumorchid",            
+"Rockbridge" = "mediumspringgreen",                
+"Franklin"  = "salmon",               
+"Bedford"  = "plum4",                 
+"Pittsylvania"   =   "slategray",        
+"Lee"  =   "turquoise",                  
+"Frederick"    =  "tan1",           
+"Amelia" =     "red",                
+"Virginia Beach City North" =  "salmon4",
+"Lynchburg City"   =   "palegreen",      
+"Louisa"  =   "mistyrose",               
+"Loudoun"   =  "mediumvioletred",              
+"Virginia Beach City" =  "lightsteelblue",
+"Essex" =  "chocolate",
+"Prince William" =  "darkorchid1")
+
+
+#building the function
+baseline_territories <- function(data, data_frame, variable_title) {
+  variable <- variable_title
+  agents_sf <- st_as_sf(data_frame, coords = c("Long", "Lat"), remove = FALSE, 
+    crs = 4326, agr = "constant")
+  ggplot(data = agents.counties) +
+  geom_sf(data = us.states, color= "grey60", fill= "ivory1") +
+    geom_sf(data = data$geometry) +
+    geom_sf(data = data, aes( fill = Agent)) +
+    geom_sf(data = agents_sf, aes(color = "FCS Agents"), size= 3) +
+    guides(color= guide_legend(title= "Agent Sites"))  +
+    coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle(paste("VCE FCS Agent Territories based on",variable,  "Z-Scores")) +
+   guides(fill = "none")+
+    theme(panel.grid.major = element_line(color = gray(0.5)), 
+    panel.background = element_rect(fill = "azure1")) +
+  scale_fill_manual(values = agent_colors)
+}
+
+#argument 'variable title' must be a string!
+```
+
+```{r territory function for one new agent}
+#building the function
+territory_one <- function(data, data_frame, variable_title) {
+  variable <- variable_title
+  agents_sf <- st_as_sf(data_frame, coords = c("Long", "Lat"), remove = FALSE, 
+    crs = 4326, agr = "constant")
+  ggplot(data = agents.counties) +
+  geom_sf(data = us.states, color= "grey60", fill= "ivory1") +
+    geom_sf(data = data$geometry) +
+    geom_sf(data = data, aes( fill = Agent)) +
+    geom_sf(data = agents_sf, aes(color = "FCS Agents"), size= 3) +
+    guides(color= guide_legend(title= "Agent Sites"))  +
+    coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle(paste("New VCE FCS Agent Territories based on",variable,  "Z-Scores")) +
+    labs(subtitle= "With One New Agent") +
+   guides(fill = "none")+
+    theme(panel.grid.major = element_line(color = gray(0.5)), 
+    panel.background = element_rect(fill = "azure1")) +
+  scale_fill_manual(values = agent_colors)
+}
+
+#argument 'variable title' must be a string!
+```
+
+```{r territory function for two new agents}
+#building the function
+territory_two <- function(data, data_frame, variable_title) {
+  variable <- variable_title
+  agents_sf <- st_as_sf(data_frame, coords = c("Long", "Lat"), remove = FALSE, 
+    crs = 4326, agr = "constant")
+  ggplot(data = agents.counties) +
+  geom_sf(data = us.states, color= "grey60", fill= "ivory1") +
+    geom_sf(data = data$geometry) +
+    geom_sf(data = data, aes( fill = Agent)) +
+    geom_sf(data = agents_sf, aes(color = "FCS Agents"), size= 3) +
+    guides(color= guide_legend(title= "Agent Sites"))  +
+    coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle(paste("New VCE FCS Agent Territories based on",variable,  "Z-Scores")) +
+    labs(subtitle= "With Two New Agents") +
+   guides(fill = "none")+
+    theme(panel.grid.major = element_line(color = gray(0.5)), 
+    panel.background = element_rect(fill = "azure1")) +
+  scale_fill_manual(values = agent_colors)
+}
+
+#argument 'variable' must be inputed as a string!
+```
+
+## Baseline/ 1 & 2 New Agent Territories
+```{R territory Inactivity}
+#reading in baseline territory
+base_inactivity_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/baselines_inactivity.csv"
+base_inactivity_df <- read.csv(paste(base_inactivity_path, sep = ''))
+base_inactivity_counties <- left_join(va.counties, base_inactivity_df, by = 'NAMELSAD')
+#mapping territory
+baseline_territories(base_inactivity_counties, base_inactivity_df, "Baseline Physical Inactivity")
+
+#reading in one new agent territory
+inactivity_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_inactivity.csv"
+inactivity_df <- read.csv(paste(inactivity_path, sep = ''))
+inactivity.counties <- left_join(va.counties, inactivity_df, by = 'NAMELSAD')
+#adding one new agent!
+territory_one(inactivity.counties, inactivity_df, "Physical Inactivity")
+
+#reading in two new agents territory
+inactivity2_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_inactivity2.csv"
+inactivity2_df <- read.csv(paste(inactivity_2path, sep = ''))
+inactivity2_counties <- left_join(va.counties, inactivity2_df, by = 'NAMELSAD')
+#adding two new agents!
+territory_two(inactivity2_counties, inactivity2_df, "Physical Inactivity")
+```` 
+
+```{r obese territories}
+#reading in baseline territory
+base_obese_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/baselines_obese.csv"
+base_obese_df <- read.csv(paste(base_obese_path, sep = ''))
+base_obese_counties <- left_join(va.counties, base_obese_df, by = 'NAMELSAD')
+#mapping territory
+baseline_territories(base_obese_counties, base_obese_df, "Baseline Obesity")
+
+#reading in one new agent territory
+obese_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_obesity.csv"
+obese_df <- read.csv(paste(obese_path, sep = ''))
+obese.counties <- left_join(va.counties, obese_df, by = 'NAMELSAD')
+
+#adding new agent!
+territory_one(obese.counties, obese_df, "Obesity")
+
+
+#reading in two new agents territory
+obese2_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_obese2.csv"
+obese2_df <- read.csv(paste(obese2_path, sep = ''))
+obese2_counties <- left_join(va.counties, obese2_df, by = 'NAMELSAD')
+#adding two new agents!
+territory_two(obese2_counties, obese2_df, "Obesity")
+
+
+```
+
+```{r low birth territories}
+#reading in baseline territory
+base_lowbirth_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/baselines_lowbirth.csv"
+base_lowbirth_df <- read.csv(paste(base_lowbirth_path, sep = ''))
+base_lowbirth_counties <- left_join(va.counties, base_lowbirth_df, by = 'NAMELSAD')
+#mapping territory
+baseline_territories(base_lowbirth_counties, base_lowbirth_df, "Baseline Low Birthweight")
+
+#reading in territory
+lowbirth_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_lowbirth.csv"
+lowbirth_df <- read.csv(paste(lowbirth_path, sep = ''))
+low.counties <- left_join(va.counties, lowbirth_df, by = 'NAMELSAD')
+
+#adding new agent!
+territory_one(low.counties, lowbirth_df, "Low Birthweight")
+
+#reading in two new agents territory
+lowbirth2_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_lowbirth2.csv"
+lowbirth2_df <- read.csv(paste(lowbirth2_path, sep = ''))
+lowbirth2_counties <- left_join(va.counties, lowbirth2_df, by = 'NAMELSAD')
+#adding two new agents!
+territory_two(lowbirth2_counties, lowbirth2_df, "Low Birthweight")
+
+```
+
+```{r diabetes territories}
+
+#reading in baseline territory
+base_diabetes_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/baselines_diabetes.csv"
+base_diabetes_df <- read.csv(paste(base_diabetes_path, sep = ''))
+base_diabetes_counties <- left_join(va.counties, base_diabetes_df, by = 'NAMELSAD')
+#mapping territory
+baseline_territories(base_diabetes_counties, base_diabetes_df, "Baseline Diabetes")
+
+#reading in territory
+diabetes_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_diabetes.csv"
+diabetes_df <- read.csv(paste(diabetes_path, sep = ''))
+diabetes.counties <- left_join(va.counties, diabetes_df, by = 'NAMELSAD')
+
+#adding new agent!
+territory_one(diabetes.counties, diabetes_df, "Diabetes")
+
+
+#reading in two new agents territory
+diabetes2_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_diabetes2.csv"
+diabetes2_df <- read.csv(paste(diabetes2_path, sep = ''))
+diabetes2_counties <- left_join(va.counties, diabetes2_df, by = 'NAMELSAD')
+#adding two new agents!
+territory_two(diabetes2_counties, diabetes2_df, "Diabetes")
+
+
+```
+
+```{r food insecurity}
+#reading in baseline territory
+base_food_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/baselines_food.csv"
+base_food_df <- read.csv(paste(base_food_path, sep = ''))
+base_food_counties <- left_join(va.counties, base_food_df, by = 'NAMELSAD')
+#mapping territory
+baseline_territories(base_food_counties, base_food_df, "Baseline Food Insecurity")
+
+#reading in territory
+food_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_food.csv"
+food_df <- read.csv(paste(food_path, sep = ''))
+food.counties <- left_join(va.counties, food_df, by = 'NAMELSAD')
+
+#adding new agent!
+territory_one(food.counties, food_df, "Food Insecurity")
+
+#reading in two new agents territory
+food2_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_food2.csv"
+food2_df <- read.csv(paste(food2_path, sep = ''))
+food2_counties <- left_join(va.counties, food2_df, by = 'NAMELSAD')
+#adding two new agents!
+territory_two(food2_counties, food2_df, "Food Insecurity")
+
+```
+
+```{r agg z territories}
+base_agg_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/baselines_agg_z.csv"
+base_agg_df <- read.csv(paste(base_agg_path, sep = ''))
+base_agg_counties <- left_join(va.counties, base_agg_df, by = 'NAMELSAD')
+#mapping territory
+baseline_territories(base_agg_counties, base_agg_df, "Baseline Aggregate")
+#reading in territory
+agg_z_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_agg_z.csv"
+agg_z_df <- read.csv(paste(agg_z_path, sep = ''))
+agg.z.counties <- left_join(va.counties, agg_z_df, by = 'NAMELSAD')
+
+#adding new agent!
+territory_one(agg.z.counties, agg_z_df, "Aggregate")
+
+#reading in two new agents territory
+agg_z2_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/agent_solutions_aggregate2.csv"
+agg_z2_df <- read.csv(paste(agg_z2_path, sep = ''))
+agg_z2_counties <- left_join(va.counties, agg_z2_df, by = 'NAMELSAD')
+#adding two new agents!
+territory_two(agg_z2_counties, agg_z2_df, "Aggregate")
+
+
+```
+
+```{r new agent solutions agg z score}
+agg_z_territory <- ggplot(data = agents.counties) +
+  geom_sf(data = us.states, color= "grey60", fill= "ivory1") +
+    geom_sf(data = agents.counties$geometry) +
+    geom_sf(data = agents.counties, aes( fill = Agent)) +
+    geom_sf(data = agents_sf, aes(color = "FCS Agents"), size= 2) +
+    guides(color= guide_legend(title= "Agent Sites"))  +
+    coord_sf(xlim = c(-84, -75), ylim = c(36, 40), expand = FALSE) +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle("VCE FCS Agent Territories") +
+   guides(fill = "none")+
+    theme(panel.grid.major = element_line(color = gray(0.5)), 
+    panel.background = element_rect(fill = "azure1")) +
+  scale_fill_manual(values = agent_colors)
+agent_territory
+
+
+```
+
+
+## Making Vectors
+```{r making county/district csv}
+va.coor <- cbind(va.counties$NAMELSAD, va.counties$INTPTLAT,va.counties$INTPTLON )
+va.long <- cbind(va.counties$NAMELSAD,va.counties$INTPTLON)
+
+```
+
+``` {r centroid distance}
+# Example data frames of coordinates
+
+cent_path <- "~/DSPG/Repose/DSPG_VCE_Health/Data/centroids.csv"
+cent_df <- read.csv(paste(cent_path, sep = ''))
+
+# Required Libraries
+library(httr)
+library(jsonlite)
+library(traveltimeR)
+library(openrouteservice)
+
+ 
+
+ors_api_key("5b3ce3597851110001cf62480d07c69ddba34d8c8df9026320748165")
+
+ 
+
+# Required Libraries
+library(httr)
+library(jsonlite)
+
+# Function to calculate driving time between two coordinates
+calculate_driving_time <- function(lat1, lon1, lat2, lon2, api_key) {
+  url <- paste0("https://api.openrouteservice.org/v2/directions/driving-car?api_key=",
+                api_key, "&start=", lon1, ",", lat1, "&end=", lon2, ",", lat2)
+  
+  response <- GET(url)
+  data <- content(response, as = "text", encoding = "UTF-8")
+  parsed_data <- fromJSON(data, simplifyVector = FALSE)
+  
+  # Extract the driving time in seconds
+  driving_time <- parsed_data$features[[1]]$properties$summary$duration
+  
+  return(driving_time)
+}
+
+# Create an empty matrix to store driving times
+num_rows <- nrow(cent_df)
+num_cols <- nrow(agents_df)
+time_matrix <- matrix(numeric(num_rows * num_cols), nrow = num_rows, ncol = num_cols)
+
+# Replace "YOUR_API_KEY" with your own OpenRouteService API key
+api_key <- "5b3ce3597851110001cf62480d07c69ddba34d8c8df9026320748165"
+
+# Calculate and save driving times into the matrix
+for (i in 1:num_rows) {
+  for (j in 1:num_cols) {
+    time_matrix[i, j] <- calculate_driving_time(cent_df$Lat[i], cent_df$Long[i],
+                                               agents_df$Lat[j], agents_df$Long[j],
+                                               api_key)
+  }
+}
+
+# Print the driving time matrix
+print(time_matrix)
+
+
+
+```
+
+```{r population vector}
+add_23_measured_data <- read_excel("2023 County Health Rankings Virginia Data.xlsx", sheet = 5, skip= 1)
+add_23_counties <- add_23_measured_data[2:134 , ]
+
+population <- data.frame(add_23_counties$Population)
+population_long <- population
+duplicate_factor <- 36
+
+# Duplicate rows
+pop_long <- population[rep(seq_len(nrow(population)), each = duplicate_factor), ]
+pop_long <- data.frame(pop_long)
+
+for (i in 2:36){
+  population_long <- rbind(population_long, population)
+}
+  
+
+
+```
+
+
+``` {r z score vector}
+z<- data.frame(zdf$z)
+z_long <- z
+
+for (i in 2:36){
+  z_long <- rbind(z_long, z)
+}
+
+big_vector <- cbind(z_long, population_long)
+
+colnames(big_vector) <- c("z", "p")
+
+write.csv(big_vector, "population_zscore.csv", row.names= FALSE)
+```
+
+```{r distance vector}
+distance <- read.csv("distance_matrix.csv")
+
+distance_df <- data.frame()
+
+for (c in colnames(distance)){
+  distance_df <- rbind(distance_df, distance[,which(colnames(distance) == c)])
+}
+distance <- as.matrix(distance)
+c(distance)
+```
+

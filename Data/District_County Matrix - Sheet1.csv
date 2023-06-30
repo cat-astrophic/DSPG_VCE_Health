@@ -1,0 +1,134 @@
+,Central,Northeast,Northwest,Southeast,Southwest
+Accomack,0,0,0,1,0
+Albemarle,0,0,1,0,0
+Alleghany,0,0,0,0,1
+Amelia,1,0,0,0,0
+Amherst,1,0,0,0,0
+Appomattox,1,0,0,0,0
+Arlington,0,1,0,0,0
+Augusta,0,0,1,0,0
+Bath,0,0,1,0,0
+Bedford,1,0,0,0,0
+Bland,0,0,0,0,1
+Botetourt,0,0,0,0,1
+Brunswick,1,0,0,0,0
+Buchanan,0,0,0,0,1
+Buckingham,1,0,0,0,0
+Campbell,1,0,0,0,0
+Caroline,0,1,0,0,0
+Carroll,0,0,0,0,1
+Charles City,0,0,0,1,0
+Charlotte,1,0,0,0,0
+Chesterfield,0,1,0,0,0
+Clarke,0,0,1,0,0
+Craig,0,0,0,0,1
+Culpeper,0,0,1,0,0
+Cumberland,1,0,0,0,0
+Dickenson,0,0,0,0,1
+Dinwiddie,0,0,0,1,0
+Essex,0,1,0,0,0
+Fairfax,0,1,0,0,0
+Fauquier,0,0,1,0,0
+Floyd,0,0,0,0,1
+Fluvanna,0,0,1,0,0
+Franklin,1,0,0,0,0
+Frederick,0,0,1,0,0
+Giles,0,0,0,0,1
+Gloucester,0,1,0,0,0
+Goochland,0,1,0,0,0
+Grayson,0,0,0,0,1
+Greene,0,0,1,0,0
+Greensville,0,0,0,1,0
+Halifax,1,0,0,0,0
+Hanover,0,1,0,0,0
+Henrico,0,1,0,0,0
+Henry,1,0,0,0,0
+Highland,0,0,1,0,0
+Isle of Wight,0,0,0,1,0
+James City,0,0,0,1,0
+King and Queen,0,1,0,0,0
+King George,0,1,0,0,0
+King William,0,1,0,0,0
+Lancaster,0,1,0,0,0
+Lee,0,0,0,0,1
+Loudoun,0,1,0,0,0
+Louisa,0,0,1,0,0
+Lunenburg,1,0,0,0,0
+Madison,0,0,1,0,0
+Mathews,0,1,0,0,0
+Mecklenburg,1,0,0,0,0
+Middlesex,0,1,0,0,0
+Montgomery,0,0,0,0,1
+Nelson,0,0,1,0,0
+New Kent,0,0,0,1,0
+Northampton,0,0,0,1,0
+Northumberland,0,1,0,0,0
+Nottoway,1,0,0,0,0
+Orange,0,0,1,0,0
+Page,0,0,1,0,0
+Patrick,1,0,0,0,0
+Pittsylvania,1,0,0,0,0
+Powhatan,0,1,0,0,0
+Prince Edward,1,0,0,0,0
+Prince George,0,0,0,1,0
+Prince William,0,1,0,0,0
+Pulaski,0,0,0,0,1
+Rappahannock,0,0,1,0,0
+Richmond,0,1,0,0,0
+Roanoke,0,0,0,0,1
+Rockbridge,0,0,1,0,0
+Rockingham,0,0,1,0,0
+Russell,0,0,0,0,1
+Scott,0,0,0,0,1
+Shenandoah,0,0,1,0,0
+Smyth,0,0,0,0,1
+Southampton,0,0,0,1,0
+Spotsylvania,0,1,0,0,0
+Stafford,0,1,0,0,0
+Surry,0,0,0,1,0
+Sussex,0,0,0,1,0
+Tazewell,0,0,0,0,1
+Warren,0,0,1,0,0
+Washington,0,0,0,0,1
+Westmoreland,0,1,0,0,0
+Wise,0,0,0,0,1
+Wythe,0,0,0,0,1
+York,0,0,0,1,0
+Alexandria City,0,1,0,0,0
+Bristol City,0,0,0,0,1
+Buena Vista City,0,0,1,0,0
+Charlottesville City,0,0,1,0,0
+Chesapeake City,0,0,0,1,0
+Colonial Heights City,0,1,0,0,0
+Covington City,0,0,0,0,1
+Danville City,1,0,0,0,0
+Emporia City,0,0,0,1,0
+Fairfax City,0,1,0,0,0
+Falls Church City,0,1,0,0,0
+Franklin City,0,0,0,1,0
+Fredericksburg City,0,1,0,0,0
+Galax City,0,0,0,0,1
+Hampton City,0,0,0,1,0
+Harrisonburg City,0,0,1,0,0
+Hopewell City,0,0,0,1,0
+Lexington City,0,0,1,0,0
+Lynchburg City,1,0,0,0,0
+Manassas City,0,1,0,0,0
+Manassas Park City,0,1,0,0,0
+Martinsville City,1,0,0,0,0
+Newport News City,0,0,0,1,0
+Norfolk City,0,0,0,1,0
+Norton City,0,0,0,0,1
+Petersburg City,0,0,0,1,0
+Poquoson City,0,0,0,1,0
+Portsmouth City,0,0,0,1,0
+Radford City,0,0,0,0,1
+Richmond City,0,1,0,0,0
+Roanoke City,0,0,0,0,1
+Salem City,0,0,0,0,1
+Staunton City,0,0,1,0,0
+Suffolk City,0,0,0,1,0
+Virginia Beach City,0,0,0,1,0
+Waynesboro City,0,0,1,0,0
+Williamsburg City,0,0,0,1,0
+Winchester City,0,0,1,0,0
