@@ -74,7 +74,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
                   "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White",
                   "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses","Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
+  # territory data
+  all_territories <- read.csv("./data/all_agent_solutions.csv")
   
+  #convert new agent locations to sf
+  additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
   ### 1.3.2 Process the data---------------------------------------------------------------- 
   
   
@@ -97,7 +101,7 @@ mapping2 <- function(variable, year) {
   idx <- which(unique(all_var_df$Variable) == variable)
   
   # Create a color palette function based on the "Value" column
-  pal <- colorNumeric(palette = "viridis", domain = var.counties$Value)
+  pal <- colorNumeric(palette = "viridis", domain = all_territories$Agent)
   
   # Create labels for counties
   county_labels <- sprintf(
@@ -149,31 +153,70 @@ mapping2 <- function(variable, year) {
 territory <- function(territory_type, Zscore_Type, variable_title) {
     
     # Filter data for selected year and variable
-    temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable, ]
+    temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable_title, ]
     # 
     # # Join variable data with county geometry data
-    # var.counties <- left_join(va.counties, temp, by = 'GEOID')
+    territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
     # 
     # # Identify the index of the selected variable
     # idx <- which(unique(all_var_df$Variable) == variable)
     
     # Create a color palette function based on the "Value" column
-    pal <- colorNumeric(palette = "viridis", domain = var.counties$Value)
+    agent_colors <- c("Roanoke" = "blue",             
+                      "Floyd"  =  "yellow",                
+                      "Newport News City" =  "lightblue",  
+                      "Newport News City North"  = "purple",
+                      "Spotsylvania"  = "pink" ,          
+                      "Petersburg City" = "magenta" ,         
+                      "Henrico"   = "beige",              
+                      "Washington"  = "mediumvioletred",          
+                      "Patrick"   =    "lightsteelblue",            
+                      "Arlington"     = "navy",           
+                      "Albemarle"      = "lightgoldenrod" ,         
+                      "Gloucester"  =  "lightgrey",             
+                      "Augusta"   = "hotpink",               
+                      "Greensville"  = "darkolivegreen",           
+                      "Warren"    = "dodgerblue",               
+                      "Amherst"     ="forestgreen",            
+                      "King George"   = "gold",           
+                      "Lancaster" = "lavenderblush",                
+                      "Richmond City"  = "darkgrey",           
+                      "Northeast District Office" =  "orange",
+                      "Fairfax"  =     "brown2",              
+                      "Orange"   =  "darkseagreen2",                 
+                      "Mecklenburg"  = "hotpink4",            
+                      "Chesapeake City" =   "khaki",        
+                      "Pulaski"  =     "lightcyan",            
+                      "Rockingham"   = "mediumorchid",            
+                      "Rockbridge" = "mediumspringgreen",                
+                      "Franklin"  = "salmon",               
+                      "Bedford"  = "plum4",                 
+                      "Pittsylvania"   =   "slategray",        
+                      "Lee"  =   "turquoise",                  
+                      "Frederick"    =  "tan1",           
+                      "Amelia" =     "red",                
+                      "Virginia Beach City North" =  "salmon4",
+                      "Lynchburg City"   =   "palegreen",      
+                      "Louisa"  =   "mistyrose",               
+                      "Loudoun"   =  "mediumvioletred",              
+                      "Virginia Beach City" =  "lightsteelblue",
+                      "Essex" =  "chocolate",
+                      "Prince William" =  "darkorchid1")
+    pal <- colorNumeric(palette = agent_colors, domain = all_territories$Agent)
     
     # Create labels for counties
     county_labels <- sprintf(
-      "<strong>%s</strong><br/>%s: %g", 
-      all_territories$Agen, 
-      good_names[idx], 
-      var.counties$Value
+      "<strong> Agent Territory: %s</strong><br/> County: %s: %g", 
+      all_territories$Agent, 
+      all_territories$NAMELSAD
     ) %>% lapply(htmltools::HTML)
     
     # Create labels for agents
     agent_labels <- sprintf(
-      "<strong>Agent Site</strong><br/>Job Department: %s </strong><br/>Agent Contact Info: %s", 
-      all_territories$`Job Dept`,
-      all_territories$`Employee Name`,
-      all_territories$`VT Email`
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s", 
+      agents_sf$Job.Dept,
+      agents_sf$Employee.Name,
+      agents_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
     # Wrap legend title if too long
@@ -185,9 +228,9 @@ territory <- function(territory_type, Zscore_Type, variable_title) {
     territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     # Create leaflet map
-    leaflet(data = all_territories) %>%
+    leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
-      addPolygons(fillColor = ~pal(Value), 
+      addPolygons(fillColor = ~pal(Agent), 
                   color = "#BDBDC3", 
                   weight = 1, 
                   smoothFactor = 0.2,
@@ -199,7 +242,7 @@ territory <- function(territory_type, Zscore_Type, variable_title) {
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(data = with_new_agents, icon=awesomeIcons(icon='cloud', markerColor = with_new_agents$NewAgent, iconColor = 'white'),
+      addAwesomeMarkers(data = additional_agent_sf, icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$NewAgent, iconColor = 'white'),
                         label = agent_labels, 
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
