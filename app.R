@@ -69,12 +69,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # Load and preprocess the VCE agents location data
   agents_sf <- read.csv("./data/vce_agents.csv") %>% st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
   
-  # Prepare labels for varibels of interest
+  # Prepare labels for varibles of interest
   good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
                   "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
                   "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White",
                   "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses","Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
-  
+  # Load the agent territory data
+  all_territories <- read.csv("./data/all_agent_solutions.csv")
+  with_new_agents <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
   ### 1.3.2 Process the data---------------------------------------------------------------- 
   
   
@@ -143,6 +145,68 @@ mapping2 <- function(variable, year) {
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
+  
+  #territory function
+  territory <- function(territory_type, Zscore_Type, variable_title) {
+    
+    # Filter data for selected year and variable
+    temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable, ]
+    # 
+    # # Join variable data with county geometry data
+    # var.counties <- left_join(va.counties, temp, by = 'GEOID')
+    # 
+    # # Identify the index of the selected variable
+    # idx <- which(unique(all_var_df$Variable) == variable)
+    
+    # Create a color palette function based on the "Value" column
+    pal <- colorNumeric(palette = "viridis", domain = var.counties$Value)
+    
+    # Create labels for counties
+    county_labels <- sprintf(
+      "<strong>%s</strong><br/>%s: %g", 
+      all_territories$Agen, 
+      good_names[idx], 
+      var.counties$Value
+    ) %>% lapply(htmltools::HTML)
+    
+    # Create labels for agents
+    agent_labels <- sprintf(
+      "<strong>Agent Site</strong><br/>Job Department:</strong><br/>Agent Contact Info: %s", 
+      all_territories$`Job Dept`,
+      all_territories$`Employee Name`,
+      all_territories$`VT Email`
+    ) %>% lapply(htmltools::HTML)
+    
+    # Wrap legend title if too long
+    # spaces <- gregexpr("\\s", good_names[idx])[[1]]
+    # middle_space <- spaces[length(spaces) %/% 2 + 1]
+    # legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
+    # 
+    # Create title for the map
+    map_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+    
+    # Create leaflet map
+    leaflet(data = all_territories) %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
+      addPolygons(fillColor = ~pal(Value), 
+                  color = "#BDBDC3", 
+                  weight = 1, 
+                  smoothFactor = 0.2,
+                  opacity = 1.0, 
+                  fillOpacity = 0.6,
+                  highlightOptions = highlightOptions(color = "white", weight = 2,
+                                                      bringToFront = TRUE),
+                  label = county_labels, 
+                  labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
+                                              textsize = "15px",
+                                              direction = "auto")) %>%
+      addAwesomeMarkers(data = with_new_agents, icon=awesomeIcons(icon='cloud', markerColor = with_new_agents$NewAgent, iconColor = 'white'),
+                        label = agent_labels, 
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
+  }  
 ## 1.5 Statistic analysis---------
   a <- "Statistics for per_low_birthweight"
   b <- "Statistics for second varible"
