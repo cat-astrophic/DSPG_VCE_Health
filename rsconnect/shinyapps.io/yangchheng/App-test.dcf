@@ -1,0 +1,13 @@
+name: App-test
+title:
+username:
+account: yangchheng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9395486
+bundleId: 7410598
+url: https://yangchheng.shinyapps.io/App-test/
+when: 1688264763.72672
+lastSyncTime: 1688264763.72673
+asMultiple: FALSE
+asStatic: FALSE
