@@ -143,6 +143,8 @@ mapping2 <- function(variable, year) {
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
+  
+  
 ## 1.5 Statistic analysis---------
   a <- "Statistics for per_low_birthweight"
   b <- "Statistics for second varible"
@@ -398,17 +400,42 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
+                                              
+                                              
                                      )
                             ),
                             ### 2.4.2 Subtab Results
                             tabPanel("Results",
                                      fluidRow(style = "margin: 6px;",
+                                              h1(strong("Results"), align = "center"),
+                                              p("", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 6px;",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
+                                              tabsetPanel(
+                                                tabPanel("Aggregate Z-score",
+                                                         # Content for the Aggregate Z-score tab goes here
+                                                ),
+                                                tabPanel("Food Insecurity Z-score",
+                                                         # Content for the z-score tab goes here
+                                                ),
+                                                tabPanel("Low Birthweight Z-score",
+                                                         # Content for the Z-score tab goes here
+                                                ),
+                                                tabPanel("Obesity Z-score",
+                                                         # Content for the Z-score tab goes here
+                                                ),
+                                                tabPanel("Physical Inactivity Z-score",
+                                                         # Content for the  Z-score tab goes here
+                                                )
+                                               
+                                              ),
+                                             
                                      )
-                            ),
+                            )
                  ),
+                            
                  
                  
                  ## 2.5 Tab Takeawayss --------------------------------------------
@@ -416,33 +443,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                           fluidRow(style = "margin: 6px;",
                                    h1(strong("Project Findings and Predictions"), align = "center"),
                                    p("", style = "padding-top:10px;"),
-                                   p("Given the rich agricultural histories of the two counties, we are interested in how agricultural land has changed over the last several years. 
-                                     This research uses quantitative tools to understand how some key natural and social factors affect the parcellation and conversion with administrative data and county-level geospatial data."),
+                                   p("findings on maps"),
                                    fluidRow(style = "margin: 6px;", align = "justify",
-                                            h4(strong("Goochland")),
-                                            p("In Goochland, agricultural land was converted to residential, mainly single-family residential urban, and suburban. 
-                                              There were also 5 parcels (about 671 acres) of large agricultural lands that have been parcellated into smaller agricultural plots."),
-                                            p("Parcellation is occurring predominantly in the southeast of Goochland County near Richmond, around the U.S. Routes I64, 250, and 288. This pattern might reflect the urban influence on the county. 
-                                              This pattern might also imply some correlation between parcellation and transportation. On the crop and land type map, those Routes are labeled as “Developed.” 
-                                              High traffic volumes can also be seen along those Routes."),
-                                            br(),
-                                            h4(strong("Powhatan")),
-                                            p("Large amounts of agricultural land were converted to 
-                                              residential-suburban uses during the decade in Powhatan (including recurrences). Parcellation among agricultural land 
-                                              is also noticeable, as 28 parcels (about 5,750 acres) of large agricultural lands have been parcellated
-                                              into smaller agricultural plots."),
-                                            p("Parcellation is occurring predominantly in the heart of Powhatan County, around the U.S. Routes 60 and 522. 
-                                              On the east end near Richmond, high parcellation rates are seen along the U.S. Routes 60 and 288 within 
-                                              the county and this might reflect the urban influence on the county. The high parcellation around 
-                                              those Routes might imply some correlation between parcellation and transportation. On the map of crop and land type, 
-                                              those Routes are labeled as “Developed”. High traffic volumes can also be seen along U.S. Routes 60 and 288. Hence the 
-                                              correlation between parcellation and those Routes is also a correlation between parcellation and developed areas (traffic volumes)."),
-                                            p("There is no obvious sign that poor soil quality can be a driver of land conversion out of agriculture from the maps."),
-                                            p("In addition to the univariate spatial analysis, we also conducted a statistical analysis that examined the association between land conversion out of 
-                                              agriculture and the characteristics of the land parcel, which include parcel acreage, whether the owner lives in the county, distance to the city of Richmond, the traffic volume and the soil class. 
-                                              The analysis was conducted for Powhatan County only due to data availability. The findings from a logistic regression model show that the probability of converting out of agriculture: 
-                                              decreases as the size of the parcel increases, decreases if the land owner lives in Powhatan, decreases with distance from Richmond. The association with traffic volume shows a U shaped impact 
-                                              on the probability of conversion. Soil quality is not significantly associated with land conversion. Note these are not causal effects. They are associations."),
+                                            h4(strong("VCE")),
+                                            
                                    ), 
                                    
                                    
