@@ -111,8 +111,10 @@ mapping2 <- function(variable, year) {
   
   # Create labels for agents
   agent_labels <- sprintf(
-    "<strong>Agent Site</strong><br/>Job Department: %s", 
-    agents_sf$Job.Dept
+    "<strong>Agent Site</strong><br/>Job Department:<br/> Agent Name:<br/> Contact Info: %s", 
+    agents_sf$Job.Dept,
+    agents_sf$Employee.Name,
+    agents_sf$VT.Email
   ) %>% lapply(htmltools::HTML)
   
   # Wrap legend title if too long
