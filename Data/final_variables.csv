@@ -3060,61 +3060,61 @@ health_outcomes,life_expectancy_white,2017,Williamsburg City,51830,91.2,Williams
 health_outcomes,life_expectancy_white,2017,Winchester City,51840,77.5,Winchester City
 health_outcomes,life_expectancy_gap,2017,Accomack,51001,5.5,Accomack Couny
 health_outcomes,life_expectancy_gap,2017,Albemarle,51003,4.1,Albemarle Couny
-health_outcomes,life_expectancy_gap,2017,Alleghany,51005,0,Alleghany Couny
+health_outcomes,life_expectancy_gap,2017,Alleghany,51005,,Alleghany Couny
 health_outcomes,life_expectancy_gap,2017,Amelia,51007,1.2,Amelia Couny
 health_outcomes,life_expectancy_gap,2017,Amherst,51009,3,Amherst Couny
 health_outcomes,life_expectancy_gap,2017,Appomattox,51011,5,Appomattox Couny
 health_outcomes,life_expectancy_gap,2017,Arlington,51013,5.1,Arlington Couny
 health_outcomes,life_expectancy_gap,2017,Augusta,51015,-5.4,Augusta Couny
-health_outcomes,life_expectancy_gap,2017,Bath,51017,0,Bath Couny
+health_outcomes,life_expectancy_gap,2017,Bath,51017,,Bath Couny
 health_outcomes,life_expectancy_gap,2017,Bedford,51019,2.9,Bedford Couny
-health_outcomes,life_expectancy_gap,2017,Bland,51021,0,Bland Couny
-health_outcomes,life_expectancy_gap,2017,Botetourt,51023,0,Botetourt Couny
+health_outcomes,life_expectancy_gap,2017,Bland,51021,,Bland Couny
+health_outcomes,life_expectancy_gap,2017,Botetourt,51023,,Botetourt Couny
 health_outcomes,life_expectancy_gap,2017,Brunswick,51025,4.2,Brunswick Couny
-health_outcomes,life_expectancy_gap,2017,Buchanan,51027,0,Buchanan Couny
+health_outcomes,life_expectancy_gap,2017,Buchanan,51027,,Buchanan Couny
 health_outcomes,life_expectancy_gap,2017,Buckingham,51029,-1.5,Buckingham Couny
 health_outcomes,life_expectancy_gap,2017,Campbell,51031,0.2,Campbell Couny
 health_outcomes,life_expectancy_gap,2017,Caroline,51033,0.7,Caroline Couny
-health_outcomes,life_expectancy_gap,2017,Carroll,51035,0,Carroll Couny
+health_outcomes,life_expectancy_gap,2017,Carroll,51035,,Carroll Couny
 health_outcomes,life_expectancy_gap,2017,Charles City,51036,3,Charles City Couny
 health_outcomes,life_expectancy_gap,2017,Charlotte,51037,4.9,Charlotte Couny
 health_outcomes,life_expectancy_gap,2017,Chesterfield,51041,1.9,Chesterfield Couny
-health_outcomes,life_expectancy_gap,2017,Clarke,51043,0,Clarke Couny
-health_outcomes,life_expectancy_gap,2017,Craig,51045,0,Craig Couny
+health_outcomes,life_expectancy_gap,2017,Clarke,51043,,Clarke Couny
+health_outcomes,life_expectancy_gap,2017,Craig,51045,,Craig Couny
 health_outcomes,life_expectancy_gap,2017,Culpeper,51047,1.8,Culpeper Couny
 health_outcomes,life_expectancy_gap,2017,Cumberland,51049,-1,Cumberland Couny
-health_outcomes,life_expectancy_gap,2017,Dickenson,51051,0,Dickenson Couny
+health_outcomes,life_expectancy_gap,2017,Dickenson,51051,,Dickenson Couny
 health_outcomes,life_expectancy_gap,2017,Dinwiddie,51053,-1,Dinwiddie Couny
 health_outcomes,life_expectancy_gap,2017,Essex,51057,2,Essex Couny
 health_outcomes,life_expectancy_gap,2017,Fairfax,51059,1,Fairfax Couny
 health_outcomes,life_expectancy_gap,2017,Fauquier,51061,3.3,Fauquier Couny
-health_outcomes,life_expectancy_gap,2017,Floyd,51063,0,Floyd Couny
+health_outcomes,life_expectancy_gap,2017,Floyd,51063,,Floyd Couny
 health_outcomes,life_expectancy_gap,2017,Fluvanna,51065,0.5,Fluvanna Couny
 health_outcomes,life_expectancy_gap,2017,Franklin,51067,-0.2,Franklin Couny
 health_outcomes,life_expectancy_gap,2017,Frederick,51069,-3.3,Frederick Couny
-health_outcomes,life_expectancy_gap,2017,Giles,51071,0,Giles Couny
+health_outcomes,life_expectancy_gap,2017,Giles,51071,,Giles Couny
 health_outcomes,life_expectancy_gap,2017,Gloucester,51073,-1.7,Gloucester Couny
 health_outcomes,life_expectancy_gap,2017,Goochland,51075,4.8,Goochland Couny
-health_outcomes,life_expectancy_gap,2017,Grayson,51077,0,Grayson Couny
-health_outcomes,life_expectancy_gap,2017,Greene,51079,0,Greene Couny
+health_outcomes,life_expectancy_gap,2017,Grayson,51077,,Grayson Couny
+health_outcomes,life_expectancy_gap,2017,Greene,51079,,Greene Couny
 health_outcomes,life_expectancy_gap,2017,Greensville,51081,-0.3,Greensville Couny
 health_outcomes,life_expectancy_gap,2017,Halifax,51083,-0.8,Halifax Couny
 health_outcomes,life_expectancy_gap,2017,Hanover,51085,3.5,Hanover Couny
 health_outcomes,life_expectancy_gap,2017,Henrico,51087,1.2,Henrico Couny
 health_outcomes,life_expectancy_gap,2017,Henry,51089,-4.1,Henry Couny
-health_outcomes,life_expectancy_gap,2017,Highland,51091,0,Highland Couny
+health_outcomes,life_expectancy_gap,2017,Highland,51091,,Highland Couny
 health_outcomes,life_expectancy_gap,2017,Isle of Wight,51093,0,Isle of Wight Couny
 health_outcomes,life_expectancy_gap,2017,James City,51095,7.3,James City Couny
 health_outcomes,life_expectancy_gap,2017,King and Queen,51097,7.2,King and Queen Couny
 health_outcomes,life_expectancy_gap,2017,King George,51099,0.7,King George Couny
 health_outcomes,life_expectancy_gap,2017,King William,51101,1.5,King William Couny
 health_outcomes,life_expectancy_gap,2017,Lancaster,51103,4.5,Lancaster Couny
-health_outcomes,life_expectancy_gap,2017,Lee,51105,0,Lee Couny
+health_outcomes,life_expectancy_gap,2017,Lee,51105,,Lee Couny
 health_outcomes,life_expectancy_gap,2017,Loudoun,51107,-0.3,Loudoun Couny
 health_outcomes,life_expectancy_gap,2017,Louisa,51109,1.3,Louisa Couny
 health_outcomes,life_expectancy_gap,2017,Lunenburg,51111,4.3,Lunenburg Couny
-health_outcomes,life_expectancy_gap,2017,Madison,51113,0,Madison Couny
-health_outcomes,life_expectancy_gap,2017,Mathews,51115,0,Mathews Couny
+health_outcomes,life_expectancy_gap,2017,Madison,51113,,Madison Couny
+health_outcomes,life_expectancy_gap,2017,Mathews,51115,,Mathews Couny
 health_outcomes,life_expectancy_gap,2017,Mecklenburg,51117,3.3,Mecklenburg Couny
 health_outcomes,life_expectancy_gap,2017,Middlesex,51119,0.9,Middlesex Couny
 health_outcomes,life_expectancy_gap,2017,Montgomery,51121,3.1,Montgomery Couny
@@ -3124,62 +3124,62 @@ health_outcomes,life_expectancy_gap,2017,Northampton,51131,3.1,Northampton Couny
 health_outcomes,life_expectancy_gap,2017,Northumberland,51133,5.8,Northumberland Couny
 health_outcomes,life_expectancy_gap,2017,Nottoway,51135,1.5,Nottoway Couny
 health_outcomes,life_expectancy_gap,2017,Orange,51137,-0.5,Orange Couny
-health_outcomes,life_expectancy_gap,2017,Page,51139,0,Page Couny
-health_outcomes,life_expectancy_gap,2017,Patrick,51141,0,Patrick Couny
+health_outcomes,life_expectancy_gap,2017,Page,51139,,Page Couny
+health_outcomes,life_expectancy_gap,2017,Patrick,51141,,Patrick Couny
 health_outcomes,life_expectancy_gap,2017,Pittsylvania,51143,1.6,Pittsylvania Couny
 health_outcomes,life_expectancy_gap,2017,Powhatan,51145,-0.6,Powhatan Couny
 health_outcomes,life_expectancy_gap,2017,Prince Edward,51147,2.2,Prince Edward Couny
 health_outcomes,life_expectancy_gap,2017,Prince George,51149,-4.5,Prince George Couny
 health_outcomes,life_expectancy_gap,2017,Prince William,51153,-0.1,Prince William Couny
 health_outcomes,life_expectancy_gap,2017,Pulaski,51155,0.1,Pulaski Couny
-health_outcomes,life_expectancy_gap,2017,Rappahannock,51157,0,Rappahannock Couny
+health_outcomes,life_expectancy_gap,2017,Rappahannock,51157,,Rappahannock Couny
 health_outcomes,life_expectancy_gap,2017,Richmond,51159,0.8,Richmond Couny
 health_outcomes,life_expectancy_gap,2017,Roanoke,51161,-1.1,Roanoke Couny
-health_outcomes,life_expectancy_gap,2017,Rockbridge,51163,0,Rockbridge Couny
+health_outcomes,life_expectancy_gap,2017,Rockbridge,51163,,Rockbridge Couny
 health_outcomes,life_expectancy_gap,2017,Rockingham,51165,2.7,Rockingham Couny
-health_outcomes,life_expectancy_gap,2017,Russell,51167,0,Russell Couny
-health_outcomes,life_expectancy_gap,2017,Scott,51169,0,Scott Couny
-health_outcomes,life_expectancy_gap,2017,Shenandoah,51171,78.8,Shenandoah Couny
-health_outcomes,life_expectancy_gap,2017,Smyth,51173,0,Smyth Couny
+health_outcomes,life_expectancy_gap,2017,Russell,51167,,Russell Couny
+health_outcomes,life_expectancy_gap,2017,Scott,51169,,Scott Couny
+health_outcomes,life_expectancy_gap,2017,Shenandoah,51171,,Shenandoah Couny
+health_outcomes,life_expectancy_gap,2017,Smyth,51173,,Smyth Couny
 health_outcomes,life_expectancy_gap,2017,Southampton,51175,5.4,Southampton Couny
 health_outcomes,life_expectancy_gap,2017,Spotsylvania,51177,0.9,Spotsylvania Couny
 health_outcomes,life_expectancy_gap,2017,Stafford,51179,-1.1,Stafford Couny
 health_outcomes,life_expectancy_gap,2017,Surry,51181,3.7,Surry Couny
 health_outcomes,life_expectancy_gap,2017,Sussex,51183,-5.6,Sussex Couny
-health_outcomes,life_expectancy_gap,2017,Tazewell,51185,0,Tazewell Couny
+health_outcomes,life_expectancy_gap,2017,Tazewell,51185,,Tazewell Couny
 health_outcomes,life_expectancy_gap,2017,Warren,51187,-2.5,Warren Couny
-health_outcomes,life_expectancy_gap,2017,Washington,51191,0,Washington Couny
+health_outcomes,life_expectancy_gap,2017,Washington,51191,,Washington Couny
 health_outcomes,life_expectancy_gap,2017,Westmoreland,51193,-2.3,Westmoreland Couny
 health_outcomes,life_expectancy_gap,2017,Wise,51195,-3.2,Wise Couny
-health_outcomes,life_expectancy_gap,2017,Wythe,51197,0,Wythe Couny
+health_outcomes,life_expectancy_gap,2017,Wythe,51197,,Wythe Couny
 health_outcomes,life_expectancy_gap,2017,York,51199,2.7,York Couny
 health_outcomes,life_expectancy_gap,2017,Alexandria City,51510,3,Alexandria City
-health_outcomes,life_expectancy_gap,2017,Bristol City,51520,0,Bristol City
-health_outcomes,life_expectancy_gap,2017,Buena Vista City,51530,0,Buena Vista City
+health_outcomes,life_expectancy_gap,2017,Bristol City,51520,,Bristol City
+health_outcomes,life_expectancy_gap,2017,Buena Vista City,51530,,Buena Vista City
 health_outcomes,life_expectancy_gap,2017,Charlottesville City,51540,4.5,Charlottesville City
 health_outcomes,life_expectancy_gap,2017,Chesapeake City,51550,1.2,Chesapeake City
 health_outcomes,life_expectancy_gap,2017,Colonial Heights City,51570,4.1,Colonial Heights City
-health_outcomes,life_expectancy_gap,2017,Covington City,51580,0,Covington City
+health_outcomes,life_expectancy_gap,2017,Covington City,51580,,Covington City
 health_outcomes,life_expectancy_gap,2017,Danville City,51590,-0.1,Danville City
-health_outcomes,life_expectancy_gap,2017,Emporia City,51595,0,Emporia City
-health_outcomes,life_expectancy_gap,2017,Fairfax City,51600,78.7,Fairfax City
-health_outcomes,life_expectancy_gap,2017,Falls Church City,51610,0,Falls Church City
+health_outcomes,life_expectancy_gap,2017,Emporia City,51595,,Emporia City
+health_outcomes,life_expectancy_gap,2017,Fairfax City,51600,,Fairfax City
+health_outcomes,life_expectancy_gap,2017,Falls Church City,51610,,Falls Church City
 health_outcomes,life_expectancy_gap,2017,Franklin City,51620,4.7,Franklin City
 health_outcomes,life_expectancy_gap,2017,Fredericksburg City,51630,4.1,Fredericksburg City
-health_outcomes,life_expectancy_gap,2017,Galax City,51640,0,Galax City
+health_outcomes,life_expectancy_gap,2017,Galax City,51640,,Galax City
 health_outcomes,life_expectancy_gap,2017,Hampton City,51650,0.7,Hampton City
 health_outcomes,life_expectancy_gap,2017,Harrisonburg City,51660,0.5,Harrisonburg City
 health_outcomes,life_expectancy_gap,2017,Hopewell City,51670,-0.7,Hopewell City
-health_outcomes,life_expectancy_gap,2017,Lexington City,51678,0,Lexington City
+health_outcomes,life_expectancy_gap,2017,Lexington City,51678,,Lexington City
 health_outcomes,life_expectancy_gap,2017,Lynchburg City,51680,4.4,Lynchburg City
 health_outcomes,life_expectancy_gap,2017,Manassas City,51683,0.8,Manassas City
 health_outcomes,life_expectancy_gap,2017,Manassas Park City,51685,12.1,Manassas Park City
 health_outcomes,life_expectancy_gap,2017,Martinsville City,51690,-1.9,Martinsville City
 health_outcomes,life_expectancy_gap,2017,Newport News City,51700,4,Newport News City
 health_outcomes,life_expectancy_gap,2017,Norfolk City,51710,4.2,Norfolk City
-health_outcomes,life_expectancy_gap,2017,Norton City,51720,0,Norton City
+health_outcomes,life_expectancy_gap,2017,Norton City,51720,,Norton City
 health_outcomes,life_expectancy_gap,2017,Petersburg City,51730,-5.9,Petersburg City
-health_outcomes,life_expectancy_gap,2017,Poquoson City,51735,0,Poquoson City
+health_outcomes,life_expectancy_gap,2017,Poquoson City,51735,,Poquoson City
 health_outcomes,life_expectancy_gap,2017,Portsmouth City,51740,3.1,Portsmouth City
 health_outcomes,life_expectancy_gap,2017,Radford City,51750,4.6,Radford City
 health_outcomes,life_expectancy_gap,2017,Richmond City,51760,9.3,Richmond City
@@ -5986,61 +5986,61 @@ health_outcomes,life_expectancy_white,2018,Williamsburg City,51830,89,Williamsbu
 health_outcomes,life_expectancy_white,2018,Winchester City,51840,77.8,Winchester City
 health_outcomes,life_expectancy_gap,2018,Accomack,51001,3.6,Accomack Couny
 health_outcomes,life_expectancy_gap,2018,Albemarle,51003,5.6,Albemarle Couny
-health_outcomes,life_expectancy_gap,2018,Alleghany,51005,0,Alleghany Couny
+health_outcomes,life_expectancy_gap,2018,Alleghany,51005,,Alleghany Couny
 health_outcomes,life_expectancy_gap,2018,Amelia,51007,-0.4,Amelia Couny
 health_outcomes,life_expectancy_gap,2018,Amherst,51009,1.5,Amherst Couny
 health_outcomes,life_expectancy_gap,2018,Appomattox,51011,6.8,Appomattox Couny
 health_outcomes,life_expectancy_gap,2018,Arlington,51013,4.7,Arlington Couny
 health_outcomes,life_expectancy_gap,2018,Augusta,51015,-5.6,Augusta Couny
-health_outcomes,life_expectancy_gap,2018,Bath,51017,0,Bath Couny
+health_outcomes,life_expectancy_gap,2018,Bath,51017,,Bath Couny
 health_outcomes,life_expectancy_gap,2018,Bedford,51019,2.4,Bedford Couny
-health_outcomes,life_expectancy_gap,2018,Bland,51021,0,Bland Couny
-health_outcomes,life_expectancy_gap,2018,Botetourt,51023,0,Botetourt Couny
+health_outcomes,life_expectancy_gap,2018,Bland,51021,,Bland Couny
+health_outcomes,life_expectancy_gap,2018,Botetourt,51023,,Botetourt Couny
 health_outcomes,life_expectancy_gap,2018,Brunswick,51025,3.9,Brunswick Couny
-health_outcomes,life_expectancy_gap,2018,Buchanan,51027,0,Buchanan Couny
+health_outcomes,life_expectancy_gap,2018,Buchanan,51027,,Buchanan Couny
 health_outcomes,life_expectancy_gap,2018,Buckingham,51029,2.1,Buckingham Couny
 health_outcomes,life_expectancy_gap,2018,Campbell,51031,0.2,Campbell Couny
 health_outcomes,life_expectancy_gap,2018,Caroline,51033,0.1,Caroline Couny
-health_outcomes,life_expectancy_gap,2018,Carroll,51035,0,Carroll Couny
+health_outcomes,life_expectancy_gap,2018,Carroll,51035,,Carroll Couny
 health_outcomes,life_expectancy_gap,2018,Charles City,51036,1.1,Charles City Couny
 health_outcomes,life_expectancy_gap,2018,Charlotte,51037,2.7,Charlotte Couny
 health_outcomes,life_expectancy_gap,2018,Chesterfield,51041,1.4,Chesterfield Couny
-health_outcomes,life_expectancy_gap,2018,Clarke,51043,0,Clarke Couny
-health_outcomes,life_expectancy_gap,2018,Craig,51045,0,Craig Couny
+health_outcomes,life_expectancy_gap,2018,Clarke,51043,,Clarke Couny
+health_outcomes,life_expectancy_gap,2018,Craig,51045,,Craig Couny
 health_outcomes,life_expectancy_gap,2018,Culpeper,51047,1.6,Culpeper Couny
 health_outcomes,life_expectancy_gap,2018,Cumberland,51049,0.9,Cumberland Couny
-health_outcomes,life_expectancy_gap,2018,Dickenson,51051,0,Dickenson Couny
+health_outcomes,life_expectancy_gap,2018,Dickenson,51051,,Dickenson Couny
 health_outcomes,life_expectancy_gap,2018,Dinwiddie,51053,-0.2,Dinwiddie Couny
 health_outcomes,life_expectancy_gap,2018,Essex,51057,1.6,Essex Couny
 health_outcomes,life_expectancy_gap,2018,Fairfax,51059,1.3,Fairfax Couny
 health_outcomes,life_expectancy_gap,2018,Fauquier,51061,4,Fauquier Couny
-health_outcomes,life_expectancy_gap,2018,Floyd,51063,0,Floyd Couny
+health_outcomes,life_expectancy_gap,2018,Floyd,51063,,Floyd Couny
 health_outcomes,life_expectancy_gap,2018,Fluvanna,51065,2.4,Fluvanna Couny
 health_outcomes,life_expectancy_gap,2018,Franklin,51067,1.8,Franklin Couny
 health_outcomes,life_expectancy_gap,2018,Frederick,51069,-1.4,Frederick Couny
-health_outcomes,life_expectancy_gap,2018,Giles,51071,0,Giles Couny
+health_outcomes,life_expectancy_gap,2018,Giles,51071,,Giles Couny
 health_outcomes,life_expectancy_gap,2018,Gloucester,51073,-1,Gloucester Couny
 health_outcomes,life_expectancy_gap,2018,Goochland,51075,6.5,Goochland Couny
-health_outcomes,life_expectancy_gap,2018,Grayson,51077,0,Grayson Couny
-health_outcomes,life_expectancy_gap,2018,Greene,51079,0,Greene Couny
+health_outcomes,life_expectancy_gap,2018,Grayson,51077,,Grayson Couny
+health_outcomes,life_expectancy_gap,2018,Greene,51079,,Greene Couny
 health_outcomes,life_expectancy_gap,2018,Greensville,51081,-0.9,Greensville Couny
 health_outcomes,life_expectancy_gap,2018,Halifax,51083,-0.2,Halifax Couny
 health_outcomes,life_expectancy_gap,2018,Hanover,51085,3,Hanover Couny
 health_outcomes,life_expectancy_gap,2018,Henrico,51087,1.1,Henrico Couny
 health_outcomes,life_expectancy_gap,2018,Henry,51089,-3.5,Henry Couny
-health_outcomes,life_expectancy_gap,2018,Highland,51091,0,Highland Couny
+health_outcomes,life_expectancy_gap,2018,Highland,51091,,Highland Couny
 health_outcomes,life_expectancy_gap,2018,Isle of Wight,51093,0.4,Isle of Wight Couny
 health_outcomes,life_expectancy_gap,2018,James City,51095,5.9,James City Couny
 health_outcomes,life_expectancy_gap,2018,King and Queen,51097,4.5,King and Queen Couny
 health_outcomes,life_expectancy_gap,2018,King George,51099,1.8,King George Couny
 health_outcomes,life_expectancy_gap,2018,King William,51101,1.4,King William Couny
 health_outcomes,life_expectancy_gap,2018,Lancaster,51103,2.4,Lancaster Couny
-health_outcomes,life_expectancy_gap,2018,Lee,51105,0,Lee Couny
+health_outcomes,life_expectancy_gap,2018,Lee,51105,,Lee Couny
 health_outcomes,life_expectancy_gap,2018,Loudoun,51107,0.8,Loudoun Couny
 health_outcomes,life_expectancy_gap,2018,Louisa,51109,0.7,Louisa Couny
 health_outcomes,life_expectancy_gap,2018,Lunenburg,51111,6.1,Lunenburg Couny
-health_outcomes,life_expectancy_gap,2018,Madison,51113,0,Madison Couny
-health_outcomes,life_expectancy_gap,2018,Mathews,51115,0,Mathews Couny
+health_outcomes,life_expectancy_gap,2018,Madison,51113,,Madison Couny
+health_outcomes,life_expectancy_gap,2018,Mathews,51115,,Mathews Couny
 health_outcomes,life_expectancy_gap,2018,Mecklenburg,51117,3.4,Mecklenburg Couny
 health_outcomes,life_expectancy_gap,2018,Middlesex,51119,0.8,Middlesex Couny
 health_outcomes,life_expectancy_gap,2018,Montgomery,51121,2.8,Montgomery Couny
@@ -6050,62 +6050,62 @@ health_outcomes,life_expectancy_gap,2018,Northampton,51131,7,Northampton Couny
 health_outcomes,life_expectancy_gap,2018,Northumberland,51133,7.7,Northumberland Couny
 health_outcomes,life_expectancy_gap,2018,Nottoway,51135,2,Nottoway Couny
 health_outcomes,life_expectancy_gap,2018,Orange,51137,-0.3,Orange Couny
-health_outcomes,life_expectancy_gap,2018,Page,51139,0,Page Couny
-health_outcomes,life_expectancy_gap,2018,Patrick,51141,0,Patrick Couny
+health_outcomes,life_expectancy_gap,2018,Page,51139,,Page Couny
+health_outcomes,life_expectancy_gap,2018,Patrick,51141,,Patrick Couny
 health_outcomes,life_expectancy_gap,2018,Pittsylvania,51143,3.5,Pittsylvania Couny
 health_outcomes,life_expectancy_gap,2018,Powhatan,51145,-1.7,Powhatan Couny
 health_outcomes,life_expectancy_gap,2018,Prince Edward,51147,3.5,Prince Edward Couny
 health_outcomes,life_expectancy_gap,2018,Prince George,51149,-4.5,Prince George Couny
 health_outcomes,life_expectancy_gap,2018,Prince William,51153,0.8,Prince William Couny
 health_outcomes,life_expectancy_gap,2018,Pulaski,51155,2.5,Pulaski Couny
-health_outcomes,life_expectancy_gap,2018,Rappahannock,51157,0,Rappahannock Couny
+health_outcomes,life_expectancy_gap,2018,Rappahannock,51157,,Rappahannock Couny
 health_outcomes,life_expectancy_gap,2018,Richmond,51159,6.3,Richmond Couny
 health_outcomes,life_expectancy_gap,2018,Roanoke,51161,-1.6,Roanoke Couny
-health_outcomes,life_expectancy_gap,2018,Rockbridge,51163,0,Rockbridge Couny
+health_outcomes,life_expectancy_gap,2018,Rockbridge,51163,,Rockbridge Couny
 health_outcomes,life_expectancy_gap,2018,Rockingham,51165,4.7,Rockingham Couny
-health_outcomes,life_expectancy_gap,2018,Russell,51167,0,Russell Couny
-health_outcomes,life_expectancy_gap,2018,Scott,51169,0,Scott Couny
-health_outcomes,life_expectancy_gap,2018,Shenandoah,51171,79.2,Shenandoah Couny
-health_outcomes,life_expectancy_gap,2018,Smyth,51173,0,Smyth Couny
+health_outcomes,life_expectancy_gap,2018,Russell,51167,,Russell Couny
+health_outcomes,life_expectancy_gap,2018,Scott,51169,,Scott Couny
+health_outcomes,life_expectancy_gap,2018,Shenandoah,51171,,Shenandoah Couny
+health_outcomes,life_expectancy_gap,2018,Smyth,51173,,Smyth Couny
 health_outcomes,life_expectancy_gap,2018,Southampton,51175,3.5,Southampton Couny
 health_outcomes,life_expectancy_gap,2018,Spotsylvania,51177,0.9,Spotsylvania Couny
 health_outcomes,life_expectancy_gap,2018,Stafford,51179,-1.2,Stafford Couny
 health_outcomes,life_expectancy_gap,2018,Surry,51181,1.6,Surry Couny
 health_outcomes,life_expectancy_gap,2018,Sussex,51183,-6.7,Sussex Couny
-health_outcomes,life_expectancy_gap,2018,Tazewell,51185,0,Tazewell Couny
+health_outcomes,life_expectancy_gap,2018,Tazewell,51185,,Tazewell Couny
 health_outcomes,life_expectancy_gap,2018,Warren,51187,-1.4,Warren Couny
-health_outcomes,life_expectancy_gap,2018,Washington,51191,0,Washington Couny
+health_outcomes,life_expectancy_gap,2018,Washington,51191,,Washington Couny
 health_outcomes,life_expectancy_gap,2018,Westmoreland,51193,-3,Westmoreland Couny
 health_outcomes,life_expectancy_gap,2018,Wise,51195,-0.7,Wise Couny
-health_outcomes,life_expectancy_gap,2018,Wythe,51197,0,Wythe Couny
+health_outcomes,life_expectancy_gap,2018,Wythe,51197,,Wythe Couny
 health_outcomes,life_expectancy_gap,2018,York,51199,2.4,York Couny
 health_outcomes,life_expectancy_gap,2018,Alexandria City,51510,4.4,Alexandria City
-health_outcomes,life_expectancy_gap,2018,Bristol City,51520,0,Bristol City
-health_outcomes,life_expectancy_gap,2018,Buena Vista City,51530,0,Buena Vista City
+health_outcomes,life_expectancy_gap,2018,Bristol City,51520,,Bristol City
+health_outcomes,life_expectancy_gap,2018,Buena Vista City,51530,,Buena Vista City
 health_outcomes,life_expectancy_gap,2018,Charlottesville City,51540,5.3,Charlottesville City
 health_outcomes,life_expectancy_gap,2018,Chesapeake City,51550,1,Chesapeake City
 health_outcomes,life_expectancy_gap,2018,Colonial Heights City,51570,4,Colonial Heights City
-health_outcomes,life_expectancy_gap,2018,Covington City,51580,0,Covington City
+health_outcomes,life_expectancy_gap,2018,Covington City,51580,,Covington City
 health_outcomes,life_expectancy_gap,2018,Danville City,51590,1.3,Danville City
-health_outcomes,life_expectancy_gap,2018,Emporia City,51595,0,Emporia City
-health_outcomes,life_expectancy_gap,2018,Fairfax City,51600,78.7,Fairfax City
-health_outcomes,life_expectancy_gap,2018,Falls Church City,51610,0,Falls Church City
+health_outcomes,life_expectancy_gap,2018,Emporia City,51595,,Emporia City
+health_outcomes,life_expectancy_gap,2018,Fairfax City,51600,,Fairfax City
+health_outcomes,life_expectancy_gap,2018,Falls Church City,51610,,Falls Church City
 health_outcomes,life_expectancy_gap,2018,Franklin City,51620,6.3,Franklin City
 health_outcomes,life_expectancy_gap,2018,Fredericksburg City,51630,2.8,Fredericksburg City
-health_outcomes,life_expectancy_gap,2018,Galax City,51640,0,Galax City
+health_outcomes,life_expectancy_gap,2018,Galax City,51640,,Galax City
 health_outcomes,life_expectancy_gap,2018,Hampton City,51650,0.5,Hampton City
 health_outcomes,life_expectancy_gap,2018,Harrisonburg City,51660,-4.6,Harrisonburg City
 health_outcomes,life_expectancy_gap,2018,Hopewell City,51670,-1.2,Hopewell City
-health_outcomes,life_expectancy_gap,2018,Lexington City,51678,0,Lexington City
+health_outcomes,life_expectancy_gap,2018,Lexington City,51678,,Lexington City
 health_outcomes,life_expectancy_gap,2018,Lynchburg City,51680,6.1,Lynchburg City
 health_outcomes,life_expectancy_gap,2018,Manassas City,51683,-0.2,Manassas City
 health_outcomes,life_expectancy_gap,2018,Manassas Park City,51685,15.7,Manassas Park City
 health_outcomes,life_expectancy_gap,2018,Martinsville City,51690,2.8,Martinsville City
 health_outcomes,life_expectancy_gap,2018,Newport News City,51700,4,Newport News City
 health_outcomes,life_expectancy_gap,2018,Norfolk City,51710,4.6,Norfolk City
-health_outcomes,life_expectancy_gap,2018,Norton City,51720,0,Norton City
+health_outcomes,life_expectancy_gap,2018,Norton City,51720,,Norton City
 health_outcomes,life_expectancy_gap,2018,Petersburg City,51730,-7.5,Petersburg City
-health_outcomes,life_expectancy_gap,2018,Poquoson City,51735,0,Poquoson City
+health_outcomes,life_expectancy_gap,2018,Poquoson City,51735,,Poquoson City
 health_outcomes,life_expectancy_gap,2018,Portsmouth City,51740,2.6,Portsmouth City
 health_outcomes,life_expectancy_gap,2018,Radford City,51750,6.1,Radford City
 health_outcomes,life_expectancy_gap,2018,Richmond City,51760,9.3,Richmond City
@@ -21457,7 +21457,7 @@ health_outcomes,life_expectancy_gap,2019,Hanover,51085,4.2,Hanover Couny
 health_outcomes,life_expectancy_gap,2019,Henrico,51087,0.4,Henrico Couny
 health_outcomes,life_expectancy_gap,2019,Henry,51089,-2.1,Henry Couny
 health_outcomes,life_expectancy_gap,2019,Highland,51091,,Highland Couny
-health_outcomes,life_expectancy_gap,2019,Isle of Wight,51093,0,Isle of Wight Couny
+health_outcomes,life_expectancy_gap,2019,Isle of Wight,51093,0.6,Isle of Wight Couny
 health_outcomes,life_expectancy_gap,2019,James City,51095,5.5,James City Couny
 health_outcomes,life_expectancy_gap,2019,King and Queen,51097,0.1,King and Queen Couny
 health_outcomes,life_expectancy_gap,2019,King George,51099,2.2,King George Couny
@@ -21486,14 +21486,14 @@ health_outcomes,life_expectancy_gap,2019,Prince Edward,51147,5.6,Prince Edward C
 health_outcomes,life_expectancy_gap,2019,Prince George,51149,-3.6,Prince George Couny
 health_outcomes,life_expectancy_gap,2019,Prince William,51153,1.2,Prince William Couny
 health_outcomes,life_expectancy_gap,2019,Pulaski,51155,2.2,Pulaski Couny
-health_outcomes,life_expectancy_gap,2019,Rappahannock,51157,0,Rappahannock Couny
+health_outcomes,life_expectancy_gap,2019,Rappahannock,51157,,Rappahannock Couny
 health_outcomes,life_expectancy_gap,2019,Richmond,51159,7.7,Richmond Couny
 health_outcomes,life_expectancy_gap,2019,Roanoke,51161,-0.5,Roanoke Couny
 health_outcomes,life_expectancy_gap,2019,Rockbridge,51163,,Rockbridge Couny
 health_outcomes,life_expectancy_gap,2019,Rockingham,51165,2.1,Rockingham Couny
 health_outcomes,life_expectancy_gap,2019,Russell,51167,,Russell Couny
 health_outcomes,life_expectancy_gap,2019,Scott,51169,,Scott Couny
-health_outcomes,life_expectancy_gap,2019,Shenandoah,51171,78.7,Shenandoah Couny
+health_outcomes,life_expectancy_gap,2019,Shenandoah,51171,,Shenandoah Couny
 health_outcomes,life_expectancy_gap,2019,Smyth,51173,,Smyth Couny
 health_outcomes,life_expectancy_gap,2019,Southampton,51175,1.5,Southampton Couny
 health_outcomes,life_expectancy_gap,2019,Spotsylvania,51177,-0.1,Spotsylvania Couny
@@ -21516,7 +21516,7 @@ health_outcomes,life_expectancy_gap,2019,Colonial Heights City,51570,7.1,Colonia
 health_outcomes,life_expectancy_gap,2019,Covington City,51580,,Covington City
 health_outcomes,life_expectancy_gap,2019,Danville City,51590,0.9,Danville City
 health_outcomes,life_expectancy_gap,2019,Emporia City,51595,,Emporia City
-health_outcomes,life_expectancy_gap,2019,Fairfax City,51600,76.7,Fairfax City
+health_outcomes,life_expectancy_gap,2019,Fairfax City,51600,,Fairfax City
 health_outcomes,life_expectancy_gap,2019,Falls Church City,51610,,Falls Church City
 health_outcomes,life_expectancy_gap,2019,Franklin City,51620,5.5,Franklin City
 health_outcomes,life_expectancy_gap,2019,Fredericksburg City,51630,3.1,Fredericksburg City
@@ -21989,7 +21989,7 @@ health_outcomes,life_expectancy_gap,2020,Hanover,51085,3.9,Hanover Couny
 health_outcomes,life_expectancy_gap,2020,Henrico,51087,1.3,Henrico Couny
 health_outcomes,life_expectancy_gap,2020,Henry,51089,-1.3,Henry Couny
 health_outcomes,life_expectancy_gap,2020,Highland,51091,,Highland Couny
-health_outcomes,life_expectancy_gap,2020,Isle of Wight,51093,0,Isle of Wight Couny
+health_outcomes,life_expectancy_gap,2020,Isle of Wight,51093,4.1,Isle of Wight Couny
 health_outcomes,life_expectancy_gap,2020,James City,51095,4.9,James City Couny
 health_outcomes,life_expectancy_gap,2020,King and Queen,51097,1.6,King and Queen Couny
 health_outcomes,life_expectancy_gap,2020,King George,51099,1.1,King George Couny
@@ -22018,14 +22018,14 @@ health_outcomes,life_expectancy_gap,2020,Prince Edward,51147,6.9,Prince Edward C
 health_outcomes,life_expectancy_gap,2020,Prince George,51149,-3.2,Prince George Couny
 health_outcomes,life_expectancy_gap,2020,Prince William,51153,1.6,Prince William Couny
 health_outcomes,life_expectancy_gap,2020,Pulaski,51155,2.2,Pulaski Couny
-health_outcomes,life_expectancy_gap,2020,Rappahannock,51157,0,Rappahannock Couny
+health_outcomes,life_expectancy_gap,2020,Rappahannock,51157,,Rappahannock Couny
 health_outcomes,life_expectancy_gap,2020,Richmond,51159,4.6,Richmond Couny
 health_outcomes,life_expectancy_gap,2020,Roanoke,51161,1.2,Roanoke Couny
 health_outcomes,life_expectancy_gap,2020,Rockbridge,51163,,Rockbridge Couny
 health_outcomes,life_expectancy_gap,2020,Rockingham,51165,4.5,Rockingham Couny
 health_outcomes,life_expectancy_gap,2020,Russell,51167,,Russell Couny
 health_outcomes,life_expectancy_gap,2020,Scott,51169,,Scott Couny
-health_outcomes,life_expectancy_gap,2020,Shenandoah,51171,77.5,Shenandoah Couny
+health_outcomes,life_expectancy_gap,2020,Shenandoah,51171,,Shenandoah Couny
 health_outcomes,life_expectancy_gap,2020,Smyth,51173,,Smyth Couny
 health_outcomes,life_expectancy_gap,2020,Southampton,51175,1.4,Southampton Couny
 health_outcomes,life_expectancy_gap,2020,Spotsylvania,51177,-0.8,Spotsylvania Couny
@@ -22048,7 +22048,7 @@ health_outcomes,life_expectancy_gap,2020,Colonial Heights City,51570,3.7,Colonia
 health_outcomes,life_expectancy_gap,2020,Covington City,51580,,Covington City
 health_outcomes,life_expectancy_gap,2020,Danville City,51590,0,Danville City
 health_outcomes,life_expectancy_gap,2020,Emporia City,51595,,Emporia City
-health_outcomes,life_expectancy_gap,2020,Fairfax City,51600,76.3,Fairfax City
+health_outcomes,life_expectancy_gap,2020,Fairfax City,51600,,Fairfax City
 health_outcomes,life_expectancy_gap,2020,Falls Church City,51610,,Falls Church City
 health_outcomes,life_expectancy_gap,2020,Franklin City,51620,8.3,Franklin City
 health_outcomes,life_expectancy_gap,2020,Fredericksburg City,51630,3.3,Fredericksburg City
