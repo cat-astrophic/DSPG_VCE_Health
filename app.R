@@ -109,7 +109,7 @@ mapping2 <- function(variable, year) {
   
   # Create labels for agents
   agent_labels <- sprintf(
-    "<strong>Agent Site</strong><br/>District Office:<br/> Agent Name:<br/> Contact Info: %s", 
+    "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s", 
     agents_sf$Job.Dept,
     agents_sf$Employee.Name,
     agents_sf$VT.Email
@@ -170,7 +170,7 @@ territory <- function(territory_type, Zscore_Type, variable_title) {
     
     # Create labels for agents
     agent_labels <- sprintf(
-      "<strong>Agent Site</strong><br/>Job Department:</strong><br/>Agent Contact Info: %s", 
+      "<strong>Agent Site</strong><br/>Job Department: %s </strong><br/>Agent Contact Info: %s", 
       all_territories$`Job Dept`,
       all_territories$`Employee Name`,
       all_territories$`VT Email`
