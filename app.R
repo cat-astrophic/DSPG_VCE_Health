@@ -269,7 +269,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Percent Uninsured" = "per_uninsured",
                                                        "Dentist Ratio" = "dentist_ratio",
                                                        "Mental Health Provider Ratio" = "mental_health_provider_ratio",
-                                                       "Primary Care Physicians Ratio" = "primary_care_physicians_ratio")
+                                                       "Primary Care Physicians Ratio" = "primary_care_physicians_ratio",
+                                                       "Vaccination Rate" = "per_vaccinated",
+                                                       "Preventable Hospitalization Rate" = "preventable_hospitalization_rate")
                                                      ),
                                                      radioButtons(inputId = "yearSelect_access", label = "Select Year: ", 
                                                                   choices = c("2016","2017", "2018", "2019", "2020"), 
@@ -478,7 +480,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    )
                                    
                           )) ,
-                 inverse = T)
+                 inverse = T))
 
 
 # 3. Define server logic  ------------------------------------------------------------
