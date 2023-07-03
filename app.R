@@ -457,36 +457,15 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    p("", style = "padding-top:10px;"),
                                    fluidRow(style = "margin: 6px;", align = "justify",
                                             column(4,
-                                                   img(src = "data-acs.png", style = "display: inline; float: left;", width = "180px"),
-                                                   p(strong("American Community Survey"), "The American Community Survey (ACS) is an demographics survey conducted by the U.S Census Bureau. The ACS samples households to compile 1-year and 5-year datasets 
-                                      providing information on social and economic characteristics including employment, education, and income. This project utilizes ACS 2016/2020 5-year
-                                      estimates to obtain county- and census tract-level data to explore Goochland and Powhatan Counties' resident characteristics.")),
+                                                   img(src = "county_health_rankings.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                   p(strong("County Health Rankings & Roadmaps"), "The County Health Rankings & Raodmaps (CHR&R) a program of the University of Wisconsin Population Health Institute. 
+                                                   The CHR&R program provides data, evidence, guidance, and examples to build awareness of the multiple factors that influence health and support leaders in growing community power to improve health equity. This project utilizes CHR&R
+                                                    to obtain 2016/2020 county-level data to explore and visualize the Commonwealth's health characteristics.")),
                                             column(4,
-                                                   img(src = "goochland.jpg", style = "display: inline; float: left;", width = "150px"),
-                                                   p(strong("Goochland County Administrative Data"), "Goochland County provided us with parcel/property data which allowed us to gain a better understanding of the different land uses and parcellation
-                                            that has occured over a 5 year period (2018 - 2022). The team used this data to create visualizations, specifically focusing on the distribution and change in land use in the county.")),
-                                            column(4,
-                                                   img(src = "powhatan.jpg", style = "display: inline; float: left;", width = "150px"),
-                                                   p(strong("Powhatan County Administrative Data"), "Powhatan County provided us with parcel/property data which allowed us to gain a better understanding of the different land uses and parcellation
-                                            that has occured over a 8 year period (2014 - 2021). The team used this data to create visualizations, specifically focusing on the distribution and change in land use in the county.")),
-                                   ),
-                                   
-                                   fluidRow(style = "margin: 6px;", align = "justify",
-                                            column(4,
-                                                   img(src = "nass.jpg", style = "display: inline; float: left;", width = "130px"),
-                                                   p(strong("USDA National Agricultural Statistics Service"), "The National Agricultural Statistics Service (NASS) under the United States Department of Agriculture (USDA) provides statistics on a wide variety
-                                                    of agricultural topics. This project specifically relies on crop layer data to create maps and to conduct a statistical analysis on the probablity of land use conversion.")),
-                                            column(4,
-                                                   img(src = "ncss.jpg", style = "display: inline; float: left;", width = "150px"),
-                                                   p(strong("USDA National Cooperative Soil Survey"), "The National Cooperative Soil Survey (NCSS) under the USDA provides soil data which was used to generate soil quality maps for both counties. 
-                                            The data was also used for our statistical analysis to predict the occurrence of land use conversion.")),
-                                            column(4,
-                                                   img(src = "vdot_crop.png", style = "display: inline; float: left;", width = "180px"),
-                                                   p(strong("VDOT Traffic Data"), "The Virginia Department of Transportation (VDOT) is responsible for building, maintaining and operating the state's roads, bridges and tunnels. VDOT also conducts 
-                                          a program where traffic data are gathered from sensors in or along streets and highways and other sources.  This data includes estimates of the average number of vehicles that traveled each segment
-                                          of road and daily vehicle miles traveled for specific groups of facilities and vehicle types are calculated. This project utilizes VDOT data to create traffic volume and commute maps for both counties."))
-                                   )),
-                          
+                                                   img(src = "vce.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                   p(strong("Virginia Cooperative Extension Administrative Data"), "Virginia Cooperative Extension (VCE) provided us with office and agent data which allowed us to gain a better understanding of where Family Consumer Science
+                                                     agents operate. The team used this data to create visualizations, specifically focusing on the distribution of optimized agent territories across localities.")),
+                                            )),
                  ),
                  
                  
@@ -509,8 +488,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                           fluidRow(style = "margin-left: 100px; margin-right: 100px;",
                                    column(6, align = "center",
                                           h4(strong("DSPG Undergraduate Interns")),
-                                          img(src = "Sareth_Moy.jpg", style = "display: inline; border: 1px solid #C0C0C0;", width = "150px"),
-                                          img(src = "Vivian_Peregrino.jpg", style = "display: inline; border: 1px solid #C0C0C0;", width = "150px"),
+                                          img(src = "Sareth_Moy.jpg", style = "display: inline; border: 1px solid #C0C0C0;", width = "500px"),
+                                          img(src = "Vivian_Peregrino.jpg", style = "display: inline; border: 1px solid #C0C0C0;", width = "500px"),
                                           br(),
                                           p(a(href = 'https://www.linkedin.com/in/sarethmoy90/', 'Sareth Moy', target = '_blank'), "(Berea College, Undergraduate in Economics, minor in Mathematics);",
                                             br(), 
@@ -519,15 +498,15 @@ ui <- navbarPage(#title = "DSPG 2023",
                                             p("", style = "padding-top:10px;"),
                                           
                                           h4(strong("DSPG PhD Student Fellow")),
-                                          img(src = "Yang_Cheng.jpg", style = "display: inline; border: 1px solid #C0C0C0;", width = "150px"),
+                                          img(src = "Yang_Cheng.jpg", style = "display: inline; border: 1px solid #C0C0C0;", width = "500px"),
                                           br(),
                                           p(a(href = 'https://www.linkedin.com/in/yangcheng2019/', 'Yang Cheng', target = '_blank'), "(Virginia Tech, PhD Student Fellow in Agricultural Economics)"),
                                           p("", style = "padding-top:10px;")
                                    ),
                                    column(6, align = "center",
-                                          h4(strong("VT Faculty Member")),
-                                          img(src = "SusanChen.jpg", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "150px"),
-                                          img(src = "Micheal_Carey.jpg", style = "display: inline; border: 1px solid #C0C0C0;", width = "150px"),
+                                          h4(strong("VT Faculty Members")),
+                                          img(src = "SusanChen.jpg", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "500px"),
+                                          img(src = "Michael_Cary.JPG", style = "display: inline; border: 1px solid #C0C0C0;", width = "500px"),
                                           br(),
                                           p(a(href = "https://www.linkedin.com/in/susanchenja/", 'Dr. Susan Chen', target = '_blank'), "(Associate Professor of Agricultural and Applied Economics);",
                                             br(), 
@@ -536,6 +515,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                           p("", style = "padding-top:10px;"),
                                           
                                           h4(strong("Project Stakeholders")),
+                                          img(src = "Kathy_Hosig.jpg", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
                                           p(a(href = "https://vetmed.vt.edu/people/faculty/hosig-kathy.html", 'Kathy Hosig', target = '_blank'), "(Virginia Cooperative Extension)",
                                             br(), 
                                           #   a(href = 'https://goochland.ext.vt.edu/staff/Maxwell-Charlotte.html', 'Nichole Shuman', target = '_blank'), "(Virginia Cooperative Extension, Goochland County)."),
