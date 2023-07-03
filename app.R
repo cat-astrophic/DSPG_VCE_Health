@@ -69,14 +69,12 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # Load and preprocess the VCE agents location data
   agents_sf <- read.csv("./data/vce_agents.csv") %>% st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
   
-  # Prepare labels for varibles of interest
+  # Prepare labels for varibels of interest
   good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
                   "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
                   "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White",
                   "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses","Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
-  # Load the agent territory data
-  all_territories <- read.csv("./data/all_agent_solutions.csv")
-  with_new_agents <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
+  
   ### 1.3.2 Process the data---------------------------------------------------------------- 
   
   
@@ -147,9 +145,8 @@ mapping2 <- function(variable, year) {
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
-  
   #territory function
-  territory <- function(territory_type, Zscore_Type, variable_title) {
+territory <- function(territory_type, Zscore_Type, variable_title) {
     
     # Filter data for selected year and variable
     temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable, ]
@@ -209,6 +206,7 @@ mapping2 <- function(variable, year) {
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }  
+
 ## 1.5 Statistic analysis---------
   a <- "Statistics for per_low_birthweight"
   b <- "Statistics for second varible"
@@ -464,17 +462,42 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
+                                              
+                                              
                                      )
                             ),
                             ### 2.4.2 Subtab Results
                             tabPanel("Results",
                                      fluidRow(style = "margin: 6px;",
+                                              h1(strong("Results"), align = "center"),
+                                              p("", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 6px;",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
+                                              tabsetPanel(
+                                                tabPanel("Aggregate Z-score",
+                                                         # Content for the Aggregate Z-score tab goes here
+                                                ),
+                                                tabPanel("Food Insecurity Z-score",
+                                                         # Content for the z-score tab goes here
+                                                ),
+                                                tabPanel("Low Birthweight Z-score",
+                                                         # Content for the Z-score tab goes here
+                                                ),
+                                                tabPanel("Obesity Z-score",
+                                                         # Content for the Z-score tab goes here
+                                                ),
+                                                tabPanel("Physical Inactivity Z-score",
+                                                         # Content for the  Z-score tab goes here
+                                                )
+                                               
+                                              ),
+                                             
                                      )
-                            ),
+                            )
                  ),
+                            
                  
                  
                  ## 2.5 Tab Takeawayss --------------------------------------------
@@ -482,33 +505,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                           fluidRow(style = "margin: 6px;",
                                    h1(strong("Project Findings and Predictions"), align = "center"),
                                    p("", style = "padding-top:10px;"),
-                                   p("Given the rich agricultural histories of the two counties, we are interested in how agricultural land has changed over the last several years. 
-                                     This research uses quantitative tools to understand how some key natural and social factors affect the parcellation and conversion with administrative data and county-level geospatial data."),
+                                   p("findings on maps"),
                                    fluidRow(style = "margin: 6px;", align = "justify",
-                                            h4(strong("Goochland")),
-                                            p("In Goochland, agricultural land was converted to residential, mainly single-family residential urban, and suburban. 
-                                              There were also 5 parcels (about 671 acres) of large agricultural lands that have been parcellated into smaller agricultural plots."),
-                                            p("Parcellation is occurring predominantly in the southeast of Goochland County near Richmond, around the U.S. Routes I64, 250, and 288. This pattern might reflect the urban influence on the county. 
-                                              This pattern might also imply some correlation between parcellation and transportation. On the crop and land type map, those Routes are labeled as “Developed.” 
-                                              High traffic volumes can also be seen along those Routes."),
-                                            br(),
-                                            h4(strong("Powhatan")),
-                                            p("Large amounts of agricultural land were converted to 
-                                              residential-suburban uses during the decade in Powhatan (including recurrences). Parcellation among agricultural land 
-                                              is also noticeable, as 28 parcels (about 5,750 acres) of large agricultural lands have been parcellated
-                                              into smaller agricultural plots."),
-                                            p("Parcellation is occurring predominantly in the heart of Powhatan County, around the U.S. Routes 60 and 522. 
-                                              On the east end near Richmond, high parcellation rates are seen along the U.S. Routes 60 and 288 within 
-                                              the county and this might reflect the urban influence on the county. The high parcellation around 
-                                              those Routes might imply some correlation between parcellation and transportation. On the map of crop and land type, 
-                                              those Routes are labeled as “Developed”. High traffic volumes can also be seen along U.S. Routes 60 and 288. Hence the 
-                                              correlation between parcellation and those Routes is also a correlation between parcellation and developed areas (traffic volumes)."),
-                                            p("There is no obvious sign that poor soil quality can be a driver of land conversion out of agriculture from the maps."),
-                                            p("In addition to the univariate spatial analysis, we also conducted a statistical analysis that examined the association between land conversion out of 
-                                              agriculture and the characteristics of the land parcel, which include parcel acreage, whether the owner lives in the county, distance to the city of Richmond, the traffic volume and the soil class. 
-                                              The analysis was conducted for Powhatan County only due to data availability. The findings from a logistic regression model show that the probability of converting out of agriculture: 
-                                              decreases as the size of the parcel increases, decreases if the land owner lives in Powhatan, decreases with distance from Richmond. The association with traffic volume shows a U shaped impact 
-                                              on the probability of conversion. Soil quality is not significantly associated with land conversion. Note these are not causal effects. They are associations."),
+                                            h4(strong("VCE")),
+                                            
                                    ), 
                                    
                                    
