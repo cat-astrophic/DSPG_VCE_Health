@@ -62,8 +62,8 @@ library(shinycssloaders)
 
 ## 1.3 Load the data----------------------------------------------------------------
 ### 1.3.1 Load the original data----------------------------------------------------------------
-#Reading in map 
 
+#Reading in map 
 va.counties <- readRDS(file = "./data/va.counties.Rdata")
 va.counties$GEOID <- as.integer(va.counties$GEOID)
 va.counties$NAMELSAD <- str_to_title(va.counties$NAMELSAD )
@@ -72,6 +72,7 @@ va.counties$Lat <- as.double(va.counties$Lat)
 colnames(va.counties)[17] <- "Long"
 va.counties$Long <- as.double(va.counties$Long)
 us.states <- readRDS(file= "./data/us.states.RData")
+
 #County Health Rankings 2023 Data
 all_var_path <- "./data/final_variables.csv"
 all_var_df <- read.csv(paste(all_var_path, sep = ''))
@@ -133,12 +134,8 @@ mapping <- function(variable, year) {
     
     ggtitle(paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")) +
     
-    theme(panel.grid.major = element_line(color = gray(0.5), 
-                                          
-                                          linetype = "dashed", size = 0.5),
-          
-          panel.background = element_rect(fill = "azure1")) 
-  
+    theme(panel.grid.major = element_line(color = gray(0.5), linetype = "dashed", 
+    size = 0.5), panel.background = element_rect(fill = "azure1")) 
 }
 
 # 2. Define UI for application ------------------------------------------------------------
