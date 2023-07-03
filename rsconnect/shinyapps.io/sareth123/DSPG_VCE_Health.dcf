@@ -1,0 +1,13 @@
+name: DSPG_VCE_Health
+title: DSPG_VCE_Health
+username:
+account: sareth123
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9400900
+bundleId: 7414545
+url: https://sareth123.shinyapps.io/DSPG_VCE_Health/
+when: 1688390853.34238
+lastSyncTime: 1688390853.34239
+asMultiple: FALSE
+asStatic: FALSE

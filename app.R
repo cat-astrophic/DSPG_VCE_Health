@@ -143,7 +143,9 @@ mapping2 <- function(variable, year) {
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
-
+## 1.5 Statistic analysis---------
+  a <- "Statistics for per_low_birthweight"
+  b <- "Statistics for second varible"
 
 # 2. Define UI for application ------------------------------------------------------------
 ui <- navbarPage(#title = "DSPG 2023",
@@ -218,6 +220,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               align = "justify",
                                      )
                             ),
+                         
 
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
                             tabPanel("Health Outcomes",
@@ -237,7 +240,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Low Birthweight" = "per_low_birthweight",
                                                        "Life Expectancy" = "life_expectancy",
                                                        "Life Expectancy Gap" = "life_expectancy_gap",
-                                                       "Life Expectancy Black" = "life_expectancy_black")
+                                                       "Life Expectancy Black" = "life_expectancy_black",
+                                                       "Life Expectancy White" = "life_expectancy_white")
                                                      ),
                                                      radioButtons(inputId = "yearSelect_outcomes", label = "Select Year: ",
                                                                   choices = c("2017", "2018", "2019", "2020"),
@@ -254,30 +258,26 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
-                                              column(4, 
-                                                     h4(strong("County Background")),
-                                                     p(""),
-                                                     
+                                              column(3, 
+                                                    
                                                      h4(strong("Summary Statistics")),
+                                                     textOutput("HealthAccessVariableDefinition")
                                                     
                                               ) ,
-                                              column(8, 
-                                                     h4(strong("Sociodemographics")),
-                                                     selectInput("powhatan_soc", "Select Variable:", width = "100%", choices = c(
-                                                       "Age Distribution of Population" = "page",
-                                                       "Employment by Industry" = "pind",
-                                                       "Income Distribution" = "pinc",
-                                                       "Median Earnings By Educational Attainment (Age > 25 years)" = "pedu")
+                                              column(9, 
+                                                       selectInput("Health_Access", "Select Variable:", width = "50%", choices = c(
+                                                       "Percent Uninsured" = "per_uninsured",
+                                                       "Dentist Ratio" = "dentist_ratio",
+                                                       "Mental Health Provider Ratio" = "mental_health_provider_ratio",
+                                                       "Primary Care Physicians Ratio" = "primary_care_physicians_ratio")
                                                      ),
-                                                     radioButtons(inputId = "yearSelect_psoc", label = "Select Year: ", 
-                                                                  choices = c("2017", "2018", "2019", "2020"), 
+                                                     radioButtons(inputId = "yearSelect_access", label = "Select Year: ", 
+                                                                  choices = c("2016","2017", "2018", "2019", "2020"), 
                                                                   selected = "2020", inline = TRUE),
-                                                     plotOutput("psoc", height = "500px"),
-                                                     h4(strong("Visualization Summaries")),
-                                                    )),
-                                     column(12, 
-                                            h4("References: "), 
-                                            p("", style = "padding-top:10px;"))  , 
+                                                     withSpinner(leafletOutput("healthaccess", height = "500px")),
+                                                    )
+                                              )
+                                     
                             ), 
                             ### 2.2.3 Subtab Economic Stability--------------------------------------
                             tabPanel("Economic Stability", 
@@ -289,26 +289,59 @@ ui <- navbarPage(#title = "DSPG 2023",
                             
                                      )
                             ),
+                            ### 2.2.4 Subatb Health Behaviors-------
+                            tabPanel("Health Behaviors", 
+                                     fluidRow(style = "margin: 6px;",
+                                              h1(strong("Health Behaviors"), align = "center"),
+                                              p("", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 6px;",
+                                              align = "justify",
+                                              
+                                     )
+                            ),
+                            ### 2.2.5 Subtab Neighborhood and Built Envr------
+                            tabPanel("Neighborhood and Built Environment", 
+                                     fluidRow(style = "margin: 6px;",
+                                              h1(strong("Neighborhood and Built Environment"), align = "center"),
+                                              p("", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 6px;",
+                                              align = "justify",
+                                              
+                                     )
+                            ),
+                            
+                            ### 2.2.6 Subatb Demographics
+                            tabPanel("Demographics", 
+                                     fluidRow(style = "margin: 6px;",
+                                              h1(strong("Demographics"), align = "center"),
+                                              p("", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 6px;",
+                                              align = "justify",
+                                              
+                                     )
+                            ),
+                            
                             
                  ),
                  ## 2.4 Tab Agent Optimization Programming------
-                 tabPanel("Mathematical Programming",
-                          fluidRow(style = "margin: 6px;",
-                                   h1(strong("Optimization Program"), align = "center"),
-                                   p("", style = "padding-top:10px;"),
-                                   fluidRow(style = "margin: 6px;", align = "justify"),
-                          )
+                 navbarMenu("Mathematical Programming" ,
+                            ### 2.4.1 Subtab Overview -----
+                            tabPanel("Programming Overview",
+                                     fluidRow(style = "margin: 6px;",
+                                              p("", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 6px;",
+                                              align = "justify",
+                                     )
+                            ),
+                            ### 2.4.2 Subtab Results
+                            tabPanel("Results",
+                                     fluidRow(style = "margin: 6px;",
+                                              p("", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 6px;",
+                                              align = "justify",
+                                     )
+                            ),
                  ),
-                 tabPanel("Results", 
-                          fluidRow(style = "margin: 6px;",
-                                   h1(strong("Economic Stability Variables"), align = "center"),
-                                   p("", style = "padding-top:10px;")),
-                          fluidRow(style = "margin: 6px;",
-                                   align = "justify",
-                                   
-                          )
-                 ),
-                 
                  
                  
                  ## 2.5 Tab Takeawayss --------------------------------------------
@@ -464,31 +497,52 @@ server <- function(input, output) {
     as.integer(input$yearSelect_outcomes)
   })
   
-  # # Update the choices for cyl input with labels
-  # observe({
-  #   updateSelectInput(session, "cyl", choices = choices_cyl, selected = input$cyl, label = names(choices_cyl))
-  # })
-  
-  # output$outcomes <- renderPlotly({
-  #  mapping(temp_outcome(), temp_year())
-  # })
   output$outcomes <- renderLeaflet({
    mapping2(temp_outcome(), temp_year())
   })
   output$VariableDefinition <- renderText({
     if (input$Health_Outcomes == "per_low_birthweight") {
-      "Statistics for per_low_birthweight"
+      a
     } else if (input$Health_Outcomes == "life_expectancy") {
-      "Statistics for life_expectancy"
+      b
     } else if (input$Health_Outcomes == "life_expectancy_gap") {
       "Statistics for life_expectancy_gap"
     } else if (input$Health_Outcomes == "life_expectancy_black") {
       "Statistics for life_expectancy_black"
+    } else if (input$Health_Outcomes == "life_expectancy_white") {
+      "Statistics for life_expectancy_white"
+    } else {
+      "Please select a health outcome."
+    } 
+  })
+  
+  ## 3.2 Healthcare Access -----
+  #create a rective expression for healthcare access variables
+  temp_healthaccess <- reactive({
+    input$Health_Access
+  })
+  temp_healthaccessyear <- reactive({
+    as.integer(input$yearSelect_access)
+  })
+  
+  output$healthaccess <- renderLeaflet({
+    mapping2(temp_healthaccess(), temp_healthaccessyear())
+  })
+  output$HealthAccessVariableDefinition <- renderText({
+    if (input$Health_Access == "per_uninsured") {
+      "stats for unsinsured"
+    } else if (input$Health_Access == "dentist_ratio") {
+      "stats for "
+    } else if (input$Health_Access == "mental_health_provider_ratio") {
+      "Statistics for "
+    } else if (input$Health_Access == "primary_care_physicians_ratio") {
+      "Statistics for"
+      
     } else {
       "Please select a health outcome."
     } 
   }) 
-     
+  
 }
 
 # 4. Run the application-------------------------------------------------------------------
