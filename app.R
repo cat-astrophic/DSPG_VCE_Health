@@ -143,8 +143,68 @@ mapping2 <- function(variable, year) {
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
-  
-  
+  #territory function
+territory <- function(territory_type, Zscore_Type, variable_title) {
+    
+    # Filter data for selected year and variable
+    temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable, ]
+    # 
+    # # Join variable data with county geometry data
+    # var.counties <- left_join(va.counties, temp, by = 'GEOID')
+    # 
+    # # Identify the index of the selected variable
+    # idx <- which(unique(all_var_df$Variable) == variable)
+    
+    # Create a color palette function based on the "Value" column
+    pal <- colorNumeric(palette = "viridis", domain = var.counties$Value)
+    
+    # Create labels for counties
+    county_labels <- sprintf(
+      "<strong>%s</strong><br/>%s: %g", 
+      all_territories$Agen, 
+      good_names[idx], 
+      var.counties$Value
+    ) %>% lapply(htmltools::HTML)
+    
+    # Create labels for agents
+    agent_labels <- sprintf(
+      "<strong>Agent Site</strong><br/>Job Department:</strong><br/>Agent Contact Info: %s", 
+      all_territories$`Job Dept`,
+      all_territories$`Employee Name`,
+      all_territories$`VT Email`
+    ) %>% lapply(htmltools::HTML)
+    
+    # Wrap legend title if too long
+    # spaces <- gregexpr("\\s", good_names[idx])[[1]]
+    # middle_space <- spaces[length(spaces) %/% 2 + 1]
+    # legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
+    # 
+    # Create title for the map
+    territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+    
+    # Create leaflet map
+    leaflet(data = all_territories) %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
+      addPolygons(fillColor = ~pal(Value), 
+                  color = "#BDBDC3", 
+                  weight = 1, 
+                  smoothFactor = 0.2,
+                  opacity = 1.0, 
+                  fillOpacity = 0.6,
+                  highlightOptions = highlightOptions(color = "white", weight = 2,
+                                                      bringToFront = TRUE),
+                  label = county_labels, 
+                  labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
+                                              textsize = "15px",
+                                              direction = "auto")) %>%
+      addAwesomeMarkers(data = with_new_agents, icon=awesomeIcons(icon='cloud', markerColor = with_new_agents$NewAgent, iconColor = 'white'),
+                        label = agent_labels, 
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
+  }  
+
 ## 1.5 Statistic analysis---------
   a <- "Statistics for per_low_birthweight"
   b <- "Statistics for second varible"
