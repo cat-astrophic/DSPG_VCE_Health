@@ -267,11 +267,16 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(9, 
                                                        selectInput("Health_Access", "Select Variable:", width = "50%", choices = c(
                                                        "Percent Uninsured" = "per_uninsured",
+                                                       "Aults without Insurance" = "per_uninsured_adults",
+                                                       "Children without Insurance" = "per_uninsured_children",
                                                        "Dentist Ratio" = "dentist_ratio",
                                                        "Mental Health Provider Ratio" = "mental_health_provider_ratio",
                                                        "Primary Care Physicians Ratio" = "primary_care_physicians_ratio",
+                                                       "Other Primary Care Provider Ratio" = "other_primary_care_provider_ratio",
                                                        "Vaccination Rate" = "per_vaccinated",
-                                                       "Preventable Hospitalization Rate" = "preventable_hospitalization_rate")
+                                                       "Preventable Hospitalization Rate" = "preventable_hospitalization_rate",
+                                                       "Annual Mammograms" = "per_with_annual_mammogram"
+                                                       )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_access", label = "Select Year: ", 
                                                                   choices = c("2016","2017", "2018", "2019", "2020"), 
@@ -288,6 +293,26 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
+                                              column(3, 
+                                                     
+                                                     h4(strong("Summary Statistics")),
+                                                     textOutput("EconomicStabilityVariableDefinition")
+                                                     
+                                              ) ,
+                                              column(9, 
+                                                     selectInput("econ_stab", "Select Variable:", width = "50%", choices = c(
+                                                       "Unemployment Rate" = "per_unemployed",
+                                                       "Children in Poverty" = "per_children_in_poverty",
+                                                       "Food Insecurity" = "per_food_insecure",
+                                                       "Median Household Income" = "median_household_income"
+                                                     )
+                                                     ),
+                                                     radioButtons(inputId = "yearSelect_econ", label = "Select Year: ", 
+                                                                  choices = c("2016","2017", "2018", "2019", "2020"), 
+                                                                  selected = "2020", inline = TRUE),
+                                                     withSpinner(leafletOutput("econstability", height = "500px")),
+                                              )
+                                     
                             
                                      )
                             ),
@@ -298,6 +323,25 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
+                                              column(3, 
+                                                     
+                                                     h4(strong("Summary Statistics")),
+                                                     textOutput("HealthBehaviorsVariableDefinition")
+                                                     
+                                              ) ,
+                                              column(9, 
+                                                     selectInput("health_behaviors", "Select Variable:", width = "50%", choices = c(
+                                                       "Smoking Rate" = "per_adults_reporting_currently_smoking",
+                                                       "Excessive Drinking" = "per_excessive_drinking",
+                                                       "Driving Deaths Involving Alcohol" = "per_driving_deaths_with_alcohol_involvement",
+                                                       "Physical Inactivity" = "per_physically_inactive"
+                                                     )
+                                                     ),
+                                                     radioButtons(inputId = "yearSelect_healthbehaviors", label = "Select Year: ", 
+                                                                  choices = c("2016","2017", "2018", "2019", "2020"), 
+                                                                  selected = "2020", inline = TRUE),
+                                                     withSpinner(leafletOutput("healthbehaviors", height = "500px")),
+                                              )
                                               
                                      )
                             ),
@@ -308,19 +352,40 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
+                                              column(3, 
+                                                     
+                                                     h4(strong("Summary Statistics")),
+                                                     textOutput("EnvrVariableDefinition")
+                                                     
+                                              ) ,
+                                              column(9, 
+                                                     selectInput("neighbor_envr", "Select Variable:", width = "50%", choices = c(
+                                                       "Physical Distress" = "per_physical_distress",
+                                                       "Mental Distress" = "per_mental_distress",
+                                                       "Access to Exercise Opportunity" = "per_access_to_exercise_opportunities",
+                                                       "Suicide Rate" = "suicide_rate"
+                                                     )
+                                                     ),
+                                                     radioButtons(inputId = "yearSelect_envr", label = "Select Year: ", 
+                                                                  choices = c("2016","2017", "2018", "2019", "2020"), 
+                                                                  selected = "2020", inline = TRUE),
+                                                     withSpinner(leafletOutput("envr", height = "500px")),
                                               
                                      )
+                                    
+                                 )
                             ),
                             
-                            ### 2.2.6 Subatb Demographics
+                            ### 2.2.6 Subtab Demographics-----
                             tabPanel("Demographics", 
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Demographics"), align = "center"),
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
-                                              
-                                     )
+                                             
+                                              )
+                                                                           
                             ),
                             
                             
@@ -544,7 +609,81 @@ server <- function(input, output) {
       "Please select a health outcome."
     } 
   }) 
+  ## 3.3 Economic Stability ----
+  temp_econ <- reactive({
+    input$econ_stab
+  })
+  temp_econyear <- reactive({
+    as.integer(input$yearSelect_econ)
+  })
   
+  output$econstability <- renderLeaflet({
+    mapping2(temp_econ(), temp_econyear())
+  })
+  output$EconomicStabilityVariableDefinition <- renderText({
+    if (input$econ_stab == "per_unemployed") {
+      "stats for unsinsured"
+    } else if (input$econ_stab == "per_children_in_poverty") {
+      "stats for "
+    } else if (input$econ_stab == "per_food_insecure") {
+      "Statistics for "
+    } else if (input$econ_stab == "median_household_income") {
+      "Statistics for"
+      
+    } else {
+      "Please select a health outcome."
+    } 
+  }) 
+  ## 3.4 Health Behaviors-----
+  temp_healthbehaviors <- reactive({
+    input$health_behaviors
+  })
+  temp_behavioryear <- reactive({
+    as.integer(input$yearSelect_healthbehaviors)
+  })
+  
+  output$healthbehaviors <- renderLeaflet({
+    mapping2(temp_healthbehaviors(), temp_behavioryear())
+  })
+  output$HealthBehaviorsVariableDefinition <- renderText({
+    if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
+      "stats for "
+    } else if (input$health_behaviors == "per_excessive_drinking") {
+      "stats for "
+    } else if (input$health_behaviors == "per_driving_deaths_with_alcohol_involvement") {
+      "Statistics for "
+    } else if (input$health_behaviors == "per_physically_inactive") {
+      "Statistics for"
+      
+    } else {
+      "Please select a health outcome."
+    } 
+  }) 
+  ## 3.5 Neighborhood and Built Environment------
+  temp_envr <- reactive({
+    input$neighbor_envr
+  })
+  temp_envryear <- reactive({
+    as.integer(input$yearSelect_envr)
+  })
+  
+  output$envr <- renderLeaflet({
+    mapping2(temp_envr(), temp_envryear())
+  })
+  output$EnvrVariableDefinition <- renderText({
+    if (input$neighbor_envr == "per_physical_distress") {
+      "stats for "
+    } else if (input$neighbor_envr == "per_mental_distress") {
+      "stats for "
+    } else if (input$neighbor_envr == "per_access_to_exercise_opportunities") {
+      "Statistics for "
+    } else if (input$neighbor_envr == "suicide_rate") {
+      "Statistics for"
+    } else {
+      "Please select a health outcome."
+    } 
+  }) 
+ 
 }
 
 # 4. Run the application-------------------------------------------------------------------
