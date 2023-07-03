@@ -183,7 +183,7 @@ mapping2 <- function(variable, year) {
     # legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
     # 
     # Create title for the map
-    map_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+    territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     # Create leaflet map
     leaflet(data = all_territories) %>%
@@ -205,7 +205,7 @@ mapping2 <- function(variable, year) {
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }  
 ## 1.5 Statistic analysis---------
   a <- "Statistics for per_low_birthweight"
