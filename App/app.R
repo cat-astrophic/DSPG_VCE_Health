@@ -490,12 +490,33 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
-                                             
+                                              column(3, 
+                                                     
+                                                     h4(strong("Summary Statistics")),
+                                                     textOutput("DemographicsDefinition")
+                                                     
+                                              ) ,
+                                              column(9, 
+                                                     selectInput("demographics", "Select Variable:", width = "50%", choices = c(
+                                                       "Less 18 years old" = "per_less_than_18_years_of_age",
+                                                       "More than 65 years old" = "per_65_and_over",
+                                                       "Black" = "per_black",
+                                                       "American Indian or Alaska Native" = "per_american_indian_or_alaska_native",
+                                                       "Asian" = "per_asian",
+                                                       "Hispanic" = "per_hispanic",
+                                                       "Nonhispanic White" = "per_nonhispanic_white"
+                                                     )
+                                                     ),
+                                                     radioButtons(inputId = "yearSelect_demo", label = "Select Year: ", 
+                                                                  choices = c("2016","2017", "2018", "2019", "2020"), 
+                                                                  selected = "2020", inline = TRUE),
+                                                     withSpinner(leafletOutput("demographicsvar", height = "500px")),
                                               )
                                                                            
-                            ),
+                            )
                             
                             
+                 ),
                  ),
                  ## 2.4 Tab Agent Optimization Programming------
                  navbarMenu("Mathematical Programming" ,
@@ -505,7 +526,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
-                                              
+                                              h1(strong("Mathematical Model")),
+                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
+                                              p("The obejective funtion of this model is to maximize the population weighted need of each counties. We give the function four different constraints."),
                                               
                                      )
                             ),
@@ -767,6 +790,32 @@ server <- function(input, output) {
     } else if (input$neighbor_envr == "per_access_to_exercise_opportunities") {
       "Statistics for "
     } else if (input$neighbor_envr == "suicide_rate") {
+      "Statistics for"
+    } else {
+      "Please select a health outcome."
+    } 
+  }) 
+  ## Demographics-----
+  temp_demo <- reactive({
+    input$demographics
+  })
+  temp_demoyear <- reactive({
+    as.integer(input$yearSelect_demo)
+  })
+  
+  output$demographicsvar <- renderLeaflet({
+    mapping2( temp_demo(), temp_demoyear())
+  })
+  output$demographicsDefinition <- renderText({
+    if (input$demographics == "per_less_than_18_years_of_age") {
+      "stats for "
+    } else if (input$demographics == "per_65_and_over") {
+      "stats for "
+    } else if (input$demographics == "per_hispanic") {
+      "Statistics for "
+    } else if (input$demographics == "per_asian") {
+      "Statistics for"
+    } else if (input$demographics == "per_nonhispanic_white") {
       "Statistics for"
     } else {
       "Please select a health outcome."
