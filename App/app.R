@@ -526,7 +526,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
-                                              
+                                              h1(strong("Mathematical Model")),
+                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
+                                              p("The obejective funtion of this model is to maximize the population weighted need of each counties. We give the function four different constraints."),
                                               
                                      )
                             ),
