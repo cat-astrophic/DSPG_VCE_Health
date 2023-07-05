@@ -293,23 +293,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                           
                                           p("This dashboard compiles our findings and allows stakeholders and other users to explore the information interactively."),
                                    ),
-                                   column(4,
-                                          h2(strong("Agents Opitmization")),
-                                          p(strong("Overview")),
-                                          p("Our goal is to try to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents (there are well over 100 cities and counties in Virginia but only 34 FCS agents), we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
-                                          p(strong("Workflow:")),
-                                          tags$li("Identify where FCS Agents are"),
-                                          tags$li("Identify health outcomes that FCS agents can affect"),
-                                          tags$li("Create a health index: z-score aggregation"),
-                                          tags$li("Determining accessibility definition"),
-                                          tags$li("Solving mathematical programs"),
-                                          tags$li("Mapping optimized territories"),
-                                          p(""),
-                                        
-                                          br(),
-                                          img(src='vce.jpg'),
-                
-                                   )
+                                   
                           ),
                           fluidRow(align = "center",
                                    p(tags$small(em('Last updated: August 2023')))
@@ -528,11 +512,28 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               align = "justify",
                                               h1(strong("Mathematical Model")),
                                               img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
-                                              p("The obejective funtion of this model is to maximize the population weighted need of each counties. We give the function four different constraints."),
+                                              p("The objective funtion of this model is to maximize the population weighted need of each counties. We give the function four different constraints."),
                                               
+                                     ),
+                                     column(4,
+                                            h1(strong("Agents Opitmization")),
+                                            p(strong("Overview")),
+                                            p("Our goal is to try to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents (there are well over 100 cities and counties in Virginia but only 34 FCS agents), we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
+                                            p(strong("Workflow:")),
+                                            tags$li("Identify where FCS Agents are"),
+                                            tags$li("Identify health outcomes that FCS agents can affect"),
+                                            tags$li("Create a health index: z-score aggregation"),
+                                            tags$li("Determining accessibility definition"),
+                                            tags$li("Solving mathematical programs"),
+                                            tags$li("Mapping optimized territories"),
+                                            p(""),
+                                            
+                                            br(),
+                                            
+                                            
                                      )
                             ),
-                            ### 2.4.2 Subtab Results
+                            ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Results"), align = "center"),
