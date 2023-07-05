@@ -1,0 +1,134 @@
+Agent,NAMELSAD,new_agent,territory_type,zscore_type
+Albemarle,Albemarle County,0,one,aggregate
+Albemarle,Charlottesville City,0,one,aggregate
+Albemarle,Fluvanna County,0,one,aggregate
+Albemarle,Nelson County,0,one,aggregate
+Albemarle,Waynesboro City,0,one,aggregate
+Amelia,Amelia County,0,one,aggregate
+Amelia,Cumberland County,0,one,aggregate
+Amelia,Nottoway County,0,one,aggregate
+Amelia,Prince Edward County,0,one,aggregate
+Amherst,Amherst County,0,one,aggregate
+Amherst,Buckingham County,0,one,aggregate
+Arlington,Alexandria City,0,one,aggregate
+Arlington,Arlington County,0,one,aggregate
+Bedford,Bedford County,0,one,aggregate
+Chesapeake City,Chesapeake City,0,one,aggregate
+Chesapeake City,Portsmouth City,0,one,aggregate
+Chesapeake City,Suffolk City,0,one,aggregate
+Fairfax,Fairfax City,0,one,aggregate
+Fairfax,Fairfax County,0,one,aggregate
+Fairfax,Falls Church City,0,one,aggregate
+Fairfax,Manassas City,0,one,aggregate
+Fairfax,Manassas Park City,0,one,aggregate
+Fairfax,Prince William County,0,one,aggregate
+Floyd,Floyd County,0,one,aggregate
+Floyd,Montgomery County,0,one,aggregate
+Franklin,Franklin County,0,one,aggregate
+Gloucester,Gloucester County,0,one,aggregate
+Gloucester,King And Queen County,0,one,aggregate
+Gloucester,Mathews County,0,one,aggregate
+Gloucester,Middlesex County,0,one,aggregate
+Greensville,Emporia City,0,one,aggregate
+Greensville,Franklin City,0,one,aggregate
+Greensville,Greensville County,0,one,aggregate
+Greensville,Southampton County,0,one,aggregate
+Greensville,Sussex County,0,one,aggregate
+Henrico,Hanover County,0,one,aggregate
+King George,Caroline County,0,one,aggregate
+King George,Essex County,0,one,aggregate
+King George,King George County,0,one,aggregate
+King George,Westmoreland County,0,one,aggregate
+Lancaster,Lancaster County,0,one,aggregate
+Lancaster,Northumberland County,0,one,aggregate
+Lancaster,Richmond County,0,one,aggregate
+Lee,Lee County,0,one,aggregate
+Lee,Norton City,0,one,aggregate
+Lee,Scott County,0,one,aggregate
+Lee,Wise County,0,one,aggregate
+Loudoun,Loudoun County,0,one,aggregate
+Louisa,Louisa County,0,one,aggregate
+Lynchburg City,Appomattox County,0,one,aggregate
+Lynchburg City,Campbell County,0,one,aggregate
+Lynchburg City,Lynchburg City,0,one,aggregate
+Mecklenburg,Brunswick County,0,one,aggregate
+Mecklenburg,Charlotte County,0,one,aggregate
+Mecklenburg,Lunenburg County,0,one,aggregate
+Mecklenburg,Mecklenburg County,0,one,aggregate
+Newport News City,Hampton City,0,one,aggregate
+Newport News City,Isle Of Wight County,0,one,aggregate
+Newport News City,Newport News City,0,one,aggregate
+Newport News City,Poquoson City,0,one,aggregate
+Newport News City North,Charles City County,0,one,aggregate
+Newport News City North,James City County,0,one,aggregate
+Newport News City North,New Kent County,0,one,aggregate
+Newport News City North,Williamsburg City,0,one,aggregate
+Newport News City North,York County,0,one,aggregate
+Orange,Culpeper County,0,one,aggregate
+Orange,Greene County,0,one,aggregate
+Orange,Madison County,0,one,aggregate
+Orange,Orange County,0,one,aggregate
+Patrick,Henry County,0,one,aggregate
+Patrick,Martinsville City,0,one,aggregate
+Patrick,Patrick County,0,one,aggregate
+Petersburg City,Dinwiddie County,0,one,aggregate
+Petersburg City,Hopewell City,0,one,aggregate
+Petersburg City,Petersburg City,0,one,aggregate
+Petersburg City,Prince George County,0,one,aggregate
+Petersburg City,Surry County,0,one,aggregate
+Pittsylvania,Danville City,0,one,aggregate
+Pittsylvania,Halifax County,0,one,aggregate
+Pittsylvania,Pittsylvania County,0,one,aggregate
+Pulaski,Bland County,0,one,aggregate
+Pulaski,Carroll County,0,one,aggregate
+Pulaski,Galax City,0,one,aggregate
+Pulaski,Giles County,0,one,aggregate
+Pulaski,Grayson County,0,one,aggregate
+Pulaski,Pulaski County,0,one,aggregate
+Pulaski,Radford City,0,one,aggregate
+Pulaski,Wythe County,0,one,aggregate
+Richmond City,Chesterfield County,0,one,aggregate
+Richmond City,Colonial Heights City,0,one,aggregate
+Richmond City,Henrico County,0,one,aggregate
+Richmond City,King William County,0,one,aggregate
+Richmond City,Richmond City,0,one,aggregate
+Roanoke,Alleghany County,0,one,aggregate
+Roanoke,Botetourt County,0,one,aggregate
+Roanoke,Covington City,0,one,aggregate
+Roanoke,Craig County,0,one,aggregate
+Roanoke,Roanoke City,0,one,aggregate
+Roanoke,Roanoke County,0,one,aggregate
+Roanoke,Salem City,0,one,aggregate
+Rockbridge,Bath County,0,one,aggregate
+Rockbridge,Buena Vista City,0,one,aggregate
+Rockbridge,Lexington City,0,one,aggregate
+Rockbridge,Rockbridge County,0,one,aggregate
+Rockingham,Augusta County,0,one,aggregate
+Rockingham,Harrisonburg City,0,one,aggregate
+Rockingham,Highland County,0,one,aggregate
+Rockingham,Rockingham County,0,one,aggregate
+Rockingham,Staunton City,0,one,aggregate
+Spotsylvania,Fredericksburg City,0,one,aggregate
+Spotsylvania,Spotsylvania County,0,one,aggregate
+Spotsylvania,Stafford County,0,one,aggregate
+Virginia Beach City,Virginia Beach City,0,one,aggregate
+Virginia Beach City North,Accomack County,0,one,aggregate
+Virginia Beach City North,Norfolk City,0,one,aggregate
+Virginia Beach City North,Northampton County,0,one,aggregate
+Warren,Fauquier County,0,one,aggregate
+Warren,Page County,0,one,aggregate
+Warren,Rappahannock County,0,one,aggregate
+Warren,Shenandoah County,0,one,aggregate
+Warren,Warren County,0,one,aggregate
+Washington,Bristol City,0,one,aggregate
+Washington,Buchanan County,0,one,aggregate
+Washington,Dickenson County,0,one,aggregate
+Washington,Russell County,0,one,aggregate
+Washington,Smyth County,0,one,aggregate
+Washington,Tazewell County,0,one,aggregate
+Washington,Washington County,0,one,aggregate
+Northeast District Office,Goochland County,0,one,aggregate
+Northeast District Office,Powhatan County,0,one,aggregate
+Frederick,Clarke County,0,one,aggregate
+Frederick,Frederick County,0,one,aggregate
+Frederick,Winchester City,0,one,aggregate
