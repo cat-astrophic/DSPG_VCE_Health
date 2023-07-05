@@ -151,17 +151,17 @@ mapping2 <- function(variable, year) {
 }
   #territory function
 # territory <- function(territory_type, Zscore_Type, variable_title) {
-# 
-#     # Filter data for selected year and variable
-#     temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable_title, ]
-#     #
-#     # # Join variable data with county geometry data
-#     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
-#     #
-#     # # Identify the index of the selected variable
-#     # idx <- which(unique(all_var_df$Variable) == variable)
-# 
-#     # Create a color palette function based on the "Value" column
+
+    # Filter data for selected year and variable
+    # temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable_title, ]
+    #
+    # # Join variable data with county geometry data
+    # territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
+    #
+    # # Identify the index of the selected variable
+    # idx <- which(unique(all_var_df$Variable) == variable)
+
+    # Create a color palette function based on the "Value" column
   # agent_colors <- c(
   #                     "Albemarle" = "lightgoldenrod" ,
   #                     "Amelia" = "red",
