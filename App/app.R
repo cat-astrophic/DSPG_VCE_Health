@@ -75,7 +75,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White",
                   "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses","Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
   # territory data
-  all_territories <- read.csv("./data/all_agent_solutions.csv")
+  all_territories <- read.csv("./data/agent_solutions.csv")
   
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
@@ -153,6 +153,7 @@ mapping2 <- function(variable, year) {
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   #territory function
+<<<<<<< HEAD
   territory <- function(territory_type, zscore_type, variable_title) {
     
     
@@ -259,6 +260,109 @@ mapping2 <- function(variable, year) {
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
+=======
+# territory <- function(territory_type, Zscore_Type, variable_title) {
+
+    # Filter data for selected year and variable
+    # temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable_title, ]
+    #
+    # # Join variable data with county geometry data
+    # territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
+    #
+    # # Identify the index of the selected variable
+    # idx <- which(unique(all_var_df$Variable) == variable)
+
+    # Create a color palette function based on the "Value" column
+  # agent_colors <- c(
+  #                     "Albemarle" = "lightgoldenrod" ,
+  #                     "Amelia" = "red",
+  #                     "Amherst"= "forestgreen",
+  #                     "Arlington" = "navy",
+  #                     "Bedford" = "plum4",
+  #                     "Chesapeake City" =  "khaki",
+  #                     "Fairfax" = "brown2",
+  #                     "Floyd"=  "yellow",
+  #                     "Franklin" = "salmon",
+  #                     "Gloucester" = "lightgrey",
+  #                     "Greensville" = "darkolivegreen",
+  #                     "Henrico"= "chartreuse4",
+  #                     "King George" = "gold",
+  #                     "Lancaster" = "lavenderblush",
+  #                     "Lee" = "turquoise",
+  #                     "Loudoun" = "mediumvioletred",
+  #                     "Louisa" =  "mistyrose",
+  #                     "Lynchburg City" = "palegreen",
+  #                     "Mecklenburg" = "hotpink4",
+  #                     "Newport News City North"  = "purple",
+  #                     "Newport News City" = "lightblue",
+  #                     "Northeast District Office" = "orange",
+  #                     "Orange"= "darkseagreen2",
+  #                     "Patrick"=  "lightsteelblue",
+  #                     "Petersburg City"= "magenta" ,
+  #                     "Pittsylvania" =  "slategray",
+  #                     "Pulaski"= "lightcyan",
+  #                     "Richmond City" = "darkgrey",
+  #                     "Roanoke" = "blue",
+  #                     "Rockbridge" = "mediumspringgreen",
+  #                     "Rockingham" = "mediumorchid",
+  #                     "Spotsylvania" = "pink" ,
+  #                     "Virginia Beach City North" = "salmon4",
+  #                     "Virginia Beach City" = "burlywood",
+  #                     "Warren" = "dodgerblue",
+  #                     "Washington"= "honeydew",
+  #                     "Frederick" = "tan1",
+  #                     "Augusta" = "hotpink",
+  #                     "Prince William" = "darkorchid1",
+  #                     "Essex" = "chocolate"
+  #                 )
+#     pal <- colorNumeric(palette = agent_colors, domain = all_territories$Agent)
+# 
+#     # Create labels for counties
+#     county_labels <- sprintf(
+#       "<strong> Agent Territory: %s</strong><br/> County: %s: %g",
+#       all_territories$Agent,
+#       all_territories$NAMELSAD
+#     ) %>% lapply(htmltools::HTML)
+# 
+#     # Create labels for agents
+#     agent_labels <- sprintf(
+#       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
+#       agents_sf$Job.Dept,
+#       agents_sf$Employee.Name,
+#       agents_sf$VT.Email
+#     ) %>% lapply(htmltools::HTML)
+# 
+#     # Wrap legend title if too long
+#     # spaces <- gregexpr("\\s", good_names[idx])[[1]]
+#     # middle_space <- spaces[length(spaces) %/% 2 + 1]
+#     # legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
+#     #
+#     # Create title for the map
+#     territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+# 
+#     # Create leaflet map
+#     leaflet(data = territory.counties) %>%
+#       addProviderTiles(providers$CartoDB.Positron) %>%
+#       addPolygons(fillColor = ~pal(Agent),
+#                   color = "#BDBDC3",
+#                   weight = 1,
+#                   smoothFactor = 0.2,
+#                   opacity = 1.0,
+#                   fillOpacity = 0.6,
+#                   highlightOptions = highlightOptions(color = "white", weight = 2,
+#                                                       bringToFront = TRUE),
+#                   label = county_labels,
+#                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
+#                                               textsize = "15px",
+#                                               direction = "auto")) %>%
+#       addAwesomeMarkers(data = additional_agent_sf, icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$NewAgent, iconColor = 'white'),
+#                         label = agent_labels,
+#                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+#       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+#       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
+#       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
+#   }
+>>>>>>> b8ce1e6d2753bed35a80f29d836bcea7b5385ba6
 
 
 # 2. Define UI for application ------------------------------------------------------------
