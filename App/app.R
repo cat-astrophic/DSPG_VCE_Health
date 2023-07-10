@@ -444,7 +444,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Smoking Rate" = "per_adults_reporting_currently_smoking",
                                                        "Excessive Drinking" = "per_excessive_drinking",
                                                        "Driving Deaths Involving Alcohol" = "per_driving_deaths_with_alcohol_involvement",
-                                                       "Physical Inactivity" = "per_physically_inactive"
+                                                       "Physical Inactivity" = "per_physically_inactive",
+                                                       "Teen Birth Rate" = "teen_birth_rate",
+                                                       "Obesity Rate" = "per_adults_with_obesity"
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_healthbehaviors", label = "Select Year: ", 
@@ -816,14 +818,23 @@ The absence of health insurance coverage poses a substantial obstacle to accessi
   })
   output$HealthBehaviorsVariableDefinition <- renderText({
     if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
-      "stats for "
+      "% Adults Reporting Currently Smoking- This variable measures the percentage of adults who are current smokers (age-adjusted).
+Every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives."
     } else if (input$health_behaviors == "per_excessive_drinking") {
-      "stats for "
+      "% Excessive Drinking- This variable is the percentage of adults reporting binge or heavy drinking (age-adjusted).
+Nearly 1 in 6 American adults are considered binge drinkers. Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes."
     } else if (input$health_behaviors == "per_driving_deaths_with_alcohol_involvement") {
-      "Statistics for "
+      "% Driving Deaths with Alcohol Involvement- This variable represents the percentage of driving deaths with alcohol involvement.
+This variable directly measures the relationship between alcohol and motor vehicle crash deaths. Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 cause 27% of all alcohol-impaired deaths."
     } else if (input$health_behaviors == "per_physically_inactive") {
-      "Statistics for"
-      
+      "% Physically Inactive- Percentage of adults age 18 and over reporting no leisure-time physical activity (age-adjusted).
+Physical inactivity is highly associated with increased risk of health conditions such as Type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and shortened life expectancy. Physical activity is associated with improved sleep, cognitive ability, bone, and musculoskeletal health, and reduced risk of dementia."
+    } else if (input$health_behaviors == "per_adults_with_obesity") {
+      "% Adults with Obesity- This variable measures the percentage of the adult population (age 18 and older) that reports a body mass index (BMI) greater than or equal to 30 kg/m2 (age-adjusted).
+Adult obesity is a persistent condition that raises the likelihood of various health risks, including hypertension, heart disease, type 2 diabetes, respiratory issues, chronic inflammation, mental illness, and certain cancers.The development of obesity is influenced by a combination of environmental and individual factors. Environmental factors, such as the availability and affordability of nutrient-rich foods, the extent of fast-food advertising, and societal attitudes regarding weight stigma, can significantly impact the prevalence and risk of obesity."
+    } else if (input$health_behaviors == "teen_birth_rate") {
+      "Teen Birth Rate- This variable represents the number of births per 1,000 female population ages 15-19.
+Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and employment opportunities."
     } else {
       "Please select a health outcome."
     } 
