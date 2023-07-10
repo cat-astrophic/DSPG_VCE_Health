@@ -153,7 +153,7 @@ mapping2 <- function(variable, year) {
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   #territory function
-<<<<<<< HEAD
+
   territory <- function(territory_type, zscore_type, variable_title) {
     
     
@@ -260,109 +260,8 @@ mapping2 <- function(variable, year) {
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
-=======
-# territory <- function(territory_type, Zscore_Type, variable_title) {
 
-    # Filter data for selected year and variable
-    # temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable_title, ]
-    #
-    # # Join variable data with county geometry data
-    # territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
-    #
-    # # Identify the index of the selected variable
-    # idx <- which(unique(all_var_df$Variable) == variable)
 
-    # Create a color palette function based on the "Value" column
-  # agent_colors <- c(
-  #                     "Albemarle" = "lightgoldenrod" ,
-  #                     "Amelia" = "red",
-  #                     "Amherst"= "forestgreen",
-  #                     "Arlington" = "navy",
-  #                     "Bedford" = "plum4",
-  #                     "Chesapeake City" =  "khaki",
-  #                     "Fairfax" = "brown2",
-  #                     "Floyd"=  "yellow",
-  #                     "Franklin" = "salmon",
-  #                     "Gloucester" = "lightgrey",
-  #                     "Greensville" = "darkolivegreen",
-  #                     "Henrico"= "chartreuse4",
-  #                     "King George" = "gold",
-  #                     "Lancaster" = "lavenderblush",
-  #                     "Lee" = "turquoise",
-  #                     "Loudoun" = "mediumvioletred",
-  #                     "Louisa" =  "mistyrose",
-  #                     "Lynchburg City" = "palegreen",
-  #                     "Mecklenburg" = "hotpink4",
-  #                     "Newport News City North"  = "purple",
-  #                     "Newport News City" = "lightblue",
-  #                     "Northeast District Office" = "orange",
-  #                     "Orange"= "darkseagreen2",
-  #                     "Patrick"=  "lightsteelblue",
-  #                     "Petersburg City"= "magenta" ,
-  #                     "Pittsylvania" =  "slategray",
-  #                     "Pulaski"= "lightcyan",
-  #                     "Richmond City" = "darkgrey",
-  #                     "Roanoke" = "blue",
-  #                     "Rockbridge" = "mediumspringgreen",
-  #                     "Rockingham" = "mediumorchid",
-  #                     "Spotsylvania" = "pink" ,
-  #                     "Virginia Beach City North" = "salmon4",
-  #                     "Virginia Beach City" = "burlywood",
-  #                     "Warren" = "dodgerblue",
-  #                     "Washington"= "honeydew",
-  #                     "Frederick" = "tan1",
-  #                     "Augusta" = "hotpink",
-  #                     "Prince William" = "darkorchid1",
-  #                     "Essex" = "chocolate"
-  #                 )
-#     pal <- colorNumeric(palette = agent_colors, domain = all_territories$Agent)
-# 
-#     # Create labels for counties
-#     county_labels <- sprintf(
-#       "<strong> Agent Territory: %s</strong><br/> County: %s: %g",
-#       all_territories$Agent,
-#       all_territories$NAMELSAD
-#     ) %>% lapply(htmltools::HTML)
-# 
-#     # Create labels for agents
-#     agent_labels <- sprintf(
-#       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
-#       agents_sf$Job.Dept,
-#       agents_sf$Employee.Name,
-#       agents_sf$VT.Email
-#     ) %>% lapply(htmltools::HTML)
-# 
-#     # Wrap legend title if too long
-#     # spaces <- gregexpr("\\s", good_names[idx])[[1]]
-#     # middle_space <- spaces[length(spaces) %/% 2 + 1]
-#     # legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
-#     #
-#     # Create title for the map
-#     territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
-# 
-#     # Create leaflet map
-#     leaflet(data = territory.counties) %>%
-#       addProviderTiles(providers$CartoDB.Positron) %>%
-#       addPolygons(fillColor = ~pal(Agent),
-#                   color = "#BDBDC3",
-#                   weight = 1,
-#                   smoothFactor = 0.2,
-#                   opacity = 1.0,
-#                   fillOpacity = 0.6,
-#                   highlightOptions = highlightOptions(color = "white", weight = 2,
-#                                                       bringToFront = TRUE),
-#                   label = county_labels,
-#                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
-#                                               textsize = "15px",
-#                                               direction = "auto")) %>%
-#       addAwesomeMarkers(data = additional_agent_sf, icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$NewAgent, iconColor = 'white'),
-#                         label = agent_labels,
-#                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-#       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-#       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
-#       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
-#   }
->>>>>>> b8ce1e6d2753bed35a80f29d836bcea7b5385ba6
 
 
 # 2. Define UI for application ------------------------------------------------------------
@@ -420,7 +319,14 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
-                                     )
+                                              column(6,
+                                                     p("In the past 100 years, Virginia has seen tremendous growth in its public health sector, nevertheless, there are still many areas that are in need of significant improvement. Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, gun violence, and motor vehicle crashes have plagued the welfare of the Commonwealth. Due to the contrasting urban and rural regions in Virginia, health varies drastically based on where Virginians reside. In the more wealthy and populated localities, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 counties fell below the national average. The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years. Virginia struggles to provide clean air and water, safe roadways, protection from communicable diseases, and other essential public health services to the entire population of the Commonwealth."),
+                                                     p("Virginia’s unfavorable health outcomes can be attributed to the lack of public health funding and poor access to affordable healthcare. The Joint Commission on Health Care found that Virginia ranks in the bottom third of states in public health spending. Spending about $95 per Capita, the Virginia Department of Health’s budget has remained unchanged for the past 20 years, when adjusted for inflation and population growth. Additionally, federal funding sometimes do not match the specific needs of localities. Federal funding often prioritizes diseases that draw the most attention and while this benefits disease prevention, it unintentionally results in the underinvestment of many needed programs that affect the social determinants of health. Moreover, this lack of funding results in public health workforce shortages, and causes workers like VCE FCS agents to be overworked and overwhelmed by the needs of the population. Staffing shortages inhibit local health departments from carrying out their responsibilities and prevent Virginians from getting the best care available."),
+                                    
+                                                    h2("Social Determinants of Health Overview"),
+                                                    p("The field of public health encompasses various factors that influence the health and well-being of individuals and communities. One crucial aspect that significantly shapes health outcomes is the social determinants of health. These determinants as defined by the World Health Organization (WHO) are the social, economic, and environmental conditions in which people are born, grow, live, work, and age. They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. They shape opportunities for good health, influence the distribution of resources and power in society, and create conditions that can either support or hinder individual and community health.")
+                                                    )
+                                               )
                             ),
                          
 
@@ -432,7 +338,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
                                               column(3,
-                                                     h4(strong("Summary Statistics")),
+                                                     h4(strong("Summary")),
                                                      textOutput("VariableDefinition"),
 
                                               ) ,
@@ -457,12 +363,14 @@ ui <- navbarPage(#title = "DSPG 2023",
                             tabPanel("Healthcare Access and Quality", 
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Healthcare Access and Quality Variables"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
+                                              p("Accessible and affordable healthcare plays a critical role in promoting physical, social, and mental well-being. While health insurance facilitates access to essential medical services, it alone does not guarantee accessibility. It is equally vital for healthcare providers to offer affordable care, be accessible to patients, and be located conveniently.
+                                                In the context of VCE FCS agents' work, their efforts can contribute to improving healthcare accessibility for individuals and families. By addressing community-specific needs and collaborating with local healthcare providers, FCS agents can support initiatives that enhance access to quality healthcare. They can facilitate partnerships between healthcare providers and community organizations, advocate for affordable healthcare options, and educate individuals on navigating the healthcare system effectively. Additionally, FCS agents can provide valuable resources and information on health insurance options, enrollment assistance, and healthcare rights.
+                                                Through their work, VCE FCS agents can play a pivotal role in fostering collaborations between healthcare providers and communities, promoting health equity, and ensuring that individuals and families have the necessary tools and support to access affordable, quality healthcare services.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
                                               column(3, 
                                                     
-                                                     h4(strong("Summary Statistics")),
+                                                     h4(strong("Summary")),
                                                      textOutput("HealthAccessVariableDefinition")
                                                     
                                               ) ,
@@ -497,7 +405,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               align = "justify",
                                               column(3, 
                                                      
-                                                     h4(strong("Summary Statistics")),
+                                                     h4(strong("Summary")),
                                                      textOutput("EconomicStabilityVariableDefinition")
                                                      
                                               ) ,
@@ -527,7 +435,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               align = "justify",
                                               column(3, 
                                                      
-                                                     h4(strong("Summary Statistics")),
+                                                     h4(strong("Summary")),
                                                      textOutput("HealthBehaviorsVariableDefinition")
                                                      
                                               ) ,
@@ -556,7 +464,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               align = "justify",
                                               column(3, 
                                                      
-                                                     h4(strong("Summary Statistics")),
+                                                     h4(strong("Summary")),
                                                      textOutput("EnvrVariableDefinition")
                                                      
                                               ) ,
@@ -565,7 +473,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Physical Distress" = "per_physical_distress",
                                                        "Mental Distress" = "per_mental_distress",
                                                        "Access to Exercise Opportunity" = "per_access_to_exercise_opportunities",
-                                                       "Suicide Rate" = "suicide_rate"
+                                                       "Suicide Rate" = "suicide_rate",
+                                                       "Limited Access to Healthy Food" = "per_limited_access_to_healthy_foods",
+                                                       "Juvenile Arrest Rate" = "juvenile_arrests_rate",
+                                                       "Insufficient Sleep" = "per_insufficient_sleep"
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_envr", label = "Select Year: ", 
@@ -587,7 +498,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               align = "justify",
                                               column(3, 
                                                      
-                                                     h4(strong("Summary Statistics")),
+                                                     h4(strong("Summary")),
                                                      textOutput("DemographicsDefinition")
                                                      
                                               ) ,
@@ -651,39 +562,46 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")
                                      ),
                                      fluidRow(style = "margin: 6px;",
-                                              p("", style = "padding-top:10px;")
+                                              column(3,
+                                                     selectInput("territory_type", "Agents",
+                                                                 choices = c("no new agents" = "base", 
+                                                                             "one new agent" = "one", 
+                                                                             "two new agents" = "two"), 
+                                                                 selected = "base"
+                                                     ),
+                                                     selectInput("zscore_type", "Health Index",
+                                                                 choices = c("aggregate" = "aggregate", 
+                                                                             "food insecurity" = "food", 
+                                                                             "obesity" = "obesity", 
+                                                                             "low birthweight" = "lowbirth", 
+                                                                             "physical inactivity" = "inactivity", 
+                                                                             "diabetes" = "diabetes"), 
+                                                                 selected = "aggregate"
+                                                     ),
+                                                     selectInput("variable_title", "Health Variable",
+                                                                 choices = c("Food Insecurity", 
+                                                                             "Diabetes", 
+                                                                             "Low Birthweight", 
+                                                                             "Obesity", 
+                                                                             "Physical Inactivity"), 
+                                                                 selected = "Food Insecurity"
+                                                     ),
+                                                     actionButton("submit_btn", "Submit")
+                                              ),
+                                              column(6,
+                                                     h4(strong("Description")),
+                                                     textOutput("basedescription")
+                                              )
                                      ),
-                                     column(3, 
-                                            
-                                            h4(strong("Description")),
-                                         
-                                     ),
-                                     column(9,
-                                            selectInput("territory_type", "Territory Type",
-                                                        choices = c("no new agents" = "base", 
-                                                                    "one new agent" = "one", 
-                                                                    "two new agents" = "two"), selected = "base"
-                                            ),
-                                            selectInput("zscore_type", "Health Index",
-                                                        choices = c(
-                                                          "aggregate" = "aggregate", 
-                                                          "food insecurity" = "food", 
-                                                          "obesity", 
-                                                          "low birthweight" = "lowbirth", 
-                                                          "obesity", 
-                                                          "physcial inactivity" = "inactivity", "diabetes"), selected = "aggregate"
-                                            ),
-                                            selectInput("variable_title", "Variable",
-                                                        choices = c("Food Insecurity", "Diabetes", "Low Birthweight", "Obesity", "Inactivity"), selected = "Food Insecurity"
-                                            ),
-                                            actionButton("submit_btn", "Submit")
-                                     ),
-                                     mainPanel(
-                                       leafletOutput("map")
+                                     fluidRow(
+                                       column(9,
+                                              mainPanel(
+                                                leafletOutput("map")
+                                              )
+                                       )
                                      )
                             )
                  ),
-                            
                  
                  
                  ## 2.5 Tab Takeawayss --------------------------------------------
@@ -829,16 +747,35 @@ server <- function(input, output) {
   })
   output$HealthAccessVariableDefinition <- renderText({
     if (input$Health_Access == "per_uninsured") {
-      "stats for unsinsured"
+      "Percent Uninsured: Percentage of population under age 65 without health insurance.
+The absence of health insurance coverage presents a notable obstacle in accessing essential healthcare services and maintaining financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health consequences as they receive less preventive care, and delayed treatment often leads to severe illnesses or other health complications. Moreover, being uninsured can have substantial financial implications, with many individuals unable to afford their medical expenses, leading to the accumulation of medical debt."
     } else if (input$Health_Access == "dentist_ratio") {
-      "stats for "
+      "Dentist Ratio: Ratio of population to dentists.
+Neglected dental diseases can result in significant health consequences, such as pain, infection, and tooth loss. While the inadequacy of dental providers represents just one of the barriers to accessing oral healthcare, a substantial portion of the nation faces shortages in this field. According to the Health Resources and Services Administration, as of December 2022, there were 7,313 designated Dental Health Professional Shortage Areas (HPSAs), encompassing a total population of 70 million individuals affected by these shortages."
     } else if (input$Health_Access == "mental_health_provider_ratio") {
-      "Statistics for "
+      "Mental Health Provider Ratio: Ratio of population to mental health providers.
+Accessing healthcare involves more than just financial coverage; it also necessitates access to healthcare providers. Approximately thirty percent of the population resides in a county designated as a Mental Health Professional Shortage Area, indicating significant deficiencies in mental health providers. With the mental health parity provisions of the Affordable Care Act expanding coverage for mental health services, there is growing concern about exacerbated workforce shortages in this field."
     } else if (input$Health_Access == "primary_care_physicians_ratio") {
-      "Statistics for"
-      
+      "Primary Care Physicians Ratio: Ratio of population to primary care physicians
+Access to healthcare is not solely reliant on financial coverage; it also requires access to healthcare providers. While an abundance of specialist physicians has been linked to increased utilization of services, including potentially unnecessary ones, having an adequate number of primary care physicians is crucial for delivering preventive and primary care. Additionally, primary care providers play a vital role in referring patients to appropriate specialty care when necessary. Thus, ensuring sufficient availability of primary care physicians is essential for facilitating timely and appropriate healthcare services."
+    } else if (input$Health_Access == "per_vaccinated"){
+      "% Vaccinated: Percentage of fee-for-service (FFS) Medicare enrollees that had an annual flu vaccination.
+Influenza is a potentially severe illness that can result in hospitalization and death. Each year, millions of people experience influenza infections, hundreds of thousands require hospitalization due to the flu, and thousands lose their lives to the disease. The most effective method to prevent influenza and lower the chances of flu-related illness, hospitalization, and death is through an annual flu vaccine. It is recommended that individuals aged 6 months and older receive a seasonal flu vaccine every year. Specifically, individuals over the age of 65 are strongly encouraged to get vaccinated as they face a higher risk of developing severe complications from the flu."
+    } else if (input$Health_Access == "per_with_annual_mammogram"){
+      "% with Annual Mammogram: Percentage of female Medicare enrollees ages 65-74 that received an annual mammography screening.
+Research indicates that undergoing mammography screening can significantly reduce breast cancer mortality, particularly among older women. The recommendation or referral from a physician, along with satisfaction with healthcare providers, plays a significant role in encouraging breast cancer screening. Presently, women aged 45-54 are advised to undergo mammograms annually, while women aged 55 and older are recommended to have mammograms every two years."
+    } else if (input$Health_Access == "preventable_hospitalization_rate"){
+      "Preventable Hospitalization Rate: Rate of hospital stays for ambulatory-care sensitive conditions per 100,000 Medicare enrollees. 
+When people are hospitalized for conditions that could have been treated in outpatient settings, it suggests that they did not have access to quality healthcare outside of hospitals. This could also mean that they relied heavily on emergency rooms and urgent care centers instead of regular healthcare providers. Preventable hospital stays can be seen as a measure of both the quality of care and the ability to access primary healthcare services."
+    } else if (input$Health_Access == "other_primary_care_provider_ratio"){
+    "Other Primary Care Provider Ratio: Ratio of population to primary care providers other than physicians. Primary healthcare is not exclusively provided by physicians. Other healthcare professionals, such as nurse practitioners (NP), physician assistants (PA), and clinical nurse specialists, can also offer routine and preventive care. According to the Health Resources and Services Administration, the primary care NP and PA workforces are projected to grow at a much faster rate compared to physicians in the next decade. This growth has the potential to help address healthcare provider shortages as demand for primary care services continues to increase."  
+    } else if (input$Health_Access == "per_uninsured_adults"){
+      "% Uninsured Adults: Percentage of adults under age 65 without health insurance."
+    } else if (input$Health_Access == "per_uninsured_children"){
+      "% Uninsured Children: Percentage of children under age 19 without health insurance. 
+The absence of health insurance coverage poses a substantial obstacle to accessing necessary healthcare and maintaining financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health consequences as they receive limited preventive care, and delayed treatment often leads to severe illnesses or other health complications. Additionally, being uninsured can have severe financial implications, with many individuals unable to afford their medical expenses, resulting in the accumulation of medical debt. This issue is particularly notable among uninsured children, who are less likely to receive timely preventive care, such as vaccinations and well-child visits."
     } else {
-      "Please select a health outcome."
+      "nothing :)"
     } 
   }) 
   ## 3.3 Economic Stability ----
@@ -904,14 +841,27 @@ server <- function(input, output) {
   })
   output$EnvrVariableDefinition <- renderText({
     if (input$neighbor_envr == "per_physical_distress") {
-      "stats for "
+      "This variable represents the percentage of adults reporting 14 or more days of poor physical health per month (age-adjusted).
+This variable offers valuable information on the overall well-being of adults in a community. Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity."
     } else if (input$neighbor_envr == "per_mental_distress") {
-      "stats for "
+      "This variable represents the percentage of adults reporting 14 or more days of poor mental health per month (age-adjusted).
+      Mental health is a fundamental aspect of our overall well-being. It encompasses our emotional, psychological, and social well-being, and it affects how we think, feel, and act. Good mental health allows us to cope with the daily stresses of life, form positive relationships, make meaningful contributions to society, and navigate challenges effectively. Poor mental health can have detrimental effects on physical health, contributing to the development or exacerbation of various health conditions, including cardiovascular disease, weakened immune system, chronic pain, and digestive disorders."
     } else if (input$neighbor_envr == "per_access_to_exercise_opportunities") {
-      "Statistics for "
+      "This variable is the percentage of the population with adequate access to locations for physical activity.
+Engaging in more physical activity has been linked to reduced risks of various health conditions, including type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and premature mortality. The built environment plays a crucial role in promoting physical activity, as individuals residing in close proximity to amenities such as sidewalks, parks, and gyms are more inclined to engage in regular exercise."
     } else if (input$neighbor_envr == "suicide_rate") {
-      "Statistics for"
-    } else {
+      "This variable measures the number of deaths due to suicide per 100,000 population (age-adjusted)
+Suicide rates provide information on the mental health of a community. Suicide has an overwhelming effect on the mental health of surviving community members, family members, and friends."
+    } else if(input$neighbor_envr == "per_limited_access_to_healthy_foods"){
+      "This variable represents the percentage of population who are low-income and do not live close to a grocery store.
+Extensive evidence indicates a robust correlation between living in a food desert and experiencing a higher prevalence of obesity and premature death. Supermarkets have traditionally been known to offer healthier food choices compared to convenience stores or smaller grocery stores. Moreover, limited access to fresh fruits and vegetables is directly linked to premature mortality."
+    } else if(input$neighbor_envr == "juvenile_arrests_rate"){  
+      "This variable represents the rate of delinquency cases per 1,000 juveniles.
+      Juvenile arrests are the result of many factors such as policing strategies, local laws, community and family support, and individual behaviors. Youth who are arrested and incarcerated experience lower self-reported health, higher rates of infectious disease and stress-related illnesses, and higher body mass indices."
+    } else if(input$neighbor_envr == "per_insufficient_sleep"){
+      " This variable represents the percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).
+Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being."
+      } else {
       "Please select a health outcome."
     } 
   }) 
@@ -926,17 +876,29 @@ server <- function(input, output) {
   output$demographicsvar <- renderLeaflet({
     mapping2( temp_demo(), temp_demoyear())
   })
-  output$demographicsDefinition <- renderText({
+  output$DemographicsDefinition <- renderText({
     if (input$demographics == "per_less_than_18_years_of_age") {
-      "stats for "
+      " Percentage of population below 18 years of age.
+Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population. Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions."
     } else if (input$demographics == "per_65_and_over") {
-      "stats for "
+      "Percentage of the population ages 65 and older.
+Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population.  Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions."
     } else if (input$demographics == "per_hispanic") {
-      "Statistics for "
+      " Percentage of the population self-identifying as Hispanic.
+Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
     } else if (input$demographics == "per_asian") {
-      "Statistics for"
+      "Percentage of the population self-identifying as Asian.
+Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
     } else if (input$demographics == "per_nonhispanic_white") {
-      "Statistics for"
+      "Percentage of population self-identifying as non-Hispanic white.
+Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
+    } else if (input$demographics == "per_american_indian_or_alaska_native"){
+      " Percentage of population self-identifying as American Indian or Alaska Native.
+Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
+    } else if (input$demographics == "per_black") {
+      " Percentage of the population self-identifying as non-Hispanic Black or African American.
+Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
+    
     } else {
       "Please select a health outcome."
     } 
@@ -951,6 +913,15 @@ server <- function(input, output) {
     output$map <- renderLeaflet({
       map
   })
+  })
+  output$basedescription <- renderText({
+    if (input$territory_type == "base"){
+      "description for no new agent"
+    } else if (input$territory_type == "one"){
+      "description for one new agent"
+    } else if (input$territory_type == "two"){
+      "description for two new agents"
+    }
   })
 }
 
