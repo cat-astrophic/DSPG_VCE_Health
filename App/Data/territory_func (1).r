@@ -18,6 +18,7 @@ library(viridis)
 library(readxl)
 library(sf) 
 options(scipen=999)
+setwd("~/DSPG/Repose/DSPG_VCE_Health/App/Data")
 #reading in va counties shps
 va.counties <- st_read("./data/va_counties.shp")
 # Convert columns to appropriate types and rename them
