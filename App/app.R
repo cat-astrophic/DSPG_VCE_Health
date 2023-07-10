@@ -79,12 +79,15 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
-  ### 1.3.2 Process the data---------------------------------------------------------------- 
-  
-  
-  
-  ### 1.3.3 Merging the data(Geo)---------------------------------------------------------------- 
-
+  ## reading in data for territory function
+  #reading in va counties shps
+  va.counties <- st_read("./data/va_counties.shp")
+  # Convert columns to appropriate types and rename them
+  va.counties <- transform(va.counties,
+                           GEOID = as.integer(GEOID),
+                           NAMELSAD = str_to_title(NAMELSAD) )
+  # territory data
+  all_territories <- read.csv("./data/agent_solutions.csv")
 
 
 # ## 1.4 Define your functions -------------------------------------------------------
@@ -150,109 +153,113 @@ mapping2 <- function(variable, year) {
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   #territory function
-# territory <- function(territory_type, Zscore_Type, variable_title) {
-# 
-#     # Filter data for selected year and variable
-#     temp2 <- all_territories[all_territories$Territory_Type == territory_type & all_territories$Zscore_Type == variable_title, ]
-#     #
-#     # # Join variable data with county geometry data
-#     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
-#     #
-#     # # Identify the index of the selected variable
-#     # idx <- which(unique(all_var_df$Variable) == variable)
-# 
-#     # Create a color palette function based on the "Value" column
-#     agent_colors <- c("Roanoke" = "blue",
-#                       "Floyd"  =  "yellow",
-#                       "Newport News City" =  "lightblue",
-#                       "Newport News City North"  = "purple",
-#                       "Spotsylvania"  = "pink" ,
-#                       "Petersburg City" = "magenta" ,
-#                       "Henrico"   = "beige",
-#                       "Washington"  = "mediumvioletred",
-#                       "Patrick"   =    "lightsteelblue",
-#                       "Arlington"     = "navy",
-#                       "Albemarle"      = "lightgoldenrod" ,
-#                       "Gloucester"  =  "lightgrey",
-#                       "Augusta"   = "hotpink",
-#                       "Greensville"  = "darkolivegreen",
-#                       "Warren"    = "dodgerblue",
-#                       "Amherst"     ="forestgreen",
-#                       "King George"   = "gold",
-#                       "Lancaster" = "lavenderblush",
-#                       "Richmond City"  = "darkgrey",
-#                       "Northeast District Office" =  "orange",
-#                       "Fairfax"  =     "brown2",
-#                       "Orange"   =  "darkseagreen2",
-#                       "Mecklenburg"  = "hotpink4",
-#                       "Chesapeake City" =   "khaki",
-#                       "Pulaski"  =     "lightcyan",
-#                       "Rockingham"   = "mediumorchid",
-#                       "Rockbridge" = "mediumspringgreen",
-#                       "Franklin"  = "salmon",
-#                       "Bedford"  = "plum4",
-#                       "Pittsylvania"   =   "slategray",
-#                       "Lee"  =   "turquoise",
-#                       "Frederick"    =  "tan1",
-#                       "Amelia" =     "red",
-#                       "Virginia Beach City North" =  "salmon4",
-#                       "Lynchburg City"   =   "palegreen",
-#                       "Louisa"  =   "mistyrose",
-#                       "Loudoun"   =  "mediumvioletred",
-#                       "Virginia Beach City" =  "lightsteelblue",
-#                       "Essex" =  "chocolate",
-#                       "Prince William" =  "darkorchid1")
-#     pal <- colorNumeric(palette = agent_colors, domain = all_territories$Agent)
-# 
-#     # Create labels for counties
-#     county_labels <- sprintf(
-#       "<strong> Agent Territory: %s</strong><br/> County: %s: %g",
-#       all_territories$Agent,
-#       all_territories$NAMELSAD
-#     ) %>% lapply(htmltools::HTML)
-# 
-#     # Create labels for agents
-#     agent_labels <- sprintf(
-#       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
-#       agents_sf$Job.Dept,
-#       agents_sf$Employee.Name,
-#       agents_sf$VT.Email
-#     ) %>% lapply(htmltools::HTML)
-# 
-#     # Wrap legend title if too long
-#     # spaces <- gregexpr("\\s", good_names[idx])[[1]]
-#     # middle_space <- spaces[length(spaces) %/% 2 + 1]
-#     # legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
-#     #
-#     # Create title for the map
-#     territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
-# 
-#     # Create leaflet map
-#     leaflet(data = territory.counties) %>%
-#       addProviderTiles(providers$CartoDB.Positron) %>%
-#       addPolygons(fillColor = ~pal(Agent),
-#                   color = "#BDBDC3",
-#                   weight = 1,
-#                   smoothFactor = 0.2,
-#                   opacity = 1.0,
-#                   fillOpacity = 0.6,
-#                   highlightOptions = highlightOptions(color = "white", weight = 2,
-#                                                       bringToFront = TRUE),
-#                   label = county_labels,
-#                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
-#                                               textsize = "15px",
-#                                               direction = "auto")) %>%
-#       addAwesomeMarkers(data = additional_agent_sf, icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$NewAgent, iconColor = 'white'),
-#                         label = agent_labels,
-#                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-#       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-#       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
-#       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
-#   }
+  territory <- function(territory_type, zscore_type, variable_title) {
+    
+    
+    
+    # 🚩: Not Territory_Type, it should be territory_type. Check your dataframe all_territories
+    temp2 <- all_territories[all_territories$territory_type == territory_type & all_territories$zscore_type == zscore_type, ]
+    
+    #convert new agent locations to sf
+    additional_agent_sf <- temp2 %>% 
+      # Convert new agent locations to sf
+      st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
+    
+    
+    # # Join variable data with county geometry data
+    territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
+    
+    #problem area!!
+    agent_colors <- c(
+      "Albemarle" = "lightgoldenrod" ,
+      "Amelia" = "red",
+      "Amherst"= "forestgreen",
+      "Arlington" = "navy",
+      "Bedford" = "plum4",
+      "Chesapeake City" =  "khaki",
+      "Fairfax" = "brown2",
+      "Floyd"=  "yellow",
+      "Franklin" = "salmon",
+      "Gloucester" = "lightgrey",
+      "Greensville" = "darkolivegreen",
+      "Henrico"= "chartreuse4",
+      "King George" = "gold",
+      "Lancaster" = "lavenderblush",
+      "Lee" = "turquoise",
+      "Loudoun" = "mediumvioletred",
+      "Louisa" =  "mistyrose",
+      "Lynchburg City" = "palegreen",
+      "Mecklenburg" = "hotpink4",
+      "Newport News City North"  = "purple",
+      "Newport News City" = "lightblue",
+      "Northeast District Office" = "orange",
+      "Orange"= "darkseagreen2",
+      "Patrick"=  "lightsteelblue",
+      "Petersburg City"= "magenta" ,
+      "Pittsylvania" =  "slategray",
+      "Pulaski"= "lightcyan",
+      "Richmond City" = "darkgrey",
+      "Roanoke" = "blue",
+      "Rockbridge" = "mediumspringgreen",
+      "Rockingham" = "mediumorchid",
+      "Spotsylvania" = "pink" ,
+      "Virginia Beach City North" = "salmon4",
+      "Virginia Beach City" = "burlywood",
+      "Warren" = "dodgerblue",
+      "Washington"= "honeydew",
+      "Frederick" = "tan1",
+      "Augusta" = "hotpink",
+      "Prince William" = "darkorchid1",
+      "Essex" = "chocolate"
+    )
+    pal <- colorFactor(palette = agent_colors, domain= territory.counties$Agent)
+    
+    # Create labels for counties
+    #problem area!!
+    county_labels <- sprintf(
+      "<strong>%s</strong><br/> Served by Agent From: %s:",
+      territory.counties$NAMELSAD,
+      additional_agent_sf$Agent
+    ) %>% lapply(htmltools::HTML)
+    
+    # Create labels for agents
+    agent_labels <- sprintf(
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
+      additional_agent_sf $Job.Dept,
+      additional_agent_sf $Employee.Name,
+      additional_agent_sf $VT.Email
+    ) %>% lapply(htmltools::HTML)
+    
+    
+    # Create title for the map
+    territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+    
+    additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "blue", "red")
+    
+    # Create leaflet map
+    leaflet(data = territory.counties) %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
+      addPolygons(fillColor = ~pal(Agent),
+                  color = "#BDBDC3",
+                  weight = 1,
+                  smoothFactor = 0.2,
+                  opacity = 1.0,
+                  fillOpacity = 0.6,
+                  highlightOptions = highlightOptions(color = "white", weight = 2,
+                                                      bringToFront = TRUE),
+                  label = county_labels,
+                  labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
+                                              textsize = "15px",
+                                              direction = "auto")) %>%
+      addAwesomeMarkers(data = additional_agent_sf, 
+                        icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
+                        label = agent_labels,
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      #addLegend(colors= agent_colors, labels= agent_colors, title = territory_title, position = "bottomright") %>%
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
+  }
 
-## 1.5 Statistic analysis---------
-  a <- "Statistics for per_low_birthweight"
-  b <- "Statistics for second varible"
 
 # 2. Define UI for application ------------------------------------------------------------
 ui <- navbarPage(#title = "DSPG 2023",
@@ -273,7 +280,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                           ),
                           fluidRow(style = "margin: 6px;",
                                    align = "justify",
-                                   column(4,
+                                   column(6,
                                           h2(strong("Project Background")),
                                           p(strong("Virginia Coorperative Extensions:"), "Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has"),
                                           tags$li("107 offices"),
@@ -284,7 +291,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                           p("For the purpose of this project, we will be focusing on VCE’s Family and Consumer Sciences Program and the agents that support this program. FCS programming is tied to community needs and directed toward families and individuals. Many counties’ FCS programs look different from one another, however, there are core specialty areas every program has. The specialty areas include: Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents are responsible for partnering and collaborating with other VCE agents, agencies, nonprofits/ other organizations, and the public to meet the educational needs of local residents. Agents are tasked with determining program goals and needs by monitoring trends and issues. FCS agents essentially help Virginian families make more healthy and smart decisions by applying research-based knowledge to work in people’s lives. However, this is easier said than done. A big reason why every county’s FCS programs look different is because of the unique populations and challenges every county has. This unfortunately creates a difficult job for FCS agents. They are overextended and commit a lot more time and effort than what seems to fit into the 3 FCS specialty areas. Today, FCS agents are doing a lot more than what was originally expected of them as VCE extends their work to be more public health focused."),
                                   
                                    ),
-                                   column(4,
+                                   column(6,
                                           h2(strong("Our Work")),
                                           p("Our team seeks to design an interactive dashboard that will aid VCE FCS agents in identifying which areas of Virginia are in need of more support. This dashboard will help our stakeholders gain a better understanding of the needs of the community, as well as their current health demographics. Agents will be able to put our research into practice by using our dashboard to identify specific areas of need for every county in Virginia. We hope that this resource will support VCE FCS agents in improving the overall health of Virginia communities."),
                                           p("We will utilize publicly accessible data, including Virginia health rankings, to offer our stakeholders a comprehensive comprehension of the factors influencing the health of families in Virginia. Our primary focus will be on various variables that align with the five determinants of health as well as health outcomes. Additionally, we will map these variables alongside the existing data on Virginia Cooperative Extension (VCE) agents. These maps will aid in identifying areas where VCE agents can provide further support to their communities."),
@@ -325,7 +332,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      textOutput("VariableDefinition"),
 
                                               ) ,
-                                              column(9,
+                                              column(8,
 
                                                      selectInput("Health_Outcomes", "Select Variable:", width = "50%", choices = c(
                                                        "Low Birthweight" = "per_low_birthweight",
@@ -537,30 +544,38 @@ ui <- navbarPage(#title = "DSPG 2023",
                             tabPanel("Results",
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Results"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
+                                              p("", style = "padding-top:10px;")
+                                     ),
                                      fluidRow(style = "margin: 6px;",
-                                              p("", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 6px;",
-                                              align = "justify",
-                                              tabsetPanel(
-                                                tabPanel("Aggregate Z-score",
-                                                         # Content for the Aggregate Z-score tab goes here
-                                                ),
-                                                tabPanel("Food Insecurity Z-score",
-                                                         # Content for the z-score tab goes here
-                                                ),
-                                                tabPanel("Low Birthweight Z-score",
-                                                         # Content for the Z-score tab goes here
-                                                ),
-                                                tabPanel("Obesity Z-score",
-                                                         # Content for the Z-score tab goes here
-                                                ),
-                                                tabPanel("Physical Inactivity Z-score",
-                                                         # Content for the  Z-score tab goes here
-                                                )
-                                               
-                                              ),
-                                             
+                                              p("", style = "padding-top:10px;")
+                                     ),
+                                     column(3, 
+                                            
+                                            h4(strong("Description")),
+                                         
+                                     ),
+                                     column(9,
+                                            selectInput("territory_type", "Territory Type",
+                                                        choices = c("no new agents" = "base", 
+                                                                    "one new agent" = "one", 
+                                                                    "two new agents" = "two"), selected = "base"
+                                            ),
+                                            selectInput("zscore_type", "Health Index",
+                                                        choices = c(
+                                                          "aggregate" = "aggregate", 
+                                                          "food insecurity" = "food", 
+                                                          "obesity", 
+                                                          "low birthweight" = "lowbirth", 
+                                                          "obesity", 
+                                                          "physcial inactivity" = "inactivity", "diabetes"), selected = "aggregate"
+                                            ),
+                                            selectInput("variable_title", "Variable",
+                                                        choices = c("Food Insecurity", "Diabetes", "Low Birthweight", "Obesity", "Inactivity"), selected = "Food Insecurity"
+                                            ),
+                                            actionButton("submit_btn", "Submit")
+                                     ),
+                                     mainPanel(
+                                       leafletOutput("map")
                                      )
                             )
                  ),
@@ -682,9 +697,9 @@ server <- function(input, output) {
   })
   output$VariableDefinition <- renderText({
     if (input$Health_Outcomes == "per_low_birthweight") {
-      a
+      "Statistics for"
     } else if (input$Health_Outcomes == "life_expectancy") {
-      b
+      "Statistics for"
     } else if (input$Health_Outcomes == "life_expectancy_gap") {
       "Statistics for life_expectancy_gap"
     } else if (input$Health_Outcomes == "life_expectancy_black") {
@@ -796,7 +811,7 @@ server <- function(input, output) {
       "Please select a health outcome."
     } 
   }) 
-  ## Demographics-----
+  ## 3.6 Demographics-----
   temp_demo <- reactive({
     input$demographics
   })
@@ -822,7 +837,17 @@ server <- function(input, output) {
       "Please select a health outcome."
     } 
   }) 
- 
+ ## 3.7 server territory maps----
+  observeEvent(input$submit_btn, {
+    territory_type <- input$territory_type
+    zscore_type <- input$zscore_type
+    variable_title <- input$variable_title
+    map <- territory(territory_type, zscore_type, variable_title)
+    
+    output$map <- renderLeaflet({
+      map
+  })
+  })
 }
 
 # 4. Run the application-------------------------------------------------------------------
