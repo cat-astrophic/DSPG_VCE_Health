@@ -149,9 +149,9 @@ mapping2 <- function(variable, year) {
                       label = agent_labels, 
                       labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
     addLegendNumeric(pal = pal, values = ~Value, title = legend_title, orientation ="vertical",
-                  width = 40, height= 200) %>%
+                  width = 20, height= 150) %>%
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
-    addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topleft", data = NULL)
+    addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
 #territory function
@@ -173,7 +173,7 @@ mapping2 <- function(variable, year) {
                                    "royalblue", "greenyellow", "gold","turquoise","mediumvioletred", "mistyrose", 
                                    "palegreen","hotpink4", "purple", "sienna1","lightblue", "darkcyan", "lightsteelblue", 
                                    "magenta","slategray","darkorange3","violet","blue","mediumspringgreen","mediumorchid", 
-                                   "pink", "salmon4","burlywood","cadetblue3", "honeydew","orange","hotpink",
+                                   "pink", "salmon4","burlywood","darkgreen", "honeydew","orange","hotpink",
                                    "darkslateblue", "darkorchid1"),
                        domain= all_territories$Agent,
                        levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
