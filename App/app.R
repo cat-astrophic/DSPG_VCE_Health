@@ -202,12 +202,12 @@ mapping2 <- function(variable, year) {
     
     #creating good title names
     idx2 <- which(unique(territory.counties$zscore_type) == zscore_type)
-    good_title_names <- c("Aggregate", "obese", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
+    good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("New VCE FCS Agent Sites and",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
-    #differentiate colors of agents by the new_agent varible
+    #differentiate colors of agents by the new_agent variable
     additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "blue", "red")
     
     # create leaflet map
