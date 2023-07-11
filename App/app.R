@@ -87,7 +87,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                            GEOID = as.integer(GEOID),
                            NAMELSAD = str_to_title(NAMELSAD) )
   # territory data
-  all_territories <- read.csv("all_agent_solutions.csv")
+  all_territories <- read.csv("./data/all_agent_solutions.csv")
 
 
 # ## 1.4 Define your functions -------------------------------------------------------
@@ -201,10 +201,10 @@ mapping2 <- function(variable, year) {
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
-    idx <- which(unique(territory.counties$zscore_type) == zscore_type)
-    good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
+    idx2 <- which(unique(territory.counties$zscore_type) == zscore_type)
+    good_title_names <- c("Aggregate", "obese", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
-    territory_title = paste("New VCE FCS Agent Sites and",good_title_names[idx], "Z-scores", sep= " ")
+    territory_title = paste("New VCE FCS Agent Sites and",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     #differentiate colors of agents by the new_agent varible
