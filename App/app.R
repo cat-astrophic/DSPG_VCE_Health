@@ -148,7 +148,7 @@ mapping2 <- function(variable, year) {
     addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
                       label = agent_labels, 
                       labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-    addLegendNumeric(pal = pal, values = ~Value, title = legend_title, orientation ="vertical",
+    addLegendNumeric(pal = pal, values = ~Value, title = legend_title, orientation =c("vertical", "horizontal"),
                   width = 20, height= 150) %>%
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
@@ -205,7 +205,7 @@ mapping2 <- function(variable, year) {
     idx2 <- which(unique(all_territories$zscore_type) == zscore_type)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
-    territory_title = paste("New VCE FCS Agent Sites and",good_title_names[idx2], "Z-scores", sep= " ")
+    territory_title = paste("New VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     #differentiate colors of agents by the new_agent variable
