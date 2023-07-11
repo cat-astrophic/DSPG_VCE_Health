@@ -532,7 +532,6 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
-<<<<<<< HEAD
                                      fluidRow(
                                        style = "margin: 6px;",
                                        h1(strong("Results"), align = "center"),
@@ -566,47 +565,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        
                                        column(6,
                                               h4(strong("Map")),  # Add the heading for the map
-                                              leafletOutput("map", width = "100%", height = "900px")
-=======
-                                     fluidRow(style = "margin: 6px;",
-                                              h1(strong("Results"), align = "center"),
-                                              p("", style = "padding-top:10px;")
-                                     ),
-                                     fluidRow(style = "margin: 6px;",
-                                              column(3,
-                                                     selectInput("territory_type", "Agents",
-                                                                 choices = c("No New Agents" = "base", 
-                                                                             "One New Agent" = "one", 
-                                                                             "Two New Agents" = "two"), 
-                                                                 selected = "base"
-                                                     ),
-                                                     selectInput("zscore_type", "Health Index",
-                                                                 choices = c("Aggregate" = "aggregate", 
-                                                                             "Food Insecurity" = "food", 
-                                                                             "Obesity" = "obese", 
-                                                                             "Low Birthweight" = "lowbirth", 
-                                                                             "Physical Inactivity" = "inactivity", 
-                                                                             "Diabetes" = "diabetes"), 
-                                                                 selected = "aggregate"
-                                                     ),
-                                                     
-                                                     actionButton("submit_btn", "Submit")
-                                              ),
-                                              column(6,
-                                                     h4(strong("Description")),
-                                                     textOutput("basedescription")
-                                              )
-                                     ),
-                                     fluidRow(
-                                       column(9,
-                                              mainPanel(
-                                                leafletOutput("map")
-                                              )
->>>>>>> c99046767ac2b382f0a912cff37eeff02fca1118
-                                       )
-                                     )
-                            )
-                 ),
+                                              leafletOutput("map", width = "100%", height = "900px"),
+
+                                       )))),
                  
                  
                  ## 2.5 Tab Takeawayss --------------------------------------------
