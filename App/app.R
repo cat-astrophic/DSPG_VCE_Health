@@ -201,7 +201,7 @@ mapping2 <- function(variable, year) {
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
-    idx2 <- which(unique(territory.counties$zscore_type) == zscore_type)
+    idx2 <- which(unique(all_territories$zscore_type) == zscore_type)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("New VCE FCS Agent Sites and",good_title_names[idx2], "Z-scores", sep= " ")
