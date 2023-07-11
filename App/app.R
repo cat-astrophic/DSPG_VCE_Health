@@ -150,7 +150,7 @@ mapping2 <- function(variable, year) {
                       labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
     addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
-    addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
+    addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topleft", data = NULL)
 }
   
 #territory function
@@ -535,8 +535,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        style = "margin: 6px;",
                                        h1(strong("Results"), align = "center"),
                                        column(6,
-                                       p("The results from our programminng are shown in this map below. The map shows the best territories that each agent should serve. You can choose to see what happens when we add no new agents, one new agents, and two new agents with regards to the z-scores. The different colors represent the unique territories. ", style = "padding-top:10px;")
-                                     )),
+                                              p("The results from our programming are shown in this map below. The map shows the best territories that each agent should serve. You can choose to see what happens when we add no new agents, one new agent, and two new agents with regards to the z-scores. The different colors represent the unique territories.", style = "padding-top:10px;")
+                                       )
+                                     ),
                                      
                                      fluidRow(
                                        column(6,
@@ -560,7 +561,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               textOutput("basedescription"),
                                               textOutput("variabledes")
                                        ),
+                                       
                                        column(6,
+                                              h4(strong("Map")),  # Add the heading for the map
                                               leafletOutput("map", width = "100%", height = "900px")
                                        )
                                      )
