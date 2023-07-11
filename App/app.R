@@ -890,11 +890,26 @@ Collecting data on ethnicity helps identify disparities and inequalities that ma
   })
   output$basedescription <- renderText({
     if (input$territory_type == "base"){
-      "description for no new agent"
+      "This map shows territories for no new agents."
     } else if (input$territory_type == "one"){
-      "description for one new agent"
+      "This map shows territories for one new agents."
     } else if (input$territory_type == "two"){
-      "description for two new agents"
+      "This map shows territories for two new agents."
+    }
+  })
+  output$variabledes <- renderText({
+    if (input$zscore_type == "food"){
+      "This map shows territories for food insecurity z-score."
+    } else if (input$zscore_type == "obesity"){
+      "This map shows territories for obesity z-score."
+    } else if (input$zscore_type == "inactivity"){
+      "This map shows territories for physical inactivity z-score."
+    } else if (input$zscore_type == "aggregate"){
+      "This map shows territories for aggregate z-score."
+    } else if (input$zscore_type == "lowbirth"){
+      "This map shows territories for low birthweight z-score."
+    } else if (input$zscore_type == "diabetes"){
+      "This map shows territories for diabetes z-score."
     }
   })
 }
