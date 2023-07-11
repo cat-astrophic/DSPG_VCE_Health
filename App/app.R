@@ -125,7 +125,7 @@ mapping2 <- function(variable, year) {
   # Wrap legend title if too long
   spaces <- gregexpr("\\s", good_names[idx])[[1]]
   middle_space <- spaces[length(spaces) %/% 2 + 1]
-  legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
+  legend_title <- paste0(substring(good_names[idx], 1, middle_space-1)," ", substring(good_names[idx], middle_space+1 ))
   
   # Create title for the map
   map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
@@ -148,7 +148,8 @@ mapping2 <- function(variable, year) {
     addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
                       label = agent_labels, 
                       labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-    addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+    addLegendSize(pal = pal, values = ~Value, title = legend_title, orientation = c("vertical", "horizontal"),
+                  strokeWidth = 1) %>%
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
