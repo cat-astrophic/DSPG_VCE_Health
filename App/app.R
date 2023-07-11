@@ -87,7 +87,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                            GEOID = as.integer(GEOID),
                            NAMELSAD = str_to_title(NAMELSAD) )
   # territory data
-  all_territories <- read.csv("./data/agent_solutions.csv")
+  all_territories <- read.csv("all_agent_solutions.csv")
 
 
 # ## 1.4 Define your functions -------------------------------------------------------
@@ -152,9 +152,9 @@ mapping2 <- function(variable, year) {
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
-  #territory function
-
-  territory <- function(territory_type, zscore_type, variable_title) {
+  
+#territory function
+  territory <- function(territory_type, zscore_type) {
     
     temp2 <- all_territories[all_territories$territory_type == territory_type & all_territories$zscore_type == zscore_type, ]
     
@@ -163,110 +163,36 @@ mapping2 <- function(variable, year) {
       # Convert new agent locations to sf
       st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
     
-    #Join variable data with county geometry data
+    #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
-    
-    #creating color dictionary
-    agent_colors <- c(
-      "Albemarle" = "lightgoldenrod" ,
-      "Amelia" = "red",
-      "Amherst"= "forestgreen",
-      "Arlington" = "navy",
-      "Bedford" = "tan4",
-      "Chesapeake City" =  "dodgerblue",
-      "Fairfax" = "aquamarine4",
-      "Floyd"=  "yellow",
-      "Franklin" = "salmon",
-      "Gloucester" = "firebrick4",
-      "Greensville" = "darkolivegreen1",
-      "Henrico"= "royalblue",
-      "King George" = "greenyellow",
-      "Lancaster" = "gold",
-      "Lee" = "turquoise",
-      "Loudoun" = "mediumvioletred",
-      "Louisa" =  "mistyrose",
-      "Lynchburg City" = "palegreen",
-      "Mecklenburg" = "hotpink4",
-      "Newport News City North"  = "purple",
-      "Newport News City" = "sienna1",
-      "Orange"= "lightblue",
-      "Patrick"=  "darkcyan",
-      "Petersburg City"= "lightsteelblue" ,
-      "Pittsylvania" =  "magenta",
-      "Pulaski"= "slategray",
-      "Richmond City" = "darkorange3",
-      "Roanoke" = "violet",
-      "Rockbridge" = "blue",
-      "Rockingham" = "mediumspringgreen",
-      "Spotsylvania" = "mediumorchid" ,
-      "Virginia Beach City North" = "pink",
-      "Virginia Beach City" = "salmon4",
-      "Warren" = "burlywood",
-      "Washington"= "cadetblue3",
-      "Northeast District Office" = "honeydew",
-      "Augusta" = "orange",
-      "Essex" = "hotpink",
-      "Frederick" = "darkslateblue",
-      "Prince William" = "darkorchid1"
-    )
-    #pal <- colorFactor(palette = agent_colors, domain= all_territories$Agent)
+  
+    #assigning colors for each agent territory
     pal <- colorFactor(palette = c("lightgoldenrod" , "red","forestgreen","navy","grey21",
-                                   "dodgerblue", "aquamarine4","yellow",
-                                   "salmon", "firebrick4", "darkolivegreen1", "royalblue", "greenyellow", "gold",
-                                   "turquoise","mediumvioletred", "mistyrose", "palegreen","hotpink4", "purple", "sienna1",
-                                   "lightblue", "darkcyan", "lightsteelblue", "magenta","slategray",
-                                   "darkorange3","violet","blue","mediumspringgreen","mediumorchid", "pink", "salmon4",
-                                   "burlywood","cadetblue3", "honeydew","orange","hotpink","darkslateblue", "darkorchid1"),
+                                   "dodgerblue", "aquamarine4","yellow","salmon", "firebrick4", "darkolivegreen1", 
+                                   "royalblue", "greenyellow", "gold","turquoise","mediumvioletred", "mistyrose", 
+                                   "palegreen","hotpink4", "purple", "sienna1","lightblue", "darkcyan", "lightsteelblue", 
+                                   "magenta","slategray","darkorange3","violet","blue","mediumspringgreen","mediumorchid", 
+                                   "pink", "salmon4","burlywood","cadetblue3", "honeydew","orange","hotpink",
+                                   "darkslateblue", "darkorchid1"),
                        domain= all_territories$Agent,
-                       levels= c( "Albemarle",
-                                  "Amelia",
-                                  "Amherst",
-                                  "Arlington",
-                                  "Bedford",
-                                  "Chesapeake City",
-                                  "Fairfax",
-                                  "Floyd",
-                                  "Franklin",
-                                  "Gloucester",
-                                  "Greensville",
-                                  "Henrico",
-                                  "King George",
-                                  "Lancaster",
-                                  "Lee",
-                                  "Loudoun",
-                                  "Louisa",
-                                  "Lynchburg City",
-                                  "Mecklenburg",
-                                  "Newport News City North",
-                                  "Newport News City",
-                                  "Orange",
-                                  "Patrick",
-                                  "Petersburg City",
-                                  "Pittsylvania",
-                                  "Pulaski",
-                                  "Richmond City",
-                                  "Roanoke",
-                                  "Rockbridge",
-                                  "Rockingham",
-                                  "Spotsylvania",
-                                  "Virginia Beach City North",
-                                  "Virginia Beach City",
-                                  "Warren",
-                                  "Washington",
-                                  "Northeast District Office",
-                                  "Augusta",
-                                  "Essex",
-                                  "Frederick",
+                       levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
+                                  "Chesapeake City","Fairfax","Floyd","Franklin","Gloucester",
+                                  "Greensville","Henrico","King George","Lancaster","Lee",
+                                  "Loudoun","Louisa","Lynchburg City","Mecklenburg","Newport News City North",
+                                  "Newport News City","Orange","Patrick","Petersburg City","Pittsylvania",
+                                  "Pulaski","Richmond City","Roanoke","Rockbridge","Rockingham",
+                                  "Spotsylvania","Virginia Beach City North","Virginia Beach City","Warren",
+                                  "Washington","Northeast District Office","Augusta","Essex","Frederick",
                                   "Prince William"))
     
-    # Create labels for counties
+    # create labels for counties
     county_labels <- sprintf(
       "<strong>%s</strong><br/> Served by Agent From: %s",
       territory.counties$NAMELSAD,
       territory.counties$Agent
     ) %>% lapply(htmltools::HTML)
     
-    # Create labels for agents
+    # create labels for agents
     agent_labels <- sprintf(
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
       additional_agent_sf $Job.Dept,
@@ -274,14 +200,17 @@ mapping2 <- function(variable, year) {
       additional_agent_sf $VT.Email
     ) %>% lapply(htmltools::HTML)
     
-    
-    # Create title for the map
-    territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+    #creating good title names
+    idx <- which(unique(territory.counties$zscore_type) == zscore_type)
+    good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
+    # create title for the map
+    territory_title = paste("New VCE FCS Agent Sites and",good_title_names[idx], "Z-scores", sep= " ")
+    #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     #differentiate colors of agents by the new_agent varible
     additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "blue", "red")
     
-    # Create leaflet map
+    # create leaflet map
     leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addPolygons(fillColor = ~pal(Agent),
@@ -954,8 +883,7 @@ Collecting data on ethnicity helps identify disparities and inequalities that ma
   observeEvent(input$submit_btn, {
     territory_type <- input$territory_type
     zscore_type <- input$zscore_type
-    variable_title <- input$variable_title
-    map <- territory(territory_type, zscore_type, variable_title)
+    map <- territory(territory_type, zscore_type)
     
     output$map <- renderLeaflet({
       map
