@@ -148,8 +148,8 @@ mapping2 <- function(variable, year) {
     addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
                       label = agent_labels, 
                       labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-    addLegendSize(pal = pal, values = ~Value, title = legend_title, orientation = c("vertical", "horizontal"),
-                  strokeWidth = 1) %>%
+    addLegendNumeric(pal = pal, values = ~Value, title = legend_title, orientation ="vertical",
+                  width = 40, height= 200) %>%
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
@@ -532,42 +532,44 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
-                                     fluidRow(
-                                       style = "margin: 6px;",
-                                       h1(strong("Results"), align = "center"),
-                                       column(6,
-                                       p("The results from our programminng are shown in this map below. The map shows the best territories that each agent should serve. You can choose to see what happens when we add no new agents, one new agents, and two new agents with regards to the z-scores. The different colors represent the unique territories. ", style = "padding-top:10px;")
-                                     )),
-                                     
-                                     fluidRow(
-                                       column(6,
-                                              selectInput("territory_type", "Agents",
-                                                          choices = c("No New Agents" = "base", 
-                                                                      "One New Agent" = "one", 
-                                                                      "Two New Agents" = "two"), 
-                                                          selected = "base"
+                                     fluidRow(style = "margin: 6px;",
+                                              h1(strong("Results"), align = "center"),
+                                              p("", style = "padding-top:10px;")
+                                     ),
+                                     fluidRow(style = "margin: 6px;",
+                                              column(3,
+                                                     selectInput("territory_type", "Agents",
+                                                                 choices = c("No New Agents" = "base", 
+                                                                             "One New Agent" = "one", 
+                                                                             "Two New Agents" = "two"), 
+                                                                 selected = "base"
+                                                     ),
+                                                     selectInput("zscore_type", "Health Index",
+                                                                 choices = c("Aggregate" = "aggregate", 
+                                                                             "Food Insecurity" = "food", 
+                                                                             "Obesity" = "obese", 
+                                                                             "Low Birthweight" = "lowbirth", 
+                                                                             "Physical Inactivity" = "inactivity", 
+                                                                             "Diabetes" = "diabetes"), 
+                                                                 selected = "aggregate"
+                                                     ),
+                                                     
+                                                     actionButton("submit_btn", "Submit")
                                               ),
-                                              selectInput("zscore_type", "Health Index",
-                                                          choices = c("Aggregate" = "aggregate", 
-                                                                      "Food Insecurity" = "food", 
-                                                                      "Obesity" = "obese", 
-                                                                      "Low Birthweight" = "lowbirth", 
-                                                                      "Physical Inactivity" = "inactivity", 
-                                                                      "Diabetes" = "diabetes"), 
-                                                          selected = "aggregate"
-                                              ),
-                                              actionButton("submit_btn", "Submit"),
-                                              h4(strong("Description")),
-                                              textOutput("basedescription"),
-                                              textOutput("variabledes")
-                                       ),
-                                       column(6,
-                                              leafletOutput("map", width = "100%", height = "900px")
+                                              column(6,
+                                                     h4(strong("Description")),
+                                                     textOutput("basedescription")
+                                              )
+                                     ),
+                                     fluidRow(
+                                       column(9,
+                                              mainPanel(
+                                                leafletOutput("map")
+                                              )
                                        )
                                      )
                             )
                  ),
-                            
                  
                  
                  ## 2.5 Tab Takeawayss --------------------------------------------
@@ -757,13 +759,13 @@ The absence of health insurance coverage poses a substantial obstacle to accessi
   })
   output$EconomicStabilityVariableDefinition <- renderText({
     if (input$econ_stab == "per_unemployed") {
-      "Unemployment rate: The unemployment rate reflects the economic and social conditions influencing an individual’s well-being. Employment provides economic stability. Unemployment, on the other hand, is a stressor that could worsen one’s health. It not only limits people’s access to quality healthcare but also is a burden on mental health as people tend to feel more depressed without a job."
+      "stats for unsinsured"
     } else if (input$econ_stab == "per_children_in_poverty") {
-      "% children in poverty: This variable measures the percentage of people under the age of 18 in poverty. Children living in poverty have less access to health resources.  "
+      "stats for "
     } else if (input$econ_stab == "per_food_insecure") {
-      "Statistics for food insecure"
+      "Statistics for "
     } else if (input$econ_stab == "median_household_income") {
-      "Median Household Income: Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease."
+      "Statistics for"
       
     } else {
       "Please select a health outcome."
@@ -890,26 +892,11 @@ Collecting data on ethnicity helps identify disparities and inequalities that ma
   })
   output$basedescription <- renderText({
     if (input$territory_type == "base"){
-      "This map shows the territories for when there are no new agents added."
+      "description for no new agent"
     } else if (input$territory_type == "one"){
-      "This map shows the territories when there is one new agent added. The new agent is shown in the red marker."
+      "description for one new agent"
     } else if (input$territory_type == "two"){
-      "This map shows the territories when there are two new agents added. The new agents are shown in the red markers."
-    }
-  })
-  output$variabledes <- renderText({
-    if (input$zscore_type == "aggregate"){
-      "This map shows the territories for aggregate z-scores."
-    } else if (input$zscore_type == "obese"){
-      "This map shows the territories for obesity z-scores."
-    } else if (input$zscore_type == "food"){
-      "This map shows the territories for food insecurity z-scores."
-    } else if (input$zscore_type == "inactivity"){
-      "This map shows the territories for physical inactivity z-scores."
-    } else if (input$zscore_type == "lowbirth"){
-      "This map shows the territories for low bithweight z-scores."
-    } else if (input$zscore_type == "diabetes"){
-      "This map shows the territories for diabetes z-scores."
+      "description for two new agents"
     }
   })
 }
