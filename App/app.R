@@ -534,8 +534,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      fluidRow(
                                        style = "margin: 6px;",
                                        h1(strong("Results"), align = "center"),
-                                       p("", style = "padding-top:10px;")
-                                     ),
+                                       column(6,
+                                       p("The results from our programminng are shown in this map below. The map shows the best territories that each agent should serve. You can choose to see what happens when we add no new agents, one new agents, and two new agents with regards to the z-scores. The different colors represent the unique territories. ", style = "padding-top:10px;")
+                                     )),
                                      
                                      fluidRow(
                                        column(6,
@@ -888,26 +889,26 @@ Collecting data on ethnicity helps identify disparities and inequalities that ma
   })
   output$basedescription <- renderText({
     if (input$territory_type == "base"){
-      "description for no new agent"
+      "This map shows the territories for when there are no new agents added."
     } else if (input$territory_type == "one"){
-      "description for one new agent"
+      "This map shows the territories when there is one new agent added. The new agent is shown in the red marker."
     } else if (input$territory_type == "two"){
-      "description for two new agents"
+      "This map shows the territories when there are two new agents added. The new agents are shown in the red markers."
     }
   })
   output$variabledes <- renderText({
     if (input$zscore_type == "aggregate"){
-      "description for aggregate"
+      "This map shows the territories for aggregate z-scores."
     } else if (input$zscore_type == "obese"){
-      "description for obese"
+      "This map shows the territories for obesity z-scores."
     } else if (input$zscore_type == "food"){
-      "description for food"
+      "This map shows the territories for food insecurity z-scores."
     } else if (input$zscore_type == "inactivity"){
-      "description for inactivity"
+      "This map shows the territories for physical inactivity z-scores."
     } else if (input$zscore_type == "lowbirth"){
-      "description for low birth"
+      "This map shows the territories for low bithweight z-scores."
     } else if (input$zscore_type == "diabetes"){
-      "description for diabestes"
+      "This map shows the territories for diabetes z-scores."
     }
   })
 }
