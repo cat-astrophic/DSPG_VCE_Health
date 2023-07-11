@@ -500,36 +500,50 @@ ui <- navbarPage(#title = "DSPG 2023",
                  ),
                  ),
                  ## 2.4 Tab Agent Optimization Programming------
-                 navbarMenu("Mathematical Programming" ,
-                            ### 2.4.1 Subtab Overview -----
-                            tabPanel("Programming Overview",
-                                     fluidRow(style = "margin: 6px;",
-                                              p("", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 6px;",
-                                              align = "justify",
-                                              h1(strong("Mathematical Model")),
-                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
-                                              p("The objective funtion of this model is to maximize the population weighted need of each counties. We give the function four different constraints."),
-                                              
+                 navbarMenu("Mathematical Programming",
+                            tabPanel("Agent Optimization Process",
+                                     fluidRow(
+                                       style = "margin: 6px;",
+                                       h1(strong("Agent Optimization Process"), align = "center")
                                      ),
-                                     column(4,
-                                            h1(strong("Agents Opitmization")),
-                                            p(strong("Overview")),
-                                            p("Our goal is to try to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents (there are well over 100 cities and counties in Virginia but only 34 FCS agents), we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
-                                            p(strong("Workflow:")),
-                                            tags$li("Identify where FCS Agents are"),
-                                            tags$li("Identify health outcomes that FCS agents can affect"),
-                                            tags$li("Create a health index: z-score aggregation"),
-                                            tags$li("Determining accessibility definition"),
-                                            tags$li("Solving mathematical programs"),
-                                            tags$li("Mapping optimized territories"),
-                                            p(""),
-                                            
-                                            br(),
-                                            
-                                            
+                                     fluidRow(
+                                       style = "margin: 6px;",
+                                       column(4,
+                                              p(strong("Overview")),
+                                              p("Our goal is to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents, we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
+                                              p(strong("Workflow:")),
+                                              tags$li("Identify where FCS Agents are"),
+                                              tags$li("Identify health outcomes that FCS agents can affect"),
+                                              tags$li("Create a health index: z-score aggregation"),
+                                              tags$li("Determining accessibility definition"),
+                                              tags$li("Solving mathematical programs"),
+                                              tags$li("Mapping optimized territories")
+                                       )
                                      )
                             ),
+                            tabPanel("Programming Overview",
+                                     fluidRow(
+                                       style = "margin: 6px;",
+                                       h1(strong("Mathematical Programming"), align = "center")
+                                     ),
+                                     fluidRow(
+                                       style = "margin: 6px;",
+                                       align = "justify",
+                                       column(6,
+                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
+                                              p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
+                                              tags$li("Population:"),
+                                              p("The population constraint plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
+                                              tags$li("Distance:"),
+                                              p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need.")
+                                       )
+                                     )
+                            ),
+                            
+                 
+                 
+                 
+                 
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
                                      fluidRow(
