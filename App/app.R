@@ -87,7 +87,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                            GEOID = as.integer(GEOID),
                            NAMELSAD = str_to_title(NAMELSAD) )
   # territory data
-  all_territories <- read.csv("all_agent_solutions.csv")
+  all_territories <- read.csv("./data/all_agent_solutions.csv")
 
 
 # ## 1.4 Define your functions -------------------------------------------------------
@@ -531,44 +531,41 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
-                                     fluidRow(style = "margin: 6px;",
-                                              h1(strong("Results"), align = "center"),
-                                              p("", style = "padding-top:10px;")
-                                     ),
-                                     fluidRow(style = "margin: 6px;",
-                                              column(3,
-                                                     selectInput("territory_type", "Agents",
-                                                                 choices = c("No New Agents" = "base", 
-                                                                             "One New Agent" = "one", 
-                                                                             "Two New Agents" = "two"), 
-                                                                 selected = "base"
-                                                     ),
-                                                     selectInput("zscore_type", "Health Index",
-                                                                 choices = c("Aggregate" = "aggregate", 
-                                                                             "Food Insecurity" = "food", 
-                                                                             "Obesity" = "obese", 
-                                                                             "Low Birthweight" = "lowbirth", 
-                                                                             "Physical Inactivity" = "inactivity", 
-                                                                             "Diabetes" = "diabetes"), 
-                                                                 selected = "aggregate"
-                                                     ),
-                                                     
-                                                     actionButton("submit_btn", "Submit")
-                                              ),
-                                              column(6,
-                                                     h4(strong("Description")),
-                                                     textOutput("basedescription")
-                                              )
-                                     ),
                                      fluidRow(
-                                       column(9,
-                                              mainPanel(
-                                                leafletOutput("map")
-                                              )
+                                       style = "margin: 6px;",
+                                       h1(strong("Results"), align = "center"),
+                                       p("", style = "padding-top:10px;")
+                                     ),
+                                     
+                                     fluidRow(
+                                       column(6,
+                                              selectInput("territory_type", "Agents",
+                                                          choices = c("No New Agents" = "base", 
+                                                                      "One New Agent" = "one", 
+                                                                      "Two New Agents" = "two"), 
+                                                          selected = "base"
+                                              ),
+                                              selectInput("zscore_type", "Health Index",
+                                                          choices = c("Aggregate" = "aggregate", 
+                                                                      "Food Insecurity" = "food", 
+                                                                      "Obesity" = "obese", 
+                                                                      "Low Birthweight" = "lowbirth", 
+                                                                      "Physical Inactivity" = "inactivity", 
+                                                                      "Diabetes" = "diabetes"), 
+                                                          selected = "aggregate"
+                                              ),
+                                              actionButton("submit_btn", "Submit"),
+                                              h4(strong("Description")),
+                                              textOutput("basedescription"),
+                                              textOutput("variabledes")
+                                       ),
+                                       column(6,
+                                              leafletOutput("map", width = "100%", height = "900px")
                                        )
                                      )
                             )
                  ),
+                            
                  
                  
                  ## 2.5 Tab Takeawayss --------------------------------------------
@@ -758,13 +755,13 @@ The absence of health insurance coverage poses a substantial obstacle to accessi
   })
   output$EconomicStabilityVariableDefinition <- renderText({
     if (input$econ_stab == "per_unemployed") {
-      "stats for unsinsured"
+      "Unemployment rate: The unemployment rate reflects the economic and social conditions influencing an individual’s well-being. Employment provides economic stability. Unemployment, on the other hand, is a stressor that could worsen one’s health. It not only limits people’s access to quality healthcare but also is a burden on mental health as people tend to feel more depressed without a job."
     } else if (input$econ_stab == "per_children_in_poverty") {
-      "stats for "
+      "% children in poverty: This variable measures the percentage of people under the age of 18 in poverty. Children living in poverty have less access to health resources.  "
     } else if (input$econ_stab == "per_food_insecure") {
-      "Statistics for "
+      "Statistics for food insecure"
     } else if (input$econ_stab == "median_household_income") {
-      "Statistics for"
+      "Median Household Income: Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease."
       
     } else {
       "Please select a health outcome."
@@ -896,6 +893,21 @@ Collecting data on ethnicity helps identify disparities and inequalities that ma
       "description for one new agent"
     } else if (input$territory_type == "two"){
       "description for two new agents"
+    }
+  })
+  output$variabledes <- renderText({
+    if (input$zscore_type == "aggregate"){
+      "description for aggregate"
+    } else if (input$zscore_type == "obese"){
+      "description for obese"
+    } else if (input$zscore_type == "food"){
+      "description for food"
+    } else if (input$zscore_type == "inactivity"){
+      "description for inactivity"
+    } else if (input$zscore_type == "lowbirth"){
+      "description for low birth"
+    } else if (input$zscore_type == "diabetes"){
+      "description for diabestes"
     }
   })
 }
