@@ -18,14 +18,16 @@ library(viridis)
 library(readxl)
 library(sf) 
 options(scipen=999)
+
+setwd("~/DSPG/Repose/DSPG_VCE_Health/App/Data")
 #reading in va counties shps
-va.counties <- st_read("./data/va_counties.shp")
+va.counties <- st_read("va_counties.shp")
 # Convert columns to appropriate types and rename them
 va.counties <- transform(va.counties,
                          GEOID = as.integer(GEOID),
                          NAMELSAD = str_to_title(NAMELSAD) )
 # territory data
-all_territories <- read.csv("./data/agent_solutions.csv")
+all_territories <- read_csv("agent_solutions.csv")
 
 territory <- function(territory_type, zscore_type, variable_title) {
   
@@ -62,8 +64,7 @@ territory <- function(territory_type, zscore_type, variable_title) {
     "Mecklenburg" = "hotpink4",
     "Newport News City North"  = "purple",
     "Newport News City" = "lightblue",
-    "Northeast District Office" = "orange",
-    "Orange"= "darkseagreen2",
+    "Orange County"= "darkseagreen2",
     "Patrick"=  "lightsteelblue",
     "Petersburg City"= "magenta" ,
     "Pittsylvania" =  "slategray",
@@ -75,20 +76,68 @@ territory <- function(territory_type, zscore_type, variable_title) {
     "Spotsylvania" = "pink" ,
     "Virginia Beach City North" = "salmon4",
     "Virginia Beach City" = "burlywood",
-    "Warren" = "dodgerblue",
+    "Warren" = "cadetblue3",
     "Washington"= "honeydew",
-    "Frederick" = "tan1",
+    "Northeast District Office" = "orange",
     "Augusta" = "hotpink",
-    "Prince William" = "darkorchid1",
-    "Essex" = "chocolate"
+    "Essex" = "chocolate",
+    "Frederick" = "tan1",
+    "Prince William" = "darkorchid1"
   )
-  pal <- colorFactor(palette = agent_colors, domain= territory.counties$Agent)
-  
+  #pal <- colorFactor(palette = agent_colors, domain= all_territories$Agent)
+  pal <- colorFactor(palette = c("lightgoldenrod" , "red","forestgreen","navy","plum4","khaki", "brown2","yellow",
+   "salmon", "lightgrey", "darkolivegreen", "chartreuse4", "gold", "lavenderblush",
+   "turquoise","mediumvioletred", "mistyrose", "palegreen","hotpink4", "purple",
+   "lightblue", "darkseagreen2", "lightsteelblue", "magenta","slategray",
+   "lightcyan","darkgrey","blue","mediumspringgreen","mediumorchid", "pink", "salmon4",
+   "burlywood","cadetblue3", "honeydew","orange","hotpink","chocolate", "darkorchid1"),
+  domain= all_territories$Agent,
+  levels= c( "Albemarle",
+             "Amelia",
+             "Amherst",
+             "Arlington",
+             "Bedford",
+             "Chesapeake City",
+             "Fairfax",
+             "Floyd",
+             "Franklin",
+             "Gloucester",
+             "Greensville",
+             "Henrico",
+             "King George",
+             "Lancaster",
+             "Lee",
+             "Loudoun",
+             "Louisa",
+             "Lynchburg City",
+             "Mecklenburg",
+             "Newport News City North",
+             "Newport News City",
+             "Orange County",
+             "Patrick",
+             "Petersburg City",
+             "Pittsylvania",
+             "Pulaski",
+             "Richmond City",
+             "Roanoke",
+             "Rockbridge",
+             "Rockingham",
+             "Spotsylvania",
+             "Virginia Beach City North",
+             "Virginia Beach City",
+             "Warren",
+             "Washington",
+             "Northeast District Office",
+             "Augusta",
+             "Essex",
+             "Frederick",
+             "Prince William"))
+
   # Create labels for counties
   county_labels <- sprintf(
     "<strong>%s</strong><br/> Served by Agent From: %s",
     territory.counties$NAMELSAD,
-    additional_agent_sf$Agent
+    territory.counties$Agent
   ) %>% lapply(htmltools::HTML)
   
   # Create labels for agents
@@ -128,3 +177,6 @@ territory <- function(territory_type, zscore_type, variable_title) {
     setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
     addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
 }
+
+# va_counties <- counties(state = "VA", cb = TRUE)
+# sf::st_write(va_counties, "C:/Users/vivia/Documents/DSPG/Repose/DSPG_VCE_Health/App/Data/va_counties.shp", append= FALSE)
