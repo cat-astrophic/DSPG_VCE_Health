@@ -156,9 +156,6 @@ mapping2 <- function(variable, year) {
 
   territory <- function(territory_type, zscore_type, variable_title) {
     
-    
-    
-    # 🚩: Not Territory_Type, it should be territory_type. Check your dataframe all_territories
     temp2 <- all_territories[all_territories$territory_type == territory_type & all_territories$zscore_type == zscore_type, ]
     
     #convert new agent locations to sf
@@ -166,61 +163,107 @@ mapping2 <- function(variable, year) {
       # Convert new agent locations to sf
       st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
     
-    
-    # # Join variable data with county geometry data
+    #Join variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
     
-    #problem area!!
+    #creating color dictionary
     agent_colors <- c(
       "Albemarle" = "lightgoldenrod" ,
       "Amelia" = "red",
       "Amherst"= "forestgreen",
       "Arlington" = "navy",
-      "Bedford" = "plum4",
-      "Chesapeake City" =  "khaki",
-      "Fairfax" = "brown2",
+      "Bedford" = "tan4",
+      "Chesapeake City" =  "dodgerblue",
+      "Fairfax" = "aquamarine4",
       "Floyd"=  "yellow",
       "Franklin" = "salmon",
-      "Gloucester" = "lightgrey",
-      "Greensville" = "darkolivegreen",
-      "Henrico"= "chartreuse4",
-      "King George" = "gold",
-      "Lancaster" = "lavenderblush",
+      "Gloucester" = "firebrick4",
+      "Greensville" = "darkolivegreen1",
+      "Henrico"= "royalblue",
+      "King George" = "greenyellow",
+      "Lancaster" = "gold",
       "Lee" = "turquoise",
       "Loudoun" = "mediumvioletred",
       "Louisa" =  "mistyrose",
       "Lynchburg City" = "palegreen",
       "Mecklenburg" = "hotpink4",
       "Newport News City North"  = "purple",
-      "Newport News City" = "lightblue",
-      "Northeast District Office" = "orange",
-      "Orange"= "darkseagreen2",
-      "Patrick"=  "lightsteelblue",
-      "Petersburg City"= "magenta" ,
-      "Pittsylvania" =  "slategray",
-      "Pulaski"= "lightcyan",
-      "Richmond City" = "darkgrey",
-      "Roanoke" = "blue",
-      "Rockbridge" = "mediumspringgreen",
-      "Rockingham" = "mediumorchid",
-      "Spotsylvania" = "pink" ,
-      "Virginia Beach City North" = "salmon4",
-      "Virginia Beach City" = "burlywood",
-      "Warren" = "dodgerblue",
-      "Washington"= "honeydew",
-      "Frederick" = "tan1",
-      "Augusta" = "hotpink",
-      "Prince William" = "darkorchid1",
-      "Essex" = "chocolate"
+      "Newport News City" = "sienna1",
+      "Orange"= "lightblue",
+      "Patrick"=  "darkcyan",
+      "Petersburg City"= "lightsteelblue" ,
+      "Pittsylvania" =  "magenta",
+      "Pulaski"= "slategray",
+      "Richmond City" = "darkorange3",
+      "Roanoke" = "violet",
+      "Rockbridge" = "blue",
+      "Rockingham" = "mediumspringgreen",
+      "Spotsylvania" = "mediumorchid" ,
+      "Virginia Beach City North" = "pink",
+      "Virginia Beach City" = "salmon4",
+      "Warren" = "burlywood",
+      "Washington"= "cadetblue3",
+      "Northeast District Office" = "honeydew",
+      "Augusta" = "orange",
+      "Essex" = "hotpink",
+      "Frederick" = "darkslateblue",
+      "Prince William" = "darkorchid1"
     )
-    pal <- colorFactor(palette = agent_colors, domain= territory.counties$Agent)
+    #pal <- colorFactor(palette = agent_colors, domain= all_territories$Agent)
+    pal <- colorFactor(palette = c("lightgoldenrod" , "red","forestgreen","navy","grey21",
+                                   "dodgerblue", "aquamarine4","yellow",
+                                   "salmon", "firebrick4", "darkolivegreen1", "royalblue", "greenyellow", "gold",
+                                   "turquoise","mediumvioletred", "mistyrose", "palegreen","hotpink4", "purple", "sienna1",
+                                   "lightblue", "darkcyan", "lightsteelblue", "magenta","slategray",
+                                   "darkorange3","violet","blue","mediumspringgreen","mediumorchid", "pink", "salmon4",
+                                   "burlywood","cadetblue3", "honeydew","orange","hotpink","darkslateblue", "darkorchid1"),
+                       domain= all_territories$Agent,
+                       levels= c( "Albemarle",
+                                  "Amelia",
+                                  "Amherst",
+                                  "Arlington",
+                                  "Bedford",
+                                  "Chesapeake City",
+                                  "Fairfax",
+                                  "Floyd",
+                                  "Franklin",
+                                  "Gloucester",
+                                  "Greensville",
+                                  "Henrico",
+                                  "King George",
+                                  "Lancaster",
+                                  "Lee",
+                                  "Loudoun",
+                                  "Louisa",
+                                  "Lynchburg City",
+                                  "Mecklenburg",
+                                  "Newport News City North",
+                                  "Newport News City",
+                                  "Orange",
+                                  "Patrick",
+                                  "Petersburg City",
+                                  "Pittsylvania",
+                                  "Pulaski",
+                                  "Richmond City",
+                                  "Roanoke",
+                                  "Rockbridge",
+                                  "Rockingham",
+                                  "Spotsylvania",
+                                  "Virginia Beach City North",
+                                  "Virginia Beach City",
+                                  "Warren",
+                                  "Washington",
+                                  "Northeast District Office",
+                                  "Augusta",
+                                  "Essex",
+                                  "Frederick",
+                                  "Prince William"))
     
     # Create labels for counties
-    #problem area!!
     county_labels <- sprintf(
-      "<strong>%s</strong><br/> Served by Agent From: %s:",
+      "<strong>%s</strong><br/> Served by Agent From: %s",
       territory.counties$NAMELSAD,
-      additional_agent_sf$Agent
+      territory.counties$Agent
     ) %>% lapply(htmltools::HTML)
     
     # Create labels for agents
@@ -235,6 +278,7 @@ mapping2 <- function(variable, year) {
     # Create title for the map
     territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
+    #differentiate colors of agents by the new_agent varible
     additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "blue", "red")
     
     # Create leaflet map
@@ -256,7 +300,6 @@ mapping2 <- function(variable, year) {
                         icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
                         label = agent_labels,
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      #addLegend(colors= agent_colors, labels= agent_colors, title = territory_title, position = "bottomright") %>%
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
@@ -580,14 +623,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                              "diabetes" = "diabetes"), 
                                                                  selected = "aggregate"
                                                      ),
-                                                     selectInput("variable_title", "Health Variable",
-                                                                 choices = c("Food Insecurity", 
-                                                                             "Diabetes", 
-                                                                             "Low Birthweight", 
-                                                                             "Obesity", 
-                                                                             "Physical Inactivity"), 
-                                                                 selected = "Food Insecurity"
-                                                     ),
+                                                     
                                                      actionButton("submit_btn", "Submit")
                                               ),
                                               column(6,
