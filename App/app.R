@@ -72,8 +72,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   
   # Prepare labels for varibels of interest
   good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
-                  "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
-                  "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses","Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
+                  "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
+                  "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
+                  "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
+                  "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
+                  "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
+                  "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
+                  "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
+                  "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
   # territory data
   all_territories <- read.csv("./data/agent_solutions.csv")
   
@@ -356,7 +362,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Vaccination Rate" = "per_vaccinated",
                                                        "Preventable Hospitalization Rate" = "preventable_hospitalization_rate",
                                                        "Annual Mammograms" = "per_with_annual_mammogram",
-                                                       "Diabetes Rate" = "per_adults_with_diabetes"
+                                                       "Diabetes Rate" = "per_adults_with_diabetes",
+                                                       "Chlamydia Rate" = "chlamydia_rate"
                                                        )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_access", label = "Select Year: ", 
@@ -384,12 +391,12 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      selectInput("econ_stab", "Select Variable:", width = "50%", choices = c(
                                                        "Unemployment Rate" = "per_unemployed",
                                                        "Children in Poverty" = "per_children_in_poverty",
-                                                       "Food Insecurity" = "per_food_insecure"
-                                                       # #"Median Household Income" = "median_household_income",
-                                                       # # "Median Household Income (Black)" = "median_household_income_black",
-                                                       # # "Median Household Income (White)" = "median_household_income_white",
-                                                       #  "Median Household Income (Hispanic)" = "median_household_income_hispanic",
-                                                       #  "Gender Pay Gap" = "gender_pay_gap"
+                                                       "Food Insecurity" = "per_food_insecure",
+                                                       "Median Household Income" = "median_household_income",
+                                                        "Median Household Income (Black)" = "median_household_income_black",
+                                                        "Median Household Income (White)" = "median_household_income_white",
+                                                         "Median Household Income (Hispanic)" = "median_household_income_hispanic",
+                                                        "Gender Pay Gap" = "gender_pay_gap"
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_econ", label = "Select Year: ", 
@@ -450,11 +457,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Physical Distress" = "per_physical_distress",
                                                        "Mental Distress" = "per_mental_distress",
                                                        "Access to Exercise Opportunity" = "per_access_to_exercise_opportunities",
-                                                       "Suicide Rate" = "suicide_rate"
-                                                       # "Limited Access to Healthy Food" = "per_limited_access_to_healthy_foods",
-                                                       # "Juvenile Arrest Rate" = "juvenile_arrests_rate",
-                                                       # "Insufficient Sleep" = "per_insufficient_sleep",
-                                                       # "Housing Problems" = "per_severe_housing_problems"
+                                                       "Suicide Rate" = "suicide_rate",
+                                                        "Limited Access to Healthy Food" = "per_limited_access_to_healthy_foods",
+                                                        "Juvenile Arrest Rate" = "juvenile_arrests_rate",
+                                                        "Insufficient Sleep" = "per_insufficient_sleep",
+                                                        "Housing Problems" = "per_severe_housing_problems"
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_envr", label = "Select Year: ", 
