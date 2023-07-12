@@ -486,7 +486,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "American Indian or Alaska Native" = "per_american_indian_or_alaska_native",
                                                        "Asian" = "per_asian",
                                                        "Hispanic" = "per_hispanic",
-                                                       "Nonhispanic White" = "per_nonhispanic_white"
+                                                       "Nonhispanic White" = "per_nonhispanic_white",
+                                                       "Not Proficient in English" = "per_not_proficient_in_english"
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_demo", label = "Select Year: ", 
@@ -550,7 +551,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      fluidRow(
                                        style = "margin: 6px;",
                                        h1(strong("Results"), align = "center"),
-                                       column(6,
+                                       column(5,
                                               p("The results from our programming are shown in this map below. The map shows the best territories that each agent should serve. You can choose to see what happens when we add no new agents, one new agent, and two new agents with regards to the z-scores. The different colors represent the unique territories.", style = "padding-top:10px;")
                                        )
                                      ),
@@ -585,20 +586,20 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        )))),
                  
                  
-                 ## 2.5 Tab Takeawayss --------------------------------------------
-                 tabPanel("Takeaways", value = "conclusion", 
-                          fluidRow(style = "margin: 6px;",
-                                   h1(strong("Project Findings and Predictions"), align = "center"),
-                                   p("", style = "padding-top:10px;"),
-                                   p("findings on maps"),
-                                   fluidRow(style = "margin: 6px;", align = "justify",
-                                            h4(strong("VCE")),
-                                            
-                                   ), 
-                                   
-                                   
-                                   
-                          )),
+                 # ## 2.5 Tab Takeawayss --------------------------------------------
+                 # tabPanel("Takeaways", value = "conclusion", 
+                 #          fluidRow(style = "margin: 6px;",
+                 #                   h1(strong("Project Findings and Predictions"), align = "center"),
+                 #                   p("", style = "padding-top:10px;"),
+                 #                   p("findings on maps"),
+                 #                   fluidRow(style = "margin: 6px;", align = "justify",
+                 #                            h4(strong("VCE")),
+                 #                            
+                 #                   ), 
+                 #                   
+                 #                   
+                 #                   
+                 #          )),
                  
                  
                  ## 2.6 Tab Data Sources --------------------------------------------
@@ -781,7 +782,7 @@ The absence of health insurance coverage poses a substantial obstacle to accessi
       "Statistics for"
       
     } else {
-      "Please select a health outcome."
+      "Please select a health variable."
     } 
   }) 
   ## 3.4 Health Behaviors-----
@@ -815,7 +816,7 @@ Adult obesity is a persistent condition that raises the likelihood of various he
       "Teen Birth Rate- This variable represents the number of births per 1,000 female population ages 15-19.
 Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and employment opportunities."
     } else {
-      "Please select a health outcome."
+      "Please select a health variable."
     } 
   }) 
   ## 3.5 Neighborhood and Built Environment------
@@ -852,7 +853,7 @@ Extensive evidence indicates a robust correlation between living in a food deser
       " This variable represents the percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).
 Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being."
       } else {
-      "Please select a health outcome."
+      "Please select a health variable."
     } 
   }) 
   ## 3.6 Demographics-----
@@ -888,9 +889,11 @@ Collecting data on ethnicity helps identify disparities and inequalities that ma
     } else if (input$demographics == "per_black") {
       " Percentage of the population self-identifying as non-Hispanic Black or African American.
 Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
-    
+    } else if (input$demographics == "per_not_proficient_in_english") {
+      "% Not Proficient in English- Percentage of the population aged 5 and over who reported speaking English less than 'well'. Understanding the number of individuals who are not proficient in English helps identify the language needs of a population. It allows policymakers, educators, and service providers to develop appropriate strategies and resources to ensure effective communication and equal access to essential services, such as healthcare, education, legal services, employment, and government programs. By recognizing language diversity and addressing language barriers, societies can promote inclusivity and equitable access to opportunities and resources.
+      "
     } else {
-      "Please select a health outcome."
+      "Please select a health variable."
     } 
   }) 
  ## 3.7 server territory maps----
