@@ -378,7 +378,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                             tabPanel("Economic Stability", 
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Economic Stability Variables"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
+                                              p("Economic factors have a profound impact on health outcomes and overall well-being within communities. Socioeconomic status, income inequality, and access to resources are all key determinants of health disparities. One crucial aspect of economic influence is income and poverty. Low-income individuals and families often struggle to afford basic necessities like nutritious food, stable housing, and healthcare services. This can result in higher rates of malnutrition, inadequate living conditions, and limited access to essential healthcare, leading to a range of health challenges. VCE agents can play a pivotal role in addressing these issues by providing community members with resources on financial literacy, budgeting, and connecting them with public assistance programs. By promoting financial stability and providing guidance on accessing available resources, agents can help improve health outcomes for vulnerable populations.
+                                                Furthermore, employment and job opportunities significantly impact health and well-being. Unemployment or underemployment can contribute to chronic stress, mental health issues, and limited access to healthcare services. Additionally, job insecurity and stressful work environments can negatively affect physical health. VCE agents can collaborate with local workforce development agencies, businesses, and educational institutions to provide job training, skills development programs, and support in finding employment. By helping individuals gain meaningful employment and stable income, agents contribute to improved health and overall quality of life within their communities.
+                                                Education is another important economic factor that influences health outcomes. Educational attainment is strongly associated with better health and economic prospects. VCE agents can support educational initiatives by providing workshops, training programs, and resources on topics such as career development, vocational skills, and entrepreneurship. By equipping community members with the necessary skills and knowledge, agents empower individuals to pursue better job opportunities, increase income potential, and ultimately enhance their health and well-being.
+                                                Access to affordable and quality healthcare is crucial for maintaining good health. Economic factors significantly influence healthcare access, as individuals with limited financial resources may struggle to afford insurance coverage and healthcare services. VCE agents can raise awareness about healthcare resources, insurance options, and preventative care programs available in the community. They can provide information on navigating the healthcare system, understanding insurance coverage, and connecting community members with local healthcare providers. By promoting access to affordable and quality healthcare, agents contribute to better health outcomes and reduce health disparities within their communities.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
                                               column(3, 
@@ -395,8 +398,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Median Household Income" = "median_household_income",
                                                         "Median Household Income (Black)" = "median_household_income_black",
                                                         "Median Household Income (White)" = "median_household_income_white",
-                                                         "Median Household Income (Hispanic)" = "median_household_income_hispanic",
-                                                        "Gender Pay Gap" = "gender_pay_gap"
+                                                         "Median Household Income (Hispanic)" = "median_household_income_hispanic"
+                                                        
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_econ", label = "Select Year: ", 
@@ -458,7 +461,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Mental Distress" = "per_mental_distress",
                                                        "Access to Exercise Opportunity" = "per_access_to_exercise_opportunities",
                                                        "Suicide Rate" = "suicide_rate",
-                                                        "Limited Access to Healthy Food" = "per_limited_access_to_healthy_foods",
+                                                       
                                                         "Juvenile Arrest Rate" = "juvenile_arrests_rate",
                                                         "Insufficient Sleep" = "per_insufficient_sleep",
                                                         "Housing Problems" = "per_severe_housing_problems"
@@ -558,10 +561,17 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
                                      fluidRow(
-                                       style = "margin: 6px;",
+                                       
                                        h1(strong("Results"), align = "center"),
-                                       column(5,
-                                              p("The results from our programming are shown in this map below. The map shows the best territories that each agent should serve. You can choose to see what happens when we add no new agents, one new agent, and two new agents with regards to the z-scores. The different colors represent the unique territories.", style = "padding-top:10px;")
+                                       column(12,
+                                              p("The map displayed on the right provides a visual representation of the ideal territories assigned to FCS agents.
+                                                These territories have been determined using data from aggregate (z_score_type)  z-scores to optimize their effectiveness. 
+                                                These territories have also been created in regard to population, accessibility, and VCE districts. Each color on the map corresponds to a distinct agent's territory. 
+                                                By hovering your cursor over a county, you can easily identify the agent responsible for serving that particular area. 
+                                                Furthermore, you can hover over the cloud icons to access relevant information regarding the FCS agent's contact details and home office. 
+                                                Feel free to explore different choices in the Agents/Health dropdowns to generate a new map.", style = "padding-top:20px;"),
+                                              
+                                              p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;"),
                                        )
                                      ),
                                      
@@ -590,7 +600,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        
                                        column(7,
                                               h4(strong("Map")),  # Add the heading for the map
-                                              leafletOutput("map", width = "100%", height = "400px"),
+                                              leafletOutput("map", width = "100%", height = "800px"),
 
                                        )))),
                  
@@ -710,9 +720,10 @@ server <- function(input, output) {
   })
   output$VariableDefinition <- renderText({
     if (input$Health_Outcomes == "per_low_birthweight") {
-      "Statistics for"
+      "% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.
+      Preterm births, which occur before 37 weeks of gestation, contribute to low birthweight. Given the far-reaching consequences of low birthweight, it is crucial to address the underlying factors contributing to it. This involves efforts to improve access to quality prenatal care, promote proper nutrition, address maternal stress, reduce exposure to pollution, and provide support for substance misuse prevention and treatment during pregnancy. By addressing these factors, we can work towards reducing the occurrence of low birthweight and improving the long-term health outcomes for infants and their families."
     } else if (input$Health_Outcomes == "life_expectancy") {
-      "Statistics for"
+      "verage number of years a person can expect to live. "
     } else if (input$Health_Outcomes == "life_expectancy_gap") {
       "Statistics for life_expectancy_gap"
     } else if (input$Health_Outcomes == "life_expectancy_black") {
@@ -794,8 +805,7 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
       When examining food insecurity, it is essential to go beyond assessing whether individuals had a continuous food supply in the past year. This measure also takes into account the challenges individuals face in acquiring and preparing well-rounded meals that meet their nutritional needs. It recognizes that access to healthy food options, such as fresh fruits and vegetables, can be limited for individuals and families experiencing food insecurity."
     } else if (input$econ_stab == "median_household_income") {
       "Median Household Income: Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease."
-    } else if (input$econ_stab == "gender_pay_gap"){
-      "Gender Pay Gap: This variable represents the ratio of women's median earnings to men's median earnings for all full-time, year-round workers, presented as cents on the dollar. A gender pay gap persists across industries in the United States, with women earning an estimated 80 cents for every dollar a man earns. Unequal pay by gender can harm women’s health and well-being. Larger gaps in pay and gender inequities are also associated with worse mortality outcomes, poorer self-rated health, and increased disability."
+    
     } else {
       "Please select a health variable."
     } 
