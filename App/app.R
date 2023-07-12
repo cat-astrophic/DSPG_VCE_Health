@@ -93,66 +93,63 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
 
 # ## 1.4 Define your functions -------------------------------------------------------
 # # Function for health outcomes
-mapping2 <- function(variable, year) {
-  
-  # Filter data for selected year and variable
-  temp <- all_var_df[all_var_df$Year == year & all_var_df$Variable == variable, ]
-  
-  # Join variable data with county geometry data
-  var.counties <- left_join(va.counties, temp, by = 'GEOID')
-  
-  # Identify the index of the selected variable
-  idx <- which(unique(all_var_df$Variable) == variable)
-  
-  # Create a color palette function based on the "Value" column
-  pal <- colorNumeric(palette = "viridis", domain = var.counties$Value)
-  
-  # Create labels for counties
-  county_labels <- sprintf(
-    "<strong>%s</strong><br/>%s: %g", 
-    var.counties$NAMELSAD, 
-    good_names[idx], 
-    var.counties$Value
-  ) %>% lapply(htmltools::HTML)
-  
-  # Create labels for agents
-  agent_labels <- sprintf(
-    "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s", 
-    agents_sf$Job.Dept,
-    agents_sf$Employee.Name,
-    agents_sf$VT.Email
-  ) %>% lapply(htmltools::HTML)
-  
-  # Wrap legend title if too long
-  spaces <- gregexpr("\\s", good_names[idx])[[1]]
-  middle_space <- spaces[length(spaces) %/% 2 + 1]
-  legend_title <- paste0(substring(good_names[idx], 1, middle_space-1)," ", substring(good_names[idx], middle_space+1 ))
-  
-  # Create title for the map
-  map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
-  
-  # Create leaflet map
-  leaflet(data = var.counties) %>%
-    addProviderTiles(providers$CartoDB.Positron) %>%
-    addPolygons(fillColor = ~pal(Value), 
-                color = "#BDBDC3", 
-                weight = 1, 
-                smoothFactor = 0.2,
-                opacity = 1.0, 
-                fillOpacity = 0.6,
-                highlightOptions = highlightOptions(color = "white", weight = 2,
-                                                    bringToFront = TRUE),
-                label = county_labels, 
-                labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
-                                            textsize = "15px",
-                                            direction = "auto")) %>%
-    addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
-                      label = agent_labels, 
-                      labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-    addLegendNumeric(pal = pal, values = ~Value, title = legend_title, orientation =c("vertical", "horizontal"),
-                  width = 20, height= 150) %>%
-    setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
-    addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
+  mapping2 <- function(variable, year) {
+    
+    # Filter data for selected year and variable
+    temp <- all_var_df[all_var_df$Year == year & all_var_df$Variable == variable, ]
+    
+    # Join variable data with county geometry data
+    var.counties <- left_join(va.counties, temp, by = 'GEOID')
+    
+    # Identify the index of the selected variable
+    idx <- which(unique(all_var_df$Variable) == variable)
+    
+    # Create a color palette function based on the "Value" column
+    pal <- colorNumeric(palette = "viridis", domain = var.counties$Value)
+    
+    # Create labels for counties
+    county_labels <- sprintf(
+      "<strong>%s</strong><br/>%s: %g", 
+      var.counties$NAMELSAD, 
+      good_names[idx], 
+      var.counties$Value
+    ) %>% lapply(htmltools::HTML)
+    
+    # Create labels for agents
+    agent_labels <- sprintf(
+      "<strong>Agent Site</strong><br/>Job Department: %s", 
+      agents_sf$Job.Dept
+    ) %>% lapply(htmltools::HTML)
+    
+    # Wrap legend title if too long
+    spaces <- gregexpr("\\s", good_names[idx])[[1]]
+    middle_space <- spaces[length(spaces) %/% 2 + 1]
+    legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
+    
+    # Create title for the map
+    map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
+    
+    # Create leaflet map
+    leaflet(data = var.counties) %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
+      addPolygons(fillColor = ~pal(Value), 
+                  color = "#BDBDC3", 
+                  weight = 1, 
+                  smoothFactor = 0.2,
+                  opacity = 1.0, 
+                  fillOpacity = 0.6,
+                  highlightOptions = highlightOptions(color = "white", weight = 2,
+                                                      bringToFront = TRUE),
+                  label = county_labels, 
+                  labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
+                                              textsize = "15px",
+                                              direction = "auto")) %>%
+      addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
+                        label = agent_labels, 
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
 #territory function
@@ -359,7 +356,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Other Primary Care Provider Ratio" = "other_primary_care_provider_ratio",
                                                        "Vaccination Rate" = "per_vaccinated",
                                                        "Preventable Hospitalization Rate" = "preventable_hospitalization_rate",
-                                                       "Annual Mammograms" = "per_with_annual_mammogram"
+                                                       "Annual Mammograms" = "per_with_annual_mammogram",
+                                                       "Diabetes Rate" = "per_adults_with_diabetes"
                                                        )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_access", label = "Select Year: ", 
@@ -387,8 +385,12 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      selectInput("econ_stab", "Select Variable:", width = "50%", choices = c(
                                                        "Unemployment Rate" = "per_unemployed",
                                                        "Children in Poverty" = "per_children_in_poverty",
-                                                       "Food Insecurity" = "per_food_insecure",
-                                                       "Median Household Income" = "median_household_income"
+                                                       "Food Insecurity" = "per_food_insecure"
+                                                       # #"Median Household Income" = "median_household_income",
+                                                       # # "Median Household Income (Black)" = "median_household_income_black",
+                                                       # # "Median Household Income (White)" = "median_household_income_white",
+                                                       #  "Median Household Income (Hispanic)" = "median_household_income_hispanic",
+                                                       #  "Gender Pay Gap" = "gender_pay_gap"
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_econ", label = "Select Year: ", 
@@ -452,7 +454,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Suicide Rate" = "suicide_rate",
                                                        "Limited Access to Healthy Food" = "per_limited_access_to_healthy_foods",
                                                        "Juvenile Arrest Rate" = "juvenile_arrests_rate",
-                                                       "Insufficient Sleep" = "per_insufficient_sleep"
+                                                       "Insufficient Sleep" = "per_insufficient_sleep",
+                                                       "Housing Problems" = "per_severe_housing_problems"
                                                      )
                                                      ),
                                                      radioButtons(inputId = "yearSelect_envr", label = "Select Year: ", 
@@ -756,6 +759,9 @@ When people are hospitalized for conditions that could have been treated in outp
     } else if (input$Health_Access == "per_uninsured_children"){
       "% Uninsured Children: Percentage of children under age 19 without health insurance. 
 The absence of health insurance coverage poses a substantial obstacle to accessing necessary healthcare and maintaining financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health consequences as they receive limited preventive care, and delayed treatment often leads to severe illnesses or other health complications. Additionally, being uninsured can have severe financial implications, with many individuals unable to afford their medical expenses, resulting in the accumulation of medical debt. This issue is particularly notable among uninsured children, who are less likely to receive timely preventive care, such as vaccinations and well-child visits."
+    } else if (input$Health_Access == "per_adults_with_diabetes"){
+      "% Adults with Diabetes- Percentage of adults aged 20 and above with diagnosed diabetes (age-adjusted).
+Diabetes is a chronic condition known to have broad impacts on physical, social, and mental well-being, and causes significant morbidity and mortality in the United States."
     } else {
       "nothing :)"
     } 
@@ -773,14 +779,17 @@ The absence of health insurance coverage poses a substantial obstacle to accessi
   })
   output$EconomicStabilityVariableDefinition <- renderText({
     if (input$econ_stab == "per_unemployed") {
-      "stats for unsinsured"
+      "Unemployment rate: The unemployment rate reflects the economic and social conditions influencing an individual’s well-being. Employment provides economic stability. Unemployment, on the other hand, is a stressor that could worsen one’s health. It not only limits people’s access to quality healthcare but also is a burden on mental health as people tend to feel more depressed without a job."
     } else if (input$econ_stab == "per_children_in_poverty") {
-      "stats for "
+      "% Children in poverty: This variable measures the percentage of people under the age of 18 in poverty. Children living in poverty have less access to health resources. Understanding this variable could tell us a lot more about the overall health and well-being of a community. It is an important indicator of socioeconomic disparities and can provide insights into the level of economic inequality and social support systems.
+      A high percentage of children in poverty suggests that a significant portion of the younger population is living in disadvantaged conditions. These children may face challenges in accessing quality education, nutritious food, stable housing, and healthcare services. Living in poverty can have long-lasting effects on a child's physical and mental health, educational attainment, and overall development. "
     } else if (input$econ_stab == "per_food_insecure") {
-      "Statistics for "
+      "% Food Insecure: Percentage of population who lack adequate access to food. Lack of consistent access to food is associated with adverse health consequences, including weight gain and premature mortality. This issue extends beyond simply having enough food and encompasses the ability of individuals and families to provide balanced meals, including fruits and vegetables. By considering the accessibility and affordability of nutritious food, we can address barriers to healthy eating and improve overall health outcomes.
+      When examining food insecurity, it is essential to go beyond assessing whether individuals had a continuous food supply in the past year. This measure also takes into account the challenges individuals face in acquiring and preparing well-rounded meals that meet their nutritional needs. It recognizes that access to healthy food options, such as fresh fruits and vegetables, can be limited for individuals and families experiencing food insecurity."
     } else if (input$econ_stab == "median_household_income") {
-      "Statistics for"
-      
+      "Median Household Income: Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease."
+    } else if (input$econ_stab == "gender_pay_gap"){
+      "Gender Pay Gap: This variable represents the ratio of women's median earnings to men's median earnings for all full-time, year-round workers, presented as cents on the dollar. A gender pay gap persists across industries in the United States, with women earning an estimated 80 cents for every dollar a man earns. Unequal pay by gender can harm women’s health and well-being. Larger gaps in pay and gender inequities are also associated with worse mortality outcomes, poorer self-rated health, and increased disability."
     } else {
       "Please select a health variable."
     } 
@@ -799,22 +808,22 @@ The absence of health insurance coverage poses a substantial obstacle to accessi
   output$HealthBehaviorsVariableDefinition <- renderText({
     if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
       "% Adults Reporting Currently Smoking- This variable measures the percentage of adults who are current smokers (age-adjusted).
-Every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives."
+        Every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives."
     } else if (input$health_behaviors == "per_excessive_drinking") {
       "% Excessive Drinking- This variable is the percentage of adults reporting binge or heavy drinking (age-adjusted).
-Nearly 1 in 6 American adults are considered binge drinkers. Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes."
+      Nearly 1 in 6 American adults are considered binge drinkers. Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes."
     } else if (input$health_behaviors == "per_driving_deaths_with_alcohol_involvement") {
       "% Driving Deaths with Alcohol Involvement- This variable represents the percentage of driving deaths with alcohol involvement.
-This variable directly measures the relationship between alcohol and motor vehicle crash deaths. Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 cause 27% of all alcohol-impaired deaths."
+      This variable directly measures the relationship between alcohol and motor vehicle crash deaths. Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 cause 27% of all alcohol-impaired deaths."
     } else if (input$health_behaviors == "per_physically_inactive") {
       "% Physically Inactive- Percentage of adults age 18 and over reporting no leisure-time physical activity (age-adjusted).
-Physical inactivity is highly associated with increased risk of health conditions such as Type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and shortened life expectancy. Physical activity is associated with improved sleep, cognitive ability, bone, and musculoskeletal health, and reduced risk of dementia."
+      Physical inactivity is highly associated with increased risk of health conditions such as Type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and shortened life expectancy. Physical activity is associated with improved sleep, cognitive ability, bone, and musculoskeletal health, and reduced risk of dementia."
     } else if (input$health_behaviors == "per_adults_with_obesity") {
       "% Adults with Obesity- This variable measures the percentage of the adult population (age 18 and older) that reports a body mass index (BMI) greater than or equal to 30 kg/m2 (age-adjusted).
-Adult obesity is a persistent condition that raises the likelihood of various health risks, including hypertension, heart disease, type 2 diabetes, respiratory issues, chronic inflammation, mental illness, and certain cancers.The development of obesity is influenced by a combination of environmental and individual factors. Environmental factors, such as the availability and affordability of nutrient-rich foods, the extent of fast-food advertising, and societal attitudes regarding weight stigma, can significantly impact the prevalence and risk of obesity."
+      Adult obesity is a persistent condition that raises the likelihood of various health risks, including hypertension, heart disease, type 2 diabetes, respiratory issues, chronic inflammation, mental illness, and certain cancers.The development of obesity is influenced by a combination of environmental and individual factors. Environmental factors, such as the availability and affordability of nutrient-rich foods, the extent of fast-food advertising, and societal attitudes regarding weight stigma, can significantly impact the prevalence and risk of obesity."
     } else if (input$health_behaviors == "teen_birth_rate") {
       "Teen Birth Rate- This variable represents the number of births per 1,000 female population ages 15-19.
-Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and employment opportunities."
+      Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and employment opportunities."
     } else {
       "Please select a health variable."
     } 
@@ -833,25 +842,28 @@ Teenage pregnancy has been linked to detrimental health outcomes for both the mo
   output$EnvrVariableDefinition <- renderText({
     if (input$neighbor_envr == "per_physical_distress") {
       "This variable represents the percentage of adults reporting 14 or more days of poor physical health per month (age-adjusted).
-This variable offers valuable information on the overall well-being of adults in a community. Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity."
+      This variable offers valuable information on the overall well-being of adults in a community. Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity."
     } else if (input$neighbor_envr == "per_mental_distress") {
       "This variable represents the percentage of adults reporting 14 or more days of poor mental health per month (age-adjusted).
       Mental health is a fundamental aspect of our overall well-being. It encompasses our emotional, psychological, and social well-being, and it affects how we think, feel, and act. Good mental health allows us to cope with the daily stresses of life, form positive relationships, make meaningful contributions to society, and navigate challenges effectively. Poor mental health can have detrimental effects on physical health, contributing to the development or exacerbation of various health conditions, including cardiovascular disease, weakened immune system, chronic pain, and digestive disorders."
     } else if (input$neighbor_envr == "per_access_to_exercise_opportunities") {
       "This variable is the percentage of the population with adequate access to locations for physical activity.
-Engaging in more physical activity has been linked to reduced risks of various health conditions, including type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and premature mortality. The built environment plays a crucial role in promoting physical activity, as individuals residing in close proximity to amenities such as sidewalks, parks, and gyms are more inclined to engage in regular exercise."
+      Engaging in more physical activity has been linked to reduced risks of various health conditions, including type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and premature mortality. The built environment plays a crucial role in promoting physical activity, as individuals residing in close proximity to amenities such as sidewalks, parks, and gyms are more inclined to engage in regular exercise."
     } else if (input$neighbor_envr == "suicide_rate") {
       "This variable measures the number of deaths due to suicide per 100,000 population (age-adjusted)
-Suicide rates provide information on the mental health of a community. Suicide has an overwhelming effect on the mental health of surviving community members, family members, and friends."
+      Suicide rates provide information on the mental health of a community. Suicide has an overwhelming effect on the mental health of surviving community members, family members, and friends."
     } else if(input$neighbor_envr == "per_limited_access_to_healthy_foods"){
       "This variable represents the percentage of population who are low-income and do not live close to a grocery store.
-Extensive evidence indicates a robust correlation between living in a food desert and experiencing a higher prevalence of obesity and premature death. Supermarkets have traditionally been known to offer healthier food choices compared to convenience stores or smaller grocery stores. Moreover, limited access to fresh fruits and vegetables is directly linked to premature mortality."
+      Extensive evidence indicates a robust correlation between living in a food desert and experiencing a higher prevalence of obesity and premature death. Supermarkets have traditionally been known to offer healthier food choices compared to convenience stores or smaller grocery stores. Moreover, limited access to fresh fruits and vegetables is directly linked to premature mortality."
     } else if(input$neighbor_envr == "juvenile_arrests_rate"){  
       "This variable represents the rate of delinquency cases per 1,000 juveniles.
       Juvenile arrests are the result of many factors such as policing strategies, local laws, community and family support, and individual behaviors. Youth who are arrested and incarcerated experience lower self-reported health, higher rates of infectious disease and stress-related illnesses, and higher body mass indices."
     } else if(input$neighbor_envr == "per_insufficient_sleep"){
       " This variable represents the percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).
-Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being."
+        Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being."
+    } else if(input$neighbor_envr == "per_severe_housing_problem"){
+      "% Severe Housing Problems - This variable is the percentage of households with at least 1 of 4 housing problems: overcrowding, high housing costs, lack of kitchen facilities, or lack of plumbing facilities.
+      Life in the built environment, ought to be safe for a person to grow and develop in a healthy way. Inadequate housing can make negative contributions to health like infectious and chronic diseases, injuries, and poor child development. Households experiencing severe cost burdens are likely to face tradeoffs in meeting other basic needs which in turn can lead to mental/emotional strain."
       } else {
       "Please select a health variable."
     } 
