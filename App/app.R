@@ -556,7 +556,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      ),
                                      
                                      fluidRow(
-                                       column(6,
+                                       column(5,
                                               selectInput("territory_type", "Agents",
                                                           choices = c("No New Agents" = "base", 
                                                                       "One New Agent" = "one", 
@@ -578,9 +578,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               textOutput("variabledes")
                                        ),
                                        
-                                       column(6,
+                                       column(7,
                                               h4(strong("Map")),  # Add the heading for the map
-                                              leafletOutput("map", width = "100%", height = "900px"),
+                                              leafletOutput("map", width = "100%", height = "400px"),
 
                                        )))),
                  
