@@ -169,8 +169,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
-      # Convert new agent locations to sf
-      st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
+    # Convert new agent locations to sf
+    st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
