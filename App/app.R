@@ -125,8 +125,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     # Create labels for agents
     agent_labels <- sprintf(
-      "<strong>Agent Site</strong><br/>Job Department: %s", 
-      agents_sf$Job.Dept
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP Ed location: %s",
+      agents_sf$Job.Dept,
+      agents_sf$Employee.Name,
+      agents_sf$VT.Email
+      agents_sf$SNAP.Ed.
     ) %>% lapply(htmltools::HTML)
     
     # Wrap legend title if too long
@@ -207,10 +210,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     # create labels for agents
     agent_labels <- sprintf(
-      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
-      additional_agent_sf $Job.Dept,
-      additional_agent_sf $Employee.Name,
-      additional_agent_sf $VT.Email
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP Ed location: %s",
+      additional_agent_sf$Job.Dept,
+      additional_agent_sf$Employee.Name,
+      additional_agent_sf$VT.Email
+      additional_agent_sf$SNAP.Ed.
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
