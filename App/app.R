@@ -145,24 +145,24 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Create leaflet map
     leaflet(data = var.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
-      addPolygons(fillColor = ~pal(Value), 
-                  color = "#BDBDC3", 
-                  weight = 1, 
+      addPolygons(fillColor = ~pal(Value),
+                  color = "#BDBDC3",
+                  weight = 1,
                   smoothFactor = 0.2,
-                  opacity = 1.0, 
+                  opacity = 1.0,
                   fillOpacity = 0.6,
                   highlightOptions = highlightOptions(color = "white", weight = 2,
                                                       bringToFront = TRUE),
-                  label = county_labels, 
+                  label = county_labels,
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
+      addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "bottomright") %>%
       addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
-                        label = agent_labels, 
+                        label = agent_labels,
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      addControl(html = textbox_content,position = "bottomright") %>% 
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
