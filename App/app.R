@@ -532,7 +532,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      fluidRow(
                                        style = "margin: 6px;",
                                        column(4,
-                                              p(strong("Overview")),
+                                              titlePanel(strong("Overview")),
                                               p("Our goal is to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents, we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
                                               p(strong("Workflow:")),
                                               tags$li("Identify where FCS Agents are"),
