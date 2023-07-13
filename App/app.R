@@ -136,6 +136,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     css_fix <- "div.info.legend.leaflet-control br {clear: both;}" # CSS to correct spacing
     html_fix <- htmltools::tags$style(type = "text/css", css_fix)  # Convert CSS to HTML
     #m %<>% htmlwidgets::prependContent(html_fix)                   # Insert into leaflet HTML code
+    
+    #floating text bow for missing values
+    textbox_content <- "<div id='floating-textbox'>*grey fill indicates no data*</div>"
     # Create title for the map
     map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
     
@@ -157,6 +160,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
                         label = agent_labels, 
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addControl(html = textbox_content,position = "bottomright") %>% 
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
