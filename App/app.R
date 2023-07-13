@@ -131,16 +131,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     spaces <- gregexpr("\\s", good_names[idx])[[1]]
     middle_space <- spaces[length(spaces) %/% 2 + 1]
     legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
-    
     css_fix <- "div.info.legend.leaflet-control br {clear: both;}" # CSS to correct spacing
     html_fix <- htmltools::tags$style(type = "text/css", css_fix)  # Convert CSS to HTML
     #m %<>% htmlwidgets::prependContent(html_fix)                   # Insert into leaflet HTML code
-    
     # Create title for the map
     map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
     
     # Create leaflet map
-   m <- leaflet(data = var.counties) %>%
+    leaflet(data = var.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addPolygons(fillColor = ~pal(Value), 
                   color = "#BDBDC3", 
@@ -157,11 +155,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
                         label = agent_labels, 
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      addLegendNumeric(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+      addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>% 
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL) %>%
-      htmlwidgets::prependContent(html_fix) 
-    m
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
 #territory function
