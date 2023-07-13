@@ -128,7 +128,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP Ed location: %s",
       agents_sf$Job.Dept,
       agents_sf$Employee.Name,
-      agents_sf$VT.Email
+      agents_sf$VT.Email,
       agents_sf$SNAP.Ed.
     ) %>% lapply(htmltools::HTML)
     
@@ -205,7 +205,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     county_labels <- sprintf(
       "<strong>%s</strong><br/> Served by Agent From: %s",
       territory.counties$NAMELSAD,
-      territory.counties$Agent
+      territory.counties$Agent,
     ) %>% lapply(htmltools::HTML)
     
     # create labels for agents
@@ -213,7 +213,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP Ed location: %s",
       additional_agent_sf$Job.Dept,
       additional_agent_sf$Employee.Name,
-      additional_agent_sf$VT.Email
+      additional_agent_sf$VT.Email,
       additional_agent_sf$SNAP.Ed.
     ) %>% lapply(htmltools::HTML)
     
