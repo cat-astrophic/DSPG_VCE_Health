@@ -214,7 +214,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       additional_agent_sf$Job.Dept,
       additional_agent_sf$Employee.Name,
       additional_agent_sf$VT.Email,
-      additional_agent_sf$SNAP.Ed.
+      additional_agent_sf$SNAP.Ed.,
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
@@ -607,8 +607,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               ),
                                               actionButton("submit_btn", "Submit"),
                                               h4(strong("Description")),
-                                              textOutput("basedescription"),
-                                              textOutput("variabledes")
+                                              textOutput("territorydescription"),
+                                              
                                        ),
                                        
                                        column(7,
@@ -947,30 +947,276 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
       map
   })
   })
-  output$basedescription <- renderText({
-    if (input$territory_type == "base"){
-      "This map shows territories for no new agents."
-    } else if (input$territory_type == "one"){
-      "This map shows territories for one new agents."
-    } else if (input$territory_type == "two"){
-      "This map shows territories for two new agents."
-    }
-  })
-  output$variabledes <- renderText({
-    if (input$zscore_type == "food"){
-      "This map shows territories for food insecurity z-score."
-    } else if (input$zscore_type == "obesity"){
-      "This map shows territories for obesity z-score."
-    } else if (input$zscore_type == "inactivity"){
-      "This map shows territories for physical inactivity z-score."
-    } else if (input$zscore_type == "aggregate"){
-      "This map shows territories for aggregate z-score."
-    } else if (input$zscore_type == "lowbirth"){
-      "This map shows territories for low birthweight z-score."
-    } else if (input$zscore_type == "diabetes"){
-      "This map shows territories for diabetes z-score."
-    }
-  })
+  
+  # output$territorydescription <- renderText({
+    # if (input$territory_type == "base" & input$zscore_type == "food") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from food insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard 
+    #       to the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By 
+    #       hovering your cursor over a county, you can easily identify the agent 
+    #       responsible for serving that particular area. Furthermore, you can hover
+    #       over the cloud icons to access relevant information regarding the FCS
+    #       agent's contact details and home office. Feel free to explore different 
+    #       choices in the Agents/Health dropdowns to generate a new map!"
+    # } else if (input$territory_type == "base" & input$zscore_type == "obese") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from obesity insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard 
+    #       to the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By 
+    #       hovering your cursor over a county, you can easily identify the agent 
+    #       responsible for serving that particular area. Furthermore, you can hover
+    #       over the cloud icons to access relevant information regarding the FCS
+    #       agent's contact details and home office. Feel free to explore different 
+    #       choices in the Agents/Health dropdowns to generate a new map!"
+    # } else if (input$territory_type == "base" && input$zscore_type == "inactivity") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from physical inactivity insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard 
+    #       to the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By 
+    #       hovering your cursor over a county, you can easily identify the agent 
+    #       responsible for serving that particular area. Furthermore, you can hover
+    #       over the cloud icons to access relevant information regarding the FCS
+    #       agent's contact details and home office. Feel free to explore different 
+    #       choices in the Agents/Health dropdowns to generate a new map!"
+    # } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from aggregate z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard 
+    #       to the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By 
+    #       hovering your cursor over a county, you can easily identify the agent 
+    #       responsible for serving that particular area. Furthermore, you can hover
+    #       over the cloud icons to access relevant information regarding the FCS
+    #       agent's contact details and home office. Feel free to explore different 
+    #       choices in the Agents/Health dropdowns to generate a new map!"
+    # } else if (input$territory_type == "base" & input$zscore_type == "lowbirth") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from low birthweight insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard 
+    #       to the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By 
+    #       hovering your cursor over a county, you can easily identify the agent 
+    #       responsible for serving that particular area. Furthermore, you can hover
+    #       over the cloud icons to access relevant information regarding the FCS
+    #       agent's contact details and home office. Feel free to explore different 
+    #       choices in the Agents/Health dropdowns to generate a new map!"
+    # } else if (input$territory_type == "base" & input$zscore_type == "diabetes") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from diabetes insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard 
+    #       to the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By 
+    #       hovering your cursor over a county, you can easily identify the agent 
+    #       responsible for serving that particular area. Furthermore, you can hover
+    #       over the cloud icons to access relevant information regarding the FCS
+    #       agent's contact details and home office. Feel free to explore different 
+    #       choices in the Agents/Health dropdowns to generate a new map!"
+    # } else if (input$territory_type == "one" & input$zscore_type == "food") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from food insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes a newly designated agent location in Prince William County 
+    #       .Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "one" & input$zscore_type == "obese") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from obesity insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes a newly designated agent location in Frederick County 
+    #       .Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from physical inactivity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes a newly designated agent location in Augusta County 
+    #       .Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from aggregate z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes a newly designated agent location in Frederick County 
+    #       .Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from low birthweight z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes a newly designated agent location in Frederick County 
+    #       .Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!."
+    # } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from diabetes z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes a newly designated agent location in Frederick County 
+    #       .Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "two" & input$zscore_type == "food") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from food insecurity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes newly designated agent locations in Prince William County 
+    #       and Essex County .Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "two" & input$zscore_type == "obese") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from obesity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes newly designated agent locations in Frederick County 
+    #       and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from physical inactivity z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes newly designated agent locations in Frederick County 
+    #       and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from aggregate z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes newly designated agent locations in Frederick County 
+    #       and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from low birthweight z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes newly designated agent locations in Frederick County 
+    #       and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
+    #   "The map displayed on the right provides a visual representation of the 
+    #       ideal territories assigned to FCS agents. These territories have been 
+    #       determined using data from diabetes z-scores to optimize 
+    #       their effectiveness. These territories have also been created in regard to 
+    #       the model’s constraints on population, commute time, and VCE districts. 
+    #       Each color on the map corresponds to a distinct agent's territory. By hovering 
+    #       your cursor over a county, you can easily identify the agent responsible for 
+    #       serving that particular area. 
+    # 
+    #       Furthermore, you can hover over the cloud icons to access relevant information 
+    #       about the FCS agent's contact details and home office. The blue cloud icons 
+    #       signify existing agents, while the red cloud icons indicate optimal new agent 
+    #       sites. The map now includes newly designated agent locations in Frederick County 
+    #       and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to 
+    #       generate a new map!"
+    # } else {
+    #   "This map shows territories for no new agents."
+    # }
+  
 }
 
 # 4. Run the application-------------------------------------------------------------------
