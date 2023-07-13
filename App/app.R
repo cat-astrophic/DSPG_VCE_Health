@@ -111,8 +111,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     idx <- which(unique(all_var_df$Variable) == variable)
     
     # Create a color palette function based on the "Value" column
-    pal <- colorNumeric(palette = "viridis", domain = var.counties$Value)
+    pal <- colorNumeric(palette = "viridis", domain = var.counties$Value, na.color= NA )
     
+    #floating text for NA values 
+    textbox_content <- "<div id='floating-textbox'>*grey fill indicates no data*</div>"
     # Create labels for counties
     county_labels <- sprintf(
       "<strong>%s</strong><br/>%s: %g", 
