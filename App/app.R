@@ -158,11 +158,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'blue', iconColor = 'white'),
                         label = agent_labels, group = "FCS Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'green', iconColor = 'white'),
+      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'orange', iconColor = 'white'),
                         label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-      addLegend(colors = c("green", "blue"), labels = c("FCS/SNAP-Ed Agent","FCS Agent" ), position = "bottomright", title= "Agent Service:") %>% 
+      addLegend(colors = c("orange", "blue"), labels = c("FCS/SNAP-Ed Agent","FCS Agent" ), position = "bottomright", title= "Agent Service:") %>% 
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)  %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
@@ -254,12 +254,12 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                         icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
                         label = agent_labels,
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'green', iconColor = 'white'),
+      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'orange', iconColor = 'white'),
                         label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
-      addLegend(colors = c("green", "blue", "red"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent", "New FCS Agent" ), 
+      addLegend(colors = c("orange", "blue", "red"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent", "New FCS Agent" ), 
               position = "topright", title= "Agent Type/Service:")
   }
 
