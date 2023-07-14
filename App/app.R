@@ -162,8 +162,12 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                         label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+<<<<<<< HEAD
       addLegend(colors = c("orange", "blue"), labels = c("FCS/SNAP-Ed Agent","FCS Agent" ), position = "bottomright", title= "Agent Service:") %>% 
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)  %>%
+=======
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
+>>>>>>> 7297a0bc3d14d0f0bc215047d6313f293341ea96
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
@@ -564,21 +568,43 @@ ui <- navbarPage(#title = "DSPG 2023",
                             tabPanel("Programming Overview",
                                      fluidRow(
                                        style = "margin: 12px;",
-                                       h1(strong("Mathematical Programming"), align = "center")
+                                       h1(strong("Programming"), align = "center")
                                      ),
                                      fluidRow(
                                        style = "margin: 12px;",
                                        align = "justify",
                                        column(6,
-                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
+                                              h1(strong("Objective Function")),
+                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; ", width = "500px"),
+                                              
                                               p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
-                                              tags$li("Population:"),
+                                              tags$li(strong("Population:")),
                                               p("The population constraint plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
-                                              tags$li("Distance:"),
-                                              p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need.")
-                                       )
+                                              tags$li(strong("Distance:")),
+                                              p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need."),
+                                              
+                                              tags$li(strong("Need:")),
+                                              p("The need factor is specifically determined by the unique needs of each county. These needs are based on various social determinants of health variables. Given that each county requires different services, 
+                                                it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
+                                                
+                                                h1(strong("Constraints")),
+                                                tags$li("Mean commute time >= 60 minutes"),
+                                                p("This time constraint is used so that agents do not have to travel more than 60 minutes to work."),
+                                                tags$li("Unique Assignment")
+                                                                               ),
+                                                column(6,
+                                                       h1("Figure 1: Isochrone Map"),
+                                                       p("Figure 1 illustrates an isochrone map that represents the travel distance for agents. The map displays three key time thresholds: 60 minutes, 40 minutes, and 20 minutes. However, there are certain counties where agents would need to travel for more than one hour to reach them. These counties pose greater logistical challenges due to their distance from the agents' locations, requiring additional time and resources for travel."),
+                                                       img(src = "isochrone.png", style = "display: inline; margin-right: 5px; ", width = "500px"),
+                                                       
+                                                       h1("Figure 2: Aggregate Z-scores Map"),
+                                                       p("Figure 2 displays a map depicting the aggregated z-scores calculated for each county. The color intensity on the map indicates the magnitude of the z-scores, with darker colors representing lower z-scores. This signifies that the county is significantly below the average in terms of the five health variables considered. 
+                                                Counties with lower z-scores require more assistance from agents as they exhibit greater needs across these health factors."),
+                                                img(src = "zscore_map.png", style = "display: inline; margin-right: 5px; ", width = "700px")
+                                                )
                                      )
                             ),
+        
                             
                  
                  
@@ -587,21 +613,16 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
                                      fluidRow(
-                                       
+                                       style = "margin: 12px;",
                                        h1(strong("Results"), align = "center"),
                                        column(12,
-                                              p("The map displayed on the right provides a visual representation of the ideal territories assigned to FCS agents.
-                                                These territories have been determined using data from aggregate (z_score_type)  z-scores to optimize their effectiveness. 
-                                                These territories have also been created in regard to population, accessibility, and VCE districts. Each color on the map corresponds to a distinct agent's territory. 
-                                                By hovering your cursor over a county, you can easily identify the agent responsible for serving that particular area. 
-                                                Furthermore, you can hover over the cloud icons to access relevant information regarding the FCS agent's contact details and home office. 
-                                                Feel free to explore different choices in the Agents/Health dropdowns to generate a new map.", style = "padding-top:20px;"),
-                                              
+                                             
                                               p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;"),
                                        )
                                      ),
                                      
                                      fluidRow(
+                                       style = "margin: 12px;",
                                        column(5,
                                               selectInput("territory_type", "Agents",
                                                           choices = c("No New Agents" = "base", 
@@ -626,7 +647,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        
                                        column(7,
                                               h4(strong("Map")),  # Add the heading for the map
-                                              leafletOutput("map", width = "100%", height = "800px"),
+                                              leafletOutput("map", width = "100%", height = "700px"),
 
                                        )))),
                  
