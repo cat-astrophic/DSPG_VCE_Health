@@ -165,7 +165,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
 
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
 
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL) %>% 
+      addLegend(colors = c("orange", "blue"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent"), 
+                position = "topright", title= "Agent Type/Service:")
 }
   
 #territory function
@@ -258,7 +260,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'orange', iconColor = 'white'),
                         label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
+      setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
       addLegend(colors = c("orange", "blue", "red"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent", "New FCS Agent" ), 
               position = "topright", title= "Agent Type/Service:")
@@ -620,7 +622,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      
                                      fluidRow(
                                        style = "margin: 12px;",
-                                       column(5,
+                                       column(4,
                                               selectInput("territory_type", "Agents",
                                                           choices = c("No New Agents" = "base", 
                                                                       "One New Agent" = "one", 
@@ -642,7 +644,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               
                                        ),
                                        
-                                       column(7,
+                                       column(8,
                                               h4(strong("Map")),  # Add the heading for the map
                                               leafletOutput("map", width = "100%", height = "700px"),
 
