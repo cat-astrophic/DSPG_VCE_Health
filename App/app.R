@@ -165,7 +165,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                         label = agent_labels,
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)  %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
@@ -262,7 +262,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                  
                  ## 2.1 Tab Overview--------------------------------------------
                  tabPanel("Overview", value = "overview",
-                          fluidRow(style = "margin: 2px;",
+                          fluidRow(style = "margin: 12px;",
                                    align = "center",
                                    h1(strong("VCE: Optimizing Extension Agent Services"),
                                       h4("Data Science for the Public Good Program"),
@@ -270,7 +270,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                       br()
                                    )
                           ),
-                          fluidRow(style = "margin: 6px;",
+                          fluidRow(style = "margin: 12px;",
                                    align = "justify",
                                    column(6,
                                           h2(strong("Project Background")),
@@ -303,10 +303,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                  navbarMenu("Health Variables" ,
                             ### 2.2.0 Subtab Virginia Public Health Overview
                             tabPanel("Public Health Overview",
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               h1(strong("Public Health in Virginia"), align = "center"),
                                               p("", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(6,
                                                      p("In the past 100 years, Virginia has seen tremendous growth in its public health sector, nevertheless, there are still many areas that are in need of significant improvement. Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, gun violence, and motor vehicle crashes have plagued the welfare of the Commonwealth. Due to the contrasting urban and rural regions in Virginia, health varies drastically based on where Virginians reside. In the more wealthy and populated localities, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 counties fell below the national average. The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years. Virginia struggles to provide clean air and water, safe roadways, protection from communicable diseases, and other essential public health services to the entire population of the Commonwealth."),
@@ -527,15 +527,15 @@ ui <- navbarPage(#title = "DSPG 2023",
                  ),
                  ),
                  ## 2.4 Tab Agent Optimization Programming------
-                 navbarMenu("Mathematical Programming",
-                            tabPanel("Agent Optimization Process",
+                 navbarMenu("Agents Territories",
+                            tabPanel("Methodology",
                                      fluidRow(
-                                       style = "margin: 6px;",
+                                       style = "margin: 12px;",
                                        h1(strong("Agent Optimization Process"), align = "center")
                                      ),
                                      fluidRow(
-                                       style = "margin: 6px;",
-                                       column(4,
+                                       style = "margin: 12px;",
+                                       column(12,
                                               titlePanel(strong("Overview")),
                                               p("Our goal is to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents, we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
                                               p(strong("Workflow:")),
@@ -550,11 +550,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             tabPanel("Programming Overview",
                                      fluidRow(
-                                       style = "margin: 6px;",
+                                       style = "margin: 12px;",
                                        h1(strong("Mathematical Programming"), align = "center")
                                      ),
                                      fluidRow(
-                                       style = "margin: 6px;",
+                                       style = "margin: 12px;",
                                        align = "justify",
                                        column(6,
                                               img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "300px"),
