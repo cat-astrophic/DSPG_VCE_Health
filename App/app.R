@@ -162,12 +162,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                         label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-<<<<<<< HEAD
-      addLegend(colors = c("orange", "blue"), labels = c("FCS/SNAP-Ed Agent","FCS Agent" ), position = "bottomright", title= "Agent Service:") %>% 
-      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)  %>%
-=======
+
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
->>>>>>> 7297a0bc3d14d0f0bc215047d6313f293341ea96
+
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
