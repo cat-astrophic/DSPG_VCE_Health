@@ -595,13 +595,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        style = "margin: 12px;",
                                        h1(strong("Results"), align = "center"),
                                        column(12,
-                                              p("The map displayed on the right provides a visual representation of the ideal territories assigned to FCS agents.
-                                                These territories have been determined using data from aggregate (z_score_type)  z-scores to optimize their effectiveness. 
-                                                These territories have also been created in regard to population, accessibility, and VCE districts. Each color on the map corresponds to a distinct agent's territory. 
-                                                By hovering your cursor over a county, you can easily identify the agent responsible for serving that particular area. 
-                                                Furthermore, you can hover over the cloud icons to access relevant information regarding the FCS agent's contact details and home office. 
-                                                Feel free to explore different choices in the Agents/Health dropdowns to generate a new map.", style = "padding-top:20px;"),
-                                              
+                                             
                                               p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;"),
                                        )
                                      ),
