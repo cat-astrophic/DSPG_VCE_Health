@@ -554,25 +554,24 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        align = "justify",
                                        column(6,
                                               img(src = "equation.png", style = "display: inline; margin-right: 5px; border: 1px solid #C0C0C0;", width = "500px"),
-                                              h1("Objective Function"),
+                                              h1(strong("Objective Function")),
                                               p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
-                                              tags$li("Population:"),
+                                              tags$li(strong("Population:")),
                                               p("The population constraint plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
-                                              tags$li("Distance:"),
+                                              tags$li(strong("Distance:")),
                                               p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their
                                                 service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel
                                                 time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps 
                                                 to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in 
                                                 need."),
-                                              p("Figure 1 shows the isochrone map for the distance agents take to travel."),
-                                              tags$li("Need:"),
-                                              p("The need factor is specifaclly for each county's need. This is based on the different social determinants of health variables. Because each county is in need of different 
-                                                services for, agents cannot possibly handle all the problems. To address the problem of need, we created a health index using aggregated z-scores. This z-score is calculated using the 
-                                                z-scores of five different social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. While there are many other variables to look into,
-                                                we believe these are the health variables that FCS agents could have a big impact on."),
-                                              p("In Figure 2, you can see the map of the aggregated z-scores calculated. The darker the color means the lower the z-score is, insinuating that that county is way below average in terms of the five
-                                                health variables. This means that that county needs more help from agents."),
-                                              h1("Constraints")
+                                              p("Figure 1 illustrates an isochrone map that represents the travel distance for agents. The map displays three key time thresholds: 60 minutes, 40 minutes, and 20 minutes. However, there are certain counties where agents would need to travel for more than one hour to reach them. These counties pose greater logistical challenges due to their distance from the agents' locations, requiring additional time and resources for travel."),
+                                              tags$li(strong("Need:")),
+                                              p("The need factor is specifically determined by the unique needs of each county. These needs are based on various social determinants of health variables. Given that each county requires different services, 
+                                                it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health
+                                                variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
+                                              p("Figure 2 displays a map depicting the aggregated z-scores calculated for each county. The color intensity on the map indicates the magnitude of the z-scores, with darker colors representing lower z-scores. This signifies that the county is significantly below the average in terms of the five health variables considered. 
+                                                Counties with lower z-scores require more assistance from agents as they exhibit greater needs across these health factors."),
+                                              h1(strong("Constraints"))
                                               ),
                                        column(6,
                                               h1("Figure 1: Isochrone Map"),
