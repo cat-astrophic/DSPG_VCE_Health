@@ -165,7 +165,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                         label = agent_labels,
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)  %>%
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
@@ -574,7 +574,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
                                      fluidRow(
-                                       
+                                       style = "margin: 12px;",
                                        h1(strong("Results"), align = "center"),
                                        column(12,
                                               p("The map displayed on the right provides a visual representation of the ideal territories assigned to FCS agents.
@@ -589,6 +589,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      ),
                                      
                                      fluidRow(
+                                       style = "margin: 12px;",
                                        column(5,
                                               selectInput("territory_type", "Agents",
                                                           choices = c("No New Agents" = "base", 
@@ -613,7 +614,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                        
                                        column(7,
                                               h4(strong("Map")),  # Add the heading for the map
-                                              leafletOutput("map", width = "100%", height = "800px"),
+                                              leafletOutput("map", width = "100%", height = "700px"),
 
                                        )))),
                  
