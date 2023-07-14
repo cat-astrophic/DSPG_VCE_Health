@@ -113,8 +113,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Create a color palette function based on the "Value" column
     pal <- colorNumeric(palette = "viridis", domain = var.counties$Value, na.color= NA )
     
-    #floating text for NA values 
-    textbox_content <- "<div id='floating-textbox'>*grey fill indicates no data*</div>"
     # Create labels for counties
     county_labels <- sprintf(
       "<strong>%s</strong><br/>%s: %g", 
@@ -136,12 +134,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     spaces <- gregexpr("\\s", good_names[idx])[[1]]
     middle_space <- spaces[length(spaces) %/% 2 + 1]
     legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
-    css_fix <- "div.info.legend.leaflet-control br {clear: both;}" # CSS to correct spacing
-    html_fix <- htmltools::tags$style(type = "text/css", css_fix)  # Convert CSS to HTML
-    #m %<>% htmlwidgets::prependContent(html_fix)                   # Insert into leaflet HTML code
-    
-    #floating text bow for missing values
-    textbox_content <- "<div id='floating-textbox'>*grey fill indicates no data*</div>"
+   
     # Create title for the map
     map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
     
