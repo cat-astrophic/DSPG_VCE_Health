@@ -113,8 +113,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Create a color palette function based on the "Value" column
     pal <- colorNumeric(palette = "viridis", domain = var.counties$Value, na.color= NA )
     
-    #floating text for NA values 
-    textbox_content <- "<div id='floating-textbox'>*grey fill indicates no data*</div>"
     # Create labels for counties
     county_labels <- sprintf(
       "<strong>%s</strong><br/>%s: %g", 
@@ -125,23 +123,18 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     # Create labels for agents
     agent_labels <- sprintf(
-      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP Ed location: %s",
-      agents_sf$Job.Dept,
-      agents_sf$Employee.Name,
-      agents_sf$VT.Email,
-      agents_sf$SNAP.Ed
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-ED Service Provided At: %s",
+      additional_agent_sf$Job.Dept,
+      additional_agent_sf$Employee.Name,
+      additional_agent_sf$VT.Email,
+      additional_agent_sf$SNAP.Ed
     ) %>% lapply(htmltools::HTML)
     
     # Wrap legend title if too long
     spaces <- gregexpr("\\s", good_names[idx])[[1]]
     middle_space <- spaces[length(spaces) %/% 2 + 1]
     legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
-    css_fix <- "div.info.legend.leaflet-control br {clear: both;}" # CSS to correct spacing
-    html_fix <- htmltools::tags$style(type = "text/css", css_fix)  # Convert CSS to HTML
-    #m %<>% htmlwidgets::prependContent(html_fix)                   # Insert into leaflet HTML code
-    
-    #floating text bow for missing values
-    textbox_content <- "<div id='floating-textbox'>*grey fill indicates no data*</div>"
+   
     # Create title for the map
     map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
     
@@ -161,8 +154,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                               textsize = "15px",
                                               direction = "auto")) %>%
       addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "bottomright") %>%
-      addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'red', iconColor = 'white'),
-                        label = agent_labels,
+      addAwesomeMarkers(data = agents_sf %>% filter(SNAP == 1), icon=awesomeIcons(icon='cloud', markerColor = 'green', iconColor = 'white'),
+                        label = agent_labels, group = "FCS/SNAP-ED Agent",
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addAwesomeMarkers(data = agents_sf %>% filter(SNAP == 0), icon=awesomeIcons(icon='cloud', markerColor = 'blue', iconColor = 'white'),
+                        label = agent_labels, group = "FCS Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
