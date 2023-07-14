@@ -61,7 +61,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Convert columns to appropriate types and rename them
     va.counties <- transform(va.counties,
                              GEOID = as.integer(GEOID),
-                             NAMELSAD = str_to_title(NAMELSAD) )
+                             NAMELSAD = str_to_title(NAMELSAD),
+                             NAME = str_to_title(NAME))
     
   # Load and preprocess the health rankings data
   all_var_df <- read.csv("./data/final_variables.csv") %>%
@@ -70,7 +71,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   
   # Load and preprocess the VCE agents location data
   agents_sf <- read.csv("./data/vce_agents.csv") %>% st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
-  
   # Prepare labels for varibels of interest
   good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
                   "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
@@ -82,20 +82,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
                   "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
   # territory data
-  all_territories <- read.csv("./data/agent_solutions.csv")
+  all_territories <- read.csv("./data/all_agent_solutions.csv")
   
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
-  ## reading in data for territory function
-  #reading in va counties shps
-  va.counties <- st_read("./data/va_counties.shp")
-  # Convert columns to appropriate types and rename them
-  va.counties <- transform(va.counties,
-                           GEOID = as.integer(GEOID),
-                           NAMELSAD = str_to_title(NAMELSAD) )
-  # territory data
-  all_territories <- read.csv("./data/all_agent_solutions.csv")
-
+  additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
 
 # ## 1.4 Define your functions -------------------------------------------------------
 # # Function for health outcomes
@@ -107,6 +98,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Join variable data with county geometry data
     var.counties <- left_join(va.counties, temp, by = 'GEOID')
     
+    #separating snap agents
+    snap_agents <- agents_sf %>% filter(SNAP == 1)
     # Identify the index of the selected variable
     idx <- which(unique(all_var_df$Variable) == variable)
     
@@ -121,13 +114,21 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       var.counties$Value
     ) %>% lapply(htmltools::HTML)
     
+    # Create labels for snap agents
+    snap_agent_labels <- sprintf(
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-Ed Service Provided At: %s",
+      snap_agents$Job.Dept,
+      snap_agents$Employee.Name,
+      snap_agents$VT.Email,
+      snap_agents$SNAP.Ed
+    ) %>% lapply(htmltools::HTML)
+    
     # Create labels for agents
     agent_labels <- sprintf(
-      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-ED Service Provided At: %s",
-      additional_agent_sf$Job.Dept,
-      additional_agent_sf$Employee.Name,
-      additional_agent_sf$VT.Email,
-      additional_agent_sf$SNAP.Ed
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
+      agents_sf$Job.Dept,
+      agents_sf$Employee.Name,
+      agents_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
     # Wrap legend title if too long
@@ -154,13 +155,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                               textsize = "15px",
                                               direction = "auto")) %>%
       addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "bottomright") %>%
-      addAwesomeMarkers(data = agents_sf %>% filter(SNAP == 1), icon=awesomeIcons(icon='cloud', markerColor = 'green', iconColor = 'white'),
-                        label = agent_labels, group = "FCS/SNAP-ED Agent",
-                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      addAwesomeMarkers(data = agents_sf %>% filter(SNAP == 0), icon=awesomeIcons(icon='cloud', markerColor = 'blue', iconColor = 'white'),
+      addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'blue', iconColor = 'white'),
                         label = agent_labels, group = "FCS Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'green', iconColor = 'white'),
+                        label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
+      addLegend(colors = c("green", "blue"), labels = c("FCS/SNAP-Ed Agent","FCS Agent" ), position = "bottomright", title= "Agent Service:") %>% 
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)  %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
@@ -172,9 +174,12 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
+    
     # Convert new agent locations to sf
     st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     
+    #separating snap agents
+    snap_agents <- agents_sf %>% filter(SNAP == 1)
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
   
@@ -204,13 +209,20 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       territory.counties$Agent
     ) %>% lapply(htmltools::HTML)
     
+    snap_agent_labels <- sprintf(
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-Ed Service Provided At: %s",
+      snap_agents$Job.Dept,
+      snap_agents$Employee.Name,
+      snap_agents$VT.Email,
+      snap_agents$SNAP.Ed
+    ) %>% lapply(htmltools::HTML)
+    
     # create labels for agents
     agent_labels <- sprintf(
-      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP Ed location: %s",
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
       additional_agent_sf$Job.Dept,
       additional_agent_sf$Employee.Name,
-      additional_agent_sf$VT.Email,
-      additional_agent_sf$SNAP.Ed
+      additional_agent_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
@@ -242,8 +254,13 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                         icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
                         label = agent_labels,
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'green', iconColor = 'white'),
+                        label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7) %>%
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
+      addLegend(colors = c("green", "blue", "red"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent", "New FCS Agent" ), 
+              position = "topright", title= "Agent Type/Service:")
   }
 
 
