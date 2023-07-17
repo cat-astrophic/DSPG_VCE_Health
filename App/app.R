@@ -288,16 +288,17 @@ ui <- navbarPage(#title = "DSPG 2023",
                  tabPanel("Overview", value = "overview",
                           fluidRow(style = "margin: 12px;",
                                    align = "center",
-                                   h1(strong("VCE: Optimizing Extension Agent Services"),
-                                      h4("Data Science for the Public Good Program"),
-                                      h4("Virginia Tech"),
+                                   h1(strong("VCE: Optimizing Extension Agent Services"), style = "font-size: 65px;",
+                                      h4("Data Science for the Public Good Program"), style = "font-size: 50px;",
+                                      h4("Virginia Tech"), style = "font-size: 50px;",
+                                      img(src = "vce_long.jpg", style = "display: inline; margin-right: 5px;", width = "500px;", align = "center"),
                                       br()
                                    )
                           ),
                           fluidRow(style = "margin: 12px;",
                                    align = "justify",
-                                   column(4,
-                                          h2(strong("Project Background")),
+                                   column(6,
+                                          h2(strong("Project Background"), align = "center"),
                                           p(strong("Virginia Coorperative Extensions:"), "Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has"),
                                           tags$li("107 offices"),
                                           tags$li("11 Agriculture Research Extension centers"), 
@@ -308,20 +309,23 @@ ui <- navbarPage(#title = "DSPG 2023",
                                           p(strong("Family Consumer Sciences:"), "For the purpose of this project, we will be focusing on VCE’s Family and Consumer Sciences Program and the agents that support this program. FCS programming is tied to community needs and directed toward families and individuals. Many counties’ FCS programs look different from one another, however, there are core specialty areas every program has. The specialty areas include: Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents are responsible for partnering and collaborating with other VCE agents, agencies, nonprofits/ other organizations, and the public to meet the educational needs of local residents. Agents are tasked with determining program goals and needs by monitoring trends and issues. FCS agents essentially help Virginian families make more healthy and smart decisions by applying research-based knowledge to work in people’s lives. However, this is easier said than done. A big reason why every county’s FCS programs look different is because of the unique populations and challenges every county has. This unfortunately creates a difficult job for FCS agents. They are overextended and commit a lot more time and effort than what seems to fit into the 3 FCS specialty areas. Today, FCS agents are doing a lot more than what was originally expected of them as VCE extends their work to be more public health focused."),
                                           
                                    ),
-                                   column(4,
-                                          h2(strong("Our Work")),
+                                   column(6,
+                                          h2(strong("Our Work"), align = "center"),
+                                          p(strong("Purpose:")),
                                           p("Our team seeks to design an interactive dashboard that will aid VCE FCS agents in identifying which areas of Virginia are in need of more support. This dashboard will help our stakeholders gain a better understanding of the needs of the community, as well as their current health demographics. Agents will be able to put our research into practice by using our dashboard to identify specific areas of need for every county in Virginia. We hope that this resource will support VCE FCS agents in improving the overall health of Virginia communities."),
                                           p("We will utilize publicly accessible data, including Virginia health rankings, to offer our stakeholders a comprehensive comprehension of the factors influencing the health of families in Virginia. Our primary focus will be on various variables that align with the five determinants of health as well as health outcomes. Additionally, we will map these variables alongside the existing data on Virginia Cooperative Extension (VCE) agents. These maps will aid in identifying areas where VCE agents can provide further support to their communities."),
-
+                                          
+                                          h2(strong("Dashboard Aims"), align = "center"),
+                                         
+                                          p(strong("Social Determinants of Health:"),
+                                          p("This interactive dashboard will allow agents to gain valuable context regarding the public health landscape of the counties they serve, enabling them to tailor their services accordingly. 
+                                            This dashboard displays data on critical health variables that influence the well-being of Virginia's localities and the work of FCS agents. Overall, this project aims to empower FCS agents' leadership with the knowledge and insights necessary to make informed decisions and have an even larger positive impact on the well-being of individuals and families in Virginia.")),
+                                          p(strong("Optimizing Agents Terriories:"), 
+                                          p("This section presents the results of the optimization process, showcasing the agent territories on maps. These visual representations allow stakeholders to identify the areas where they should focus their efforts and explore the locations of newly assigned agents. By providing this interactive feature, stakeholders can make informed decisions based on the visual insights provided by the maps.")),
                                           
                           
                                    ),
-                                   column(4,
-                                          h2(strong("Dashboard Aims")),
-                                          p("Our dashboard is aimed at:"),
-                                          p(strong("Social Determinants of Health"), "This interactive dashboard will allow agents to gain valuable context regarding the public health landscape of the counties they serve, enabling them to tailor their services accordingly. This dashboard displays data on critical health variables that influence the well-being of Virginia's localities and the work of FCS agents. Overall, this project aims to empower FCS agents' leadership with the knowledge and insights necessary to make informed decisions and have an even larger positive impact on the well-being of individuals and families in Virginia."),
-                                          p(strong("Optimizing Agents Terriories"), "This section presents the results of the optimization process, showcasing the agent territories on maps. These visual representations allow stakeholders to identify the areas where they should focus their efforts and explore the locations of newly assigned agents. By providing this interactive feature, stakeholders can make informed decisions based on the visual insights provided by the maps."),
-                                   )
+                                   
                                    
                           ),
                           
@@ -359,7 +363,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                       They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health 
                                                       equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. 
                                                       They shape opportunities for good health, influence the distribution of resources and power in society, and create conditions that can either support or hinder individual and community health.")
-                                                    )
+                                                    
+                                                    ),
+                                              column(6,
+                                                     img(src = "sdoh.jpg", style = "display: inline; margin-right: 5px; ", width = "600px;", align = "center"))
                                      
                                                )
                             ),
@@ -369,7 +376,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
                           tabPanel("Health Variables",
                                    h1(strong("Health Variables"), align = "center"),
-                                   p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites."),
+                                   p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
                             tabsetPanel(
                               tabPanel("Health Outcomes", 
                                      fluidRow(style = "margin: 20px;",
@@ -551,7 +558,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Physical Distress" = "per_physical_distress",
                                                        "Mental Distress" = "per_mental_distress",
                                                        "Access to Exercise Opportunity" = "per_access_to_exercise_opportunities",
-                                                       "Suicide Rate" = "suicide_rate",
+                                                       
                                                        
                                                         "Juvenile Arrest Rate" = "juvenile_arrests_rate",
                                                         "Insufficient Sleep" = "per_insufficient_sleep",
