@@ -737,7 +737,7 @@ ui <- navbarPage(#title = "DSPG 2023",
 
                                             
                                             
-                                            )),
+                                  
 
                                              fluidRow(style = "margin: 6px;", align = "left",
                                                       column(4,
@@ -754,6 +754,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                       
                                                       
                                    ),
+                          )),
                  
 
                  
