@@ -734,13 +734,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                             
                                              ),
                                             
-<<<<<<< HEAD
+
                                             
                                             
                                             )),
-                 ),
-                                   ))),
-=======
+
                                              fluidRow(style = "margin: 6px;", align = "left",
                                                       column(4,
                                                              img(src = "usda_ers.jpg", style = "display: inline; float: left;", width = "230px"),
@@ -755,8 +753,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                their overall well-being and access to healthcare.")),
                                                       
                                                       
-                                   )),
->>>>>>> f3e443e1df75ec5476d4d8dfd4a850dd41ab5eea
+                                   ),
+                 
+
                  
                  
                  ## 2.5 Tab Team --------------------------------------------
