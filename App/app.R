@@ -319,8 +319,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    column(4,
                                           h2(strong("Dashboard Aims")),
                                           p("Our dashboard is aimed at:"),
-                                          p(strong("Social Determinants of Health"), "The resulting analysis and findings will be presented in an interactive dashboard, which will serve as a valuable resource for the Virginia Cooperative Extension. Through this dashboard, VCE agents will be equipped with the necessary information to enhance their understanding of community health determinants and identify areas where their expertise can have a meaningful impact."),
-                                          p(strong("Optimizing Agents Terriories"), "provide agents with a new terriroty to cover .... This dashboard compiles our findings and allows stakeholders and other users to explore the information interactively."),
+                                          p(strong("Social Determinants of Health"), "This interactive dashboard will allow agents to gain valuable context regarding the public health landscape of the counties they serve, enabling them to tailor their services accordingly. This dashboard displays data on critical health variables that influence the well-being of Virginia's localities and the work of FCS agents. Overall, this project aims to empower FCS agents' leadership with the knowledge and insights necessary to make informed decisions and have an even larger positive impact on the well-being of individuals and families in Virginia."),
+                                          p(strong("Optimizing Agents Terriories"), "This section presents the results of the optimization process, showcasing the agent territories on maps. These visual representations allow stakeholders to identify the areas where they should focus their efforts and explore the locations of newly assigned agents. By providing this interactive feature, stakeholders can make informed decisions based on the visual insights provided by the maps."),
                                    )
                                    
                           ),
@@ -374,7 +374,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                               tabPanel("Health Outcomes", 
                                      fluidRow(style = "margin: 20px;",
                                               h1(strong("Health Outcomes"), align = "left", style = "font-size: 18px;"),
-                                              p("Health outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community.[1] These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors. Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
+                                              p("Health outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors. Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(3,
@@ -673,7 +673,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
                                      tabsetPanel(
-                                       tabPanel("FCS Agents",
+                                       tabPanel("FCS and SNAP-Ed Agents",
                                                 fluidRow(
                                                   style = "margin: 12px;",
                                                   h1(strong("Results"), align = "center"),
