@@ -672,7 +672,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                           fluidRow(style = "margin: 6px;",
                                    h1(strong("Data Sources"), align = "center"),
                                    p("", style = "padding-top:10px;"),
-                                   fluidRow(style = "margin: 6px;", align = "justify",
+                                   fluidRow(style = "margin: 6px;", align = "left",
                                             column(4,
                                                    img(src = "county_health_rankings.jpg", style = "display: inline; float: left;", width = "230px"),
                                                    p(strong("County Health Rankings & Roadmaps"), "The County Health Rankings & Raodmaps (CHR&R) a program of the University of Wisconsin Population Health Institute. 
@@ -684,22 +684,22 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      agents operate. The team used this data to create visualizations, specifically focusing on the distribution of optimized agent territories across localities.")),
                                             column(4,
                                                    img(src = "data-acs.jpg", style = "display: inline; float: left;", width = "230px"),
-                                                   p(strong("We retrieve American Community Survey (ACS) data to examine demographic and socioeconomic characteristics of our target population. ACS is an ongoing yearly survey conducted by the U.S Census Bureau that samples 
+                                                   p(strong("American Community Survey (ACS)"),"We retrieve ACS data to examine demographic and socioeconomic characteristics of our target population. ACS is an ongoing yearly survey conducted by the U.S Census Bureau that samples 
                                                             households to compile 1-year and 5-year datasets. We used the most recently available 1-year/5-year estimates, to analyze localities social determinants of health.")),
-                                            column(4,
-                                                   img(src = "brfss.jpg", style = "display: inline; float: left;", width = "230px"),
-                                                   p(strong("The Behavioral Risk Factor Surveillance System (BRFSS) stands as the leading national platform for health-related telephone surveys. Its primary objective is to gather state-level data on health-related risk 
+                                            ), 
+                                            
+                                            fluidRow(style = "margin: 6px;", align = "left",
+                                                     column(4,
+                                                            img(src = "brfss.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                            p(strong("Behavioral Risk Factor Surveillance System (BRFSS)"),"BRFSS stands as the leading national platform for health-related telephone surveys. Its primary objective is to gather state-level data on health-related risk 
                                                             behaviors, chronic health conditions, and the utilization of preventive services among U.S. residents.")),
-                                            column(4,
-                                                   img(src = "cdc_stat.jpg", style = "display: inline; float: left;", width = "230px"),
-                                                   p(strong("The National Center for Health Statistics (NCHS) is responsible for the collection, analysis, and dissemination of health data and statistics. NCHS focuses on providing timely, relevant, and accurate information 
+                                                     column(4,
+                                                            img(src = "cdc_stat.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                            p(strong("CDC National Center for Health Statistics(NCHS)"),"The NCHS is responsible for the collection, analysis, and dissemination of health data and statistics. NCHS focuses on providing timely, relevant, and accurate information 
                                                             that informs the public and assists in making program and policy decisions aimed at enhancing the health of our nation. Through its products and services, NCHS strives to contribute to the improvement of public health.
-                                                            Our team used this data to dive deeper into the public health landscape of the Commonwealth")),
-                                            
-                                            
-                                            
-                                            )),
-                 ),
+                                                            Our team used this data to dive deeper into the public health landscape of the Commonwealth"))
+                                                            
+                                                            ))),
                  
                  
                  ## 2.5 Tab Team --------------------------------------------
