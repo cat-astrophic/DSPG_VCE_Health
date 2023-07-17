@@ -290,35 +290,42 @@ ui <- navbarPage(#title = "DSPG 2023",
                           ),
                           fluidRow(style = "margin: 12px;",
                                    align = "justify",
-                                   column(6,
+                                   column(4,
                                           h2(strong("Project Background")),
                                           p(strong("Virginia Coorperative Extensions:"), "Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has"),
                                           tags$li("107 offices"),
                                           tags$li("11 Agriculture Research Extension centers"), 
                                           tags$li("6 4-H centers throughout the state"),
+                                          br(),
                                           p("VCE agents and volunteers strive to empower youth and Virginian farmers, guide sustainable resource management, and promote public health. VCE accomplishes these goals through programs that put research-based knowledge to work in people’s lives. VCE has a variety of programs like 4-H Youth Development, Family and Consumer Sciences, Community Viability, Agriculture and Natural Resources, Food, Nutrition, and Health, etc. in every county. VCE works on unique challenges Virginians face in partnership with governments and organizations to solve these issues in a way that benefits all people. With the expertise and knowledge from Virginia Tech and Virginia State University, VCE agents are able to tackle issues and foster community growth across the state. "),
                   
-                                          p("For the purpose of this project, we will be focusing on VCE’s Family and Consumer Sciences Program and the agents that support this program. FCS programming is tied to community needs and directed toward families and individuals. Many counties’ FCS programs look different from one another, however, there are core specialty areas every program has. The specialty areas include: Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents are responsible for partnering and collaborating with other VCE agents, agencies, nonprofits/ other organizations, and the public to meet the educational needs of local residents. Agents are tasked with determining program goals and needs by monitoring trends and issues. FCS agents essentially help Virginian families make more healthy and smart decisions by applying research-based knowledge to work in people’s lives. However, this is easier said than done. A big reason why every county’s FCS programs look different is because of the unique populations and challenges every county has. This unfortunately creates a difficult job for FCS agents. They are overextended and commit a lot more time and effort than what seems to fit into the 3 FCS specialty areas. Today, FCS agents are doing a lot more than what was originally expected of them as VCE extends their work to be more public health focused."),
-                                  
+                                          p(strong("Family Consumer Science:"), "For the purpose of this project, we will be focusing on VCE’s Family and Consumer Sciences Program and the agents that support this program. FCS programming is tied to community needs and directed toward families and individuals. Many counties’ FCS programs look different from one another, however, there are core specialty areas every program has. The specialty areas include: Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents are responsible for partnering and collaborating with other VCE agents, agencies, nonprofits/ other organizations, and the public to meet the educational needs of local residents. Agents are tasked with determining program goals and needs by monitoring trends and issues. FCS agents essentially help Virginian families make more healthy and smart decisions by applying research-based knowledge to work in people’s lives. However, this is easier said than done. A big reason why every county’s FCS programs look different is because of the unique populations and challenges every county has. This unfortunately creates a difficult job for FCS agents. They are overextended and commit a lot more time and effort than what seems to fit into the 3 FCS specialty areas. Today, FCS agents are doing a lot more than what was originally expected of them as VCE extends their work to be more public health focused."),
+                                          
                                    ),
-                                   column(6,
+                                   column(4,
                                           h2(strong("Our Work")),
                                           p("Our team seeks to design an interactive dashboard that will aid VCE FCS agents in identifying which areas of Virginia are in need of more support. This dashboard will help our stakeholders gain a better understanding of the needs of the community, as well as their current health demographics. Agents will be able to put our research into practice by using our dashboard to identify specific areas of need for every county in Virginia. We hope that this resource will support VCE FCS agents in improving the overall health of Virginia communities."),
                                           p("We will utilize publicly accessible data, including Virginia health rankings, to offer our stakeholders a comprehensive comprehension of the factors influencing the health of families in Virginia. Our primary focus will be on various variables that align with the five determinants of health as well as health outcomes. Additionally, we will map these variables alongside the existing data on Virginia Cooperative Extension (VCE) agents. These maps will aid in identifying areas where VCE agents can provide further support to their communities."),
 
-                                          p("The resulting analysis and findings will be presented in an interactive dashboard, which will serve as a valuable resource for the Virginia Cooperative Extension. Through this dashboard, VCE agents will be equipped with the necessary information to enhance their understanding of community health determinants and identify areas where their expertise can have a meaningful impact."),
+                                          
                           
-                                          p("This dashboard compiles our findings and allows stakeholders and other users to explore the information interactively."),
                                    ),
+                                   column(4,
+                                          h2(strong("Dashboard Aims")),
+                                          p("Our dashboard is aimed at:"),
+                                          p(strong("Social Determinants of Health"), "The resulting analysis and findings will be presented in an interactive dashboard, which will serve as a valuable resource for the Virginia Cooperative Extension. Through this dashboard, VCE agents will be equipped with the necessary information to enhance their understanding of community health determinants and identify areas where their expertise can have a meaningful impact."),
+                                          p(strong("Optimizing Agents Terriories"), "provide agents with a new terriroty to cover .... This dashboard compiles our findings and allows stakeholders and other users to explore the information interactively."),
+                                   )
                                    
                           ),
+                          
                           fluidRow(align = "center",
-                                   p(tags$small(em('Last updated: August 2023')))
+                                   p(tags$small(em('Last updated: July 2023')))
                           ) 
                  ),
                  
                  ## 2.2 Tab Health variables --------------------------------------------
-                 tabPanel("Social Determinants of Health" ,
+                navbarMenu("Social Determinants of Health" ,
                             ### 2.2.0 Subtab Virginia Public Health Overview
                             tabPanel("Public Health Overview",
                                      fluidRow(style = "margin: 12px;",
@@ -326,26 +333,42 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 12px;",
                                               align = "justify",
+                                              column(12,
+                                                     p("In the past 100 years, Virginia has seen tremendous growth in its public health sector, nevertheless, there are still many areas that are in need of significant improvement. 
+                                                       Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, gun violence, and motor vehicle crashes have plagued the welfare of the Commonwealth. Due to the contrasting urban and rural regions in Virginia, health varies drastically based on where Virginians reside. 
+                                                       In the more wealthy and populated localities, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 counties fell below the national average. 
+                                                       The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years. 
+                                                       Virginia struggles to provide clean air and water, safe roadways, protection from communicable diseases, and other essential public health services to the entire population of the Commonwealth."),
+                                                     p("Virginia’s unfavorable health outcomes can be attributed to the lack of public health funding and poor access to affordable healthcare. 
+                                                       The Joint Commission on Health Care found that Virginia ranks in the bottom third of states in public health spending. Spending about $95 per Capita, the Virginia Department 
+                                                       of Health’s budget has remained unchanged for the past 20 years, when adjusted for inflation and population growth. Additionally, federal funding sometimes do not match the specific needs of localities. 
+                                                       Federal funding often prioritizes diseases that draw the most attention and while this benefits disease prevention, it unintentionally results in the underinvestment of many needed programs that affect the social determinants of health. 
+                                                       Moreover, this lack of funding results in public health workforce shortages, and causes workers like VCE FCS agents to be overworked and overwhelmed by the needs of the population. 
+                                                       Staffing shortages inhibit local health departments from carrying out their responsibilities and prevent Virginians from getting the best care available.")
+                                                     ),
                                               column(6,
-                                                     p("In the past 100 years, Virginia has seen tremendous growth in its public health sector, nevertheless, there are still many areas that are in need of significant improvement. Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, gun violence, and motor vehicle crashes have plagued the welfare of the Commonwealth. Due to the contrasting urban and rural regions in Virginia, health varies drastically based on where Virginians reside. In the more wealthy and populated localities, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 counties fell below the national average. The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years. Virginia struggles to provide clean air and water, safe roadways, protection from communicable diseases, and other essential public health services to the entire population of the Commonwealth."),
-                                                     p("Virginia’s unfavorable health outcomes can be attributed to the lack of public health funding and poor access to affordable healthcare. The Joint Commission on Health Care found that Virginia ranks in the bottom third of states in public health spending. Spending about $95 per Capita, the Virginia Department of Health’s budget has remained unchanged for the past 20 years, when adjusted for inflation and population growth. Additionally, federal funding sometimes do not match the specific needs of localities. Federal funding often prioritizes diseases that draw the most attention and while this benefits disease prevention, it unintentionally results in the underinvestment of many needed programs that affect the social determinants of health. Moreover, this lack of funding results in public health workforce shortages, and causes workers like VCE FCS agents to be overworked and overwhelmed by the needs of the population. Staffing shortages inhibit local health departments from carrying out their responsibilities and prevent Virginians from getting the best care available."),
-                                    
-                                                    h2("Social Determinants of Health Overview"),
-                                                    p("The field of public health encompasses various factors that influence the health and well-being of individuals and communities. One crucial aspect that significantly shapes health outcomes is the social determinants of health. These determinants as defined by the World Health Organization (WHO) are the social, economic, and environmental conditions in which people are born, grow, live, work, and age. They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. They shape opportunities for good health, influence the distribution of resources and power in society, and create conditions that can either support or hinder individual and community health.")
+                                                    h2("Health Overview", align = "center"),
+                                                    p("The field of public health encompasses various factors that influence the health and well-being of individuals and communities. One crucial aspect that significantly shapes health outcomes is the social determinants of health.
+                                                      These determinants as defined by the World Health Organization (WHO) are the social, economic, and environmental conditions in which people are born, grow, live, work, and age.
+                                                      They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health 
+                                                      equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. 
+                                                      They shape opportunities for good health, influence the distribution of resources and power in society, and create conditions that can either support or hinder individual and community health.")
                                                     )
+                                     
                                                )
                             ),
-                 ),
+                 
                          
 
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
-                 tabPanel("Health Variables",
+                          tabPanel("Health Variables",
+                                   h1(strong("Health Variables"), align = "center"),
+                                   p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites."),
                             tabsetPanel(
                               tabPanel("Health Outcomes",
                                      fluidRow(style = "margin: 12px;",
                                               h1(strong("Health Outcomes"), align = "center"),
-                                              p("Health Outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors."),
-                                              p("Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
+                                              p("Health outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors. Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(3,
@@ -370,14 +393,15 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               )
                                      )
                             ),
+                            
+                      
                           
                             ### 2.2.2 Subtab Healthcare Access and Quality--------------------------------------
                             tabPanel("Healthcare Access and Quality", 
                                      fluidRow(style = "margin: 12px;",
                                               h1(strong("Healthcare Access and Quality Variables"), align = "center"),
                                               p("Accessible and affordable healthcare plays a critical role in promoting physical, social, and mental well-being. While health insurance facilitates access to essential medical services, it alone does not guarantee accessibility. It is equally vital for healthcare providers to offer affordable care, be accessible to patients, and be located conveniently.
-                                                In the context of VCE FCS agents' work, their efforts can contribute to improving healthcare accessibility for individuals and families."),
-                                              p("By addressing community-specific needs and collaborating with local healthcare providers, FCS agents can support initiatives that enhance access to quality healthcare. They can facilitate partnerships between healthcare providers and community organizations, advocate for affordable healthcare options, and educate individuals on navigating the healthcare system effectively. Additionally, FCS agents can provide valuable resources and information on health insurance options, enrollment assistance, and healthcare rights.
+                                                In the context of VCE FCS agents' work, their efforts can contribute to improving healthcare accessibility for individuals and families. By addressing community-specific needs and collaborating with local healthcare providers, FCS agents can support initiatives that enhance access to quality healthcare. They can facilitate partnerships between healthcare providers and community organizations, advocate for affordable healthcare options, and educate individuals on navigating the healthcare system effectively. Additionally, FCS agents can provide valuable resources and information on health insurance options, enrollment assistance, and healthcare rights.
                                                 Through their work, VCE FCS agents can play a pivotal role in fostering collaborations between healthcare providers and communities, promoting health equity, and ensuring that individuals and families have the necessary tools and support to access affordable, quality healthcare services.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 12px;",
                                               align = "justify",
@@ -559,6 +583,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                  ),
                  ),
                  ),
+                ),
                  
                  ## 2.4 Tab Agent Optimization Programming------
                  navbarMenu("Agents Territories",
@@ -842,7 +867,7 @@ server <- function(input, output) {
       "% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.
       Preterm births, which occur before 37 weeks of gestation, contribute to low birthweight. Given the far-reaching consequences of low birthweight, it is crucial to address the underlying factors contributing to it. This involves efforts to improve access to quality prenatal care, promote proper nutrition, address maternal stress, reduce exposure to pollution, and provide support for substance misuse prevention and treatment during pregnancy. By addressing these factors, we can work towards reducing the occurrence of low birthweight and improving the long-term health outcomes for infants and their families."
     } else if (input$Health_Outcomes == "life_expectancy") {
-      "verage number of years a person can expect to live. "
+      "Life Expectancy: Average number of years a person can expect to live. "
     } else if (input$Health_Outcomes == "life_expectancy_gap") {
       "Statistics for life_expectancy_gap"
     } else if (input$Health_Outcomes == "life_expectancy_black") {
@@ -855,7 +880,7 @@ server <- function(input, output) {
   })
   
   ## 3.2 Healthcare Access -----
-  #create a rective expression for healthcare access variables
+  #create a reactive expression for healthcare access variables
   temp_healthaccess <- reactive({
     input$Health_Access
   })
