@@ -81,8 +81,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
                   "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
                   "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
-  # territory data
+  # fcs AND snap territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
+  
+  # snap territory data
+  #snap_territories <- read.csv("./data/all_agent_solutions.csv")
+  
+  # fcs territory data
+  #fcs_territories <- read.csv("./data/all_agent_solutions.csv")
   
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
