@@ -189,13 +189,13 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
   
     #assigning colors for each agent territory
-    pal <- colorFactor(palette = c("lightgoldenrod" , "red","forestgreen","navy","grey21",
-                                   "dodgerblue", "aquamarine4","yellow","salmon", "firebrick4", "darkolivegreen1", 
-                                   "royalblue", "greenyellow", "gold","turquoise","mediumvioletred", "mistyrose", 
-                                   "palegreen","hotpink4", "purple", "sienna1","lightblue", "darkcyan", "lightsteelblue", 
-                                   "magenta","slategray","darkorange3","violet","blue","mediumspringgreen","mediumorchid", 
-                                   "pink", "salmon4","burlywood","darkgreen", "honeydew","orange","hotpink",
-                                   "darkslateblue", "darkorchid1"),
+    pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
+                                   "#1f77b4", "#018571","#ffffb3","#e45756", "#B12A90FF", "#4a9848", 
+                                   "#488fc1", "#addd8e", "#fddb6f","#22a784","#c44e52", "#fde0dd", 
+                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#79b8d1", 
+                                   "#e7298a","#5b5b5b","#440154","#af8dc3","#414487","#00ba38","#D35FB7", 
+                                   "#f28e2b", "#b31a1c","#d8b365","#006d2c", "#f0fff0","#ffa500","#ff69b4",
+                                   "#483d8b", "#9a5baf"),
                        domain= all_territories$Agent,
                        levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
                                   "Chesapeake City","Fairfax","Floyd","Franklin","Gloucester",
