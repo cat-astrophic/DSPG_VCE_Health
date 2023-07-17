@@ -714,9 +714,29 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                             img(src = "cdc_stat.jpg", style = "display: inline; float: left;", width = "230px"),
                                                             p(strong("CDC National Center for Health Statistics(NCHS)"),"The NCHS is responsible for the collection, analysis, and dissemination of health data and statistics. NCHS focuses on providing timely, relevant, and accurate information 
                                                             that informs the public and assists in making program and policy decisions aimed at enhancing the health of our nation. Through its products and services, NCHS strives to contribute to the improvement of public health.
-                                                            Our team used this data to dive deeper into the public health landscape of the Commonwealth"))
+                                                            Our team used this data to dive deeper into the public health landscape of the Commonwealth.")),
+                                                     column(4,
+                                                            img(src = "census.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                            p(strong("United States Census Bureau"),"The primary objective of the Census Bureau is to fulfill its role as the foremost provider of high-quality data concerning the people and economy of the nation. Their mission centers 
+                                                              around delivering data that encompasses an ideal combination of timeliness, relevance, quality, and cost-effectiveness. Our team used insightful data on the demographics of Virginia to enhance our dashboard's descriptiveness")),
                                                             
-                                                            ))),
+                                             ),
+                                            
+                                             fluidRow(style = "margin: 6px;", align = "left",
+                                                      column(4,
+                                                             img(src = "usda_ers.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                             p(strong("USDA Economic Research Service (ERS)"),"The mission of the ERS, a part of the U.S. Department of Agriculture, is to proactively identify trends and emerging issues in agriculture, 
+                                                               food, the environment, and rural America. Through conducting rigorous and unbiased economic research, the ERS aims to provide valuable insights that inform and enrich decision-making processes 
+                                                               for both public and private sectors. The team used ERS data on the food environment in Virginia to help Agents better tailor their FCS programming .")),
+                                                      column(4,
+                                                             img(src = "bureau_labor_stat.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                             p(strong("Bureau of Labor Statistics (BLS)"),"The BLS is responsible for assessing labor market activity, working conditions, price fluctuations, and productivity 
+                                                               within the U.S. economy. Their primary objective is to provide essential data that supports decision-making processes in both public and private sectors.By improving working conditions, expanding opportunities for meaningful employment, and 
+                                                               ensuring the provision of work-related benefits and rights, they contribute to fostering the welfare of individuals and promoting their economic stability. The team looked at BLS data to analyze how economic stability in Virginians lives effects
+                                                               their overall well-being and access to healthcare.")),
+                                                      
+                                                      
+                                   )),
                  
                  
                  ## 2.5 Tab Team --------------------------------------------
