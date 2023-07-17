@@ -165,13 +165,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
 
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
 
-<<<<<<< HEAD
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
-=======
+
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL) %>% 
       addLegend(colors = c("orange", "blue"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent"), 
                 position = "topright", title= "Agent Type/Service:")
->>>>>>> 936eb36bf8dc947af27f453c25e891406855025b
+
 }
   
 #territory function
@@ -320,7 +318,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                  ),
                  
                  ## 2.2 Tab Health variables --------------------------------------------
-                 navbarMenu("Health Variables" ,
+                 tabPanel("Social Determinants of Health" ,
                             ### 2.2.0 Subtab Virginia Public Health Overview
                             tabPanel("Public Health Overview",
                                      fluidRow(style = "margin: 12px;",
@@ -337,10 +335,13 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                     )
                                                )
                             ),
+                 ),
                          
 
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
-                            tabPanel("Health Outcomes",
+                 tabPanel("Health Variables",
+                            tabsetPanel(
+                              tabPanel("Health Outcomes",
                                      fluidRow(style = "margin: 12px;",
                                               h1(strong("Health Outcomes"), align = "center"),
                                               p("Health Outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors."),
@@ -369,6 +370,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               )
                                      )
                             ),
+                          
                             ### 2.2.2 Subtab Healthcare Access and Quality--------------------------------------
                             tabPanel("Healthcare Access and Quality", 
                                      fluidRow(style = "margin: 12px;",
@@ -393,7 +395,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        "Dentist Ratio" = "dentist_ratio",
                                                        "Mental Health Provider Ratio" = "mental_health_provider_ratio",
                                                        "Primary Care Physicians Ratio" = "primary_care_physicians_ratio",
-                                                       "Other Primary Care Provider Ratio" = "other_primary_care_provider_ratio",
+                                                       
                                                        "Vaccination Rate" = "per_vaccinated",
                                                        "Preventable Hospitalization Rate" = "preventable_hospitalization_rate",
                                                        "Annual Mammograms" = "per_with_annual_mammogram",
@@ -556,39 +558,37 @@ ui <- navbarPage(#title = "DSPG 2023",
                             
                  ),
                  ),
+                 ),
+                 
                  ## 2.4 Tab Agent Optimization Programming------
                  navbarMenu("Agents Territories",
                             tabPanel("Methodology",
-                                     fluidRow(
-                                       style = "margin: 12px;",
-                                       h1(strong("Agent Optimization Process"), align = "center")
-                                     ),
-                                     fluidRow(
-                                       style = "margin: 12px;",
+                                     fluidRow(style = "margin: 12px;",
+                                       h1(strong("Agent Optimization Process"), align = "center")),
+                                     fluidRow(style = "margin: 12px;",
                                        column(12,
                                               titlePanel(strong("Overview")),
                                               p("Our goal is to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents, we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
                                               p(strong("Workflow:")),
-                                              tags$li("Identify where FCS Agents are"),
+                                              tags$li("Perform a literature review to understand the role of FCS and identify which SDoH variables are relevant to the work that FCS does"),
                                               tags$li("Identify health outcomes that FCS agents can affect"),
-                                              tags$li("Create a health index: z-score aggregation"),
-                                              tags$li("Determining accessibility definition"),
-                                              tags$li("Solving mathematical programs"),
-                                              tags$li("Mapping optimized territories")
+                                              tags$li("Create an aggregate measure of need within communities thorugh a health index: aggregate z-score"),
+                                              tags$li("Use current FCS agent locations and isochrone maps to determine how accessible FCS agents are to their communities"),
+                                              tags$li("Use a mathematical programming model to optimize the assignment of counties to FCS agents"),
+                                              tags$li("Use a mathematical programming model to determine the best locations for adding new FCS agents to Virginia"),
                                        )
                                      )
                             ),
                             tabPanel("Programming Overview",
-                                     fluidRow(
-                                       style = "margin: 12px;",
+                                     fluidRow(style = "margin: 12px;",
                                        h1(strong("Programming"), align = "center")
                                      ),
                                      fluidRow(
                                        style = "margin: 12px;",
                                        align = "justify",
                                        column(6,
-                                              h1(strong("Objective Function")),
-                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; ", width = "500px"),
+                                              h1(strong("Objective Function"), align = "center"),
+                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; ", width = "500px;", align = "center"),
                                               
                                               p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
                                               tags$li(strong("Population:")),
@@ -600,24 +600,36 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("The need factor is specifically determined by the unique needs of each county. These needs are based on various social determinants of health variables. Given that each county requires different services, 
                                                 it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
                                                 
-                                              h1(strong("Constraints")),
-                                              tags$li("Mean commute time less than 60 minutes"),
-                                              p("This time constraint is used so that agents do not have to travel more than 60 minutes to work."),
-                                              tags$li("Unique Assignment"),
-                                              p("This constraint allows us to make sure that no county is left out. Each county will be assigned to an angent."),
-                                              tags$li("Population served less than 1.2 million")
+                                              h1(strong("Constraints"), align = "center"),
+                                              tags$li(strong("Mean commute time less than 60 minutes")),
+                                              p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 60 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time."),
+                                              tags$li(strong("Unique assignment")),
+                                              p("The county assignment constraint ensures that every county is allocated to an agent, leaving no county without coverage. This constraint guarantees that each county receives the attention and support of an assigned agent. By assigning agents to specific counties, we can ensure that the unique needs and characteristics of each county are addressed, providing tailored services and resources to the communities within them. This approach promotes comprehensive coverage and equitable distribution of support across all counties, leaving no county overlooked or underserved."),
+                                              tags$li(strong("Population served less than 1.2 million")),
+                                              p("The population constraint serves as an important mechanism to ensure that agents are not overwhelmed with excessive workloads. By considering the varying population density, particularly in rural and urban areas, we can identify imbalances where some agents may be burdened with more individuals to assist, while others have a lighter workload. 
+                                                This constraint helps maintain a fair distribution of responsibilities among agents, ensuring that they can effectively and efficiently serve the population within their capacity."),
+                                              tags$li(strong("District(agent) = district(county)")),
+                                              p("The district-based constraint ensures that agents operate within their designated districts as established by the Virginia Cooperative Extension (VCE). 
+                                                VCE divides Virginia into five distinct districts, and it is essential for agents to adhere to this division. By working exclusively within their assigned districts, 
+                                                agents can effectively focus on the specific needs and priorities of their respective communities. This constraint enables efficient coordination, ensures localized expertise, 
+                                                and enhances the delivery of targeted services within each district."),
+                                              
                                               
                                                                                ),
-                                                column(6,
+                                                column(6, align = "center",
                                                        h1("Figure 1: Isochrone Map"),
                                                        p("Figure 1 illustrates an isochrone map that represents the travel distance for agents. The map displays three key time thresholds: 60 minutes, 40 minutes, and 20 minutes. However, there are certain counties where agents would need to travel for more than one hour to reach them. These counties pose greater logistical challenges due to their distance from the agents' locations, requiring additional time and resources for travel."),
                                                        img(src = "isochrone.png", style = "display: inline; margin-right: 5px; ", width = "500px"),
                                                        
                                                        h1("Figure 2: Aggregate Z-scores Map"),
                                                        p("Figure 2 displays a map depicting the aggregated z-scores calculated for each county. The color intensity on the map indicates the magnitude of the z-scores, with darker colors representing lower z-scores. This signifies that the county is significantly below the average in terms of the five health variables considered. 
-                                                Counties with lower z-scores require more assistance from agents as they exhibit greater needs across these health factors."),
-                                                img(src = "zscore_map.png", style = "display: inline; margin-right: 5px; ", width = "700px")
-                                                )
+                                                         Counties with lower z-scores require more assistance from agents as they exhibit greater needs across these health factors."),
+                                                        img(src = "zscore_map.png", style = "display: inline; margin-right: 5px; ", width = "700px"),
+                                                       h1("Figure 3: VCE Districts"),
+                                                       p("Figure 3 shows the different VCE districts."),
+                                                       img(src = "vce_districts.jpg", style = "display: inline; margin-right: 5px;", width = "700px")
+                                                       
+                                                 )
                                      )
                             ),
         
@@ -717,6 +729,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                             
                                             )),
                  ),
+                                   ))),
                  
                  
                  ## 2.5 Tab Team --------------------------------------------
