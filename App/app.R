@@ -193,15 +193,15 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                    
                                    "#1f77b4", "#018571","#ffffb3","#e45756", "#B12A90FF", "#4a9848", 
                                    
-                                   "#488fc1", "#addd8e", "#004949","#22a784","#c44e52", "#fde0dd", 
+                                   "#488fc1", "#c2df23", "#004949","#924900" ,"#c44e52", "#fde0dd", 
                                    
                                    "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#79b8d1", 
                                    
-                                   "#e7298a","#5b5b5b","#440154","#af8dc3","#414487","#00ba38","#D35FB7", 
+                                   "#e7298a","#5b5b5b","#440154","#af8dc3","#414487","#00ba38","#FDE725FF", 
                                    
-                                   "#f28e2b", "#b31a1c","#d8b365","#006d2c", "#f0fff0","#ffa500","#ff69b4",
+                                   "#3b528b", "#b31a1c","#d8b365","#006d2c", "#f0fff0","#ffa500","#ff69b4",
                                    
-                                   "#483d8b", "#9a5baf"),
+                                   "#483d8b", "#9a5baf"), 
                        domain= all_territories$Agent,
                        levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
                                   "Chesapeake City","Fairfax","Floyd","Franklin","Gloucester",
