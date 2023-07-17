@@ -189,13 +189,13 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
   
     #assigning colors for each agent territory
-    pal <- colorFactor(palette = c("lightgoldenrod" , "red","forestgreen","navy","grey21",
-                                   "dodgerblue", "aquamarine4","yellow","salmon", "firebrick4", "darkolivegreen1", 
-                                   "royalblue", "greenyellow", "gold","turquoise","mediumvioletred", "mistyrose", 
-                                   "palegreen","hotpink4", "purple", "sienna1","lightblue", "darkcyan", "lightsteelblue", 
-                                   "magenta","slategray","darkorange3","violet","blue","mediumspringgreen","mediumorchid", 
-                                   "pink", "salmon4","burlywood","darkgreen", "honeydew","orange","hotpink",
-                                   "darkslateblue", "darkorchid1"),
+    pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
+                                   "#1f77b4", "#018571","#ffffb3","#e45756", "#B12A90FF", "#4a9848", 
+                                   "#488fc1", "#addd8e", "#fddb6f","#22a784","#c44e52", "#fde0dd", 
+                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#79b8d1", 
+                                   "#e7298a","#5b5b5b","#440154","#af8dc3","#414487","#00ba38","#D35FB7", 
+                                   "#f28e2b", "#b31a1c","#d8b365","#006d2c", "#f0fff0","#ffa500","#ff69b4",
+                                   "#483d8b", "#9a5baf"),
                        domain= all_territories$Agent,
                        levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
                                   "Chesapeake City","Fairfax","Floyd","Franklin","Gloucester",
@@ -728,12 +728,12 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    p("", style = "padding-top:10px;"),
                                    fluidRow(style = "margin: 6px;", align = "left",
                                             column(4,
-                                                   img(src = "county_health_rankings.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                   img(src = "county_health_rankings.jpg", style = "display: inline; float: left;", width = "250px"),
                                                    p(strong("County Health Rankings & Roadmaps"), "The County Health Rankings & Raodmaps (CHR&R) a program of the University of Wisconsin Population Health Institute. 
                                                    The CHR&R program provides data, evidence, guidance, and examples to build awareness of the multiple factors that influence health and support leaders in growing community power to improve health equity. This project utilizes CHR&R
                                                     to obtain 2016/2020 county-level data to explore and visualize the Commonwealth's health characteristics.")),
                                             column(4,
-                                                   img(src = "vce.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                   img(src = "vce_logo.jpg", style = "display: inline; float: left;", width = "230px"),
                                                    p(strong("Virginia Cooperative Extension Administrative Data"), "Virginia Cooperative Extension (VCE) provided us with office and agent data which allowed us to gain a better understanding of where Family Consumer Science
                                                      agents operate. The team used this data to create visualizations, specifically focusing on the distribution of optimized agent territories across localities.")),
                                             column(4,
@@ -748,7 +748,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                             p(strong("Behavioral Risk Factor Surveillance System (BRFSS)"),"BRFSS stands as the leading national platform for health-related telephone surveys. Its primary objective is to gather state-level data on health-related risk 
                                                             behaviors, chronic health conditions, and the utilization of preventive services among U.S. residents.")),
                                                      column(4,
-                                                            img(src = "cdc_stat.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                            img(src = "cdc_stat.jpg", style = "display: inline; float: left;", width = "275px"),
                                                             p(strong("CDC National Center for Health Statistics(NCHS)"),"The NCHS is responsible for the collection, analysis, and dissemination of health data and statistics. NCHS focuses on providing timely, relevant, and accurate information 
                                                             that informs the public and assists in making program and policy decisions aimed at enhancing the health of our nation. Through its products and services, NCHS strives to contribute to the improvement of public health.
                                                             Our team used this data to dive deeper into the public health landscape of the Commonwealth.")),
@@ -766,12 +766,12 @@ ui <- navbarPage(#title = "DSPG 2023",
 
                                              fluidRow(style = "margin: 6px;", align = "left",
                                                       column(4,
-                                                             img(src = "usda_ers.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                             img(src = "usda_ers.jpg", style = "display: inline; float: left;", width = "180px"),
                                                              p(strong("USDA Economic Research Service (ERS)"),"The mission of the ERS, a part of the U.S. Department of Agriculture, is to proactively identify trends and emerging issues in agriculture, 
                                                                food, the environment, and rural America. Through conducting rigorous and unbiased economic research, the ERS aims to provide valuable insights that inform and enrich decision-making processes 
                                                                for both public and private sectors. The team used ERS data on the food environment in Virginia to help Agents better tailor their FCS programming .")),
                                                       column(4,
-                                                             img(src = "bureau_labor_stat.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                             img(src = "bureau_labor_stat.jpg", style = "display: inline; float: left;", width = "215px"),
                                                              p(strong("Bureau of Labor Statistics (BLS)"),"The BLS is responsible for assessing labor market activity, working conditions, price fluctuations, and productivity 
                                                                within the U.S. economy. Their primary objective is to provide essential data that supports decision-making processes in both public and private sectors.By improving working conditions, expanding opportunities for meaningful employment, and 
                                                                ensuring the provision of work-related benefits and rights, they contribute to fostering the welfare of individuals and promoting their economic stability. The team looked at BLS data to analyze how economic stability in Virginians lives effects
