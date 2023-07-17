@@ -162,12 +162,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                         label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-<<<<<<< HEAD
-      addLegend(colors = c("orange", "blue"), labels = c("FCS/SNAP-Ed Agent","FCS Agent" ), position = "bottomright", title= "Agent Service:") %>% 
-      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)  %>%
-=======
+
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
->>>>>>> 7297a0bc3d14d0f0bc215047d6313f293341ea96
+
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
 }
   
@@ -338,10 +335,11 @@ ui <- navbarPage(#title = "DSPG 2023",
 
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
                             tabPanel("Health Outcomes",
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               h1(strong("Health Outcomes"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 6px;",
+                                              p("Health Outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors."),
+                                              p("Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
+                                     fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(3,
                                                      h4(strong("Summary")),
@@ -367,12 +365,13 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.2.2 Subtab Healthcare Access and Quality--------------------------------------
                             tabPanel("Healthcare Access and Quality", 
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               h1(strong("Healthcare Access and Quality Variables"), align = "center"),
                                               p("Accessible and affordable healthcare plays a critical role in promoting physical, social, and mental well-being. While health insurance facilitates access to essential medical services, it alone does not guarantee accessibility. It is equally vital for healthcare providers to offer affordable care, be accessible to patients, and be located conveniently.
-                                                In the context of VCE FCS agents' work, their efforts can contribute to improving healthcare accessibility for individuals and families. By addressing community-specific needs and collaborating with local healthcare providers, FCS agents can support initiatives that enhance access to quality healthcare. They can facilitate partnerships between healthcare providers and community organizations, advocate for affordable healthcare options, and educate individuals on navigating the healthcare system effectively. Additionally, FCS agents can provide valuable resources and information on health insurance options, enrollment assistance, and healthcare rights.
+                                                In the context of VCE FCS agents' work, their efforts can contribute to improving healthcare accessibility for individuals and families."),
+                                              p("By addressing community-specific needs and collaborating with local healthcare providers, FCS agents can support initiatives that enhance access to quality healthcare. They can facilitate partnerships between healthcare providers and community organizations, advocate for affordable healthcare options, and educate individuals on navigating the healthcare system effectively. Additionally, FCS agents can provide valuable resources and information on health insurance options, enrollment assistance, and healthcare rights.
                                                 Through their work, VCE FCS agents can play a pivotal role in fostering collaborations between healthcare providers and communities, promoting health equity, and ensuring that individuals and families have the necessary tools and support to access affordable, quality healthcare services.", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(3, 
                                                     
@@ -406,13 +405,19 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ), 
                             ### 2.2.3 Subtab Economic Stability--------------------------------------
                             tabPanel("Economic Stability", 
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               h1(strong("Economic Stability Variables"), align = "center"),
-                                              p("Economic factors have a profound impact on health outcomes and overall well-being within communities. Socioeconomic status, income inequality, and access to resources are all key determinants of health disparities. One crucial aspect of economic influence is income and poverty. Low-income individuals and families often struggle to afford basic necessities like nutritious food, stable housing, and healthcare services. This can result in higher rates of malnutrition, inadequate living conditions, and limited access to essential healthcare, leading to a range of health challenges. VCE agents can play a pivotal role in addressing these issues by providing community members with resources on financial literacy, budgeting, and connecting them with public assistance programs. By promoting financial stability and providing guidance on accessing available resources, agents can help improve health outcomes for vulnerable populations.
-                                                Furthermore, employment and job opportunities significantly impact health and well-being. Unemployment or underemployment can contribute to chronic stress, mental health issues, and limited access to healthcare services. Additionally, job insecurity and stressful work environments can negatively affect physical health. VCE agents can collaborate with local workforce development agencies, businesses, and educational institutions to provide job training, skills development programs, and support in finding employment. By helping individuals gain meaningful employment and stable income, agents contribute to improved health and overall quality of life within their communities.
-                                                Education is another important economic factor that influences health outcomes. Educational attainment is strongly associated with better health and economic prospects. VCE agents can support educational initiatives by providing workshops, training programs, and resources on topics such as career development, vocational skills, and entrepreneurship. By equipping community members with the necessary skills and knowledge, agents empower individuals to pursue better job opportunities, increase income potential, and ultimately enhance their health and well-being.
+                                              p("Economic factors have a profound impact on health outcomes and overall well-being within communities. Socioeconomic status, income inequality, and access to resources are all key determinants of health disparities. 
+                                                One crucial aspect of economic influence is income and poverty. Low-income individuals and families often struggle to afford basic necessities like nutritious food, stable housing, and healthcare services. 
+                                                This can result in higher rates of malnutrition, inadequate living conditions, and limited access to essential healthcare, leading to a range of health challenges. VCE agents can play a pivotal role in addressing these issues by providing community members with resources on financial literacy, budgeting, and connecting them with public assistance programs. By promoting financial stability and providing guidance on accessing available resources, agents can help improve health outcomes for vulnerable populations.
+                                                Furthermore, employment and job opportunities significantly impact health and well-being. Unemployment or underemployment can contribute to chronic stress, mental health issues, and limited access to healthcare services. 
+                                                Additionally, job insecurity and stressful work environments can negatively affect physical health. "),
+                                              p("VCE agents can collaborate with local workforce development agencies, businesses, and educational institutions to provide job training, skills development programs, and support in finding employment. 
+                                                By helping individuals gain meaningful employment and stable income, agents contribute to improved health and overall quality of life within their communities.
+                                                Education is another important economic factor that influences health outcomes. Educational attainment is strongly associated with better health and economic prospects. 
+                                                VCE agents can support educational initiatives by providing workshops, training programs, and resources on topics such as career development, vocational skills, and entrepreneurship. By equipping community members with the necessary skills and knowledge, agents empower individuals to pursue better job opportunities, increase income potential, and ultimately enhance their health and well-being.
                                                 Access to affordable and quality healthcare is crucial for maintaining good health. Economic factors significantly influence healthcare access, as individuals with limited financial resources may struggle to afford insurance coverage and healthcare services. VCE agents can raise awareness about healthcare resources, insurance options, and preventative care programs available in the community. They can provide information on navigating the healthcare system, understanding insurance coverage, and connecting community members with local healthcare providers. By promoting access to affordable and quality healthcare, agents contribute to better health outcomes and reduce health disparities within their communities.", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(3, 
                                                      
@@ -443,9 +448,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.2.4 Subatb Health Behaviors-------
                             tabPanel("Health Behaviors", 
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               h1(strong("Health Behaviors"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
+                                              p("The Virginia Cooperative Extension and Family Consumer Services can play a crucial role in addressing health behaviors and promoting positive health outcomes within communities. Through extensive outreach and educational initiatives, the Virginia Cooperative Extension can provide valuable information and resources to individuals and families. They can raise awareness about the importance of health behaviors, such as maintaining a balanced diet and engaging in regular physical exercise, and offer guidance on making healthy choices. The Family Consumer Services division can specifically contribute to improving health behaviors by focusing on areas such as nutrition education, budgeting for healthy food options, meal planning, and promoting physical activity. They can provide workshops, classes, and demonstrations that empower community members with the knowledge and skills necessary to make informed choices about their health and well-being. Furthermore, the Virginia Cooperative Extension and Family Consumer Services can collaborate with local organizations, policymakers, and community leaders to advocate for policies and programs that support reliable access to nutritious food and exercise opportunities. They can participate in community partnerships to address food insecurity, promote community gardens and farmers markets, and advocate for the development of safe and accessible spaces for physical activity.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
                                               column(3, 
@@ -474,9 +479,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.2.5 Subtab Neighborhood and Built Envr------
                             tabPanel("Neighborhood and Built Environment", 
-                                     fluidRow(style = "margin: 6px;",
+                                     fluidRow(style = "margin: 12px;",
                                               h1(strong("Neighborhood and Built Environment"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
+                                              p("The physical environment encompasses the spaces where individuals reside, acquire knowledge, work, and engage in recreational activities. It includes factors such as housing, transportation, and the overall built environment.
+                                             Stable and affordable housing plays a significant role in providing a safe environment for families to thrive and prosper. However, housing costs often constitute a substantial portion of a family's expenses. When rent or mortgage payments become unaffordable, 
+                                             families are compelled to make challenging trade-offs, such as prioritizing housing over other essential needs like utilities, food, transportation, or medical care.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
                                               column(3, 
@@ -511,7 +518,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                             tabPanel("Demographics", 
                                      fluidRow(style = "margin: 6px;",
                                               h1(strong("Demographics"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
+                                              p("Demographics are a vital factor to consider as a social determinant of health due to their significant impact on health outcomes and disparities. Demographic factors such as race, ethnicity, gender, age, income level, and education play a crucial role in shaping health disparities and influencing health behaviors, access to healthcare, and social contexts. By examining demographics, we gain insights into the unique challenges and needs of different population groups, allowing for targeted interventions, tailored healthcare services, and the development of policies that address the specific barriers and inequities faced by diverse communities. Understanding the intersectionality of demographics further enhances our understanding of how multiple factors interact to shape health outcomes and informs strategies for promoting health equity and improving overall health for all individuals and populations.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
                                               column(3, 
@@ -587,10 +594,13 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               p("The need factor is specifically determined by the unique needs of each county. These needs are based on various social determinants of health variables. Given that each county requires different services, 
                                                 it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
                                                 
-                                                h1(strong("Constraints")),
-                                                tags$li("Mean commute time >= 60 minutes"),
-                                                p("This time constraint is used so that agents do not have to travel more than 60 minutes to work."),
-                                                tags$li("Unique Assignment")
+                                              h1(strong("Constraints")),
+                                              tags$li("Mean commute time less than 60 minutes"),
+                                              p("This time constraint is used so that agents do not have to travel more than 60 minutes to work."),
+                                              tags$li("Unique Assignment"),
+                                              p("This constraint allows us to make sure that no county is left out. Each county will be assigned to an angent."),
+                                              tags$li("Population served less than 1.2 million")
+                                              
                                                                                ),
                                                 column(6,
                                                        h1("Figure 1: Isochrone Map"),
