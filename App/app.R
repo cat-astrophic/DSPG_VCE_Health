@@ -371,10 +371,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    h1(strong("Health Variables"), align = "center"),
                                    p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites."),
                             tabsetPanel(
-                              tabPanel("Health Outcomes",
-                                     fluidRow(style = "margin: 12px;",
-                                              h1(strong("Health Outcomes"), align = "center"),
-                                              p("Health outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors. Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
+                              tabPanel("Health Outcomes", 
+                                     fluidRow(style = "margin: 20px;",
+                                              h1(strong("Health Outcomes"), align = "left", style = "font-size: 18px;"),
+                                              p("Health outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community.[1] These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors. Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(3,
@@ -382,7 +382,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      textOutput("VariableDefinition"),
 
                                               ) ,
-                                              column(8,
+                                              column(9,
 
                                                      selectInput("Health_Outcomes", "Select Variable:", width = "50%", choices = c(
                                                        "Low Birthweight" = "per_low_birthweight",
@@ -398,14 +398,15 @@ ui <- navbarPage(#title = "DSPG 2023",
 
                                               )
                                      )
+                                     
                             ),
                             
                       
                           
                             ### 2.2.2 Subtab Healthcare Access and Quality--------------------------------------
                             tabPanel("Healthcare Access and Quality", 
-                                     fluidRow(style = "margin: 12px;",
-                                              h1(strong("Healthcare Access and Quality Variables"), align = "center"),
+                                     fluidRow(style = "margin: 20px;",
+                                              h1(strong("Healthcare Access and Quality Variables"), align = "left", style = "font-size: 18px;"),
                                               p("Accessible and affordable healthcare plays a critical role in promoting physical, social, and mental well-being. While health insurance facilitates access to essential medical services, it alone does not guarantee accessibility. It is equally vital for healthcare providers to offer affordable care, be accessible to patients, and be located conveniently.
                                                 In the context of VCE FCS agents' work, their efforts can contribute to improving healthcare accessibility for individuals and families. By addressing community-specific needs and collaborating with local healthcare providers, FCS agents can support initiatives that enhance access to quality healthcare. They can facilitate partnerships between healthcare providers and community organizations, advocate for affordable healthcare options, and educate individuals on navigating the healthcare system effectively. Additionally, FCS agents can provide valuable resources and information on health insurance options, enrollment assistance, and healthcare rights.
                                                 Through their work, VCE FCS agents can play a pivotal role in fostering collaborations between healthcare providers and communities, promoting health equity, and ensuring that individuals and families have the necessary tools and support to access affordable, quality healthcare services.", style = "padding-top:10px;")),
@@ -443,8 +444,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ), 
                             ### 2.2.3 Subtab Economic Stability--------------------------------------
                             tabPanel("Economic Stability", 
-                                     fluidRow(style = "margin: 12px;",
-                                              h1(strong("Economic Stability Variables"), align = "center"),
+                                     fluidRow(style = "margin: 20px;",
+                                              h1(strong("Economic Stability"), align = "left", style = "font-size: 18px;"),
                                               p("Economic factors have a profound impact on health outcomes and overall well-being within communities. Socioeconomic status, income inequality, and access to resources are all key determinants of health disparities. 
                                                 One crucial aspect of economic influence is income and poverty. Low-income individuals and families often struggle to afford basic necessities like nutritious food, stable housing, and healthcare services. 
                                                 This can result in higher rates of malnutrition, inadequate living conditions, and limited access to essential healthcare, leading to a range of health challenges. VCE agents can play a pivotal role in addressing these issues by providing community members with resources on financial literacy, budgeting, and connecting them with public assistance programs. By promoting financial stability and providing guidance on accessing available resources, agents can help improve health outcomes for vulnerable populations.
@@ -486,8 +487,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.2.4 Subatb Health Behaviors-------
                             tabPanel("Health Behaviors", 
-                                     fluidRow(style = "margin: 12px;",
-                                              h1(strong("Health Behaviors"), align = "center"),
+                                     fluidRow(style = "margin: 20px;",
+                                              h1(strong("Health Behaviors"), align = "left", style = "font-size: 18px;"),
                                               p("The Virginia Cooperative Extension and Family Consumer Services can play a crucial role in addressing health behaviors and promoting positive health outcomes within communities. Through extensive outreach and educational initiatives, the Virginia Cooperative Extension can provide valuable information and resources to individuals and families. They can raise awareness about the importance of health behaviors, such as maintaining a balanced diet and engaging in regular physical exercise, and offer guidance on making healthy choices. The Family Consumer Services division can specifically contribute to improving health behaviors by focusing on areas such as nutrition education, budgeting for healthy food options, meal planning, and promoting physical activity. They can provide workshops, classes, and demonstrations that empower community members with the knowledge and skills necessary to make informed choices about their health and well-being. Furthermore, the Virginia Cooperative Extension and Family Consumer Services can collaborate with local organizations, policymakers, and community leaders to advocate for policies and programs that support reliable access to nutritious food and exercise opportunities. They can participate in community partnerships to address food insecurity, promote community gardens and farmers markets, and advocate for the development of safe and accessible spaces for physical activity.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
@@ -517,8 +518,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             ### 2.2.5 Subtab Neighborhood and Built Envr------
                             tabPanel("Neighborhood and Built Environment", 
-                                     fluidRow(style = "margin: 12px;",
-                                              h1(strong("Neighborhood and Built Environment"), align = "center"),
+                                     fluidRow(style = "margin: 20px;",
+                                              h1(strong("Neighborhood and Built Environment"), align = "left", style = "font-size: 18px;"),
                                               p("The physical environment encompasses the spaces where individuals reside, acquire knowledge, work, and engage in recreational activities. It includes factors such as housing, transportation, and the overall built environment.
                                              Stable and affordable housing plays a significant role in providing a safe environment for families to thrive and prosper. However, housing costs often constitute a substantial portion of a family's expenses. When rent or mortgage payments become unaffordable, 
                                              families are compelled to make challenging trade-offs, such as prioritizing housing over other essential needs like utilities, food, transportation, or medical care.", style = "padding-top:10px;")),
@@ -554,8 +555,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                             
                             ### 2.2.6 Subtab Demographics-----
                             tabPanel("Demographics", 
-                                     fluidRow(style = "margin: 6px;",
-                                              h1(strong("Demographics"), align = "center"),
+                                     fluidRow(style = "margin: 20px;",
+                                              h1(strong("Demographics"), align = "left", style = "font-size: 18px;"),
                                               p("Demographics are a vital factor to consider as a social determinant of health due to their significant impact on health outcomes and disparities. Demographic factors such as race, ethnicity, gender, age, income level, and education play a crucial role in shaping health disparities and influencing health behaviors, access to healthcare, and social contexts. By examining demographics, we gain insights into the unique challenges and needs of different population groups, allowing for targeted interventions, tailored healthcare services, and the development of policies that address the specific barriers and inequities faced by diverse communities. Understanding the intersectionality of demographics further enhances our understanding of how multiple factors interact to shape health outcomes and informs strategies for promoting health equity and improving overall health for all individuals and populations.", style = "padding-top:10px;")),
                                      fluidRow(style = "margin: 6px;",
                                               align = "justify",
@@ -671,44 +672,85 @@ ui <- navbarPage(#title = "DSPG 2023",
                  
                             ### 2.4.2 Subtab Results ----
                             tabPanel("Results",
-                                     fluidRow(
-                                       style = "margin: 12px;",
-                                       h1(strong("Results"), align = "center"),
-                                       column(12,
-                                             
-                                              p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;"),
-                                       )
-                                     ),
-                                     
-                                     fluidRow(
-                                       style = "margin: 12px;",
-                                       column(4,
-                                              selectInput("territory_type", "Agents",
-                                                          choices = c("No New Agents" = "base", 
-                                                                      "One New Agent" = "one", 
-                                                                      "Two New Agents" = "two"), 
-                                                          selected = "base"
-                                              ),
-                                              selectInput("zscore_type", "Health Index",
-                                                          choices = c("Aggregate" = "aggregate", 
-                                                                      "Food Insecurity" = "food", 
-                                                                      "Obesity" = "obese", 
-                                                                      "Low Birthweight" = "lowbirth", 
-                                                                      "Physical Inactivity" = "inactivity", 
-                                                                      "Diabetes" = "diabetes"), 
-                                                          selected = "aggregate"
-                                              ),
-                                              actionButton("submit_btn", "Submit"),
-                                              h4(strong("Description")),
-                                              textOutput("territorydescription"),
-                                              
+                                     tabsetPanel(
+                                       tabPanel("FCS Agents",
+                                                fluidRow(
+                                                  style = "margin: 12px;",
+                                                  h1(strong("Results"), align = "center"),
+                                                  column(12,
+                                                         p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
+                                                  )
+                                                ),
+                                                
+                                                fluidRow(
+                                                  style = "margin: 12px;",
+                                                  column(4,
+                                                         selectInput("territory_type", "Agents",
+                                                                     choices = c("No New Agents" = "base",
+                                                                                 "One New Agent" = "one",
+                                                                                 "Two New Agents" = "two"),
+                                                                     selected = "base"
+                                                         ),
+                                                         selectInput("zscore_type", "Health Index",
+                                                                     choices = c("Aggregate" = "aggregate",
+                                                                                 "Food Insecurity" = "food",
+                                                                                 "Obesity" = "obese",
+                                                                                 "Low Birthweight" = "lowbirth",
+                                                                                 "Physical Inactivity" = "inactivity",
+                                                                                 "Diabetes" = "diabetes"),
+                                                                     selected = "aggregate"
+                                                         ),
+                                                         h4(strong("Description")),
+                                                         textOutput("territorydescription")
+                                                  ),
+                                                  
+                                                  column(8,
+                                                         h4(strong("Map")),  # Add the heading for the map
+                                                         leafletOutput("map", width = "100%", height = "700px")
+                                                  )
+                                                )
                                        ),
                                        
-                                       column(8,
-                                              h4(strong("Map")),  # Add the heading for the map
-                                              leafletOutput("map", width = "100%", height = "700px"),
-
-                                       )))),
+                                       tabPanel("SNAPEd Agents",
+                                                fluidRow(
+                                                  style = "margin: 12px;",
+                                                  h1(strong("Results"), align = "center"),
+                                                  column(12,
+                                                         p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
+                                                  )
+                                                ),
+                                                
+                                                fluidRow(
+                                                  style = "margin: 12px;",
+                                                  column(4,
+                                                         selectInput("territory_type_snaped", "Agents",
+                                                                     choices = c("No New Agents" = "base",
+                                                                                 "One New Agent" = "one",
+                                                                                 "Two New Agents" = "two"),
+                                                                     selected = "base"
+                                                         ),
+                                                         selectInput("zscore_type_snaped", "Health Index",
+                                                                     choices = c("Aggregate" = "aggregate",
+                                                                                 "Food Insecurity" = "food",
+                                                                                 "Obesity" = "obese",
+                                                                                 "Low Birthweight" = "lowbirth",
+                                                                                 "Physical Inactivity" = "inactivity",
+                                                                                 "Diabetes" = "diabetes"),
+                                                                     selected = "aggregate"
+                                                         ),
+                                                         h4(strong("Description")),
+                                                         textOutput("territorydescription_snaped")
+                                                  ),
+                                                  
+                                                  column(8,
+                                                         h4(strong("Map")),  # Add the heading for the map
+                                                         leafletOutput("map_snaped", width = "100%", height = "700px")
+                                                  )
+                                                )
+                                       )
+                                     )
+                            )),
+                            
                  
                  
                  # ## 2.5 Tab Takeawayss --------------------------------------------
@@ -1075,14 +1117,14 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
     } 
   }) 
  ## 3.7 server territory maps----
-  observeEvent(input$submit_btn, {
+  observe({
     territory_type <- input$territory_type
     zscore_type <- input$zscore_type
     map <- territory(territory_type, zscore_type)
     
     output$map <- renderLeaflet({
       map
-  })
+    })
   })
   
   output$territorydescription <- renderText({
