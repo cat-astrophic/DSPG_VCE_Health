@@ -83,7 +83,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
   # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
+  # snap territory data
+  snap_territories <- read.csv("./data/base_agg_snap.csv")
   
+<<<<<<< HEAD
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
   additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
@@ -94,6 +97,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   #load nonsnap terr
   fcs_territories <- read.csv("./data/base_agg_non_snap.csv")
   
+=======
+  #non-snap territory data
+  fcs_territories <- read.csv("./data/base_agg_non_snap.csv")
+>>>>>>> fa076a4b6c9ad22a47181101e5abf0dcd33f0d5f
 
 # ## 1.4 Define your functions -------------------------------------------------------
 # # Function for health outcomes
