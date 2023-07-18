@@ -287,43 +287,25 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # snap territory function
   snap_territory <- function(territory_type_snaped, zscore_type_snaped) {
     
-    temp2 <- snap_territories[snap_territories$territory_type == territory_type_snaped & snap_territories$zscore_type == zscore_type_snaped, ]
+    temp2 <- snap_territories[snap_territories$snap_territory_type == territory_type_snaped & snap_territories$snap_zscore_type == zscore_type_snaped, ]
     
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
       
       # Convert new agent locations to sf
       st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
-    
-    #separating snap agents
-    snap_agents <- agents_sf %>% filter(SNAP == 1)
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
     
     #assigning colors for each agent territory
-    pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
+    pal <- colorFactor(palette = c("#004949" , "#fc4e2a","#FDE725FF","#21214f","#332288",
                                    
-                                   "#1f77b4", "#018571","#ffffb3","#e45756", "#B12A90FF", "#4a9848", 
-                                   
-                                   "#488fc1", "#c2df23", "#004949","#924900" ,"#c44e52", "#fde0dd", 
-                                   
-                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#79b8d1", 
-                                   
-                                   "#e7298a","#5b5b5b","#440154","#af8dc3","#414487","#00ba38","#FDE725FF", 
-                                   
-                                   "#3b528b", "#b31a1c","#d8b365","#006d2c", "#f0fff0","#ffa500","#ff69b4",
-                                   
-                                   "#483d8b", "#9a5baf"), 
+                                   "#1f77b4", "#018571","#ffffb3","#9a5baf", "#B12A90FF"), 
                        domain= snap_territories$Agent,
-                       levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
-                                  "Chesapeake City","Fairfax","Floyd","Franklin","Gloucester",
-                                  "Greensville","Henrico","King George","Lancaster","Lee",
-                                  "Loudoun","Louisa","Lynchburg City","Mecklenburg","Newport News City North",
-                                  "Newport News City","Orange","Patrick","Petersburg City","Pittsylvania",
-                                  "Pulaski","Richmond City","Roanoke","Rockbridge","Rockingham",
-                                  "Spotsylvania","Virginia Beach City North","Virginia Beach City","Warren",
-                                  "Washington","Northeast District Office","Augusta","Essex","Frederick",
-                                  "Prince William"))
+                       levels= c( "Arlington","Franklin","Lynchburg City",
+                                  "Newport News City","Pittsylvania",
+                                  "Roanoke","Rockbridge","Virginia Beach City",
+                                  "Washington","Northeast District Office"))
     
     # create labels for counties
     county_labels <- sprintf(
@@ -333,15 +315,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     ) %>% lapply(htmltools::HTML)
     
     snap_agent_labels <- sprintf(
-      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-Ed Service Provided At: %s",
-      snap_agents$Job.Dept,
-      snap_agents$Employee.Name,
-      snap_agents$VT.Email,
-      snap_agents$SNAP.Ed
+      "<strong>SNAP-Ed Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
+      additional_agent_sf$Job.Dept,
+      additional_agent_sf$Employee.Name,
+      additional_agent_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
-    idx2 <- which(unique(snap_territories$zscore_type) == zscore_type_snaped)
+    idx2 <- which(unique(snap_territories$snap_zscore_type) == zscore_type_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS/SNAP-Ed Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
@@ -377,7 +358,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # ONLY fcs territory function
   fcs_territory <- function(territory_type_non_snaped, zscore_type_non_snaped) {
     
-    temp2 <- fcs_territories[fcs_territories$territory_type == territory_type_non_snaped & fcs_territories$zscore_type == zscore_type_non_snaped, ]
+    temp2 <- fcs_territories[fcs_territories$non_snap_territory_type == territory_type_non_snaped & fcs_territories$non_snap_zcore_type == zscore_type_non_snaped, ]
     
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
@@ -390,27 +371,23 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     #assigning colors for each agent territory
     pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
                                    
-                                   "#1f77b4", "#018571","#ffffb3","#e45756", "#B12A90FF", "#4a9848", 
+                                   "#ff69b4", "#018571","#ffffb3","#006d2c", "#B12A90FF", "#4a9848", 
                                    
                                    "#488fc1", "#c2df23", "#004949","#924900" ,"#c44e52", "#fde0dd", 
                                    
-                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#79b8d1", 
+                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#b31a1c", 
                                    
-                                   "#e7298a","#5b5b5b","#440154","#af8dc3","#414487","#00ba38","#FDE725FF", 
-                                   
-                                   "#3b528b", "#b31a1c","#d8b365","#006d2c", "#f0fff0","#ffa500","#ff69b4",
-                                   
-                                   "#483d8b", "#9a5baf"), 
+                                   "#e7298a","#FDE725FF"), 
+                       
                        domain= fcs_territories$Agent,
-                       levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
-                                  "Chesapeake City","Fairfax","Floyd","Franklin","Gloucester",
+                       levels= c( "Albemarle","Amelia","Amherst", "Bedford",
+                                  "Chesapeake City","Fairfax","Floyd","Gloucester",
                                   "Greensville","Henrico","King George","Lancaster","Lee",
-                                  "Loudoun","Louisa","Lynchburg City","Mecklenburg","Newport News City North",
-                                  "Newport News City","Orange","Patrick","Petersburg City","Pittsylvania",
-                                  "Pulaski","Richmond City","Roanoke","Rockbridge","Rockingham",
-                                  "Spotsylvania","Virginia Beach City North","Virginia Beach City","Warren",
-                                  "Washington","Northeast District Office","Augusta","Essex","Frederick",
-                                  "Prince William"))
+                                  "Loudoun","Louisa","Mecklenburg","Newport News City North",
+                                  "Orange","Patrick","Petersburg City",
+                                  "Pulaski","Richmond City","Rockingham",
+                                  "Spotsylvania","Virginia Beach City North","Warren"
+                                  ))
     
     # create labels for counties
     county_labels <- sprintf(
@@ -428,7 +405,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
-    idx2 <- which(unique(fcs_territories$zscore_type) == zscore_type_non_snaped)
+    idx2 <- which(unique(fcs_territories$non_snap_zcore_type) == zscore_type_non_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
@@ -956,44 +933,44 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                   )
                                                 )
                                        ),
-                                      #  # #results for nonsnaped----
-                                      # tabPanel("FCS Non SNAP-Ed Agents",
-                                      #          fluidRow(
-                                      #            style = "margin: 12px;",
-                                      #            h1(strong("Results"), align = "center"),
-                                      #            column(12,
-                                      #                   p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
-                                      #            )
-                                      #          ),
-                                      #          
-                                      #          fluidRow(
-                                      #            style = "margin: 12px;",
-                                      #            column(4,
-                                      #                   selectInput("territory_type_non_snaped", "Agents",
-                                      #                               choices = c("No New Agents" = "base",
-                                      #                                           "One New Agent" = "one",
-                                      #                                           "Two New Agents" = "two"),
-                                      #                               selected = "base"
-                                      #                   ),
-                                      #                   selectInput("zscore_type_non_snaped", "Health Index",
-                                      #                               choices = c("Aggregate" = "aggregate",
-                                      #                                           "Food Insecurity" = "food",
-                                      #                                           "Obesity" = "obese",
-                                      #                                           "Low Birthweight" = "lowbirth",
-                                      #                                           "Physical Inactivity" = "inactivity",
-                                      #                                           "Diabetes" = "diabetes"),
-                                      #                               selected = "aggregate"
-                                      #                   ),
-                                      #                   h4(strong("Description")),
-                                      #                   textOutput("territorydescription")
-                                      #            ),
-                                      #            
-                                      #            column(8,
-                                      #                   h4(strong("Map")),  # Add the heading for the map
-                                      #                   leafletOutput("non_snaped_map", width = "100%", height = "700px")
-                                      #            )
-                                      #          )
-                                      # )
+                                       # #results for nonsnaped----
+                                      tabPanel("FCS Non SNAP-Ed Agents",
+                                               fluidRow(
+                                                 style = "margin: 12px;",
+                                                 h1(strong("Results"), align = "center"),
+                                                 column(12,
+                                                        p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
+                                                 )
+                                               ),
+
+                                               fluidRow(
+                                                 style = "margin: 12px;",
+                                                 column(4,
+                                                        selectInput("territory_type_non_snaped", "Agents",
+                                                                    choices = c("No New Agents" = "base",
+                                                                                "One New Agent" = "one",
+                                                                                "Two New Agents" = "two"),
+                                                                    selected = "base"
+                                                        ),
+                                                        selectInput("zscore_type_non_snaped", "Health Index",
+                                                                    choices = c("Aggregate" = "aggregate",
+                                                                                "Food Insecurity" = "food",
+                                                                                "Obesity" = "obese",
+                                                                                "Low Birthweight" = "lowbirth",
+                                                                                "Physical Inactivity" = "inactivity",
+                                                                                "Diabetes" = "diabetes"),
+                                                                    selected = "aggregate"
+                                                        ),
+                                                        h4(strong("Description")),
+                                                        textOutput("territorydescription_nonsnaped")
+                                                 ),
+
+                                                 column(8,
+                                                        h4(strong("Map")),  # Add the heading for the map
+                                                        leafletOutput("map_non_snaped", width = "100%", height = "700px")
+                                                 )
+                                               )
+                                      )
                                      )
                             )),
                             
@@ -1654,16 +1631,16 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
       map_snaped
     })
   })
- # # nonsnap terr server-----
- #  observe({
- #    non_snap_territory_type <- input$territory_type_nonsnaped
- #    non_snap_zscore_type <- input$zscore_type_nonsnaped
- #    non_snaped_map <- fcs_territory(territory_type_nonsnaped, zscore_type_nonsnaped)
- # 
- #    output$non_snaped_map <- renderLeaflet({
- #      non_snaped_map
- #    })
- #  })
+ # nonsnaped terr server-----
+  observe({
+    territory_type_non_snaped <- input$territory_type_non_snaped
+    zscore_type_non_snaped <- input$zscore_type_non_snaped
+    map_non_snaped <- fcs_territory(territory_type_non_snaped, zscore_type_non_snaped)
+
+    output$map_non_snaped <- renderLeaflet({
+      map_non_snaped
+    })
+  })
 
 }
 
