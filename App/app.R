@@ -606,7 +606,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(9, 
                                                        selectInput("Health_Access", "Select Variable:", width = "50%", choices = c(
                                                        "Percent Uninsured" = "per_uninsured",
-                                                       "Aults without Insurance" = "per_uninsured_adults",
+                                                      
                                                        "Children without Insurance" = "per_uninsured_children",
                                                        "Dentist Ratio" = "dentist_ratio",
                                                        "Mental Health Provider Ratio" = "mental_health_provider_ratio",
@@ -809,7 +809,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               
                                               p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
                                               tags$li(strong("Population:")),
-                                              p("The population constraint plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
+                                              p("The population factor plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
                                               tags$li(strong("Distance:")),
                                               p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need."),
                                               
@@ -818,8 +818,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                 it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
                                                 
                                               h1(strong("Constraints"), align = "center"),
-                                              tags$li(strong("Mean commute time less than 60 minutes")),
-                                              p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 60 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time."),
+                                              tags$li(strong("Mean commute time less than 120 minutes")),
+                                              p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 120 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time."),
                                               tags$li(strong("Unique assignment")),
                                               p("The county assignment constraint ensures that every county is allocated to an agent, leaving no county without coverage. This constraint guarantees that each county receives the attention and support of an assigned agent. By assigning agents to specific counties, we can ensure that the unique needs and characteristics of each county are addressed, providing tailored services and resources to the communities within them. This approach promotes comprehensive coverage and equitable distribution of support across all counties, leaving no county overlooked or underserved."),
                                               tags$li(strong("Population served less than 1.2 million")),
@@ -1141,7 +1141,7 @@ server <- function(input, output) {
       "Life Expectancy: Average number of years a person can expect to live. Life expectancy is a vital metric for assessing health outcomes as it provides valuable insights into the well-being of a population and the factors influencing lifespan. This measure not only informs us about the overall state of the population's health but also sheds light on the various determinants that can impact longevity. By analyzing life expectancy, we gain a comprehensive understanding of both the health status of a community and the underlying elements that shape the length of an individual's life.
       In 2020, the life expectancy at birth for the total population of Virginia was 78.3 years, as reported by the Virginia Department of Health (VDH). However, this figure marked a decrease of 1.4 years compared to the previous year. The decline in life expectancy can be attributed to several factors, including the significant impact of the COVID-19 pandemic, which accounted for a large number of deaths. Additionally, unintentional injuries, heart disease, chronic liver disease and cirrhosis, diabetes, and Alzheimer's disease were significant contributors to the decrease in life expectancy. These causes reflect the complex nature of health outcomes and highlight the need for comprehensive efforts to address these factors and improve population health."
     } else if (input$Health_Outcomes == "life_expectancy_gap") {
-      "The life expectancy gap is a measure obtained by calculating the disparity between the life expectancies of white and black populations. This disparity serves as a significant indicator of health inequalities between these two racial groups. Analyzing the life expectancy gap provides valuable insights into the existing disparities in health outcomes between white and black populations. By examining this gap, we can gain a deeper understanding of the prevailing health disparities and the need for targeted interventions to address the unequal health experiences of these racial groups."
+      "Life Expectancy Gap: The life expectancy gap is a measure obtained by calculating the disparity between the life expectancies of white and black populations. This disparity serves as a significant indicator of health inequalities between these two racial groups. Analyzing the life expectancy gap provides valuable insights into the existing disparities in health outcomes between white and black populations. By examining this gap, we can gain a deeper understanding of the prevailing health disparities and the need for targeted interventions to address the unequal health experiences of these racial groups."
     } else if (input$Health_Outcomes == "life_expectancy_black") {
       "Life Expectancy Black: Avergae number of years a black person can expect to live. In 2020, the average life expectancy for individuals of the black race, as reported by the Virginia Department of Health, was 73.9 years. This figure represented a decrease of 2.4 years compared to the previous year, 2019. The life expectancy of the black population is an important measure that provides insights into the health outcomes and well-being of this specific racial group. By monitoring changes in life expectancy over time, we can identify trends and address the factors contributing to the decrease, aiming to improve the health and longevity of individuals belonging to the black race."
     } else if (input$Health_Outcomes == "life_expectancy_white") {
@@ -1166,7 +1166,7 @@ server <- function(input, output) {
   })
   output$HealthAccessVariableDefinition <- renderText({
     if (input$Health_Access == "per_uninsured") {
-      "Percent Uninsured: Percentage of population under age 65 without health insurance.
+      "% Uninsured: Percentage of population under age 65 without health insurance.
 The absence of health insurance coverage presents a notable obstacle in accessing essential healthcare services and maintaining financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health consequences as they receive less preventive care, and delayed treatment often leads to severe illnesses or other health complications. Moreover, being uninsured can have substantial financial implications, with many individuals unable to afford their medical expenses, leading to the accumulation of medical debt."
     } else if (input$Health_Access == "dentist_ratio") {
       "Dentist Ratio: Ratio of population to dentists.
@@ -1240,22 +1240,22 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
   })
   output$HealthBehaviorsVariableDefinition <- renderText({
     if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
-      "% Adults Reporting Currently Smoking- This variable measures the percentage of adults who are current smokers (age-adjusted).
+      "% Adults Reporting Currently Smoking: This variable measures the percentage of adults who are current smokers (age-adjusted).
         Every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives."
     } else if (input$health_behaviors == "per_excessive_drinking") {
-      "% Excessive Drinking- This variable is the percentage of adults reporting binge or heavy drinking (age-adjusted).
+      "% Excessive Drinking: This variable is the percentage of adults reporting binge or heavy drinking (age-adjusted).
       Nearly 1 in 6 American adults are considered binge drinkers. Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes."
     } else if (input$health_behaviors == "per_driving_deaths_with_alcohol_involvement") {
-      "% Driving Deaths with Alcohol Involvement- This variable represents the percentage of driving deaths with alcohol involvement.
+      "% Driving Deaths with Alcohol Involvement: This variable represents the percentage of driving deaths with alcohol involvement.
       This variable directly measures the relationship between alcohol and motor vehicle crash deaths. Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 cause 27% of all alcohol-impaired deaths."
     } else if (input$health_behaviors == "per_physically_inactive") {
-      "% Physically Inactive- Percentage of adults age 18 and over reporting no leisure-time physical activity (age-adjusted).
+      "% Physically Inactive: Percentage of adults age 18 and over reporting no leisure-time physical activity (age-adjusted).
       Physical inactivity is highly associated with increased risk of health conditions such as Type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and shortened life expectancy. Physical activity is associated with improved sleep, cognitive ability, bone, and musculoskeletal health, and reduced risk of dementia."
     } else if (input$health_behaviors == "per_adults_with_obesity") {
-      "% Adults with Obesity- This variable measures the percentage of the adult population (age 18 and older) that reports a body mass index (BMI) greater than or equal to 30 kg/m2 (age-adjusted).
+      "% Adults with Obesity: This variable measures the percentage of the adult population (age 18 and older) that reports a body mass index (BMI) greater than or equal to 30 kg/m2 (age-adjusted).
       Adult obesity is a persistent condition that raises the likelihood of various health risks, including hypertension, heart disease, type 2 diabetes, respiratory issues, chronic inflammation, mental illness, and certain cancers.The development of obesity is influenced by a combination of environmental and individual factors. Environmental factors, such as the availability and affordability of nutrient-rich foods, the extent of fast-food advertising, and societal attitudes regarding weight stigma, can significantly impact the prevalence and risk of obesity."
     } else if (input$health_behaviors == "teen_birth_rate") {
-      "Teen Birth Rate- This variable represents the number of births per 1,000 female population ages 15-19.
+      "Teen Birth Rate: This variable represents the number of births per 1,000 female population ages 15-19.
       Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and employment opportunities."
     } else {
       "Please select a health variable."
@@ -1274,28 +1274,28 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
   })
   output$EnvrVariableDefinition <- renderText({
     if (input$neighbor_envr == "per_physical_distress") {
-      "This variable represents the percentage of adults reporting 14 or more days of poor physical health per month (age-adjusted).
+      "% Physical Distress: Percentage of adults reporting 14 or more days of poor physical health per month (age-adjusted).
       This variable offers valuable information on the overall well-being of adults in a community. Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity."
     } else if (input$neighbor_envr == "per_mental_distress") {
-      "This variable represents the percentage of adults reporting 14 or more days of poor mental health per month (age-adjusted).
+      "% Mental Distress: Percentage of adults reporting 14 or more days of poor mental health per month (age-adjusted).
       Mental health is a fundamental aspect of our overall well-being. It encompasses our emotional, psychological, and social well-being, and it affects how we think, feel, and act. Good mental health allows us to cope with the daily stresses of life, form positive relationships, make meaningful contributions to society, and navigate challenges effectively. Poor mental health can have detrimental effects on physical health, contributing to the development or exacerbation of various health conditions, including cardiovascular disease, weakened immune system, chronic pain, and digestive disorders."
     } else if (input$neighbor_envr == "per_access_to_exercise_opportunities") {
-      "This variable is the percentage of the population with adequate access to locations for physical activity.
+      "% Access to Exercise Opportunities: Percentage of the population with adequate access to locations for physical activity.
       Engaging in more physical activity has been linked to reduced risks of various health conditions, including type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and premature mortality. The built environment plays a crucial role in promoting physical activity, as individuals residing in close proximity to amenities such as sidewalks, parks, and gyms are more inclined to engage in regular exercise."
     } else if (input$neighbor_envr == "suicide_rate") {
-      "This variable measures the number of deaths due to suicide per 100,000 population (age-adjusted)
+      "Suicide Rate: The number of deaths due to suicide per 100,000 population (age-adjusted)
       Suicide rates provide information on the mental health of a community. Suicide has an overwhelming effect on the mental health of surviving community members, family members, and friends."
     } else if(input$neighbor_envr == "per_limited_access_to_healthy_foods"){
-      "This variable represents the percentage of population who are low-income and do not live close to a grocery store.
+      "% Limited Access to Healthy Foods: Percentage of population who are low-income and do not live close to a grocery store.
       Extensive evidence indicates a robust correlation between living in a food desert and experiencing a higher prevalence of obesity and premature death. Supermarkets have traditionally been known to offer healthier food choices compared to convenience stores or smaller grocery stores. Moreover, limited access to fresh fruits and vegetables is directly linked to premature mortality."
     } else if(input$neighbor_envr == "juvenile_arrests_rate"){  
-      "This variable represents the rate of delinquency cases per 1,000 juveniles.
+      "Juvenile Arrests Rate: Rate of delinquency cases per 1,000 juveniles.
       Juvenile arrests are the result of many factors such as policing strategies, local laws, community and family support, and individual behaviors. Youth who are arrested and incarcerated experience lower self-reported health, higher rates of infectious disease and stress-related illnesses, and higher body mass indices."
     } else if(input$neighbor_envr == "per_insufficient_sleep"){
-      " This variable represents the percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).
-        Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being."
+      "% Insufficient Sleep: Percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).
+      Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being."
     } else if(input$neighbor_envr == "per_severe_housing_problem"){
-      "% Severe Housing Problems - This variable is the percentage of households with at least 1 of 4 housing problems: overcrowding, high housing costs, lack of kitchen facilities, or lack of plumbing facilities.
+      "% Severe Housing Problems: Percentage of households with at least 1 of 4 housing problems: overcrowding, high housing costs, lack of kitchen facilities, or lack of plumbing facilities.
       Life in the built environment, ought to be safe for a person to grow and develop in a healthy way. Inadequate housing can make negative contributions to health like infectious and chronic diseases, injuries, and poor child development. Households experiencing severe cost burdens are likely to face tradeoffs in meeting other basic needs which in turn can lead to mental/emotional strain."
       } else {
       "Please select a health variable."
@@ -1314,28 +1314,28 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
   })
   output$DemographicsDefinition <- renderText({
     if (input$demographics == "per_less_than_18_years_of_age") {
-      " Percentage of population below 18 years of age.
+      " % Less than 18 Years of Age: Percentage of population below 18 years of age.
       Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population. Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions."
     } else if (input$demographics == "per_65_and_over") {
-      "Percentage of the population ages 65 and older.
+      "% 65 and Over:Percentage of the population ages 65 and older.
       Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population.  Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions."
     } else if (input$demographics == "per_hispanic") {
-      " Percentage of the population self-identifying as Hispanic.
+      "% Hispanic: Percentage of the population self-identifying as Hispanic.
       Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
     } else if (input$demographics == "per_asian") {
-      "Percentage of the population self-identifying as Asian.
+      "% Asian: Percentage of the population self-identifying as Asian.
       Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
     } else if (input$demographics == "per_nonhispanic_white") {
-      "Percentage of population self-identifying as non-Hispanic white.
+      "% Nonhispanic White: Percentage of population self-identifying as non-Hispanic white.
       Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
     } else if (input$demographics == "per_american_indian_or_alaska_native"){
-      " Percentage of population self-identifying as American Indian or Alaska Native.
+      "% American Indian or Alaska Native: Percentage of population self-identifying as American Indian or Alaska Native.
       Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
     } else if (input$demographics == "per_black") {
-      " Percentage of the population self-identifying as non-Hispanic Black or African American.
+      "% Black: Percentage of the population self-identifying as non-Hispanic Black or African American.
     Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
     } else if (input$demographics == "per_not_proficient_in_english") {
-      "% Not Proficient in English- Percentage of the population aged 5 and over who reported speaking English less than 'well'. Understanding the number of individuals who are not proficient in English helps identify the language needs of a population. It allows policymakers, educators, and service providers to develop appropriate strategies and resources to ensure effective communication and equal access to essential services, such as healthcare, education, legal services, employment, and government programs. By recognizing language diversity and addressing language barriers, societies can promote inclusivity and equitable access to opportunities and resources.
+      "% Not Proficient in English: Percentage of the population aged 5 and over who reported speaking English less than 'well'. Understanding the number of individuals who are not proficient in English helps identify the language needs of a population. It allows policymakers, educators, and service providers to develop appropriate strategies and resources to ensure effective communication and equal access to essential services, such as healthcare, education, legal services, employment, and government programs. By recognizing language diversity and addressing language barriers, societies can promote inclusivity and equitable access to opportunities and resources.
       "
     } else {
       "Please select a health variable."
