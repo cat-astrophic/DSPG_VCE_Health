@@ -87,6 +87,13 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
   additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
+  
+  
+  #load in snap terr
+  snap_territories <- read.csv("./data/base_agg_snap.csv")
+  #load nonsnap terr
+  fcs_territories <- read.csv("./data/base_agg_non_snap.csv")
+  
 
 # ## 1.4 Define your functions -------------------------------------------------------
 # # Function for health outcomes
@@ -275,9 +282,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   }
 
   # snap territory function
-  snap_territory <- function(territory_type, zscore_type) {
+  snap_territory <- function(territory_type_snaped, zscore_type_snaped) {
     
-    temp2 <- snap_territories[snap_territories$territory_type == territory_type & snap_territories$zscore_type == zscore_type, ]
+    temp2 <- snap_territories[snap_territories$territory_type == territory_type_snaped & snap_territories$zscore_type == zscore_type_snaped, ]
     
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
@@ -331,7 +338,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
-    idx2 <- which(unique(snap_territories$zscore_type) == zscore_type)
+    idx2 <- which(unique(snap_territories$zscore_type) == zscore_type_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS/SNAP-Ed Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
@@ -357,7 +364,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                               direction = "auto")) %>%
       addAwesomeMarkers(data = additional_agent_sf, 
                         icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
-                        label = agent_labels,
+                        label = snap_agent_labels,
                         labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
       setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
@@ -365,9 +372,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                 position = "topright", title= "Agent Type:")
   }
   # ONLY fcs territory function
-  fcs_territory <- function(territory_type, zscore_type) {
+  fcs_territory <- function(territory_type_non_snaped, zscore_type_non_snaped) {
     
-    temp2 <- fcs_territories[fcs_territories$territory_type == territory_type & fcs_territories$zscore_type == zscore_type, ]
+    temp2 <- fcs_territories[fcs_territories$territory_type == territory_type_non_snaped & fcs_territories$zscore_type == zscore_type_non_snaped, ]
     
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
@@ -418,7 +425,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
-    idx2 <- which(unique(fcs_territories$zscore_type) == zscore_type)
+    idx2 <- which(unique(fcs_territories$zscore_type) == zscore_type_non_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
@@ -908,8 +915,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                   )
                                                 )
                                        ),
-                                       
-                                       tabPanel("SNAPEd Agents",
+                                       #results for snaped----
+                                      tabPanel("SNAP-Ed Agents",
                                                 fluidRow(
                                                   style = "margin: 12px;",
                                                   h1(strong("Results"), align = "center"),
@@ -917,7 +924,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                          p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
                                                   )
                                                 ),
-                                                
+
                                                 fluidRow(
                                                   style = "margin: 12px;",
                                                   column(4,
@@ -939,13 +946,51 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                          h4(strong("Description")),
                                                          textOutput("territorydescription_snaped")
                                                   ),
-                                                  
+
                                                   column(8,
                                                          h4(strong("Map")),  # Add the heading for the map
                                                          leafletOutput("map_snaped", width = "100%", height = "700px")
                                                   )
                                                 )
-                                       )
+                                       ),
+                                      #  # #results for nonsnaped----
+                                      # tabPanel("FCS Non SNAP-Ed Agents",
+                                      #          fluidRow(
+                                      #            style = "margin: 12px;",
+                                      #            h1(strong("Results"), align = "center"),
+                                      #            column(12,
+                                      #                   p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
+                                      #            )
+                                      #          ),
+                                      #          
+                                      #          fluidRow(
+                                      #            style = "margin: 12px;",
+                                      #            column(4,
+                                      #                   selectInput("territory_type_non_snaped", "Agents",
+                                      #                               choices = c("No New Agents" = "base",
+                                      #                                           "One New Agent" = "one",
+                                      #                                           "Two New Agents" = "two"),
+                                      #                               selected = "base"
+                                      #                   ),
+                                      #                   selectInput("zscore_type_non_snaped", "Health Index",
+                                      #                               choices = c("Aggregate" = "aggregate",
+                                      #                                           "Food Insecurity" = "food",
+                                      #                                           "Obesity" = "obese",
+                                      #                                           "Low Birthweight" = "lowbirth",
+                                      #                                           "Physical Inactivity" = "inactivity",
+                                      #                                           "Diabetes" = "diabetes"),
+                                      #                               selected = "aggregate"
+                                      #                   ),
+                                      #                   h4(strong("Description")),
+                                      #                   textOutput("territorydescription")
+                                      #            ),
+                                      #            
+                                      #            column(8,
+                                      #                   h4(strong("Map")),  # Add the heading for the map
+                                      #                   leafletOutput("non_snaped_map", width = "100%", height = "700px")
+                                      #            )
+                                      #          )
+                                      # )
                                      )
                             )),
                             
@@ -1596,8 +1641,27 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
     "This map shows territories for no new agents."
   }
   })
-  
-  
+  #snaped territory server-----
+  observe({
+    territory_type_snaped <- input$territory_type_snaped
+    zscore_type_snaped <- input$zscore_type_snaped
+    map_snaped <- snap_territory(territory_type_snaped, zscore_type_snaped)
+
+    output$map_snaped <- renderLeaflet({
+      map_snaped
+    })
+  })
+ # # nonsnap terr server-----
+ #  observe({
+ #    non_snap_territory_type <- input$territory_type_nonsnaped
+ #    non_snap_zscore_type <- input$zscore_type_nonsnaped
+ #    non_snaped_map <- fcs_territory(territory_type_nonsnaped, zscore_type_nonsnaped)
+ # 
+ #    output$non_snaped_map <- renderLeaflet({
+ #      non_snaped_map
+ #    })
+ #  })
+
 }
 
 # 4. Run the application-------------------------------------------------------------------
