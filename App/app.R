@@ -240,7 +240,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     idx2 <- which(unique(all_territories$zscore_type) == zscore_type)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
-    territory_title = paste("New VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
+    territory_title = paste("Optimized VCE FCS Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     #differentiate colors of agents by the new_agent variable
@@ -274,7 +274,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
               position = "topright", title= "Agent Type/Service:")
   }
 
-  #territory function
+  # snap territory function
   snap_territory <- function(territory_type, zscore_type) {
     
     temp2 <- snap_territories[snap_territories$territory_type == territory_type & snap_territories$zscore_type == zscore_type, ]
@@ -331,10 +331,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
-    idx2 <- which(unique(all_territories$zscore_type) == zscore_type)
+    idx2 <- which(unique(snap_territories$zscore_type) == zscore_type)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
-    territory_title = paste("Optimized VCE FCS/SNAP-Ed Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
+    territory_title = paste("Optimized VCE FCS/SNAP-Ed Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     #differentiate colors of agents by the new_agent variable
@@ -364,7 +364,93 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       addLegend(colors = c("orange", "red"), labels = c("Existing FCS/SNAP-Ed Agent", "New FCS Agent" ), 
                 position = "topright", title= "Agent Type:")
   }
+  # ONLY fcs territory function
+  fcs_territory <- function(territory_type, zscore_type) {
+    
+    temp2 <- fcs_territories[fcs_territories$territory_type == territory_type & fcs_territories$zscore_type == zscore_type, ]
+    
+    #convert new agent locations to sf
+    additional_agent_sf <- temp2 %>% 
+      
+      # Convert new agent locations to sf
+      st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
+    #joining variable data with county geometry data
+    territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
+    
+    #assigning colors for each agent territory
+    pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
+                                   
+                                   "#1f77b4", "#018571","#ffffb3","#e45756", "#B12A90FF", "#4a9848", 
+                                   
+                                   "#488fc1", "#c2df23", "#004949","#924900" ,"#c44e52", "#fde0dd", 
+                                   
+                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#79b8d1", 
+                                   
+                                   "#e7298a","#5b5b5b","#440154","#af8dc3","#414487","#00ba38","#FDE725FF", 
+                                   
+                                   "#3b528b", "#b31a1c","#d8b365","#006d2c", "#f0fff0","#ffa500","#ff69b4",
+                                   
+                                   "#483d8b", "#9a5baf"), 
+                       domain= fcs_territories$Agent,
+                       levels= c( "Albemarle","Amelia","Amherst", "Arlington","Bedford",
+                                  "Chesapeake City","Fairfax","Floyd","Franklin","Gloucester",
+                                  "Greensville","Henrico","King George","Lancaster","Lee",
+                                  "Loudoun","Louisa","Lynchburg City","Mecklenburg","Newport News City North",
+                                  "Newport News City","Orange","Patrick","Petersburg City","Pittsylvania",
+                                  "Pulaski","Richmond City","Roanoke","Rockbridge","Rockingham",
+                                  "Spotsylvania","Virginia Beach City North","Virginia Beach City","Warren",
+                                  "Washington","Northeast District Office","Augusta","Essex","Frederick",
+                                  "Prince William"))
+    
+    # create labels for counties
+    county_labels <- sprintf(
+      "<strong>%s</strong><br/> Served by Agent From: %s",
+      territory.counties$NAMELSAD,
+      territory.counties$Agent
+    ) %>% lapply(htmltools::HTML)
 
+    # create labels for agents
+    agent_labels <- sprintf(
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
+      additional_agent_sf$Job.Dept,
+      additional_agent_sf$Employee.Name,
+      additional_agent_sf$VT.Email
+    ) %>% lapply(htmltools::HTML)
+    
+    #creating good title names
+    idx2 <- which(unique(fcs_territories$zscore_type) == zscore_type)
+    good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
+    # create title for the map
+    territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
+    #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+    
+    #differentiate colors of agents by the new_agent variable
+    additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "blue", "red")
+    
+    # create leaflet map
+    leaflet(data = territory.counties) %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
+      addPolygons(fillColor = ~pal(Agent),
+                  color = "#BDBDC3",
+                  weight = 1,
+                  smoothFactor = 0.2,
+                  opacity = 1.0,
+                  fillOpacity = 0.6,
+                  highlightOptions = highlightOptions(color = "white", weight = 2,
+                                                      bringToFront = TRUE),
+                  label = county_labels,
+                  labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
+                                              textsize = "15px",
+                                              direction = "auto")) %>%
+      addAwesomeMarkers(data = additional_agent_sf, 
+                        icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
+                        label = agent_labels,
+                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
+      addLegend(colors = c( "blue", "red"), labels = c("Existing FCS Agent", "New FCS Agent" ), 
+                position = "topright", title= "Agent Type/Service:")
+  }
 
 
 # 2. Define UI for application ------------------------------------------------------------
