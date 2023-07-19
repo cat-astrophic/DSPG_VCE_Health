@@ -35,6 +35,7 @@ library(readxl)
 library(sf) 
 options(scipen=999)
 library(htmlwidgets)
+library(fontawesome) 
 
 
 #options(shiny.maxRequestSize = 80*1024^2)
@@ -177,8 +178,16 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Create title for the map
     map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
     
+    #making icon set for legend
+    icons <- awesomeIconList(
+      `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
+                                     iconColor = 'ivory', markerColor = 'purple'
+      ),
+      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "apple", library = "fa",
+                                             iconColor = 'ivory', markerColor = 'blue')
+    )
     # Create leaflet map
-    leaflet(data = var.counties) %>%
+    map1 <-leaflet(data = var.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addPolygons(fillColor = ~pal(Value),
                   color = "#BDBDC3",
@@ -193,21 +202,37 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                               textsize = "15px",
                                               direction = "auto")) %>%
       addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "bottomright") %>%
-      addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='cloud', markerColor = 'blue', iconColor = 'white'),
-                        label = agent_labels, group = "FCS Agent",
-                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'orange', iconColor = 'white'),
-                        label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
-                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addAwesomeMarkers(lat = additional_agent_sf$Lat,
+                        lng = additional_agent_sf$Long,
+                        icon = icons) %>%
+      addLegendAwesomeIcon(iconSet = icons,
+                           orientation = 'vertical',
+                           title = htmltools::tags$div(
+                             style = 'font-size: 20px;',
+                             'Agent Type:'),
+                           labelStyle = 'font-size: 16px;') %>% 
+      # addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='user', markerColor = 'blue', iconColor = 'white'),
+      #                   label = agent_labels, group = "FCS Agent",
+      #                   labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      # addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='apple', markerColor = 'orange', iconColor = 'white'),
+      #                   label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
+      #                   labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      #addLegendAwesomeIcon(iconSet = icons,
+                           # orientation = 'vertical',
+                           # marker = FALSE,
+                           # title = htmltools::tags$div(
+                           #   style = 'font-size: 20px;',
+                           #   'Awesome Icons'),
+                           # labelStyle = 'font-size: 16px;') %>% 
+      #legend for continious scale
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-
+      #setting default map zoom
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
-
-
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL) %>% 
-      addLegend(colors = c("orange", "blue"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent"), 
-                position = "topright", title= "Agent Type/Service:")
-
+      #map title
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
+      #Legend for Icon
+      #addLegendAwesomeIcon(iconSet= icons,title = "Agent Type:",labelStyle = "", orientation = "vertical")
+map1
 }
   
 #territory function
