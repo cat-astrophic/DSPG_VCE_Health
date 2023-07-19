@@ -82,26 +82,15 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
                   "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
  
-  good_names2 <- c( "Chlamydia Rate","Dentist Ratio","Drug Mortality Rate",
-                    "Gender Pay Gap","HIV Prevalence Rate","Median Household Income Black",
-                    "Median Household Income White","Juvenile Arrests Rate","Life Expectancy",
-                    "Life Expectancy Black","Life Expectancy White","Life Expectancy Gap",
-                    "Median Household Income","Median Household Income Gap White Black",
-                    "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
-                    "Mental Health Provider Ratio","Other Primary Care Provider Ratio",
-                    "Percent 6 and over","Percent Population with Access to Exercise Opportunities",
-                    "Percent of Adults Reporting Currently Smoking","Percent of Adults with Diabetes",
-                    "Percent of Adults With Obesity","Percent American Indian or Alaska Native",
-                    "Percent Asian", "Percent Black","Percent Children in Poverty",
-                    "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking",
-                    "Percent Food Insecure","Percent Hispanic","Percent Household Income Required for Child Care Expenses",
-                    "Percent Insufficient Sleep","Percent less than 18 years of age","Percent Limited Access to Healthy Foods",
-                    "Percent Low Birthweight","Percent Mental Distress","Percent Nonhispanic-White",
-                    "Percent not Proficient in English","Percent Physical Distress","Percent Physically Inactive",
-                    "Percent Severe Housing Problems","Percent Unemployed","Percent Uninsured","Percent of Uninsured Adults",
-                    "Percent Uninsured Children","Percent Vaccinated","Percent Access to Exercise Opportunities",
-                    "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
-                    "Suicide Rate","Teen Birth Rate")
+  good_names2 <- c( "Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
+                    "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
+                    "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
+                    "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
+                    "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
+                    "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
+                    "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
+                    "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
+                    "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
    # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
   # snap territory data
@@ -119,7 +108,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   
  
   # read in va avg data
-  va_avg <- read.csv("./data/with_state_avg.csv") 
+  va_avg <- read.csv("./data/with_state_avg.csv") %>% 
+    filter(!(Year %in% c(2021, 2022)))
   
 
 
@@ -466,29 +456,18 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   #LINE GRAPH FUNCTION
   sdoh_line <- function(va_avg,county1, county2, variable) {
     
-    good_names2 <- c( "Chlamydia Rate","Dentist Ratio","Drug Mortality Rate",
-                      "Gender Pay Gap","HIV Prevalence Rate","Median Household Income Black",
-                      "Median Household Income White","Juvenile Arrests Rate","Life Expectancy",
-                      "Life Expectancy Black","Life Expectancy White","Life Expectancy Gap",
-                      "Median Household Income","Median Household Income Gap White Black",
-                      "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
-                      "Mental Health Provider Ratio","Other Primary Care Provider Ratio",
-                      "Percent 6 and over","Percent Population with Access to Exercise Opportunities",
-                      "Percent of Adults Reporting Currently Smoking","Percent of Adults with Diabetes",
-                      "Percent of Adults With Obesity","Percent American Indian or Alaska Native",
-                      "Percent Asian", "Percent Black","Percent Children in Poverty",
-                      "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking",
-                      "Percent Food Insecure","Percent Hispanic","Percent Household Income Required for Child Care Expenses",
-                      "Percent Insufficient Sleep","Percent less than 18 years of age","Percent Limited Access to Healthy Foods",
-                      "Percent Low Birthweight","Percent Mental Distress","Percent Nonhispanic-White",
-                      "Percent not Proficient in English","Percent Physical Distress","Percent Physically Inactive",
-                      "Percent Severe Housing Problems","Percent Unemployed","Percent Uninsured","Percent of Uninsured Adults",
-                      "Percent Uninsured Children","Percent Vaccinated","Percent Access to Exercise Opportunities",
-                      "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
-                      "Suicide Rate","Teen Birth Rate")
+    good_names2 <- c( "Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
+                      "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
+                      "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
+                      "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
+                      "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
+                      "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
+                      "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
+                      "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
+                      "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
     
-    va_avg <- read.csv("./data/with_state_avg.csv")%>% 
-      filter(Year != 2021 & 2022)
+    va_avg <- read.csv("./data/with_state_avg.csv") %>% 
+      filter(!(Year %in% c(2021, 2022)))
    
     # Filter data for the first selected county and variable
     selection1 <- va_avg[va_avg$County2 == county1 & va_avg$Variable == variable, ] %>% 
@@ -630,67 +609,58 @@ ui <- navbarPage(#title = "DSPG 2023",
                          
 
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
-                          tabPanel("Health Variables",
-                                   h1(strong("Health Variables"), align = "center"),
-                                   p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
-                            tabsetPanel(
-                              tabPanel("Health Outcomes", 
-                                     fluidRow(style = "margin: 20px;",
-                                              h1(strong("Health Outcomes"), align = "left", style = "font-size: 18px;"),
-                                              p("Health outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors. Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 12px;",
-                                              align = "justify",
-                                              column(3,
-                                                     h4(strong("Summary")),
-                                                     textOutput("VariableDefinition"),
-                                                     
-
-                                              ) ,
-                                              column(9,
-
-                                                     selectInput("Health_Outcomes", "Select Variable:", width = "50%", choices = c(
-                                                       "Low Birthweight" = "per_low_birthweight",
-                                                       "Life Expectancy" = "life_expectancy",
-                                                       "Life Expectancy Gap" = "life_expectancy_gap",
-                                                       "Life Expectancy Black" = "life_expectancy_black",
-                                                       "Life Expectancy White" = "life_expectancy_white")
-                                                     ),
-                                                     radioButtons(inputId = "yearSelect_outcomes", label = "Select Year: ",
-                                                                  choices = c("2017", "2018", "2019", "2020"),
-                                                                  selected = "2020", inline = TRUE , width = "50%"),
-                                                     
-                                                     withSpinner(leafletOutput("outcomes", height = "500px")),
-                                                     selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
-                                                     selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
-                                                     selectInput("variable", "Select Variable", choices = good_names2),
-                                                     plotlyOutput("comparison_plot", height = "500px")
-                                              
-
-                                              )),
-                                    # fluidRow(style = "margin: 12px;",
-                                    #          align = "justify",
-                                    #          column(3,
-                                    #                 h4(strong("Line Graph"))),
-                                    #                 selectInput("Health_Outcomes_Line", "Select Variable:", )
-                                    #   
-                                    # )      
-                                     
-                                     column(12, 
-                                            h4("References: "), 
-                                            p(tags$small("[1] https://my.clevelandclinic.org/health/diseases/24980-low-birth-weight", tags$br(),
-                                                         "[2] https://health.gov/healthypeople/priority-areas/social-determinants-health/literature-summaries")), 
-                                                         # "[3] U.S. Census Bureau (2022). Age and sex, 2020: ACS 5-Year estimates subject tables. Retrieved July 18, 2022, from https://data.census.gov/cedsci/table?t=Populations%20and%20People&g=0500000US51075&tid=ACSST5Y2020.S0101.", tags$br(), 
-                                                         # "[4] U.S. Census Bureau (2022). Race, 2020: DEC redistricting data (PL 94-171). Retrieved July 18, 2022, from https://data.census.gov/cedsci/table?t=Populations%20and%20People&g=0500000US51075." , tags$br(),
-                                                         # "[5] U.S. Census Bureau (2022). Employment status, 2020: ACS 5-Year estimates subject tables. Retrieved July 18, 2022, from https://data.census.gov/cedsci/table?t=Employment%3AEmployment%20and%20Labor%20Force%20Status&g=0500000US51075&y=2020&tid=ACSST5Y2020.S2301&moe=false." , tags$br(),
-                                                         # "[6] U.S. Census Bureau (2022). Industry by occupation for the civilian employed population 16 years and over, 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Occupation&g=0500000US51075&y=2020&tid=ACSST5Y2020.S2405", tags$br(),
-                                                         # "[7] U.S. Census Bureau (2022). Median income in the past 12 months (in 2020 inflation-adjusted dollars), 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Income%20%28Households,%20Families,%20Individuals%29&g=0500000US51075&y=2020&tid=ACSST5Y2020.S1903", tags$br(),
-                                                         # "[8] U.S. Census Bureau (2022). Income in the past 12 months (in 2020 inflation-adjusted dollars), 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Income%20%28Households,%20Families,%20Individuals%29&g=0500000US51075&y=2020", tags$br(),
-                                                         # "[9] U.S. Census Bureau (2022). Educational attainment, 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Education&g=0500000US51075&y=2020", tags$br(),
-                                                         # "[10] U.S. Census Bureau (2022). Geographic mobility by selected characteristics in the United States, 2020: ACS 5-Year estimates subject tables. Retrieved July 25, 2022, from https://data.census.gov/cedsci/table?t=Residential%20Mobility&g=0500000US51075&y=2020")),
-                                            # p("", style = "padding-top:10px;")) 
-                                          ),
-                              ),
-                            
+                           tabPanel("Health Variables",
+                                    h1(strong("Health Variables"), align = "center"),
+                                    p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
+                                    tabsetPanel(
+                                      
+                                      tabPanel("Health Outcomes", 
+                                               fluidRow(style = "margin: 20px;",
+                                                        h1(strong("Health Outcomes"), align = "left", style = "font-size: 18px;"),
+                                                        p("Health outcomes provide insights into the average lifespan and the physical and mental well-being experienced by individuals within a community. These outcomes are shaped by various factors, including access to clean water, affordable housing, quality medical care, and the availability of good employment opportunities. Local, state, and federal programs and policies play a significant role in influencing these factors. Communities often exhibit significant disparities based on geographical location, income levels, and racial or ethnic backgrounds. To uncover these disparities, data is often disaggregated based on people's characteristics or their geographical location. This breakdown of data helps reveal hidden inequalities and enables a better understanding of why and where health outcomes differ across different areas within a county. It also sheds light on how various health factors interact to influence these outcomes. Furthermore, analyzing data in this manner allows us to evaluate how policies and programs either support or limit opportunities for achieving health equity for all individuals within a community.", style = "padding-top:10px;")),
+                                               fluidRow(style = "margin: 12px;",
+                                                        align = "justify",
+                                                        column(3,
+                                                               h4(strong("Summary")),
+                                                               textOutput("VariableDefinition")),
+                                                        column(9,
+                                                               selectInput("Health_Outcomes", "Select Variable:", width = "50%", choices = c(
+                                                                 "Low Birthweight" = "per_low_birthweight",
+                                                                 "Life Expectancy" = "life_expectancy",
+                                                                 "Life Expectancy Gap" = "life_expectancy_gap",
+                                                                 "Life Expectancy Black" = "life_expectancy_black",
+                                                                 "Life Expectancy White" = "life_expectancy_white")
+                                                               ),
+                                                               radioButtons(inputId = "yearSelect_outcomes", label = "Select Year: ",
+                                                                            choices = c("2017", "2018", "2019", "2020"),
+                                                                            selected = "2020", inline = TRUE, width = "50%"),
+                                                               withSpinner(leafletOutput("outcomes", height = "500px"))
+                                                        )),
+                                               fluidRow(style = "margin: 12px;",
+                                                        align = "justify",
+                                                        column(3,
+                                                               h4(strong("Line Graph")),
+                                                               selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
+                                                               selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
+                                                               selectInput("variable", "Select Variable", choices = c(
+                                                                 "Low Birthweight" = "per_low_birthweight",
+                                                                 "Life Expectancy" = "life_expectancy",
+                                                                 "Life Expectancy Gap" = "life_expectancy_gap",
+                                                                 "Life Expectancy Black" = "life_expectancy_black",
+                                                                 "Life Expectancy White" = "life_expectancy_white"))
+                                                        ),
+                                                        column(9,
+                                                               plotlyOutput("comparison_plot", height = "500px")
+                                                        )),
+                                      ),
+                                      # column(12, 
+                                      #        h4("References: "), 
+                                      #        p(tags$small("[1] https://my.clevelandclinic.org/health/diseases/24980-low-birth-weight", tags$br(),
+                                      #                     "[2] https://health.gov/healthypeople/priority-areas/social-determinants-health/literature-summaries")) 
+                                      #        # Add other references here if needed...
+                                      # ),
+                                      # 
+                          
                             
                             
                       
@@ -1264,14 +1234,9 @@ server <- function(input, output) {
     county1 <- input$county1
     county2 <- input$county2
     variable <- input$variable
-  
-    
-    # Call the sdoh_line function with reactive inputs
     comparison_plot <- sdoh_line(va_avg, county1, county2, variable)
     return(comparison_plot)
   })
-  
-  # Output the plotly object to the UI
   output$comparison_plot <- renderPlotly({
     comparison_plot_reactive()
   })
