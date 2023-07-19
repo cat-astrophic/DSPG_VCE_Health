@@ -1138,8 +1138,10 @@ server <- function(input, output) {
       "% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.
       Preterm births, which occur before 37 weeks of gestation, contribute to low birthweight. Given the far-reaching consequences of low birthweight, it is crucial to address the underlying factors contributing to it. This involves efforts to improve access to quality prenatal care, promote proper nutrition, address maternal stress, reduce exposure to pollution, and provide support for substance misuse prevention and treatment during pregnancy. By addressing these factors, we can work towards reducing the occurrence of low birthweight and improving the long-term health outcomes for infants and their families."
     } else if (input$Health_Outcomes == "life_expectancy") {
-      "Life Expectancy: Average number of years a person can expect to live. Life expectancy is a vital metric for assessing health outcomes as it provides valuable insights into the well-being of a population and the factors influencing lifespan. This measure not only informs us about the overall state of the population's health but also sheds light on the various determinants that can impact longevity. By analyzing life expectancy, we gain a comprehensive understanding of both the health status of a community and the underlying elements that shape the length of an individual's life.
-      In 2020, the life expectancy at birth for the total population of Virginia was 78.3 years, as reported by the Virginia Department of Health (VDH). However, this figure marked a decrease of 1.4 years compared to the previous year. The decline in life expectancy can be attributed to several factors, including the significant impact of the COVID-19 pandemic, which accounted for a large number of deaths. Additionally, unintentional injuries, heart disease, chronic liver disease and cirrhosis, diabetes, and Alzheimer's disease were significant contributors to the decrease in life expectancy. These causes reflect the complex nature of health outcomes and highlight the need for comprehensive efforts to address these factors and improve population health."
+      "Life Expectancy: Average number of years a person can expect to live. 
+      Life expectancy is a vital metric for assessing health outcomes as it provides valuable insights into the well-being of a population and the factors influencing lifespan. This measure not only informs us about the overall state of the population's health but also sheds light on the various determinants that can impact longevity. By analyzing life expectancy, we gain a comprehensive understanding of both the health status of a community and the underlying elements that shape the length of an individual's life.
+      In 2020, the life expectancy at birth for the total population of Virginia was 78.3 years, as reported by the Virginia Department of Health (VDH). 
+      However, this figure marked a decrease of 1.4 years compared to the previous year. The decline in life expectancy can be attributed to several factors, including the significant impact of the COVID-19 pandemic, which accounted for a large number of deaths. Additionally, unintentional injuries, heart disease, chronic liver disease and cirrhosis, diabetes, and Alzheimer's disease were significant contributors to the decrease in life expectancy. These causes reflect the complex nature of health outcomes and highlight the need for comprehensive efforts to address these factors and improve population health."
     } else if (input$Health_Outcomes == "life_expectancy_gap") {
       "Life Expectancy Gap: The life expectancy gap is a measure obtained by calculating the disparity between the life expectancies of white and black populations. This disparity serves as a significant indicator of health inequalities between these two racial groups. Analyzing the life expectancy gap provides valuable insights into the existing disparities in health outcomes between white and black populations. By examining this gap, we can gain a deeper understanding of the prevailing health disparities and the need for targeted interventions to address the unequal health experiences of these racial groups."
     } else if (input$Health_Outcomes == "life_expectancy_black") {
@@ -1167,35 +1169,74 @@ server <- function(input, output) {
   output$HealthAccessVariableDefinition <- renderText({
     if (input$Health_Access == "per_uninsured") {
       "% Uninsured: Percentage of population under age 65 without health insurance.
-The absence of health insurance coverage presents a notable obstacle in accessing essential healthcare services and maintaining financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health consequences as they receive less preventive care, and delayed treatment often leads to severe illnesses or other health complications. Moreover, being uninsured can have substantial financial implications, with many individuals unable to afford their medical expenses, leading to the accumulation of medical debt."
+      The absence of health insurance coverage presents a notable obstacle in accessing essential healthcare services and maintaining 
+      financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health 
+      consequences as they receive less preventive care, and delayed treatment often leads to severe illnesses or other health complications. 
+      Moreover, being uninsured can have substantial financial implications, with many individuals unable to afford their medical expenses, 
+      leading to the accumulation of medical debt."
     } else if (input$Health_Access == "dentist_ratio") {
       "Dentist Ratio: Ratio of population to dentists.
-Neglected dental diseases can result in significant health consequences, such as pain, infection, and tooth loss. While the inadequacy of dental providers represents just one of the barriers to accessing oral healthcare, a substantial portion of the nation faces shortages in this field. According to the Health Resources and Services Administration, as of December 2022, there were 7,313 designated Dental Health Professional Shortage Areas (HPSAs), encompassing a total population of 70 million individuals affected by these shortages."
+      Neglected dental diseases can result in significant health consequences, such as pain, infection, and tooth loss. 
+      While the inadequacy of dental providers represents just one of the barriers to accessing oral healthcare, a substantial 
+      portion of the nation faces shortages in this field. According to the Health Resources and Services Administration, as of December 
+      2022, there were 7,313 designated Dental Health Professional Shortage Areas (HPSAs), encompassing a total population of 70 million 
+      individuals affected by these shortages."
     } else if (input$Health_Access == "mental_health_provider_ratio") {
       "Mental Health Provider Ratio: Ratio of population to mental health providers.
-Accessing healthcare involves more than just financial coverage; it also necessitates access to healthcare providers. Approximately thirty percent of the population resides in a county designated as a Mental Health Professional Shortage Area, indicating significant deficiencies in mental health providers. With the mental health parity provisions of the Affordable Care Act expanding coverage for mental health services, there is growing concern about exacerbated workforce shortages in this field."
+      Accessing healthcare involves more than just financial coverage; it also necessitates access to healthcare providers. 
+      Approximately thirty percent of the population resides in a county designated as a Mental Health Professional Shortage Area, 
+      indicating significant deficiencies in mental health providers. With the mental health parity provisions of the Affordable Care Act 
+      expanding coverage for mental health services, there is growing concern about exacerbated workforce shortages in this field."
     } else if (input$Health_Access == "primary_care_physicians_ratio") {
       "Primary Care Physicians Ratio: Ratio of population to primary care physicians
-Access to healthcare is not solely reliant on financial coverage; it also requires access to healthcare providers. While an abundance of specialist physicians has been linked to increased utilization of services, including potentially unnecessary ones, having an adequate number of primary care physicians is crucial for delivering preventive and primary care. Additionally, primary care providers play a vital role in referring patients to appropriate specialty care when necessary. Thus, ensuring sufficient availability of primary care physicians is essential for facilitating timely and appropriate healthcare services."
+      Access to healthcare is not solely reliant on financial coverage; it also requires access to healthcare providers. 
+      While an abundance of specialist physicians has been linked to increased utilization of services, including potentially unnecessary 
+      ones, having an adequate number of primary care physicians is crucial for delivering preventive and primary care. 
+      Additionally, primary care providers play a vital role in referring patients to appropriate specialty care when necessary. 
+      Thus, ensuring sufficient availability of primary care physicians is essential for facilitating timely and appropriate 
+      healthcare services."
     } else if (input$Health_Access == "per_vaccinated"){
       "% Vaccinated: Percentage of fee-for-service (FFS) Medicare enrollees that had an annual flu vaccination.
-Influenza is a potentially severe illness that can result in hospitalization and death. Each year, millions of people experience influenza infections, hundreds of thousands require hospitalization due to the flu, and thousands lose their lives to the disease. The most effective method to prevent influenza and lower the chances of flu-related illness, hospitalization, and death is through an annual flu vaccine. It is recommended that individuals aged 6 months and older receive a seasonal flu vaccine every year. Specifically, individuals over the age of 65 are strongly encouraged to get vaccinated as they face a higher risk of developing severe complications from the flu."
+      Influenza is a potentially severe illness that can result in hospitalization and death. 
+      Each year, millions of people experience influenza infections, hundreds of thousands require hospitalization due to the flu, 
+      and thousands lose their lives to the disease.
+      The most effective method to prevent influenza and lower the chances of flu-related illness, hospitalization,
+      and death is through an annual flu vaccine. It is recommended that individuals aged 6 months and older receive a seasonal 
+      flu vaccine every year. Specifically, individuals over the age of 65 are strongly encouraged to get vaccinated as they face a 
+      higher risk of developing severe complications from the flu."
     } else if (input$Health_Access == "per_with_annual_mammogram"){
       "% with Annual Mammogram: Percentage of female Medicare enrollees ages 65-74 that received an annual mammography screening.
-Research indicates that undergoing mammography screening can significantly reduce breast cancer mortality, particularly among older women. The recommendation or referral from a physician, along with satisfaction with healthcare providers, plays a significant role in encouraging breast cancer screening. Presently, women aged 45-54 are advised to undergo mammograms annually, while women aged 55 and older are recommended to have mammograms every two years."
+      Research indicates that undergoing mammography screening can significantly reduce breast cancer mortality, particularly among older 
+      women. The recommendation or referral from a physician, along with satisfaction with healthcare providers, plays a significant role 
+      in encouraging breast cancer screening. Presently, women aged 45-54 are advised to undergo mammograms annually, while women aged 55 
+      and older are recommended to have mammograms every two years."
     } else if (input$Health_Access == "preventable_hospitalization_rate"){
       "Preventable Hospitalization Rate: Rate of hospital stays for ambulatory-care sensitive conditions per 100,000 Medicare enrollees. 
-When people are hospitalized for conditions that could have been treated in outpatient settings, it suggests that they did not have access to quality healthcare outside of hospitals. This could also mean that they relied heavily on emergency rooms and urgent care centers instead of regular healthcare providers. Preventable hospital stays can be seen as a measure of both the quality of care and the ability to access primary healthcare services."
+      When people are hospitalized for conditions that could have been treated in outpatient settings, 
+      it suggests that they did not have access to quality healthcare outside of hospitals. 
+      This could also mean that they relied heavily on emergency rooms and urgent care centers instead of regular healthcare providers. 
+      Preventable hospital stays can be seen as a measure of both the quality of care and the ability to access primary 
+      healthcare services."
     } else if (input$Health_Access == "other_primary_care_provider_ratio"){
-    "Other Primary Care Provider Ratio: Ratio of population to primary care providers other than physicians. Primary healthcare is not exclusively provided by physicians. Other healthcare professionals, such as nurse practitioners (NP), physician assistants (PA), and clinical nurse specialists, can also offer routine and preventive care. According to the Health Resources and Services Administration, the primary care NP and PA workforces are projected to grow at a much faster rate compared to physicians in the next decade. This growth has the potential to help address healthcare provider shortages as demand for primary care services continues to increase."  
+    "Other Primary Care Provider Ratio: Ratio of population to primary care providers other than physicians. 
+      Primary healthcare is not exclusively provided by physicians. Other healthcare professionals, such as nurse practitioners (NP), 
+      physician assistants (PA), and clinical nurse specialists, can also offer routine and preventive care. According to the Health 
+      Resources and Services Administration, the primary care NP and PA workforces are projected to grow at a much faster rate compared 
+      to physicians in the next decade. This growth has the potential to help address healthcare provider shortages as demand for primary 
+      care services continues to increase."  
     } else if (input$Health_Access == "per_uninsured_adults"){
       "% Uninsured Adults: Percentage of adults under age 65 without health insurance."
     } else if (input$Health_Access == "per_uninsured_children"){
       "% Uninsured Children: Percentage of children under age 19 without health insurance. 
-The absence of health insurance coverage poses a substantial obstacle to accessing necessary healthcare and maintaining financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health consequences as they receive limited preventive care, and delayed treatment often leads to severe illnesses or other health complications. Additionally, being uninsured can have severe financial implications, with many individuals unable to afford their medical expenses, resulting in the accumulation of medical debt. This issue is particularly notable among uninsured children, who are less likely to receive timely preventive care, such as vaccinations and well-child visits."
+      The absence of health insurance coverage poses a substantial obstacle to accessing necessary healthcare and maintaining 
+      financial stability. being uninsured can have severe financial implications, with many individuals unable to afford 
+      their medical expenses, resulting in the accumulation of medical debt. This issue is particularly notable among uninsured children, 
+      who are less likely to receive timely preventive care, such as vaccinations and well-child visits. "
     } else if (input$Health_Access == "per_adults_with_diabetes"){
       "% Adults with Diabetes- Percentage of adults aged 20 and above with diagnosed diabetes (age-adjusted).
-Diabetes is a chronic condition known to have broad impacts on physical, social, and mental well-being, and causes significant morbidity and mortality in the United States."
+      Diabetes is a chronic condition known to have broad impacts on physical, social, and mental well-being, and causes significant 
+      morbidity and mortality in the United States.The Centers for Disease Control and Prevention (CDC) reports that people with diabetes are at high
+      risk of heart disease, stroke, and other complications such as kidney failure, blindness, and amputation of a foot, toe, or leg."
     } else {
       "nothing :)"
     } 
@@ -1240,14 +1281,24 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
   })
   output$HealthBehaviorsVariableDefinition <- renderText({
     if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
-      "% Adults Reporting Currently Smoking: This variable measures the percentage of adults who are current smokers (age-adjusted).
-        Every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives."
+      "% Adults Reporting Currently Smoking: Percentage of adults who are current smokers (age-adjusted).
+      According to the County Health Rankings, every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several 
+      cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. 
+      Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. 
+      It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives."
     } else if (input$health_behaviors == "per_excessive_drinking") {
-      "% Excessive Drinking: This variable is the percentage of adults reporting binge or heavy drinking (age-adjusted).
-      Nearly 1 in 6 American adults are considered binge drinkers. Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes."
+      "% Excessive Drinking: Percentage of adults reporting binge or heavy drinking (age-adjusted).
+      Nearly 1 in 6 American adults are considered binge drinkers. 
+      Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, 
+      hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden 
+      infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes."
     } else if (input$health_behaviors == "per_driving_deaths_with_alcohol_involvement") {
-      "% Driving Deaths with Alcohol Involvement: This variable represents the percentage of driving deaths with alcohol involvement.
-      This variable directly measures the relationship between alcohol and motor vehicle crash deaths. Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 cause 27% of all alcohol-impaired deaths."
+      "% Driving Deaths with Alcohol Involvement: Percentage of driving deaths with alcohol involvement.
+      This variable directly measures the relationship between alcohol and motor vehicle crash deaths. 
+      Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, 
+      which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor 
+      vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 
+      cause 27% of all alcohol-impaired deaths."
     } else if (input$health_behaviors == "per_physically_inactive") {
       "% Physically Inactive: Percentage of adults age 18 and over reporting no leisure-time physical activity (age-adjusted).
       Physical inactivity is highly associated with increased risk of health conditions such as Type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and shortened life expectancy. Physical activity is associated with improved sleep, cognitive ability, bone, and musculoskeletal health, and reduced risk of dementia."
@@ -1255,8 +1306,13 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
       "% Adults with Obesity: This variable measures the percentage of the adult population (age 18 and older) that reports a body mass index (BMI) greater than or equal to 30 kg/m2 (age-adjusted).
       Adult obesity is a persistent condition that raises the likelihood of various health risks, including hypertension, heart disease, type 2 diabetes, respiratory issues, chronic inflammation, mental illness, and certain cancers.The development of obesity is influenced by a combination of environmental and individual factors. Environmental factors, such as the availability and affordability of nutrient-rich foods, the extent of fast-food advertising, and societal attitudes regarding weight stigma, can significantly impact the prevalence and risk of obesity."
     } else if (input$health_behaviors == "teen_birth_rate") {
-      "Teen Birth Rate: This variable represents the number of births per 1,000 female population ages 15-19.
-      Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and employment opportunities."
+      "Teen Birth Rate: Number of births per 1,000 female population ages 15-19.
+      Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, 
+      family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be 
+      attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and 
+      experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, 
+      high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and 
+      employment opportunities."
     } else {
       "Please select a health variable."
     } 
@@ -1275,7 +1331,8 @@ Diabetes is a chronic condition known to have broad impacts on physical, social,
   output$EnvrVariableDefinition <- renderText({
     if (input$neighbor_envr == "per_physical_distress") {
       "% Physical Distress: Percentage of adults reporting 14 or more days of poor physical health per month (age-adjusted).
-      This variable offers valuable information on the overall well-being of adults in a community. Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity."
+      This variable offers valuable information on the overall well-being of adults in a community. 
+      Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity."
     } else if (input$neighbor_envr == "per_mental_distress") {
       "% Mental Distress: Percentage of adults reporting 14 or more days of poor mental health per month (age-adjusted).
       Mental health is a fundamental aspect of our overall well-being. It encompasses our emotional, psychological, and social well-being, and it affects how we think, feel, and act. Good mental health allows us to cope with the daily stresses of life, form positive relationships, make meaningful contributions to society, and navigate challenges effectively. Poor mental health can have detrimental effects on physical health, contributing to the development or exacerbation of various health conditions, including cardiovascular disease, weakened immune system, chronic pain, and digestive disorders."
