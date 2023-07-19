@@ -81,7 +81,28 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
                   "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
                   "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
-  # territory data
+ 
+  good_names2 <- c( "Chlamydia Rate","Dentist Ratio","Drug Mortality Rate",
+                    "Gender Pay Gap","HIV Prevalence Rate","Median Household Income Black",
+                    "Median Household Income White","Juvenile Arrests Rate","Life Expectancy",
+                    "Life Expectancy Black","Life Expectancy White","Life Expectancy Gap",
+                    "Median Household Income","Median Household Income Gap White Black",
+                    "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
+                    "Mental Health Provider Ratio","Other Primary Care Provider Ratio",
+                    "Percent 6 and over","Percent Population with Access to Exercise Opportunities",
+                    "Percent of Adults Reporting Currently Smoking","Percent of Adults with Diabetes",
+                    "Percent of Adults With Obesity","Percent American Indian or Alaska Native",
+                    "Percent Asian", "Percent Black","Percent Children in Poverty",
+                    "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking",
+                    "Percent Food Insecure","Percent Hispanic","Percent Household Income Required for Child Care Expenses",
+                    "Percent Insufficient Sleep","Percent less than 18 years of age","Percent Limited Access to Healthy Foods",
+                    "Percent Low Birthweight","Percent Mental Distress","Percent Nonhispanic-White",
+                    "Percent not Proficient in English","Percent Physical Distress","Percent Physically Inactive",
+                    "Percent Severe Housing Problems","Percent Unemployed","Percent Uninsured","Percent of Uninsured Adults",
+                    "Percent Uninsured Children","Percent Vaccinated","Percent Access to Exercise Opportunities",
+                    "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
+                    "Suicide Rate","Teen Birth Rate")
+   # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
   # snap territory data
   snap_territories <- read.csv("./data/base_agg_snap.csv")
@@ -95,6 +116,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   snap_territories <- read.csv("./data/base_agg_snap.csv")
   #load nonsnap terr
   fcs_territories <- read.csv("./data/base_agg_non_snap.csv")
+  
+ 
+  # read in va avg data
+  va_avg <- read.csv("./data/with_state_avg.csv") 
   
 
 
@@ -438,6 +463,74 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       addLegend(colors = c( "blue", "red"), labels = c("Existing FCS Agent", "New FCS Agent" ), 
                 position = "topright", title= "Agent Type/Service:")
   }
+  #LINE GRAPH FUNCTION
+  sdoh_line <- function(va_avg,county1, county2, variable) {
+    
+    good_names2 <- c( "Chlamydia Rate","Dentist Ratio","Drug Mortality Rate",
+                      "Gender Pay Gap","HIV Prevalence Rate","Median Household Income Black",
+                      "Median Household Income White","Juvenile Arrests Rate","Life Expectancy",
+                      "Life Expectancy Black","Life Expectancy White","Life Expectancy Gap",
+                      "Median Household Income","Median Household Income Gap White Black",
+                      "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
+                      "Mental Health Provider Ratio","Other Primary Care Provider Ratio",
+                      "Percent 6 and over","Percent Population with Access to Exercise Opportunities",
+                      "Percent of Adults Reporting Currently Smoking","Percent of Adults with Diabetes",
+                      "Percent of Adults With Obesity","Percent American Indian or Alaska Native",
+                      "Percent Asian", "Percent Black","Percent Children in Poverty",
+                      "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking",
+                      "Percent Food Insecure","Percent Hispanic","Percent Household Income Required for Child Care Expenses",
+                      "Percent Insufficient Sleep","Percent less than 18 years of age","Percent Limited Access to Healthy Foods",
+                      "Percent Low Birthweight","Percent Mental Distress","Percent Nonhispanic-White",
+                      "Percent not Proficient in English","Percent Physical Distress","Percent Physically Inactive",
+                      "Percent Severe Housing Problems","Percent Unemployed","Percent Uninsured","Percent of Uninsured Adults",
+                      "Percent Uninsured Children","Percent Vaccinated","Percent Access to Exercise Opportunities",
+                      "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
+                      "Suicide Rate","Teen Birth Rate")
+    
+    va_avg <- read.csv("./data/with_state_avg.csv")%>% 
+      filter(Year != 2021 & 2022)
+   
+    # Filter data for the first selected county and variable
+    selection1 <- va_avg[va_avg$County2 == county1 & va_avg$Variable == variable, ] %>% 
+      na.omit(cols= Value)
+    
+    # Filter data for the second selected county and variable
+    selection2 <- va_avg[va_avg$County2 == county2 & va_avg$Variable == variable, ]%>% 
+      na.omit(cols= Value)
+    
+    # filter va avg data for selected variable
+    avg <- va_avg[va_avg$County2 == "Virginia" & va_avg$Variable == variable, ] %>% 
+      na.omit(cols= Value)
+    
+    # Identify the index of the selected variable
+    idx <- which(unique(all_var_df$Variable) == variable)
+    
+    # Wrap legend title if too long
+    spaces <- gregexpr("\\s", good_names[idx])[[1]]
+    middle_space <- spaces[length(spaces) %/% 2 + 1]
+    legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
+    
+    # Create title for the map
+    map_title = paste(good_names2[idx],"Over Time", sep= " ")
+    
+    #plot all the selections and average on plotly line graph
+    comparison_plot <- plot_ly() %>%
+      add_trace(data = selection1, x = ~Year, y = ~Value, name = county1,
+                type = "scatter", mode = "lines", 
+                line = list(color = "#33638DFF", width = 4)) %>%
+      add_trace(data = selection2, x = ~Year, y = ~Value, name = county2,
+                type = "scatter", mode = "lines", 
+                line = list(color = "#440154FF", width = 4)) %>%
+      add_trace(data = avg, x = ~Year, y = ~Value, name = "State Average",
+                type = "scatter", mode = "lines", 
+                line = list(color = "#3F4788FF", width = 4)) %>%
+      layout(title = map_title, 
+             xaxis = list(tickvals= c(2016, 2017, 2018, 2019, 2020),title = 'Years'),
+             yaxis = list(title = good_names2[idx]),
+             legend = list(font = list(size = 15)))
+    
+    comparison_plot
+  }
 
 
 # 2. Define UI for application ------------------------------------------------------------
@@ -550,6 +643,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3,
                                                      h4(strong("Summary")),
                                                      textOutput("VariableDefinition"),
+                                                     
 
                                               ) ,
                                               column(9,
@@ -564,10 +658,23 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      radioButtons(inputId = "yearSelect_outcomes", label = "Select Year: ",
                                                                   choices = c("2017", "2018", "2019", "2020"),
                                                                   selected = "2020", inline = TRUE , width = "50%"),
+                                                     
                                                      withSpinner(leafletOutput("outcomes", height = "500px")),
+                                                     selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
+                                                     selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
+                                                     selectInput("variable", "Select Variable", choices = good_names2),
+                                                     plotlyOutput("comparison_plot", height = "500px")
+                                              
 
-                                              )
-                                     ),
+                                              )),
+                                    # fluidRow(style = "margin: 12px;",
+                                    #          align = "justify",
+                                    #          column(3,
+                                    #                 h4(strong("Line Graph"))),
+                                    #                 selectInput("Health_Outcomes_Line", "Select Variable:", )
+                                    #   
+                                    # )      
+                                     
                                      column(12, 
                                             h4("References: "), 
                                             p(tags$small("[1] https://my.clevelandclinic.org/health/diseases/24980-low-birth-weight", tags$br(),
@@ -1152,8 +1259,24 @@ server <- function(input, output) {
     } else {
       "Please select a health outcome."
     } 
+    })
+  comparison_plot_reactive <- reactive({
+    county1 <- input$county1
+    county2 <- input$county2
+    variable <- input$variable
+  
+    
+    # Call the sdoh_line function with reactive inputs
+    comparison_plot <- sdoh_line(va_avg, county1, county2, variable)
+    return(comparison_plot)
   })
   
+  # Output the plotly object to the UI
+  output$comparison_plot <- renderPlotly({
+    comparison_plot_reactive()
+  })
+    
+
   ## 3.2 Healthcare Access -----
   #create a reactive expression for healthcare access variables
   temp_healthaccess <- reactive({
@@ -1699,6 +1822,7 @@ server <- function(input, output) {
     })
   })
 
+  
 }
 
 # 4. Run the application-------------------------------------------------------------------
