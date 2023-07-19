@@ -72,26 +72,38 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # Load and preprocess the VCE agents location data
   agents_sf <- read.csv("./data/vce_agents.csv") %>% st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
   # Prepare labels for varibels of interest
-  good_names <- c("Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
-                  "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
-                  "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
-                  "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
-                  "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
-                  "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
-                  "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
-                  "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
-                  "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
+  good_names <- c( "per__and_over","per_american_indian_or_alaska_native","per_asian","per_black","per_hispanic",
+                   "per_less_than__years_of_age", "per_nonhispanic_white","per_not_proficient_in_english","gender_pay_gap",
+                   "median_household_income","median_household_income_black","median_household_income_gap_white_black",
+                   "median_household_income_gap_white_hispanic","median_household_income_hispanic","median_household_income_white",
+                   "per_children_in_poverty","per_food_insecure","per_unemployed","per_adults_reporting_currently_smoking",
+                   "per_adults_with_obesity","per_driving_deaths_with_alcohol_involvement","per_excessive_drinking",
+                   "per_physically_inactive","teen_birth_rate","life_expectancy","life_expectancy_black","life_expectancy_gap",
+                   "life_expectancy_white","per_low_birthweight","chlamydia_rate","dentist_ratio","drug_overdose_mortality_rate",
+                   "HIV_prevalence_rate","mental_health_provider_ratio","other_primary_care_provider_ratio","per_adults_with_diabetes",
+                   "per_uninsured","per_uninsured_adults","per_uninsured_children","per_vaccinated","per_with_annual_mammogram",
+                   "preventable_hospitalization_rate","primary_care_physicians_ratio","juvenile_arrests_rate","per_insufficient_sleep",
+                   "per_limited_access_to_healthy_foods","per_mental_distress","per_physical_distress","per_severe_housing_problems",
+                   "per_with_access_to_exercise_opportunities","suicide_rate")
  
-  good_names2 <- c( "Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
-                    "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
-                    "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
-                    "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
-                    "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
-                    "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
-                    "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
-                    "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
-                    "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
-   # territory data
+  good_names2 <- c(  "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian",
+                     "Percent Black","Percent Hispanic","Percent less than 18 years of age",
+                     "Percent Nonhispanic-White","Percent not Proficient in English","Gender Pay Gap",
+                     "Median Household Income","Median Household Income Black","Median Household Income Gap White Black",
+                     "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
+                     "Median Household Income White","Percent Children in Poverty","Percent Food Insecure",
+                     "Percent Unemployed","Percent of Adults Reporting Currently Smoking","Percent of Adults With Obesity",
+                     "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking","Percent Physically Inactive",
+                     "Teen Birth Rate","Life Expectancy","Life Expectancy Black","Life Expectancy Gap",
+                     "Life Expectancy White","Percent Low Birthweight","Chlamydia Rate","Dentist Ratio",
+                     "Drug Mortality Rate","HIV Prevalence Rate","Mental Health Provider Ratio",
+                     "Other Primary Care Provider Ratio","Percent of Adults with Diabetes","Percent Uninsured",
+                     "Percent of Uninsured Adults","Percent Uninsured Children","Percent Vaccinated",
+                     "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
+                     "Juvenile Arrests Rate","Percent With Access to Exercise Opportunities","Percent Insufficient Sleep",
+                     "Percent Limited Access to Healthy Foods","Percent Mental Distress","Percent Physical Distress",
+                     "Percent Severe Housing Problems","Suicide Rate")
+  # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
   # snap territory data
   snap_territories <- read.csv("./data/base_agg_snap.csv")
