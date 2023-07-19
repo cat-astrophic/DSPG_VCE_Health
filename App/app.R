@@ -653,7 +653,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                         align = "justify",
                                                         column(3,
                                                                h4(strong("Line Graph")),
-                                                               selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
+                                                               selectInput("county1", "Select County 1", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                                selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
                                                                # selectInput("variable", "Select Variable", choices = c(
                                                                #   "Low Birthweight" = "per_low_birthweight",
@@ -666,13 +666,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                plotlyOutput("comparison_plot", height = "500px")
                                                         )),
                                       ),
-                                      # column(12, 
-                                      #        h4("References: "), 
-                                      #        p(tags$small("[1] https://my.clevelandclinic.org/health/diseases/24980-low-birth-weight", tags$br(),
-                                      #                     "[2] https://health.gov/healthypeople/priority-areas/social-determinants-health/literature-summaries")) 
-                                      #        # Add other references here if needed...
-                                      # ),
-                                      # 
+                                      
                           
                             
                             
@@ -712,9 +706,26 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                   selected = "2020", inline = TRUE),
                                                      withSpinner(leafletOutput("healthaccess", height = "500px")),
                                                     )
-                                              )
-                                     
-                            ), 
+                                              ),
+                                     fluidRow(style = "margin: 12px;",
+                                              align = "justify",
+                                              column(3,
+                                                     h4(strong("Line Graph")),
+                                                     selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
+                                                     selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
+                                                     # selectInput("variable", "Select Variable", choices = c(
+                                                     #   "Low Birthweight" = "per_low_birthweight",
+                                                     #   "Life Expectancy" = "life_expectancy",
+                                                     #   "Life Expectancy Gap" = "life_expectancy_gap",
+                                                     #   "Life Expectancy Black" = "life_expectancy_black",
+                                                     #   "Life Expectancy White" = "life_expectancy_white"))
+                                              ),
+                                              column(9,
+                                                     plotlyOutput("comparison_plot_access", height = "500px")
+                                              )),
+                            ),
+                            
+                             
                             ### 2.2.3 Subtab Economic Stability--------------------------------------
                             tabPanel("Economic Stability", 
                                      fluidRow(style = "margin: 20px;",
@@ -1226,14 +1237,23 @@ server <- function(input, output) {
     county1 <- input$county1
     county2 <- input$county2
     
-    # Check if the selected variable is "per_low_birthweight"
     if (temp_outcome() == "per_low_birthweight") {
       comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
       return(comparison_plot)
     } else if (temp_outcome() == "life_expectancy"){
       comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
       return(comparison_plot)
-      
+    } else if (temp_outcome() == "life_expectancy_gap"){
+      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      return(comparison_plot)
+    } else if (temp_outcome() == "life_expectancy_black"){
+      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      return(comparison_plot)
+    } else if (temp_outcome() == "life_expectancy_white"){
+      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      return(comparison_plot)
+    } else {
+    return(NULL)
     }
   })
   
@@ -1267,12 +1287,54 @@ server <- function(input, output) {
   temp_healthaccess <- reactive({
     input$Health_Access
   })
+  
   temp_healthaccessyear <- reactive({
     as.integer(input$yearSelect_access)
   })
   
   output$healthaccess <- renderLeaflet({
     mapping2(temp_healthaccess(), temp_healthaccessyear())
+    
+  })
+ 
+  
+  comparison_plot_access_reactive <- reactive({
+    county1 <- input$county1
+    county2 <- input$county2
+    if (temp_healthaccess() == "per_uninsured") {
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot_access)
+    } else if (temp_healthaccess() == "dentist_ratio"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot)
+    } else if (temp_healthaccess() == "mental_health_provider_ratio"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot)
+    } else if (temp_healthaccess() == "primary_care_physicians_ratio"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot_access)
+    } else if (temp_healthaccess() == "per_vaccinated"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot_access)
+    } else if (temp_healthaccess() == "per_with_annual_mammogram"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot_access)
+    } else if (temp_healthaccess() == "preventable_hospitalization_rate"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot_access)
+    } else if (temp_healthaccess() == "per_uninsured_children"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot_access)
+    } else if (temp_healthaccess() == "per_adults_with_diabetes"){
+      comparison_plot_access <- sdoh_line(va_avg, county1, county2, temp_healthaccess())
+      return(comparison_plot_access)
+    } else {
+      return(NULL)
+    }
+  })
+  
+  output$comparison_plot_access <- renderPlotly({
+    comparison_plot_access_reactive()
   })
   output$HealthAccessVariableDefinition <- renderText({
     if (input$Health_Access == "per_uninsured") {
@@ -1349,6 +1411,9 @@ server <- function(input, output) {
       "nothing :)"
     } 
   }) 
+  
+  
+  
   ## 3.3 Economic Stability ----
   temp_econ <- reactive({
     input$econ_stab
