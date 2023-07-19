@@ -72,37 +72,38 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # Load and preprocess the VCE agents location data
   agents_sf <- read.csv("./data/vce_agents.csv") %>% st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
   # Prepare labels for varibels of interest
-  good_names <- c( "per__and_over","per_american_indian_or_alaska_native","per_asian","per_black","per_hispanic",
-                   "per_less_than__years_of_age", "per_nonhispanic_white","per_not_proficient_in_english","gender_pay_gap",
-                   "median_household_income","median_household_income_black","median_household_income_gap_white_black",
-                   "median_household_income_gap_white_hispanic","median_household_income_hispanic","median_household_income_white",
-                   "per_children_in_poverty","per_food_insecure","per_unemployed","per_adults_reporting_currently_smoking",
-                   "per_adults_with_obesity","per_driving_deaths_with_alcohol_involvement","per_excessive_drinking",
-                   "per_physically_inactive","teen_birth_rate","life_expectancy","life_expectancy_black","life_expectancy_gap",
-                   "life_expectancy_white","per_low_birthweight","chlamydia_rate","dentist_ratio","drug_overdose_mortality_rate",
-                   "HIV_prevalence_rate","mental_health_provider_ratio","other_primary_care_provider_ratio","per_adults_with_diabetes",
-                   "per_uninsured","per_uninsured_adults","per_uninsured_children","per_vaccinated","per_with_annual_mammogram",
-                   "preventable_hospitalization_rate","primary_care_physicians_ratio","juvenile_arrests_rate","per_insufficient_sleep",
-                   "per_limited_access_to_healthy_foods","per_mental_distress","per_physical_distress","per_severe_housing_problems",
-                   "per_with_access_to_exercise_opportunities","suicide_rate")
- 
-  good_names2 <- c(  "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian",
-                     "Percent Black","Percent Hispanic","Percent less than 18 years of age",
-                     "Percent Nonhispanic-White","Percent not Proficient in English","Gender Pay Gap",
-                     "Median Household Income","Median Household Income Black","Median Household Income Gap White Black",
-                     "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
-                     "Median Household Income White","Percent Children in Poverty","Percent Food Insecure",
-                     "Percent Unemployed","Percent of Adults Reporting Currently Smoking","Percent of Adults With Obesity",
-                     "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking","Percent Physically Inactive",
-                     "Teen Birth Rate","Life Expectancy","Life Expectancy Black","Life Expectancy Gap",
-                     "Life Expectancy White","Percent Low Birthweight","Chlamydia Rate","Dentist Ratio",
-                     "Drug Mortality Rate","HIV Prevalence Rate","Mental Health Provider Ratio",
-                     "Other Primary Care Provider Ratio","Percent of Adults with Diabetes","Percent Uninsured",
-                     "Percent of Uninsured Adults","Percent Uninsured Children","Percent Vaccinated",
+  good_names <- c(   "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian","Percent Black",
+                     "Percent Hispanic","Percent less than 18 years of age","Percent Nonhispanic-White","Percent not Proficient in English",
+                     "Gender Pay Gap","Median Household Income","Median Household Income Black","Median Household Income Gap White Black",
+                     "Median Household Income Gap White Hispanic","Median Household Income Hispanic","Median Household Income White",
+                     "Percent Children in Poverty","Percent Food Insecure","Percent Unemployed","Percent of Adults Reporting Currently Smoking",
+                     "Percent of Adults With Obesity","Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking",
+                     "Percent Physically Inactive","Teen Birth Rate","Life Expectancy","Life Expectancy Black","Life Expectancy Gap",
+                     "Life Expectancy White","Percent Low Birthweight","Chlamydia Rate","Dentist Ratio","Drug Mortality Rate",
+                     "HIV Prevalence Rate","Mental Health Provider Ratio","Other Primary Care Provider Ratio","Percent of Adults with Diabetes",
+                     "Percent Uninsured","Percent of Uninsured Adults","Percent Uninsured Children","Percent Vaccinated",
                      "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
                      "Juvenile Arrests Rate","Percent With Access to Exercise Opportunities","Percent Insufficient Sleep",
                      "Percent Limited Access to Healthy Foods","Percent Mental Distress","Percent Physical Distress",
                      "Percent Severe Housing Problems","Suicide Rate")
+ 
+  # good_names2 <- c(  "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian",
+  #                    "Percent Black","Percent Hispanic","Percent less than 18 years of age",
+  #                    "Percent Nonhispanic-White","Percent not Proficient in English","Gender Pay Gap",
+  #                    "Median Household Income","Median Household Income Black","Median Household Income Gap White Black",
+  #                    "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
+  #                    "Median Household Income White","Percent Children in Poverty","Percent Food Insecure",
+  #                    "Percent Unemployed","Percent of Adults Reporting Currently Smoking","Percent of Adults With Obesity",
+  #                    "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking","Percent Physically Inactive",
+  #                    "Teen Birth Rate","Life Expectancy","Life Expectancy Black","Life Expectancy Gap",
+  #                    "Life Expectancy White","Percent Low Birthweight","Chlamydia Rate","Dentist Ratio",
+  #                    "Drug Mortality Rate","HIV Prevalence Rate","Mental Health Provider Ratio",
+  #                    "Other Primary Care Provider Ratio","Percent of Adults with Diabetes","Percent Uninsured",
+  #                    "Percent of Uninsured Adults","Percent Uninsured Children","Percent Vaccinated",
+  #                    "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
+  #                    "Juvenile Arrests Rate","Percent With Access to Exercise Opportunities","Percent Insufficient Sleep",
+  #                    "Percent Limited Access to Healthy Foods","Percent Mental Distress","Percent Physical Distress",
+  #                    "Percent Severe Housing Problems","Suicide Rate")
   # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
   # snap territory data
@@ -468,15 +469,15 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   #LINE GRAPH FUNCTION
   sdoh_line <- function(va_avg,county1, county2, variable) {
     
-    good_names2 <- c( "Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
-                      "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
-                      "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
-                      "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
-                      "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
-                      "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
-                      "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
-                      "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
-                      "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
+    # good_names2 <- c( "Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
+    #                   "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
+    #                   "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
+    #                   "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
+    #                   "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
+    #                   "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
+    #                   "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
+    #                   "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
+    #                   "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
     
     va_avg <- read.csv("./data/with_state_avg.csv") %>% 
       filter(!(Year %in% c(2021, 2022)))
@@ -502,7 +503,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     legend_title <- paste0(substring(good_names[idx], 1, middle_space-1), "</br>", substring(good_names[idx], middle_space+1))
     
     # Create title for the map
-    map_title = paste(good_names2[idx],"Over Time", sep= " ")
+    map_title = paste(good_names[idx],"Over Time", sep= " ")
     
     #plot all the selections and average on plotly line graph
     comparison_plot <- plot_ly() %>%
@@ -517,7 +518,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                 line = list(color = "#3F4788FF", width = 4)) %>%
       layout(title = map_title, 
              xaxis = list(tickvals= c(2016, 2017, 2018, 2019, 2020),title = 'Years'),
-             yaxis = list(title = good_names2[idx]),
+             yaxis = list(title = good_names[idx]),
              legend = list(font = list(size = 15)))
     
     comparison_plot
@@ -654,12 +655,12 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                h4(strong("Line Graph")),
                                                                selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
                                                                selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
-                                                               selectInput("variable", "Select Variable", choices = c(
-                                                                 "Low Birthweight" = "per_low_birthweight",
-                                                                 "Life Expectancy" = "life_expectancy",
-                                                                 "Life Expectancy Gap" = "life_expectancy_gap",
-                                                                 "Life Expectancy Black" = "life_expectancy_black",
-                                                                 "Life Expectancy White" = "life_expectancy_white"))
+                                                               # selectInput("variable", "Select Variable", choices = c(
+                                                               #   "Low Birthweight" = "per_low_birthweight",
+                                                               #   "Life Expectancy" = "life_expectancy",
+                                                               #   "Life Expectancy Gap" = "life_expectancy_gap",
+                                                               #   "Life Expectancy Black" = "life_expectancy_black",
+                                                               #   "Life Expectancy White" = "life_expectancy_white"))
                                                         ),
                                                         column(9,
                                                                plotlyOutput("comparison_plot", height = "500px")
@@ -695,13 +696,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(9, 
                                                        selectInput("Health_Access", "Select Variable:", width = "50%", choices = c(
                                                        "Percent Uninsured" = "per_uninsured",
-                                                      
                                                        "Children without Insurance" = "per_uninsured_children",
                                                        "Dentist Ratio" = "dentist_ratio",
                                                        "Mental Health Provider Ratio" = "mental_health_provider_ratio",
                                                        "Primary Care Physicians Ratio" = "primary_care_physicians_ratio",
-                                                       
-                                                       "Vaccination Rate" = "per_vaccinated",
+                                                        "Vaccination Rate" = "per_vaccinated",
                                                        "Preventable Hospitalization Rate" = "preventable_hospitalization_rate",
                                                        "Annual Mammograms" = "per_with_annual_mammogram",
                                                        "Diabetes Rate" = "per_adults_with_diabetes",
@@ -1220,8 +1219,28 @@ server <- function(input, output) {
   })
   
   output$outcomes <- renderLeaflet({
-   mapping2(temp_outcome(), temp_year())
+    mapping2(temp_outcome(), temp_year())
   })
+  
+  comparison_plot_reactive <- reactive({
+    county1 <- input$county1
+    county2 <- input$county2
+    
+    # Check if the selected variable is "per_low_birthweight"
+    if (temp_outcome() == "per_low_birthweight") {
+      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      return(comparison_plot)
+    } else if (temp_outcome() == "life_expectancy"){
+      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      return(comparison_plot)
+      
+    }
+  })
+  
+  output$comparison_plot <- renderPlotly({
+    comparison_plot_reactive()
+  })
+  
   output$VariableDefinition <- renderText({
     if (input$Health_Outcomes == "per_low_birthweight") {
       "% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.
@@ -1241,18 +1260,7 @@ server <- function(input, output) {
     } else {
       "Please select a health outcome."
     } 
-    })
-  comparison_plot_reactive <- reactive({
-    county1 <- input$county1
-    county2 <- input$county2
-    variable <- input$variable
-    comparison_plot <- sdoh_line(va_avg, county1, county2, variable)
-    return(comparison_plot)
-  })
-  output$comparison_plot <- renderPlotly({
-    comparison_plot_reactive()
-  })
-    
+  })  
 
   ## 3.2 Healthcare Access -----
   #create a reactive expression for healthcare access variables
