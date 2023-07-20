@@ -746,7 +746,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                         column(3,
                                                                h4(strong("Line Graph")),
                                                                selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
-                                                               selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
+                                                               selectInput("county2", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                                
                                                         ),
                                                         column(9,
@@ -799,7 +799,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3,
                                                      h4(strong("Line Graph")),
                                                      selectInput("county3", "Select County 1", choices = unique(va_avg$County2)),
-                                                     selectInput("county4", "Select County 2", choices = unique(va_avg$County2)),
+                                                     selectInput("county4", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                      
                                               ),
                                               column(9,
@@ -855,7 +855,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3,
                                                      h4(strong("Line Graph")),
                                                      selectInput("county5", "Select County 1", choices = unique(va_avg$County2)),
-                                                     selectInput("county6", "Select County 2", choices = unique(va_avg$County2)),
+                                                     selectInput("county6", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                      
                                               ),
                                               column(9,
@@ -897,7 +897,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3,
                                                      h4(strong("Line Graph")),
                                                      selectInput("county7", "Select County 1", choices = unique(va_avg$County2)),
-                                                     selectInput("county8", "Select County 2", choices = unique(va_avg$County2)),
+                                                     selectInput("county8", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                      
                                               ),
                                               column(9,
@@ -942,7 +942,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                           column(3,
                                                  h4(strong("Line Graph")),
                                                  selectInput("county9", "Select County 1", choices = unique(va_avg$County2)),
-                                                 selectInput("county10", "Select County 2", choices = unique(va_avg$County2)),
+                                                 selectInput("county10", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                  
                                           ),
                                           column(9,
@@ -987,7 +987,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      column(3,
                                             h4(strong("Line Graph")),
                                             selectInput("county11", "Select County 1", choices = unique(va_avg$County2)),
-                                            selectInput("county12", "Select County 2", choices = unique(va_avg$County2)),
+                                            selectInput("county12", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                             
                                      ),
                                      column(9,
@@ -1627,30 +1627,30 @@ server <- function(input, output) {
     county8 <- input$county8
     
     if (temp_healthbehaviors() == "per_adults_reporting_currently_smoking") {
-      comparison_plot_envr <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
-      return(comparison_plot_envr)
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_excessive_drinking"){
-      comparison_plot_envr <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
-      return(comparison_plot_envr)
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_driving_deaths_with_alcohol_involvement"){
-      comparison_plot_envr <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
-      return(comparison_plot_envr)
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_physically_inactive"){
-      comparison_plot_envr <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
-      return(comparison_plot_envr)
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_adults_with_obesity"){
-      comparison_plot_envr <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
-      return(comparison_plot_envr)
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "teen_birth_rate"){
-      comparison_plot_envr <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
-      return(comparison_plot_envr)
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      return(comparison_plot_behavior)
     } else {
       return(NULL)
     }
   })
   
-  output$comparison_plot_envr <- renderPlotly({
-    comparison_plot_envr_reactive()
+  output$comparison_plot_behavior <- renderPlotly({
+    comparison_plot_behavior_reactive()
   })
   output$HealthBehaviorsVariableDefinition <- renderText({
     if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
