@@ -1,5 +1,5 @@
 # SDoH line graph function
-sdoh_line <- function(county1, county2, variable) {
+sdoh_line <- function(county1, county2) {
   
   good_names2 <- c( "Chlamydia Rate","Dentist Ratio","Drug Mortality Rate",
                     "Gender Pay Gap","HIV Prevalence Rate","Median Household Income Black",
