@@ -91,17 +91,16 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
   # snap territory data
-  snap_territories <- read.csv("./data/base_agg_snap.csv")
+  snap_territories <- read.csv("./data/snap_results.csv")
 
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
   additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
   
   
-  #load in snap terr
-  snap_territories <- read.csv("./data/base_agg_snap.csv")
+ 
   #load nonsnap terr
-  fcs_territories <- read.csv("./data/base_agg_non_snap.csv")
+  fcs_territories <- read.csv("./data/non_snap_results.csv")
   
  
   # read in va avg data
@@ -215,7 +214,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
 map1
 }
   
-#territory function
+#both snap and fcs territory function
   territory <- function(territory_type, zscore_type) {
     
     temp2 <- all_territories[all_territories$territory_type == territory_type & all_territories$zscore_type == zscore_type, ]
@@ -349,8 +348,8 @@ map1
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
       
-      # Convert new agent locations to sf
-      st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
+    # Convert new agent locations to sf
+    st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
     
@@ -598,7 +597,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                           p("VCE agents and volunteers strive to empower youth and Virginian farmers, guide sustainable resource management, and promote public health. VCE accomplishes these goals through programs that put research-based knowledge to work in people’s lives. VCE has a variety of programs like 4-H Youth Development, Family and Consumer Sciences, Community Viability, Agriculture and Natural Resources, Food, Nutrition, and Health, etc. in every county. VCE works on unique challenges Virginians face in partnership with governments and organizations to solve these issues in a way that benefits all people. With the expertise and knowledge from Virginia Tech and Virginia State University, VCE agents are able to tackle issues and foster community growth across the state. "),
                   
                                           p(strong("Family Consumer Sciences:"), "For the purpose of this project, we will be focusing on VCE’s Family and Consumer Sciences Program and the agents that support this program. FCS programming is tied to community needs and directed toward families and individuals. Many counties’ FCS programs look different from one another, however, there are core specialty areas every program has. The specialty areas include: Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents are responsible for partnering and collaborating with other VCE agents, agencies, nonprofits/ other organizations, and the public to meet the educational needs of local residents. Agents are tasked with determining program goals and needs by monitoring trends and issues. FCS agents essentially help Virginian families make more healthy and smart decisions by applying research-based knowledge to work in people’s lives. However, this is easier said than done. A big reason why every county’s FCS programs look different is because of the unique populations and challenges every county has. This unfortunately creates a difficult job for FCS agents. They are overextended and commit a lot more time and effort than what seems to fit into the 3 FCS specialty areas. Today, FCS agents are doing a lot more than what was originally expected of them as VCE extends their work to be more public health focused."),
-                                          
+                                          p(strong("Supplemental Nutrition Assistance Program-Education: "),
+                                          p("We will also be focusing on SNAP-Ed agents. SNAP-Ed is a federally funded program that operates through partnerships with state and local organizations, including Cooperative Extension offices in Virginia. "))
                                    ),
                                    column(6,
                                           h2(strong("Our Work"), align = "center"),
@@ -959,7 +959,13 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      fluidRow(style = "margin: 12px;",
                                        column(12,
                                               titlePanel(strong("Overview")),
-                                              p("Our goal is to optimize FCS agent efforts by determining optimal territories for these agents to cover. Since not all counties have FCS agents, we want to determine how FCS agents can allocate their efforts across space so that we do not have some agents serving one well-off county while other agents serve several counties, many of which may be inaccessible in the sense that they take several hours to reach by car. In addition to spatially optimizing existing agents, we also want to identify the locations where new agents could have the largest impact."),
+                                              p("Our primary objective is to enhance the efficiency of FCS (Food and Consumer Service) agent efforts by strategically determining optimal territories for these agents to cover. Given that not all counties currently have FCS agents, our aim is to find the most effective way to allocate their efforts across different areas. 
+                                                We want to avoid situations where some agents are serving relatively well-off counties while others are burdened with multiple counties, some of which may be challenging to access due to long travel times."),
+                                                
+                                              p("To achieve this goal, we will spatially optimize the distribution of existing agents, ensuring a balanced and equitable allocation of their services. This means identifying areas where FCS agents can make the most significant impact and where their services are most needed.
+                                              Furthermore, we will also explore the possibility of establishing new FCS agent locations in areas where there is a high demand for their services. By identifying regions with the greatest need and potential impact, we can strategically deploy new agents to address the specific challenges faced by underserved communities."),
+                                              p("In addition to optimizing the allocation of FCS agents, our methodology will extend to SNAP-Ed (Supplemental Nutrition Assistance Program Education) agents. Since SNAP-Ed agents work with families who have limited financial means, we aim to provide them with valuable insights into where their resources should be allocated most effectively. By focusing on specific groups with income levels below $2,000, SNAP-Ed agents can tailor their efforts to serve those who need assistance the most. By considering both SNAP-Ed and FCS agents together, we can achieve a comprehensive approach that optimizes the impact of their collective efforts. This integrated approach will enable us to better address the diverse needs of various communities and create a more efficient and equitable distribution of services."),
+                                              p("Ultimately, our objective is to empower agents with the necessary tools and data-driven insights to make informed decisions about resource allocation. By strategically positioning FCS and SNAP-Ed agents and identifying areas with the highest potential for impact, we can work towards improving the overall well-being of communities and promoting health and nutrition for those who need it most."),
                                               p(strong("Workflow:")),
                                               tags$li("Perform a literature review to understand the role of FCS and identify which SDoH variables are relevant to the work that FCS does"),
                                               tags$li("Identify health outcomes that FCS agents can affect"),
