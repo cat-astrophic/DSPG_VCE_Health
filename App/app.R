@@ -109,8 +109,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     filter(!(Year %in% c(2021, 2022)))
   
   #making icons for maps
-  snap_agents_icon <- makeAwesomeIcon(icon = "home", library = "fa", iconColor = 'ivory', markerColor = "lightblue")
-  agents_icon <- makeAwesomeIcon(icon = "user", library = "fa", iconColor = 'ivory', markerColor = 'cadetblue')
+  snap_icon <- makeAwesomeIcon(icon = "home", library = "fa", iconColor = 'ivory', markerColor = "lightblue")
+  non_snap_icon <- makeAwesomeIcon(icon = "user", library = "fa", iconColor = 'ivory', markerColor = 'cadetblue')
   new_agent_icon <- makeAwesomeIcon(icon = "star", library = "fa", iconColor = 'ivory', markerColor = "green")
 
 # ## 1.4 Define your functions -------------------------------------------------------
@@ -125,7 +125,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     #separating snap agents
     snap_agents <- agents_sf %>% filter(SNAP == 1)
-    non_snap <- agents_sf %>%  filter(SNAP == 0)
+    non_snap_agents<- agents_sf %>%  filter(SNAP == 0)
+    
     # Identify the index of the selected variable
     idx <- which(unique(all_var_df$Variable) == variable)
     
@@ -139,7 +140,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       good_names[idx], 
       var.counties$Value
     ) %>% lapply(htmltools::HTML)
-    
+  
     # Create labels for snap agents
     snap_agent_labels <- sprintf(
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-Ed Service Provided At: %s",
@@ -165,12 +166,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Create title for the map
     map_title = paste("VCE FCS Agent Sites and",good_names[idx], year, sep= " ")
     
-    #making icon set for legend
+    
+    #icon list for sdoh map legend
     icons <- awesomeIconList(
       `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
                                      iconColor = 'ivory', markerColor = 'cadetblue'),
-      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon= "home", library= "fa",
+      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
                                              iconColor = 'ivory', markerColor = "lightblue"))
+    
     # Create leaflet map
     map1 <-leaflet(data = var.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -188,16 +191,16 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                               direction = "auto")) %>%
       addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "bottomright") %>%
       #adding fcs agent marker
-      addAwesomeMarkers(data = non_snap,
-                        lat = non_snap$Lat,
-                        lng = non_snap$Long,
+      addAwesomeMarkers(data = non_snap_agents,
+                        lat = non_snap_agents$Lat,
+                        lng = non_snap_agents$Long,
                         label = agent_labels,
-                        icon = agents_icon) %>%
+                        icon = non_snap_icon) %>%
       addAwesomeMarkers(data= snap_agents,
                         lat =snap_agents$Lat,
                         lng = snap_agents$Long,
                         label = snap_agent_labels,
-                        icon = snap_agents_icon) %>%
+                        icon = snap_icon) %>%
       addLegendAwesomeIcon(iconSet = icons,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
@@ -228,7 +231,7 @@ map1
     
     #separating snap agents
     snap_agents <- all_territories %>% filter(SNAP == 1)
-    non_snap <- all_territories %>%  filter(SNAP == 0)
+    non_snap_agents<- all_territories %>%  filter(SNAP == 0)
     new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
@@ -276,9 +279,9 @@ map1
     # create labels for agents
     agent_labels <- sprintf(
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
-      non_snap$Job.Dept,
-      non_snap$Employee.Name,
-      non_snap$VT.Email
+      non_snap_agents$Job.Dept,
+      non_snap_agents$Employee.Name,
+      non_snap_agents$VT.Email
     ) %>% lapply(htmltools::HTML)
     
     new_agent_labels <- sprintf(
@@ -291,16 +294,16 @@ map1
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
-    #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
-    #making icon set for legend
-    icons <- awesomeIconList(
+    #icon list for territory legend
+    icons_territory <- awesomeIconList(
       `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
                                      iconColor = 'ivory', markerColor = 'cadetblue'),
       `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
                                              iconColor = 'ivory', markerColor = "lightblue"),
       `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
-                                             iconColor = 'ivory', markerColor = "green"))
+                                     iconColor = 'ivory', markerColor = "green"))
+    
     #create leaflet map
     leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -316,22 +319,22 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(data = non_snap,
-                        lat = non_snap$Lat,
-                        lng = non_snap$Long,
+      addAwesomeMarkers(data = non_snap_agents,
+                        lat = non_snap_agents$Lat,
+                        lng = non_snap_agents$Long,
                         label = agent_labels,
-                        icon = agents_icon) %>%
+                        icon = non_snap_icon) %>%
       addAwesomeMarkers(data= snap_agents,
                         lat =snap_agents$Lat,
                         lng = snap_agents$Long,
                         label = snap_agent_labels,
-                        icon = snap_agents_icon) %>%
+                        icon = snap_icon) %>%
       addAwesomeMarkers(data= new_agent,
                         lat =new_agent$Lat,
                         lng = new_agent$Long,
                         label = new_agent_labels,
                         icon = new_agent_icon) %>%
-      addLegendAwesomeIcon(iconSet = icons,
+      addLegendAwesomeIcon(iconSet = icons_territory,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
                              style = 'font-size: 20px;',
@@ -353,6 +356,10 @@ map1
       st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
+    
+    #filtering data for labels and icons
+    snap_agents <- snap_territories %>% filter(SNAP == 1)
+    new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     
     #assigning colors for each agent territory
     pal <- colorFactor(palette = c("#004949" , "#fc4e2a","#FDE725FF","#21214f","#332288",
@@ -378,12 +385,23 @@ map1
       additional_agent_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
+    new_agent_labels <- sprintf(
+      "<strong>New Agent Site </strong><br/>District Office: %s",
+      additional_agent_sf$Job.Dept
+    ) %>% lapply(htmltools::HTML)
+    
     #creating good title names
     idx2 <- which(unique(snap_territories$snap_zscore_type) == zscore_type_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS/SNAP-Ed Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
-    #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+
+    #icon list for snap territory legend
+    snap_icons_territory <- awesomeIconList(
+      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
+                                             iconColor = 'ivory', markerColor = "lightblue"),
+      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
+                                     iconColor = 'ivory', markerColor = "green"))
     
     #making icon set for legend
     icons <- awesomeIconList(
@@ -407,10 +425,17 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(lat = additional_agent_sf$Lat,
-                        lng = additional_agent_sf$Long,
-                        icon = icons) %>%
-      addLegendAwesomeIcon(iconSet = icons,
+      addAwesomeMarkers(data= snap_agents,
+                        lat =snap_agents$Lat,
+                        lng = snap_agents$Long,
+                        label = snap_agent_labels,
+                        icon = snap_icon) %>%
+      addAwesomeMarkers(data= new_agent,
+                        lat =new_agent$Lat,
+                        lng = new_agent$Long,
+                        label = new_agent_labels,
+                        icon = new_agent_icon) %>%
+      addLegendAwesomeIcon(iconSet = snap_icons_territory,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
                              style = 'font-size: 20px;',
@@ -431,6 +456,10 @@ map1
       st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
+    
+    #filtering data for labels and icons
+    non_snap_agents<- fcs_territories %>% filter(new_agent == 0)
+    new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     
     #assigning colors for each agent territory
     pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
@@ -468,12 +497,25 @@ map1
       additional_agent_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
+    new_agent_labels <- sprintf(
+      "<strong>New Agent Site </strong><br/>District Office: %s",
+      additional_agent_sf$Job.Dept
+    ) %>% lapply(htmltools::HTML)
+    
     #creating good title names
     idx2 <- which(unique(fcs_territories$non_snap_zcore_type) == zscore_type_non_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
+    
+    
+    #icon list for fcs territory legends
+    non_snap_icons_territory <- awesomeIconList(
+      `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
+                                     iconColor = 'ivory', markerColor = 'cadetblue'),
+      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
+                                     iconColor = 'ivory', markerColor = "green"))
     
     #making icon set for legend
     icons <- awesomeIconList(
@@ -497,10 +539,17 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(lat = additional_agent_sf$Lat,
-                        lng = additional_agent_sf$Long,
-                        icon = icons) %>%
-      addLegendAwesomeIcon(iconSet = icons,
+      addAwesomeMarkers(data= non_snap_agents,
+                        lat =non_snap_agents$Lat,
+                        lng = non_snap_agents$Long,
+                        label = agent_labels,
+                        icon = non_snap_icon) %>%
+      addAwesomeMarkers(data= new_agent,
+                        lat =new_agent$Lat,
+                        lng = new_agent$Long,
+                        label = new_agent_labels,
+                        icon = new_agent_icon) %>%
+      addLegendAwesomeIcon(iconSet = non_snap_icons_territory,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
                              style = 'font-size: 20px;',
@@ -552,13 +601,13 @@ map1
     comparison_plot <- plot_ly() %>%
       add_trace(data = selection1, x = ~Year, y = ~Value, name = county1,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#8B2323", width = 4)) %>%
+                line = list(color = "#440154ff", width = 4)) %>%
       add_trace(data = selection2, x = ~Year, y = ~Value, name = county2,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#D02090", width = 4)) %>%
+                line = list(color = "#22A884FF", width = 4)) %>%
       add_trace(data = avg, x = ~Year, y = ~Value, name = "State Average",
                 type = "scatter", mode = "lines", 
-                line = list(color = "#3F4788FF", width = 4)) %>%
+                line = list(color = "#FDE725FF", width = 4)) %>%
       layout(title = map_title, 
              xaxis = list(tickvals= c(2016, 2017, 2018, 2019, 2020),title = 'Years'),
              yaxis = list(title = good_names[idx]),
