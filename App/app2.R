@@ -101,7 +101,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   #load in snap terr
 
   #load nonsnap terr
-  fcs_territories <- read.csv("./data/non_snap_results.csv")
+  fcs_territories <- read.csv("./data/non_snap_results1.csv")
   
  
   # read in va avg data
@@ -111,7 +111,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   #making icons for maps
   snap_agents_icon <- makeAwesomeIcon(icon = "home", library = "fa", iconColor = 'ivory', markerColor = "lightblue")
   agents_icon <- makeAwesomeIcon(icon = "user", library = "fa", iconColor = 'ivory', markerColor = 'cadetblue')
-  new_agent_icon <- makeAwesomeIcon(icon = "star", library = "fa", iconColor = 'ivory', markerColor = "green")
+  new_agent_icon <- makeAwesomeIcon(icon = "star", library = "fa", iconColor = 'ivory', markerColor = "red")
 
 # ## 1.4 Define your functions -------------------------------------------------------
 # # Function for health outcomes
@@ -300,7 +300,7 @@ map1
       `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
                                              iconColor = 'ivory', markerColor = "lightblue"),
       `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
-                                             iconColor = 'ivory', markerColor = "green"))
+                                             iconColor = 'ivory', markerColor = "red"))
     #create leaflet map
     leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -354,15 +354,21 @@ map1
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
     
+    #separating snap agents
+    snap_agents <- snap_territories %>% filter(new_agent == 0)
+    new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
+    
     #assigning colors for each agent territory
     pal <- colorFactor(palette = c("#004949" , "#fc4e2a","#FDE725FF","#21214f","#332288",
                                    
-                                   "#1f77b4", "#018571","#ffffb3","#9a5baf", "#B12A90FF"), 
+                                   "#1f77b4", "#018571","#ffffb3","#9a5baf", "#B12A90FF", 
+                                   "#ffa500","#e7298a", "#c2df23"), 
                        domain= snap_territories$Agent,
                        levels= c( "Arlington","Franklin","Lynchburg City",
                                   "Newport News City","Pittsylvania",
                                   "Roanoke","Rockbridge","Virginia Beach City",
-                                  "Washington","Northeast District Office"))
+                                  "Washington","Northeast District Office", "Madison",
+                                  "Accomack", "Mathews"))
     
     # create labels for counties
     county_labels <- sprintf(
@@ -378,6 +384,11 @@ map1
       additional_agent_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
+    new_agent_labels <- sprintf(
+      "<strong>New Agent Site </strong><br/>District Office: %s",
+      additional_agent_sf$Job.Dept
+    ) %>% lapply(htmltools::HTML)
+    
     #creating good title names
     idx2 <- which(unique(snap_territories$snap_zscore_type) == zscore_type_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
@@ -390,7 +401,7 @@ map1
       `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
                                              iconColor = 'ivory', markerColor = "lightblue"),
       `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
-                                     iconColor = 'ivory', markerColor = "green"))
+                                     iconColor = 'ivory', markerColor = "red"))
     
     # create leaflet map
     leaflet(data = territory.counties) %>%
@@ -407,9 +418,16 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(lat = additional_agent_sf$Lat,
-                        lng = additional_agent_sf$Long,
-                        icon = icons) %>%
+      addAwesomeMarkers(data= snap_agents,
+                        lat =snap_agents$Lat,
+                        lng = snap_agents$Long,
+                        label = snap_agent_labels,
+                        icon = snap_agents_icon) %>%
+      addAwesomeMarkers(data= new_agent,
+                        lat =new_agent$Lat,
+                        lng = new_agent$Long,
+                        label = new_agent_labels,
+                        icon = new_agent_icon) %>%
       addLegendAwesomeIcon(iconSet = icons,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
@@ -441,7 +459,7 @@ map1
                                    
                                    "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#b31a1c", 
                                    
-                                   "#e7298a","#FDE725FF"), 
+                                   "#e7298a","#FDE725FF", "#440154", "#f0fff0", "#3b528b", "#b31a1c" ), 
                        
                        domain= fcs_territories$Agent,
                        levels= c( "Albemarle","Amelia","Amherst", "Bedford",
@@ -450,8 +468,9 @@ map1
                                   "Loudoun","Louisa","Mecklenburg","Newport News City North",
                                   "Orange","Patrick","Petersburg City",
                                   "Pulaski","Richmond City","Rockingham",
-                                  "Spotsylvania","Virginia Beach City North","Warren"
-                                  ))
+                                  "Spotsylvania","Virginia Beach City North","Warren",
+                                  "Bland", "Smyth", "Richmond", "Accomack"
+                       ))    
     
     # create labels for counties
     county_labels <- sprintf(
@@ -480,7 +499,7 @@ map1
       `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
                                              iconColor = 'ivory', markerColor = "cadetblue"),
       `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
-                                     iconColor = 'ivory', markerColor = "green"))
+                                     iconColor = 'ivory', markerColor = "red"))
     
     # create leaflet map
     leaflet(data = territory.counties) %>%
