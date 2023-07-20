@@ -181,10 +181,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     #making icon set for legend
     icons <- awesomeIconList(
       `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
-                                     iconColor = 'ivory', markerColor = 'purple'
+                                     iconColor = 'ivory', markerColor = 'cadetblue'
       ),
-      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "apple", library = "fa",
-                                             iconColor = 'ivory', markerColor = 'blue')
+      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(text= fa("home"),
+                                             iconColor = 'ivory', markerColor = "lightblue")
     )
     # Create leaflet map
     map1 <-leaflet(data = var.counties) %>%
@@ -210,20 +210,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                            title = htmltools::tags$div(
                              style = 'font-size: 20px;',
                              'Agent Type:'),
-                           labelStyle = 'font-size: 16px;') %>% 
-      # addAwesomeMarkers(data = agents_sf, icon=awesomeIcons(icon='user', markerColor = 'blue', iconColor = 'white'),
-      #                   label = agent_labels, group = "FCS Agent",
-      #                   labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      # addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='apple', markerColor = 'orange', iconColor = 'white'),
-      #                   label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
-      #                   labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      #addLegendAwesomeIcon(iconSet = icons,
-                           # orientation = 'vertical',
-                           # marker = FALSE,
-                           # title = htmltools::tags$div(
-                           #   style = 'font-size: 20px;',
-                           #   'Awesome Icons'),
-                           # labelStyle = 'font-size: 16px;') %>% 
+                           labelStyle = 'font-size: 14px;') %>% 
       #legend for continious scale
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
       #setting default map zoom
