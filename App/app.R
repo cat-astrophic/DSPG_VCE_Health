@@ -792,7 +792,23 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               )
                                      
                             
-                                     )
+                                     ),
+                                     fluidRow(style = "margin: 12px;",
+                                              align = "justify",
+                                              column(3,
+                                                     h4(strong("Line Graph")),
+                                                     selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
+                                                     selectInput("county2", "Select County 2", choices = unique(va_avg$County2)),
+                                                     # selectInput("variable", "Select Variable", choices = c(
+                                                     #   "Low Birthweight" = "per_low_birthweight",
+                                                     #   "Life Expectancy" = "life_expectancy",
+                                                     #   "Life Expectancy Gap" = "life_expectancy_gap",
+                                                     #   "Life Expectancy Black" = "life_expectancy_black",
+                                                     #   "Life Expectancy White" = "life_expectancy_white"))
+                                              ),
+                                              column(9,
+                                                     plotlyOutput("comparison_plot_econ", height = "500px")
+                                              )),
                             ),
                             ### 2.2.4 Subatb Health Behaviors-------
                             tabPanel("Health Behaviors", 
@@ -1443,6 +1459,7 @@ server <- function(input, output) {
   temp_econ <- reactive({
     input$econ_stab
   })
+  
   temp_econyear <- reactive({
     as.integer(input$yearSelect_econ)
   })
@@ -1450,6 +1467,32 @@ server <- function(input, output) {
   output$econstability <- renderLeaflet({
     mapping2(temp_econ(), temp_econyear())
   })
+  
+  comparison_plot_econ_reactive <- reactive({
+    county1 <- input$county1
+    county2 <- input$county2
+    
+    if (temp_econ() == "per_unemployed") {
+     comparison_plot_econ <- sdoh_line(va_avg, county1, county2, temp_econ())
+      return(comparison_plot)
+    } else if (temp_econ() == "per_children_in_poverty"){
+     comparison_plot_econ <- sdoh_line(va_avg, county1, county2, temp_econ())
+      return(comparison_plot)
+    } else if (temp_econ() == "per_food_insecure"){
+     comparison_plot_econ <- sdoh_line(va_avg, county1, county2, temp_econ())
+      return(comparison_plot)
+    } else if (temp_econ() == "median_household_income"){
+     comparison_plot_econ <- sdoh_line(va_avg, county1, county2, temp_econ())
+      return(comparison_plot)
+    } else {
+      return(NULL)
+    }
+  })
+  
+  output$comparison_plot_econ <- renderPlotly({
+    comparison_plot_econ_reactive()
+  })
+  
   output$EconomicStabilityVariableDefinition <- renderText({
     if (input$econ_stab == "per_unemployed") {
       "Unemployment rate: The unemployment rate reflects the economic and social conditions influencing an individual’s well-being. Employment provides economic stability. Unemployment, on the other hand, is a stressor that could worsen one’s health. It not only limits people’s access to quality healthcare but also is a burden on mental health as people tend to feel more depressed without a job."
