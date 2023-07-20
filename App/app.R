@@ -66,7 +66,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                              NAME = str_to_title(NAME))
     
   # Load and preprocess the health rankings data
-  all_var_df <- read.csv("./data/final_variables.csv") %>%
+  all_var_df <- read.csv("./data/final_variables_16_20.csv") %>%
     transform(GEOID = as.integer(FIPS),
               Value = as.numeric(Value))
   
@@ -87,24 +87,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                      "Juvenile Arrests Rate","Percent With Access to Exercise Opportunities","Percent Insufficient Sleep",
                      "Percent Limited Access to Healthy Foods","Percent Mental Distress","Percent Physical Distress",
                      "Percent Severe Housing Problems","Suicide Rate")
- 
-  # good_names2 <- c(  "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian",
-  #                    "Percent Black","Percent Hispanic","Percent less than 18 years of age",
-  #                    "Percent Nonhispanic-White","Percent not Proficient in English","Gender Pay Gap",
-  #                    "Median Household Income","Median Household Income Black","Median Household Income Gap White Black",
-  #                    "Median Household Income Gap White Hispanic","Median Household Income Hispanic",
-  #                    "Median Household Income White","Percent Children in Poverty","Percent Food Insecure",
-  #                    "Percent Unemployed","Percent of Adults Reporting Currently Smoking","Percent of Adults With Obesity",
-  #                    "Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking","Percent Physically Inactive",
-  #                    "Teen Birth Rate","Life Expectancy","Life Expectancy Black","Life Expectancy Gap",
-  #                    "Life Expectancy White","Percent Low Birthweight","Chlamydia Rate","Dentist Ratio",
-  #                    "Drug Mortality Rate","HIV Prevalence Rate","Mental Health Provider Ratio",
-  #                    "Other Primary Care Provider Ratio","Percent of Adults with Diabetes","Percent Uninsured",
-  #                    "Percent of Uninsured Adults","Percent Uninsured Children","Percent Vaccinated",
-  #                    "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
-  #                    "Juvenile Arrests Rate","Percent With Access to Exercise Opportunities","Percent Insufficient Sleep",
-  #                    "Percent Limited Access to Healthy Foods","Percent Mental Distress","Percent Physical Distress",
-  #                    "Percent Severe Housing Problems","Suicide Rate")
+  
   # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
   # snap territory data
@@ -125,7 +108,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   va_avg <- read.csv("./data/with_state_avg.csv") %>% 
     filter(!(Year %in% c(2021, 2022)))
   
-
+  #making icons for maps
+  snap_agents_icon <- makeAwesomeIcon(icon = "home", library = "fa", iconColor = 'ivory', markerColor = "lightblue")
+  agents_icon <- makeAwesomeIcon(icon = "user", library = "fa", iconColor = 'ivory', markerColor = 'cadetblue')
+  new_agent_icon <- makeAwesomeIcon(icon = "star", library = "fa", iconColor = 'ivory', markerColor = "green")
 
 # ## 1.4 Define your functions -------------------------------------------------------
 # # Function for health outcomes
@@ -139,6 +125,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     #separating snap agents
     snap_agents <- agents_sf %>% filter(SNAP == 1)
+    non_snap <- agents_sf %>%  filter(SNAP == 0)
     # Identify the index of the selected variable
     idx <- which(unique(all_var_df$Variable) == variable)
     
@@ -181,11 +168,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     #making icon set for legend
     icons <- awesomeIconList(
       `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
-                                     iconColor = 'ivory', markerColor = 'cadetblue'
-      ),
-      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(text= fa("home"),
-                                             iconColor = 'ivory', markerColor = "lightblue")
-    )
+                                     iconColor = 'ivory', markerColor = 'cadetblue'),
+      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon= "home", library= "fa",
+                                             iconColor = 'ivory', markerColor = "lightblue"))
     # Create leaflet map
     map1 <-leaflet(data = var.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -202,9 +187,17 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                               textsize = "15px",
                                               direction = "auto")) %>%
       addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "bottomright") %>%
-      addAwesomeMarkers(lat = additional_agent_sf$Lat,
-                        lng = additional_agent_sf$Long,
-                        icon = icons) %>%
+      #adding fcs agent marker
+      addAwesomeMarkers(data = non_snap,
+                        lat = non_snap$Lat,
+                        lng = non_snap$Long,
+                        label = agent_labels,
+                        icon = agents_icon) %>%
+      addAwesomeMarkers(data= snap_agents,
+                        lat =snap_agents$Lat,
+                        lng = snap_agents$Long,
+                        label = snap_agent_labels,
+                        icon = snap_agents_icon) %>%
       addLegendAwesomeIcon(iconSet = icons,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
@@ -234,7 +227,9 @@ map1
     st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     
     #separating snap agents
-    snap_agents <- agents_sf %>% filter(SNAP == 1)
+    snap_agents <- all_territories %>% filter(SNAP == 1)
+    non_snap <- all_territories %>%  filter(SNAP == 0)
+    new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
   
@@ -281,9 +276,14 @@ map1
     # create labels for agents
     agent_labels <- sprintf(
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
-      additional_agent_sf$Job.Dept,
-      additional_agent_sf$Employee.Name,
-      additional_agent_sf$VT.Email
+      non_snap$Job.Dept,
+      non_snap$Employee.Name,
+      non_snap$VT.Email
+    ) %>% lapply(htmltools::HTML)
+    
+    new_agent_labels <- sprintf(
+      "<strong>New Agent Site </strong><br/>District Office: %s",
+      additional_agent_sf$Job.Dept
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
@@ -293,10 +293,15 @@ map1
     territory_title = paste("Optimized VCE FCS Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
-    #differentiate colors of agents by the new_agent variable
-    additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "blue", "red")
-    
-    # create leaflet map
+    #making icon set for legend
+    icons <- awesomeIconList(
+      `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
+                                     iconColor = 'ivory', markerColor = 'cadetblue'),
+      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
+                                             iconColor = 'ivory', markerColor = "lightblue"),
+      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
+                                             iconColor = 'ivory', markerColor = "green"))
+    #create leaflet map
     leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addPolygons(fillColor = ~pal(Agent),
@@ -311,17 +316,29 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(data = additional_agent_sf, 
-                        icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
+      addAwesomeMarkers(data = non_snap,
+                        lat = non_snap$Lat,
+                        lng = non_snap$Long,
                         label = agent_labels,
-                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
-      addAwesomeMarkers(data = snap_agents, icon=awesomeIcons(icon='cloud', markerColor = 'orange', iconColor = 'white'),
-                        label = snap_agent_labels, group = "FCS/SNAP-Ed Agent",
-                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+                        icon = agents_icon) %>%
+      addAwesomeMarkers(data= snap_agents,
+                        lat =snap_agents$Lat,
+                        lng = snap_agents$Long,
+                        label = snap_agent_labels,
+                        icon = snap_agents_icon) %>%
+      addAwesomeMarkers(data= new_agent,
+                        lat =new_agent$Lat,
+                        lng = new_agent$Long,
+                        label = new_agent_labels,
+                        icon = new_agent_icon) %>%
+      addLegendAwesomeIcon(iconSet = icons,
+                           orientation = 'vertical',
+                           title = htmltools::tags$div(
+                             style = 'font-size: 20px;',
+                             'Agent Type:'),
+                           labelStyle = 'font-size: 14px;') %>% 
       setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
-      addLegend(colors = c("orange", "blue", "red"), labels = c("Existing FCS/SNAP-Ed Agent","Existing FCS Agent", "New FCS Agent" ), 
-              position = "topright", title= "Agent Type/Service:")
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
 
   # snap territory function
@@ -368,8 +385,12 @@ map1
     territory_title = paste("Optimized VCE FCS/SNAP-Ed Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
-    #differentiate colors of agents by the new_agent variable
-    additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "orange", "red")
+    #making icon set for legend
+    icons <- awesomeIconList(
+      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
+                                             iconColor = 'ivory', markerColor = "lightblue"),
+      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
+                                     iconColor = 'ivory', markerColor = "green"))
     
     # create leaflet map
     leaflet(data = territory.counties) %>%
@@ -386,14 +407,17 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(data = additional_agent_sf, 
-                        icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
-                        label = snap_agent_labels,
-                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addAwesomeMarkers(lat = additional_agent_sf$Lat,
+                        lng = additional_agent_sf$Long,
+                        icon = icons) %>%
+      addLegendAwesomeIcon(iconSet = icons,
+                           orientation = 'vertical',
+                           title = htmltools::tags$div(
+                             style = 'font-size: 20px;',
+                             'Agent Type:'),
+                           labelStyle = 'font-size: 14px;') %>% 
       setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
-      addLegend(colors = c("orange", "red"), labels = c("Existing FCS/SNAP-Ed Agent", "New FCS Agent" ), 
-                position = "topright", title= "Agent Type:")
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
   # ONLY fcs territory function
   fcs_territory <- function(territory_type_non_snaped, zscore_type_non_snaped) {
@@ -451,8 +475,12 @@ map1
     territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
-    #differentiate colors of agents by the new_agent variable
-    additional_agent_sf$markerColor <- ifelse(temp2$new_agent == 0, "blue", "red")
+    #making icon set for legend
+    icons <- awesomeIconList(
+      `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
+                                             iconColor = 'ivory', markerColor = "cadetblue"),
+      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
+                                     iconColor = 'ivory', markerColor = "green"))
     
     # create leaflet map
     leaflet(data = territory.counties) %>%
@@ -469,14 +497,17 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(data = additional_agent_sf, 
-                        icon=awesomeIcons(icon='cloud', markerColor = additional_agent_sf$markerColor, iconColor = 'white'),
-                        label = agent_labels,
-                        labelOptions = labelOptions(noHide = FALSE, direction = "auto", offset=c(0,-10))) %>%
+      addAwesomeMarkers(lat = additional_agent_sf$Lat,
+                        lng = additional_agent_sf$Long,
+                        icon = icons) %>%
+      addLegendAwesomeIcon(iconSet = icons,
+                           orientation = 'vertical',
+                           title = htmltools::tags$div(
+                             style = 'font-size: 20px;',
+                             'Agent Type:'),
+                           labelStyle = 'font-size: 14px;') %>% 
       setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL) %>% 
-      addLegend(colors = c( "blue", "red"), labels = c("Existing FCS Agent", "New FCS Agent" ), 
-                position = "topright", title= "Agent Type/Service:")
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
   #LINE GRAPH FUNCTION
   sdoh_line <- function(va_avg,county1, county2, variable) {
