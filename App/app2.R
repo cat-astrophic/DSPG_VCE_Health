@@ -413,7 +413,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # ONLY fcs territory function
   fcs_territory <- function(territory_type_non_snaped, zscore_type_non_snaped) {
     
-    temp2 <- fcs_territories[fcs_territories$non_snap_territory_type == territory_type_non_snaped & fcs_territories$non_snap_zcore_type == zscore_type_non_snaped, ]
+    temp2 <- fcs_territories[fcs_territories$non_snap_territory_type == territory_type_non_snaped & fcs_territories$non_snap_zscore_type == zscore_type_non_snaped, ]
     
     #convert new agent locations to sf
     additional_agent_sf <- temp2 %>% 
@@ -513,10 +513,23 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
   #LINE GRAPH FUNCTION
-  sdoh_line <- function(va_avg,county1, county2, variable) {
+  sdoh_line <- function(county1, county2, county4, variable) {
     
-    
-    va_avg <- read.csv("./data/with_state_avg.csv") %>% 
+    good_names <- c(   "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian","Percent Black",
+                       "Percent Hispanic","Percent less than 18 years of age","Percent Nonhispanic-White","Percent not Proficient in English",
+                       "Gender Pay Gap","Median Household Income","Median Household Income Black","Median Household Income Gap White Black",
+                       "Median Household Income Gap White Hispanic","Median Household Income Hispanic","Median Household Income White",
+                       "Percent Children in Poverty","Percent Food Insecure","Percent Unemployed","Percent of Adults Reporting Currently Smoking",
+                       "Percent of Adults With Obesity","Percent Driving Deaths with Alcohol Involvement","Percent Excessive Drinking",
+                       "Percent Physically Inactive","Teen Birth Rate","Life Expectancy","Life Expectancy Black","Life Expectancy Gap",
+                       "Life Expectancy White","Percent Low Birthweight","Chlamydia Rate","Dentist Ratio","Drug Mortality Rate",
+                       "HIV Prevalence Rate","Mental Health Provider Ratio","Other Primary Care Provider Ratio","Percent of Adults with Diabetes",
+                       "Percent Uninsured","Percent of Uninsured Adults","Percent Uninsured Children","Percent Vaccinated",
+                       "Percent With Annual Mammogram","Preventable Hospitalization Rate","Primary Care Physicians Ratio",
+                       "Juvenile Arrests Rate","Percent With Access to Exercise Opportunities","Percent Insufficient Sleep",
+                       "Percent Limited Access to Healthy Foods","Percent Mental Distress","Percent Physical Distress",
+                       "Percent Severe Housing Problems","Suicide Rate")
+    va_avg <- read.csv("./data/with_state_avg.csv") %>%
       filter(!(Year %in% c(2021, 2022)))
    
     # Filter data for the first selected county and variable
@@ -526,13 +539,19 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # Filter data for the second selected county and variable
     selection2 <- va_avg[va_avg$County2 == county2 & va_avg$Variable == variable, ]%>% 
       na.omit(cols= Value)
+
+    # selection3 <- va_avg[va_avg$County2 == county3 & va_avg$Variable == variable, ]%>%
+    #   na.omit(cols= Value)
     
+    selection4 <- va_avg[va_avg$County2 == county4 & va_avg$Variable == variable, ]%>% 
+      na.omit(cols= Value)
+
     # filter va avg data for selected variable
     avg <- va_avg[va_avg$County2 == "Virginia" & va_avg$Variable == variable, ] %>% 
       na.omit(cols= Value)
     
     # Identify the index of the selected variable
-    idx <- which(unique(all_var_df$Variable) == variable)
+    idx <- which(unique(va_avg$Variable) == variable)
     
     # Wrap legend title if too long
     spaces <- gregexpr("\\s", good_names[idx])[[1]]
@@ -550,6 +569,12 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       add_trace(data = selection2, x = ~Year, y = ~Value, name = county2,
                 type = "scatter", mode = "lines", 
                 line = list(color = "#D02090", width = 4)) %>%
+      # add_trace(data = selection3, x = ~Year, y = ~Value, name = county3,
+      #           type = "scatter", mode = "lines",
+      #           line = list(color = "#7FFF00", width = 4)) %>%
+      add_trace(data = selection4, x = ~Year, y = ~Value, name = county4,
+                type = "scatter", mode = "lines", 
+                line = list(color = "#D00", width = 4)) %>%
       add_trace(data = avg, x = ~Year, y = ~Value, name = "State Average",
                 type = "scatter", mode = "lines", 
                 line = list(color = "#3F4788FF", width = 4)) %>%
@@ -664,11 +689,12 @@ ui <- navbarPage(#title = "DSPG 2023",
                  
                          
 
-                            ### 2.2.1 Subtab Health Outcomes--------------------------------------
                            tabPanel("Dashboard",
                                     h1(strong("Health Variables"), align = "center"),
                                     p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Sciences) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
                                     tabsetPanel(
+                                      
+                                      # 2.2.1 demographics -----
                                       tabPanel("Demographics", 
                                                fluidRow(style = "margin: 20px;",
                                                         h1(strong("Demographics"), align = "left", style = "font-size: 18px;"),
@@ -707,6 +733,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                selectInput("county11", "Select County 1", choices = unique(va_avg$County2)),
                                                                selectInput("county12", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                                
+                                                               selectInput("county_1", "Select County 3", choices = unique(va_avg$County2), selected = "Richmond City"),
+                                                               
+                                                               
                                                         ),
                                                         column(9,
                                                                plotlyOutput("comparison_plot_demo", height = "500px")
@@ -714,6 +743,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                
                                                
                                       ),
+                                      
+                                      #2.2.2 health outcomes----
                                       
                                       tabPanel("Health Outcomes", 
                                                fluidRow(style = "margin: 20px;",
@@ -743,6 +774,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                h4(strong("Line Graph")),
                                                                selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
                                                                selectInput("county2", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
+                                                               selectInput("County14", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
                                                                
                                                         ),
                                                         column(9,
@@ -796,7 +828,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      h4(strong("Line Graph")),
                                                      selectInput("county3", "Select County 1", choices = unique(va_avg$County2)),
                                                      selectInput("county4", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                     
+                                                     selectInput("County15", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
                                               ),
                                               column(9,
                                                      plotlyOutput("comparison_plot_access", height = "500px")
@@ -852,7 +884,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      h4(strong("Line Graph")),
                                                      selectInput("county5", "Select County 1", choices = unique(va_avg$County2)),
                                                      selectInput("county6", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                     
+                                                     selectInput("County16", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
                                               ),
                                               column(9,
                                                      plotlyOutput("comparison_plot_econ", height = "500px")
@@ -894,7 +926,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      h4(strong("Line Graph")),
                                                      selectInput("county7", "Select County 1", choices = unique(va_avg$County2)),
                                                      selectInput("county8", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                     
+                                                     selectInput("County17", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
                                               ),
                                               column(9,
                                                      plotlyOutput("comparison_plot_behavior", height = "500px")
@@ -939,14 +971,14 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                  h4(strong("Line Graph")),
                                                  selectInput("county9", "Select County 1", choices = unique(va_avg$County2)),
                                                  selectInput("county10", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                 
+                                                 selectInput("County18", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
                                           ),
                                           column(9,
                                                  plotlyOutput("comparison_plot_envr", height = "500px")
                                           )),
                             ),
                             
-                            ### 2.2.6 Subtab Demographics-----
+                           
 
                  ),
                  ),
@@ -1300,21 +1332,22 @@ server <- function(input, output) {
   comparison_plot_reactive <- reactive({
     county1 <- input$county1
     county2 <- input$county2
+    county14 <- input$county14
     
     if (temp_outcome() == "per_low_birthweight") {
-      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
       return(comparison_plot)
     } else if (temp_outcome() == "life_expectancy"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
       return(comparison_plot)
     } else if (temp_outcome() == "life_expectancy_gap"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
       return(comparison_plot)
     } else if (temp_outcome() == "life_expectancy_black"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
       return(comparison_plot)
     } else if (temp_outcome() == "life_expectancy_white"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, temp_outcome())
+      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
       return(comparison_plot)
     } else {
     return(NULL)
@@ -1327,10 +1360,12 @@ server <- function(input, output) {
   
   output$VariableDefinition <- renderText({
     if (input$Health_Outcomes == "per_low_birthweight") {
-      "% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.
+      "% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).
+      Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.
       Preterm births, which occur before 37 weeks of gestation, contribute to low birthweight. Given the far-reaching consequences of low birthweight, it is crucial to address the underlying factors contributing to it. This involves efforts to improve access to quality prenatal care, promote proper nutrition, address maternal stress, reduce exposure to pollution, and provide support for substance misuse prevention and treatment during pregnancy. By addressing these factors, we can work towards reducing the occurrence of low birthweight and improving the long-term health outcomes for infants and their families."
     } else if (input$Health_Outcomes == "life_expectancy") {
-      "Life Expectancy: Average number of years a person can expect to live. 
+      "Life Expectancy:  
+      Average number of years a person can expect to live. 
       Life expectancy is a vital metric for assessing health outcomes as it provides valuable insights into the well-being of a population and the factors influencing lifespan. This measure not only informs us about the overall state of the population's health but also sheds light on the various determinants that can impact longevity. By analyzing life expectancy, we gain a comprehensive understanding of both the health status of a community and the underlying elements that shape the length of an individual's life.
       In 2020, the life expectancy at birth for the total population of Virginia was 78.3 years, as reported by the Virginia Department of Health (VDH). 
       However, this figure marked a decrease of 1.4 years compared to the previous year. The decline in life expectancy can be attributed to several factors, including the significant impact of the COVID-19 pandemic, which accounted for a large number of deaths. Additionally, unintentional injuries, heart disease, chronic liver disease and cirrhosis, diabetes, and Alzheimer's disease were significant contributors to the decrease in life expectancy. These causes reflect the complex nature of health outcomes and highlight the need for comprehensive efforts to address these factors and improve population health."
@@ -1365,36 +1400,37 @@ server <- function(input, output) {
   comparison_plot_access_reactive <- reactive({
     county3 <- input$county3
     county4 <- input$county4
+    county15 <- input$county15
     
     if (temp_healthaccess() == "per_uninsured") {
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else if (temp_healthaccess() == "dentist_ratio"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot)
     } else if (temp_healthaccess() == "mental_health_provider_ratio"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot)
     } else if (temp_healthaccess() == "primary_care_physicians_ratio"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else if (temp_healthaccess() == "per_vaccinated"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else if (temp_healthaccess() == "per_with_annual_mammogram"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else if (temp_healthaccess() == "preventable_hospitalization_rate"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else if (temp_healthaccess() == "per_uninsured_children"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else if (temp_healthaccess() == "per_adults_with_diabetes"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else if (temp_healthaccess() == "chlamydia_rate"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, temp_healthaccess())
+      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
       return(comparison_plot_access)
     } else {
       return(NULL)
@@ -1496,27 +1532,28 @@ server <- function(input, output) {
   comparison_plot_econ_reactive <- reactive({
     county5 <- input$county5
     county6 <- input$county6
+    county16 <- input$county16
     
     if (temp_econ() == "per_unemployed") {
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, temp_econ())
+     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
       return(comparison_plot_econ)
     } else if (temp_econ() == "per_children_in_poverty"){
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, temp_econ())
+     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
       return(comparison_plot_econ)
     } else if (temp_econ() == "per_food_insecure"){
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, temp_econ())
+     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
       return(comparison_plot_econ)
     } else if (temp_econ() == "median_household_income"){
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, temp_econ())
+     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
       return(comparison_plot_econ)
     } else if (temp_econ() == "median_household_income_black"){
-      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, temp_econ())
+      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
       return(comparison_plot_econ)
     } else if (temp_econ() == "median_household_income_white"){
-      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, temp_econ())
+      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
       return(comparison_plot_econ)
     } else if (temp_econ() == "median_household_income_hispanic"){
-      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, temp_econ())
+      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
       return(comparison_plot_econ)
     } else {
       return(NULL)
@@ -1565,24 +1602,25 @@ server <- function(input, output) {
   comparison_plot_behavior_reactive <- reactive({
     county7 <- input$county7
     county8 <- input$county8
+    county17 <- input$county17
     
     if (temp_healthbehaviors() == "per_adults_reporting_currently_smoking") {
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
       return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_excessive_drinking"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
       return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_driving_deaths_with_alcohol_involvement"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
       return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_physically_inactive"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
       return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "per_adults_with_obesity"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
       return(comparison_plot_behavior)
     } else if (temp_healthbehaviors() == "teen_birth_rate"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, temp_healthbehaviors())
+      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
       return(comparison_plot_behavior)
     } else {
       return(NULL)
@@ -1645,27 +1683,28 @@ server <- function(input, output) {
   comparison_plot_envr_reactive <- reactive({
     county9 <- input$county9
     county10 <- input$county10
+    county18 <- input$county18
     
     if (temp_envr() == "per_physical_distress") {
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, temp_envr())
+      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
       return(comparison_plot_envr)
     } else if (temp_envr() == "per_mental_distress"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, temp_envr())
+      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
       return(comparison_plot_envr)
     } else if (temp_envr() == "per_with_access_to_exercise_opportunities"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, temp_envr())
+      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
       return(comparison_plot_envr)
     } else if (temp_envr() == "suicide_rate"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, temp_envr())
+      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
       return(comparison_plot_envr)
     } else if (temp_envr() == "juvenile_arrests_rate"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, temp_envr())
+      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
       return(comparison_plot_envr)
     } else if (temp_envr() == "per_insufficient_sleep"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, temp_envr())
+      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
       return(comparison_plot_envr)
     } else if (temp_envr() == "per_severe_housing_problem"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, temp_envr())
+      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
       return(comparison_plot_envr)
     } else {
       return(NULL)
@@ -1714,43 +1753,23 @@ server <- function(input, output) {
   })
   
   output$demographicsvar <- renderLeaflet({
-    mapping2( temp_demo(), temp_demoyear())
+    mapping2(temp_demo(), temp_demoyear())
   })
-  comparison_plot_demo_reactive <- reactive({
-    county11 <- input$county11
-    county12 <- input$county12
-    
-    if (temp_demo() == "per_less_than_18_years_of_age") {
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else if (temp_demo() == "per_65_and_over"){
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else if (temp_demo() == "per_hispanic"){
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else if (temp_demo() == "per_asian"){
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else if (temp_demo() == "per_nonhispanic_white"){
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else if (temp_demo() == "per_american_indian_or_alaska_native"){
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else if (temp_demo() == "per_black"){
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else if (temp_demo() == "per_not_proficient_in_english"){
-      comparison_plot_demo <- sdoh_line(va_avg, county11, county12, temp_demo())
-      return(comparison_plot_demo)
-    } else {
-      return(NULL)
-    }
+  
+  county11 <- reactive({
+    input$county11
+  })
+  
+  county12 <- reactive({
+    input$county12
+  })
+  
+  county_1 <- reactive({
+    input$county_1
   })
   
   output$comparison_plot_demo <- renderPlotly({
-    comparison_plot_demo_reactive()
+    sdoh_line(county11(), county12(), county_1(), temp_demo())
   })
   output$DemographicsDefinition <- renderText({
     if (input$demographics == "per_less_than_18_years_of_age") {
