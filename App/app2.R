@@ -499,6 +499,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       #                   lng = non_snap$Long,
       #                   label = agent_labels,
       #                   icon = agents_icon) %>%
+      
       addAwesomeMarkers(data= new_agent,
                         lat =new_agent$Lat,
                         icon = new_agent_icon) %>%
