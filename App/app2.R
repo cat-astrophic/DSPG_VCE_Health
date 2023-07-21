@@ -610,19 +610,22 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    align = "justify",
                                    column(6,
                                           h2(strong("Project Background"), align = "center"),
-                                          p(strong("Problem:"), "Virginia Cooperative Extension Family (VCE), Consumer Sciences (FCS), and Supplemental Nutrition Assistance Program-Education (SNAP-Ed) agents are essential contributors to the well-being of Virginian individuals, families, and communities. Their commitment to knowledge and resources greatly benefits communities throughout Virginia. However, these dedicated professionals are overextended, which hinders them from delivering their services and educational programs across the entire Commonwealth."),
-                                          p(strong("Virginia Coorperative Extensions:"), "Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has"),
+                                          p(strong("Problem:"), 
+                                          p("Virginia Cooperative Extension Family (VCE), Consumer Sciences (FCS), and Supplemental Nutrition Assistance Program-Education (SNAP-Ed) agents are essential contributors to the well-being of Virginian individuals, families, and communities. Their commitment to knowledge and resources greatly benefits communities throughout Virginia. However, these dedicated professionals are overextended, which hinders them from delivering their services and educational programs across the entire Commonwealth."),
+                                          p(strong("Virginia Coorperative Extensions:"), 
+                                            p("Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has"),
                                           tags$li("107 offices"),
                                           tags$li("11 Agriculture Research Extension centers"), 
                                           tags$li("6 4-H centers throughout the state"),
-                                          br(),
+                                      
                                           p("VCE agents and volunteers strive to empower youth and Virginian farmers, guide sustainable resource management, and promote public health. VCE accomplishes these goals through programs that put research-based knowledge to work in people’s lives. VCE has a variety of programs like 4-H Youth Development, Family and Consumer Sciences, Community Viability, Agriculture and Natural Resources, Food, Nutrition, and Health, etc. in every county. VCE works on unique challenges Virginians face in partnership with governments and organizations to solve these issues in a way that benefits all people. With the expertise and knowledge from Virginia Tech and Virginia State University, VCE agents are able to tackle issues and foster community growth across the state. "),
                   
                                           p(strong("Family Consumer Sciences:"),
-                                            "This project focuses on VCE's Family and Consumer Sciences Program and the agents supporting it. FCS programming addresses community needs, including Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents collaborate with various organizations to meet local residents' educational needs and make research-based knowledge applicable to their lives. "),
-                                          p(strong("Supplemental Nutrition Assistance Program-Education: "),"We will also be focusing on SNAP-Ed agents. SNAP-Ed is a federally funded program that operates through partnerships with state and local organizations, including Cooperative Extension offices in Virginia.
-                                            Their primary goal is to promote healthy eating habits, improve food choices, and enhance food security among SNAP recipients.")
-                                   ),
+                                          p("This project focuses on VCE's Family and Consumer Sciences Program and the agents supporting it. FCS programming addresses community needs, including Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents collaborate with various organizations to meet local residents' educational needs and make research-based knowledge applicable to their lives. "),
+                                          p(strong("Supplemental Nutrition Assistance Program-Education: "),
+                                            p("We will also be focusing on SNAP-Ed agents. SNAP-Ed is a federally funded program that operates through partnerships with state and local organizations, including Cooperative Extension offices in Virginia.
+                                            Their primary goal is to promote healthy eating habits, improve food choices, and enhance food security among SNAP recipients."),
+                                   ))))),
                                    column(6,
                                           h2(strong("Our Work"), align = "center"),
                                           p(strong("Purpose:")),
@@ -690,7 +693,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
                            tabPanel("Dashboard",
                                     h1(strong("Health Variables"), align = "center"),
-                                    p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
+                                    p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Sciences) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
                                     tabsetPanel(
                                       tabPanel("Demographics", 
                                                fluidRow(style = "margin: 20px;",
