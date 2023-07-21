@@ -1189,7 +1189,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                    The CHR&R program provides data, evidence, guidance, and examples to build awareness of the multiple factors that influence health and support leaders in growing community power to improve health equity. This project utilizes CHR&R
                                                     to obtain 2016/2020 county-level data to explore and visualize the Commonwealth's health characteristics.")),
                                             column(4,
-                                                   img(src = "vce.jpg", style = "display: inline; float: left;", width = "230px"),
+                                                   img(src = "vce_logo.jpg", style = "display: inline; float: left;", width = "200px"),
                                                    p(strong("Virginia Cooperative Extension Administrative Data"), "Virginia Cooperative Extension (VCE) provided us with office and agent data which allowed us to gain a better understanding of where Family Consumer Science
                                                      agents operate. The team used this data to create visualizations, specifically focusing on the distribution of optimized agent territories across localities.")),
                                             column(4,
