@@ -96,9 +96,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
   additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
-  
-  
-  #load in snap terr
 
   #load nonsnap terr
   fcs_territories <- read.csv("./data/non_snap_results1.csv")
@@ -355,7 +352,7 @@ map1
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
     
     #separating snap agents
-    snap_agents <- snap_territories %>% filter(new_agent == 0)
+    snap_agents <- additional_agent_sf%>% filter(new_agent == 0)
     new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     
     #assigning colors for each agent territory
@@ -450,6 +447,8 @@ map1
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
     
+    non_snap <- additional_agent_sf %>% filter(new_agent == 0)
+    new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     #assigning colors for each agent territory
     pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
                                    
@@ -479,12 +478,18 @@ map1
       territory.counties$Agent
     ) %>% lapply(htmltools::HTML)
 
+    
     # create labels for agents
     agent_labels <- sprintf(
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
       additional_agent_sf$Job.Dept,
       additional_agent_sf$Employee.Name,
       additional_agent_sf$VT.Email
+    ) %>% lapply(htmltools::HTML)
+    
+    new_agent_labels <- sprintf(
+      "<strong>New Agent Site </strong><br/>District Office: %s",
+      additional_agent_sf$Job.Dept
     ) %>% lapply(htmltools::HTML)
     
     #creating good title names
@@ -516,9 +521,14 @@ map1
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addAwesomeMarkers(lat = additional_agent_sf$Lat,
-                        lng = additional_agent_sf$Long,
-                        icon = icons) %>%
+      # addAwesomeMarkers(data = non_snap,
+      #                   lat = non_snap$Lat,
+      #                   lng = non_snap$Long,
+      #                   label = agent_labels,
+      #                   icon = agents_icon) %>%
+      addAwesomeMarkers(data= new_agent,
+                        lat =new_agent$Lat,
+                        icon = new_agent_icon) %>%
       addLegendAwesomeIcon(iconSet = icons,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
