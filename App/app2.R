@@ -146,6 +146,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       agents_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
     
+    snap_agent_labels <- sprintf(
+      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-Ed Service Provided At: %s",
+      snap_agents$Job.Dept,
+      snap_agents$Employee.Name,
+      snap_agents$VT.Email,
+      snap_agents$SNAP.Ed
+    ) %>% lapply(htmltools::HTML)
+    
     # Wrap legend title if too long
     spaces <- gregexpr("\\s", good_names[idx])[[1]]
     middle_space <- spaces[length(spaces) %/% 2 + 1]
@@ -181,14 +189,29 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       #map title
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL) %>% 
       #adding fcs agent marker
+      addAwesomeMarkers(data = non_snap,
+                        lat = non_snap$Lat,
+                        lng = non_snap$Long,
+                        label = agent_labels,
+                        icon = agents_icon) %>%
+      addAwesomeMarkers(data= snap_agents,
+                        lat =snap_agents$Lat,
+                        lng = snap_agents$Long,
+                        label = snap_agent_labels,
+                        icon = snap_agents_icon) %>%
       addAwesomeMarkers(data= agents_sf, lat= agents_sf$Lat, lng= agents_sf$Long, icon = icons, group= groups, label= agent_labels) %>% 
       addLayersControl(                                                                                                           
         overlayGroups = groups,
         options = layersControlOptions(collapsed = FALSE),
         position= "topleft") %>% 
+            htmlwidgets::onRender("
+        function() {
+            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:left\">Agent Type</label>');
+        }
+    ") %>% 
       #legend for continious scale
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "topright") %>%
-      addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "topright") %>% 
+      #addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "topright") %>% 
       #setting default map zoom
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 6.8)
 }
@@ -205,8 +228,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     
     #separating snap agents
-    snap_agents <- all_territories %>% filter(SNAP == 1)
-    non_snap <- all_territories %>%  filter(SNAP == 0)
+    snap_agents <- additional_agent_sf %>% filter(SNAP == 1)
+    non_snap <- additional_agent_sf %>%  filter(SNAP == 0)
     new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
@@ -494,26 +517,30 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      # addAwesomeMarkers(data = non_snap,
-      #                   lat = non_snap$Lat,
-      #                   lng = non_snap$Long,
-      #                   label = agent_labels,
-      #                   icon = agents_icon) %>%
-      
+      addAwesomeMarkers(data = non_snap,
+                        lat = non_snap$Lat,
+                        lng = non_snap$Long,
+                        label = agent_labels,
+                        icon = agents_icon) %>%
+
       addAwesomeMarkers(data= new_agent,
                         lat =new_agent$Lat,
+                        lng = new_agent$Long,
+                        label = new_agent_labels,
                         icon = new_agent_icon) %>%
       addLegendAwesomeIcon(iconSet = icons,
                            orientation = 'vertical',
                            title = htmltools::tags$div(
                              style = 'font-size: 20px;',
                              'Agent Type:'),
-                           labelStyle = 'font-size: 14px;') %>% 
+                           labelStyle = 'font-size: 14px;') %>%
       setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
   #LINE GRAPH FUNCTION
+
   sdoh_line <- function(county1, county2, county4, variable) {
+
     
     good_names <- c(   "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian","Percent Black",
                        "Percent Hispanic","Percent less than 18 years of age","Percent Nonhispanic-White","Percent not Proficient in English",
@@ -543,8 +570,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # selection3 <- va_avg[va_avg$County2 == county3 & va_avg$Variable == variable, ]%>%
     #   na.omit(cols= Value)
     
+
     selection4 <- va_avg[va_avg$County2 == county4 & va_avg$Variable == variable, ]%>% 
       na.omit(cols= Value)
+
 
     # filter va avg data for selected variable
     avg <- va_avg[va_avg$County2 == "Virginia" & va_avg$Variable == variable, ] %>% 
@@ -569,12 +598,15 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       add_trace(data = selection2, x = ~Year, y = ~Value, name = county2,
                 type = "scatter", mode = "lines", 
                 line = list(color = "#D02090", width = 4)) %>%
+
       # add_trace(data = selection3, x = ~Year, y = ~Value, name = county3,
       #           type = "scatter", mode = "lines",
       #           line = list(color = "#7FFF00", width = 4)) %>%
+      
       add_trace(data = selection4, x = ~Year, y = ~Value, name = county4,
                 type = "scatter", mode = "lines", 
                 line = list(color = "#D00", width = 4)) %>%
+
       add_trace(data = avg, x = ~Year, y = ~Value, name = "State Average",
                 type = "scatter", mode = "lines", 
                 line = list(color = "#3F4788FF", width = 4)) %>%
