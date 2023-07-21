@@ -98,7 +98,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
 
   #load nonsnap terr
-  fcs_territories <- read.csv("./data/non_snap_results1.csv")
+  fcs_territories <- read.csv("./data/non_snap_results.csv")
   
  
   # read in va avg data
@@ -541,15 +541,6 @@ map1
   #LINE GRAPH FUNCTION
   sdoh_line <- function(va_avg,county1, county2, variable) {
     
-    # good_names2 <- c( "Percent Low Birthweight", "Percent of Adults Reporting Currently Smoking","Percent Population with Access to Exercise Opportunities", "Percent Excessive Drinking",
-    #                   "Percent Driving Deaths with Alcohol Involvement", "Dentist Ratio", "Mental Health Provider Ratio", "Teen Birth Rate","Percent Unemployed", "Percent Children in Poverty", 
-    #                   "Chlamydia Rate", "Percent Uninsured","Primary Care Physicians Ratio", "Preventable Hospitalization Rate", "Percent With Annual Mammogram",
-    #                   "Percent Vaccinated", "Life Expectancy", "Life Expectancy Black", "Life Expectancy White", "Life Expectancy Gap", "Percent of Uninsured Adults", "Percent Uninsured Children", "Other Primary Care Provider Ratio","Drug Mortality Rate", 
-    #                   "Percent of Adults With Obesity", "Percent Physically Inactive", "Percent of Adults with Diabetes", "HIV Prevalence Rate","Percent Food Insecure", "Percent Physical Distress", "Percent Mental Distress", "Percent Severe Housing Problems", 
-    #                   "Percent Insufficient Sleep","Suicide Rate", "Percent Access to Exercise Opportunities","Percent Limited Access to Healthy Foods", 
-    #                   "Juvenile Arrests Rate","Percent less than 18 years of age", "Percent 65 and over", "Percent Black", "Percent American Indian or Alaska Native", 
-    #                   "Percent Asian","Percent Hispanic","Percent Nonhispanic-White","Percent not Proficient in English","Percent Household Income Required for Child Care Expenses",
-    #                   "Gender Pay Gap","Median Household Income Black", "Median Household Income White","Median Household Income Hispanic","Median Household Income Gap White Black","Median Household Income Gap White Hispanic", "Median Household Income")
     
     va_avg <- read.csv("./data/with_state_avg.csv") %>% 
       filter(!(Year %in% c(2021, 2022)))
@@ -619,6 +610,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                    align = "justify",
                                    column(6,
                                           h2(strong("Project Background"), align = "center"),
+                                          p(strong("Problem:"), "Virginia Cooperative Extension Family (VCE), Consumer Sciences (FCS), and Supplemental Nutrition Assistance Program-Education (SNAP-Ed) agents are essential contributors to the well-being of Virginian individuals, families, and communities. Their commitment to knowledge and resources greatly benefits communities throughout Virginia. However, these dedicated professionals are overextended, which hinders them from delivering their services and educational programs across the entire Commonwealth."),
                                           p(strong("Virginia Coorperative Extensions:"), "Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has"),
                                           tags$li("107 offices"),
                                           tags$li("11 Agriculture Research Extension centers"), 
@@ -626,15 +618,16 @@ ui <- navbarPage(#title = "DSPG 2023",
                                           br(),
                                           p("VCE agents and volunteers strive to empower youth and Virginian farmers, guide sustainable resource management, and promote public health. VCE accomplishes these goals through programs that put research-based knowledge to work in people’s lives. VCE has a variety of programs like 4-H Youth Development, Family and Consumer Sciences, Community Viability, Agriculture and Natural Resources, Food, Nutrition, and Health, etc. in every county. VCE works on unique challenges Virginians face in partnership with governments and organizations to solve these issues in a way that benefits all people. With the expertise and knowledge from Virginia Tech and Virginia State University, VCE agents are able to tackle issues and foster community growth across the state. "),
                   
-                                          p(strong("Family Consumer Sciences:"), "For the purpose of this project, we will be focusing on VCE’s Family and Consumer Sciences Program and the agents that support this program. FCS programming is tied to community needs and directed toward families and individuals. Many counties’ FCS programs look different from one another, however, there are core specialty areas every program has. The specialty areas include: Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents are responsible for partnering and collaborating with other VCE agents, agencies, nonprofits/ other organizations, and the public to meet the educational needs of local residents. Agents are tasked with determining program goals and needs by monitoring trends and issues. FCS agents essentially help Virginian families make more healthy and smart decisions by applying research-based knowledge to work in people’s lives. However, this is easier said than done. A big reason why every county’s FCS programs look different is because of the unique populations and challenges every county has. This unfortunately creates a difficult job for FCS agents. They are overextended and commit a lot more time and effort than what seems to fit into the 3 FCS specialty areas. Today, FCS agents are doing a lot more than what was originally expected of them as VCE extends their work to be more public health focused."),
-                                          p(strong("Supplemental Nutrition Assistance Program-Education: "),
-                                          p("We will also be focusing on SNAP-Ed agents. SNAP-Ed is a federally funded program that operates through partnerships with state and local organizations, including Cooperative Extension offices in Virginia. "))
+                                          p(strong("Family Consumer Sciences:"),
+                                            "This project focuses on VCE's Family and Consumer Sciences Program and the agents supporting it. FCS programming addresses community needs, including Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents collaborate with various organizations to meet local residents' educational needs and make research-based knowledge applicable to their lives. "),
+                                          p(strong("Supplemental Nutrition Assistance Program-Education: "),"We will also be focusing on SNAP-Ed agents. SNAP-Ed is a federally funded program that operates through partnerships with state and local organizations, including Cooperative Extension offices in Virginia.
+                                            Their primary goal is to promote healthy eating habits, improve food choices, and enhance food security among SNAP recipients.")
                                    ),
                                    column(6,
                                           h2(strong("Our Work"), align = "center"),
                                           p(strong("Purpose:")),
-                                          p("Our team seeks to design an interactive dashboard that will aid VCE FCS agents in identifying which areas of Virginia are in need of more support. This dashboard will help our stakeholders gain a better understanding of the needs of the community, as well as their current health demographics. Agents will be able to put our research into practice by using our dashboard to identify specific areas of need for every county in Virginia. We hope that this resource will support VCE FCS agents in improving the overall health of Virginia communities."),
-                                          p("We will utilize publicly accessible data, including Virginia health rankings, to offer our stakeholders a comprehensive comprehension of the factors influencing the health of families in Virginia. Our primary focus will be on various variables that align with the five determinants of health as well as health outcomes. Additionally, we will map these variables alongside the existing data on Virginia Cooperative Extension (VCE) agents. These maps will aid in identifying areas where VCE agents can provide further support to their communities."),
+                                          p("Our team designed an interactive dashboard to aid VCE FCS agents in identifying areas in Virginia that needed more support. The dashboard helped stakeholders gain a better understanding of community needs, enabling agents to identify specific areas of need for each county in Virginia. The resource aimed to support VCE FCS agents in improving the overall health of Virginia communities."),
+                                          p("We utilized publicly accessible data, including Virginia health rankings, to provide stakeholders with a comprehensive understanding of the factors influencing family health in Virginia. Our focus was on various variables aligning with the five determinants of health and health outcomes. Additionally, we mapped these variables alongside existing data on Virginia Cooperative Extension (VCE) agents to identify areas where VCE agents could provide additional support to their communities."),
                                           
                                           h2(strong("Dashboard Aims"), align = "center"),
                                          
@@ -678,7 +671,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                        Staffing shortages inhibit local health departments from carrying out their responsibilities and prevent Virginians from getting the best care available.")
                                                      ),
                                               column(6,
-                                                    h2("Health Overview", align = "center"),
+                                                    h2("Social Determinants of Health", align = "center"),
                                                     p("The field of public health encompasses various factors that influence the health and well-being of individuals and communities. One crucial aspect that significantly shapes health outcomes is the social determinants of health.
                                                       These determinants as defined by the World Health Organization (WHO) are the social, economic, and environmental conditions in which people are born, grow, live, work, and age.
                                                       They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health 
@@ -695,7 +688,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                          
 
                             ### 2.2.1 Subtab Health Outcomes--------------------------------------
-                           tabPanel("Health Variables",
+                           tabPanel("Dashboard",
                                     h1(strong("Health Variables"), align = "center"),
                                     p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
                                     tabsetPanel(
@@ -982,91 +975,73 @@ ui <- navbarPage(#title = "DSPG 2023",
                 ),
                  
                  ## 2.4 Tab Agent Optimization Programming------
-                 navbarMenu("Agents Territories",
-                            tabPanel("Methodology",
-                                     fluidRow(style = "margin: 12px;",
-                                       h1(strong("Agent Optimization Process"), align = "center")),
-                                     fluidRow(style = "margin: 12px;",
-                                       column(12,
-                                              titlePanel(strong("Overview")),
-                                              p("Our primary objective is to enhance the efficiency of FCS (Food and Consumer Service) agent efforts by strategically determining optimal territories for these agents to cover. Given that not all counties currently have FCS agents, our aim is to find the most effective way to allocate their efforts across different areas. 
-                                                We want to avoid situations where some agents are serving relatively well-off counties while others are burdened with multiple counties, some of which may be challenging to access due to long travel times."),
-                                                
-                                              p("To achieve this goal, we will spatially optimize the distribution of existing agents, ensuring a balanced and equitable allocation of their services. This means identifying areas where FCS agents can make the most significant impact and where their services are most needed.
-                                              Furthermore, we will also explore the possibility of establishing new FCS agent locations in areas where there is a high demand for their services. By identifying regions with the greatest need and potential impact, we can strategically deploy new agents to address the specific challenges faced by underserved communities."),
-                                              p("In addition to optimizing the allocation of FCS agents, our methodology will extend to SNAP-Ed (Supplemental Nutrition Assistance Program Education) agents. Since SNAP-Ed agents work with families who have limited financial means, we aim to provide them with valuable insights into where their resources should be allocated most effectively. By focusing on specific groups with income levels below $2,000, SNAP-Ed agents can tailor their efforts to serve those who need assistance the most. By considering both SNAP-Ed and FCS agents together, we can achieve a comprehensive approach that optimizes the impact of their collective efforts. This integrated approach will enable us to better address the diverse needs of various communities and create a more efficient and equitable distribution of services."),
-                                              p("Ultimately, our objective is to empower agents with the necessary tools and data-driven insights to make informed decisions about resource allocation. By strategically positioning FCS and SNAP-Ed agents and identifying areas with the highest potential for impact, we can work towards improving the overall well-being of communities and promoting health and nutrition for those who need it most."),
-                                              p(strong("Workflow:")),
-                                              tags$li("Perform a literature review to understand the role of FCS and identify which SDoH variables are relevant to the work that FCS does"),
-                                              tags$li("Identify health outcomes that FCS agents can affect"),
-                                              tags$li("Create an aggregate measure of need within communities thorugh a health index: aggregate z-score"),
-                                              tags$li("Use current FCS agent locations and isochrone maps to determine how accessible FCS agents are to their communities"),
-                                              tags$li("Use a mathematical programming model to optimize the assignment of counties to FCS agents"),
-                                              tags$li("Use a mathematical programming model to determine the best locations for adding new FCS agents to Virginia"),
-                                       )
-                                     )
-                            ),
-                            tabPanel("Programming Overview",
-                                     fluidRow(style = "margin: 12px;",
-                                       h1(strong("Programming"), align = "center")
-                                     ),
-                                     fluidRow(
-                                       style = "margin: 12px;",
-                                       align = "justify",
-                                       column(6,
-                                              h1(strong("Objective Function"), align = "center"),
-                                              img(src = "equation.png", style = "display: inline; margin-right: 5px; ", width = "500px;", align = "center"),
-                                              
-                                              p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
-                                              tags$li(strong("Population:")),
-                                              p("The population factor plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
-                                              tags$li(strong("Distance:")),
-                                              p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need."),
-                                              
-                                              tags$li(strong("Need:")),
-                                              p("The need factor is specifically determined by the unique needs of each county. These needs are based on various social determinants of health variables. Given that each county requires different services, 
-                                                it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
-                                                
-                                              h1(strong("Constraints"), align = "center"),
-                                              tags$li(strong("Mean commute time less than 120 minutes")),
-                                              p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 120 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time."),
-                                              tags$li(strong("Unique assignment")),
-                                              p("The county assignment constraint ensures that every county is allocated to an agent, leaving no county without coverage. This constraint guarantees that each county receives the attention and support of an assigned agent. By assigning agents to specific counties, we can ensure that the unique needs and characteristics of each county are addressed, providing tailored services and resources to the communities within them. This approach promotes comprehensive coverage and equitable distribution of support across all counties, leaving no county overlooked or underserved."),
-                                              tags$li(strong("Population served less than 1.2 million")),
-                                              p("The population constraint serves as an important mechanism to ensure that agents are not overwhelmed with excessive workloads. By considering the varying population density, particularly in rural and urban areas, we can identify imbalances where some agents may be burdened with more individuals to assist, while others have a lighter workload. 
-                                                This constraint helps maintain a fair distribution of responsibilities among agents, ensuring that they can effectively and efficiently serve the population within their capacity."),
-                                              tags$li(strong("District(agent) = district(county)")),
-                                              p("The district-based constraint ensures that agents operate within their designated districts as established by the Virginia Cooperative Extension (VCE). 
-                                                VCE divides Virginia into five distinct districts, and it is essential for agents to adhere to this division. By working exclusively within their assigned districts, 
-                                                agents can effectively focus on the specific needs and priorities of their respective communities. This constraint enables efficient coordination, ensures localized expertise, 
-                                                and enhances the delivery of targeted services within each district."),
-                                              
-                                              
-                                                                               ),
-                                                column(6, align = "center",
-                                                       h1("Figure 1: Isochrone Map"),
-                                                       p("Figure 1 illustrates an isochrone map that represents the travel distance for agents. The map displays three key time thresholds: 60 minutes, 40 minutes, and 20 minutes. However, there are certain counties where agents would need to travel for more than one hour to reach them. These counties pose greater logistical challenges due to their distance from the agents' locations, requiring additional time and resources for travel."),
-                                                       img(src = "isochrone.png", style = "display: inline; margin-right: 5px; ", width = "500px"),
-                                                       
-                                                       h1("Figure 2: Aggregate Z-scores Map"),
-                                                       p("Figure 2 displays a map depicting the aggregated z-scores calculated for each county. The color intensity on the map indicates the magnitude of the z-scores, with darker colors representing lower z-scores. This signifies that the county is significantly below the average in terms of the five health variables considered. 
-                                                         Counties with lower z-scores require more assistance from agents as they exhibit greater needs across these health factors."),
+                navbarMenu("Agent Optimization",
+                           tabPanel("Methodology",
+                                    fluidRow(style = "margin: 12px;",
+                                             h1(strong("Agent Optimization Process"), align = "center")),
+                                    fluidRow(style = "margin: 12px;",
+                                             column(12,
+                                                    titlePanel(strong("Overview")),
+                                                    p("Our primary objective is to enhance the efficiency of FCS (Food and Consumer Service) agent efforts by strategically determining optimal territories for these agents to cover. Given that not all counties currently have FCS agents, our aim is to find the most effective way to allocate their efforts across different areas. 
+                                                        We want to avoid situations where some agents are serving relatively well-off counties while others are burdened with multiple counties, some of which may be challenging to access due to long travel times."),
+                                                        p("To achieve this goal, we will spatially optimize the distribution of existing agents, ensuring a balanced and equitable allocation of their services. This means identifying areas where FCS agents can make the most significant impact and where their services are most needed.
+                                                        Furthermore, we will also explore the possibility of establishing new FCS agent locations in areas where there is a high demand for their services. By identifying regions with the greatest need and potential impact, we can strategically deploy new agents to address the specific challenges faced by underserved communities."),
+                                                        p("In addition to optimizing the allocation of FCS agents, our methodology will extend to SNAP-Ed (Supplemental Nutrition Assistance Program Education) agents. Since SNAP-Ed agents work with families who have limited financial means, we aim to provide them with valuable insights into where their resources should be allocated most effectively. By focusing on specific groups with income levels below $2,000, SNAP-Ed agents can tailor their efforts to serve those who need assistance the most. By considering both SNAP-Ed and FCS agents together, we can achieve a comprehensive approach that optimizes the impact of their collective efforts. This integrated approach will enable us to better address the diverse needs of various communities and create a more efficient and equitable distribution of services."),
+                                                        p("Ultimately, our objective is to empower agents with the necessary tools and data-driven insights to make informed decisions about resource allocation. By strategically positioning FCS and SNAP-Ed agents and identifying areas with the highest potential for impact, we can work towards improving the overall well-being of communities and promoting health and nutrition for those who need it most."),
+                                                        p(strong("Workflow:")),
+                                                        tags$li("Perform a literature review to understand the role of FCS and identify which SDoH variables are relevant to the work that FCS does"),
+                                                        tags$li("Identify health outcomes that FCS agents can affect"),
+                                                        tags$li("Create an aggregate measure of need within communities through a health index: aggregate z-score"),
+                                                        tags$li("Use current FCS agent locations and isochrone maps to determine how accessible FCS agents are to their communities"),
+                                                        tags$li("Use a mathematical programming model to optimize the assignment of counties to FCS agents"),
+                                                        tags$li("Use a mathematical programming model to determine the best locations for adding new FCS agents to Virginia"),
+                                                        h1(strong("Programming"), align = "center"),
+                                                        fluidRow(style = "margin: 12px;",
+                                                             column(6,
+                                                                    h1(strong("Objective Function"), align = "center"),
+                                                                    img(src = "equation.png", style = "display: inline; margin-right: 5px; ", width = "500px;", align = "center"),
+                                                                    p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
+                                                                    tags$li(strong("Population:")),
+                                                                    p("The population factor plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
+                                                                    tags$li(strong("Distance:")),
+                                                                    p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need."),
+                                                                    tags$li(strong("Need:")),
+                                                                    p("The need factor is specifically determined by the unique needs of each county. These needs are based on various social determinants of health variables. Given that each county requires different services, 
+                                                                      it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
+                                                                      h1(strong("Constraints"), align = "center"),
+                                                                      tags$li(strong("Mean commute time less than 120 minutes")),
+                                                                      p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 120 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time."),
+                                                                      tags$li(strong("Unique assignment")),
+                                                                      p("The county assignment constraint ensures that every county is allocated to an agent, leaving no county without coverage. This constraint guarantees that each county receives the attention and support of an assigned agent. By assigning agents to specific counties, we can ensure that the unique needs and characteristics of each county are addressed, providing tailored services and resources to the communities within them. This approach promotes comprehensive coverage and equitable distribution of support across all counties, leaving no county overlooked or underserved."),
+                                                                      tags$li(strong("Population served less than 1.2 million")),
+                                                                      p("The population constraint serves as an important mechanism to ensure that agents are not overwhelmed with excessive workloads. By considering the varying population density, particularly in rural and urban areas, we can identify imbalances where some agents may be burdened with more individuals to assist, while others have a lighter workload. 
+                                                                      This constraint helps maintain a fair distribution of responsibilities among agents, ensuring that they can effectively and efficiently serve the population within their capacity."),
+                                                                      tags$li(strong("District(agent) = district(county)")),
+                                                                      p("The district-based constraint ensures that agents operate within their designated districts as established by the Virginia Cooperative Extension (VCE). 
+                                                                      VCE divides Virginia into five distinct districts, and it is essential for agents to adhere to this division. By working exclusively within their assigned districts, 
+                                                                      agents can effectively focus on the specific needs and priorities of their respective communities. This constraint enables efficient coordination, ensures localized expertise, 
+                                                                      and enhances the delivery of targeted services within each district.")
+                                                                           ),
+                                                        column(6, align = "center",
+                                                               h1("Figure 1: Isochrone Map"),
+                                                               p("Figure 1 illustrates an isochrone map that represents the travel distance for agents. The map displays three key time thresholds: 60 minutes, 40 minutes, and 20 minutes. However, there are certain counties where agents would need to travel for more than one hour to reach them. These counties pose greater logistical challenges due to their distance from the agents' locations, requiring additional time and resources for travel."),
+                                                               img(src = "isochrone.png", style = "display: inline; margin-right: 5px; ", width = "500px"),
+                                                               h1("Figure 2: Aggregate Z-scores Map"),
+                                                               p("Figure 2 displays a map depicting the aggregated z-scores calculated for each county. The color intensity on the map indicates the magnitude of the z-scores, with darker colors representing lower z-scores. This signifies that the county is significantly below the average in terms of the five health variables considered. 
+                                                        Counties with lower z-scores require more assistance from agents as they exhibit greater needs across these health factors."),
                                                         img(src = "zscore_map.png", style = "display: inline; margin-right: 5px; ", width = "700px"),
-                                                       h1("Figure 3: VCE Districts"),
-                                                       p("Figure 3 shows the different VCE districts."),
-                                                       img(src = "vce_districts.jpg", style = "display: inline; margin-right: 5px;", width = "700px")
-                                                       
-                                                 )
-                                     )
-                            ),
-        
+                                                        h1("Figure 3: VCE Districts"),
+                                                        p("Figure 3 shows the different VCE districts."),
+                                                        img(src = "vce_districts.jpg", style = "display: inline; margin-right: 5px;", width = "700px")
+                                                        ))
+                                                           )
+                                                               )
+                                                                 ),
+                                                            
                             
                  
-                 
-                 
-                 
                             ### 2.4.2 Subtab Results ----
-                            tabPanel("Results",
+                            tabPanel("Where Should New Agents Be?",
                                      tabsetPanel(
                                        tabPanel("FCS and SNAP-Ed Agents",
                                                 fluidRow(
@@ -1086,7 +1061,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                                  "Two New Agents" = "two"),
                                                                      selected = "base"
                                                          ),
-                                                         selectInput("zscore_type", "Health Index",
+                                                         selectInput("zscore_type", "Health Variables",
                                                                      choices = c("Aggregate" = "aggregate",
                                                                                  "Food Insecurity" = "food",
                                                                                  "Obesity" = "obese",
@@ -1144,7 +1119,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                 )
                                        ),
                                        # #results for nonsnaped----
-                                      tabPanel("FCS Non SNAP-Ed Agents",
+                                      tabPanel("FCS Agents",
                                                fluidRow(
                                                  style = "margin: 12px;",
                                                  h1(strong("Results"), align = "center"),
@@ -2102,8 +2077,7 @@ server <- function(input, output) {
         about the FCS agent's contact details and home office. The blue cloud icons
         signify existing agents, while the red cloud icons indicate optimal new agent
         sites. The map now includes newly designated agent locations in Frederick County
-        and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+        and Augusta County."
   } else {
     "This map shows territories for no new agents."
   }
