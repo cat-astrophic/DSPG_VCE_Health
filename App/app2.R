@@ -138,16 +138,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       good_names[idx], 
       var.counties$Value
     ) %>% lapply(htmltools::HTML)
-    
-    # Create labels for snap agents
-    snap_agent_labels <- sprintf(
-      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-Ed Service Provided At: %s",
-      snap_agents$Job.Dept,
-      snap_agents$Employee.Name,
-      snap_agents$VT.Email,
-      snap_agents$SNAP.Ed
-    ) %>% lapply(htmltools::HTML)
-    
     # Create labels for agents
     agent_labels <- sprintf(
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
@@ -168,6 +158,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     icons <- awesomeIconList(
       `FCS Agents` = agents_icon,
       `FCS/SNAP-Ed Agents` = snap_agents_icon)
+    
+    # group names for legen
+    groups <- c("FCS Agents" <- "<div style='position: relative; display: inline-block' class='awesome-marker-icon-cadetblue awesome-marker'><i class='fa fa-user icon-white '></i></div>FCS Agents",
+                "FCS/SNAP-Ed Agents" <- "<div style='position: relative ; display: inline-block' class='awesome-marker-icon-lightblue awesome-marker'><i class='fa fa-home icon-white '></i></div>FCS/SNAP-Ed Agents")
+    
     # Create leaflet map
     map1 <-leaflet(data = var.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -183,33 +178,19 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"),
                                               textsize = "15px",
                                               direction = "auto")) %>%
-      addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "bottomright") %>%
-      #adding fcs agent marker
-      addAwesomeMarkers(data = non_snap,
-                        lat = non_snap$Lat,
-                        lng = non_snap$Long,
-                        label = agent_labels,
-                        icon = agents_icon) %>%
-      addAwesomeMarkers(data= snap_agents,
-                        lat =snap_agents$Lat,
-                        lng = snap_agents$Long,
-                        label = snap_agent_labels,
-                        icon = snap_agents_icon) %>%
-      addLegendAwesomeIcon(iconSet = icons,
-                           orientation = 'vertical',
-                           title = htmltools::tags$div(
-                             style = 'font-size: 20px;',
-                             'Agent Type:'),
-                           labelStyle = 'font-size: 14px;') %>% 
-      #legend for continious scale
-      addLegend(pal = pal, values = ~Value, title = legend_title, position = "bottomright") %>%
-      #setting default map zoom
-      setView(lng = -78.6568942, lat = 38.2315734, zoom = 7)%>%
       #map title
-      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL)
-      #Legend for Icon
-      #addLegendAwesomeIcon(iconSet= icons,title = "Agent Type:",labelStyle = "", orientation = "vertical")
-map1
+      addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL) %>% 
+      #adding fcs agent marker
+      addAwesomeMarkers(data= agents_sf, lat= agents_sf$Lat, lng= agents_sf$Long, icon = icons, group= groups, label= agent_labels) %>% 
+      addLayersControl(                                                                                                           
+        overlayGroups = groups,
+        options = layersControlOptions(collapsed = FALSE),
+        position= "topleft") %>% 
+      #legend for continious scale
+      addLegend(pal = pal, values = ~Value, title = legend_title, position = "topright") %>%
+      addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "topright") %>% 
+      #setting default map zoom
+      setView(lng = -78.6568942, lat = 38.2315734, zoom = 6.8)
 }
   
 #territory function
@@ -492,7 +473,6 @@ map1
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
-    #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
     
     #making icon set for legend
     icons <- awesomeIconList(
