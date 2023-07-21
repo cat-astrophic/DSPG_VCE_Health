@@ -166,10 +166,8 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     #making icon set for legend
     icons <- awesomeIconList(
-      `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
-                                     iconColor = 'ivory', markerColor = 'cadetblue'),
-      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon= "home", library= "fa",
-                                             iconColor = 'ivory', markerColor = "lightblue"))
+      `FCS Agents` = agents_icon,
+      `FCS/SNAP-Ed Agents` = snap_agents_icon)
     # Create leaflet map
     map1 <-leaflet(data = var.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -294,12 +292,9 @@ map1
     
     #making icon set for legend
     icons <- awesomeIconList(
-      `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
-                                     iconColor = 'ivory', markerColor = 'cadetblue'),
-      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
-                                             iconColor = 'ivory', markerColor = "lightblue"),
-      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
-                                             iconColor = 'ivory', markerColor = "red"))
+      `FCS Agents` = agents_icon,
+      `FCS/SNAP-Ed Agents` = snap_agents_icon,
+      `New Agents` = new_agent_icon)
     #create leaflet map
     leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -397,10 +392,8 @@ map1
     
     #making icon set for legend
     icons <- awesomeIconList(
-      `FCS/SNAP-Ed Agents` = makeAwesomeIcon(icon = "home", library = "fa",
-                                             iconColor = 'ivory', markerColor = "lightblue"),
-      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
-                                     iconColor = 'ivory', markerColor = "red"))
+      `FCS/SNAP-Ed Agents` = snap_agents_icon,
+      `New Agents` = new_agent_icon)
     
     # create leaflet map
     leaflet(data = territory.counties) %>%
@@ -503,10 +496,8 @@ map1
     
     #making icon set for legend
     icons <- awesomeIconList(
-      `FCS Agents` = makeAwesomeIcon(icon = "user", library = "fa",
-                                             iconColor = 'ivory', markerColor = "cadetblue"),
-      `New Agents` = makeAwesomeIcon(icon = "star", library = "fa",
-                                     iconColor = 'ivory', markerColor = "red"))
+      `FCS Agents` = agents_icon,
+      `New Agents` = new_agent_icon)
     
     # create leaflet map
     leaflet(data = territory.counties) %>%
