@@ -634,7 +634,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                           p(strong("Social Determinants of Health:"),
                                           p("This interactive dashboard will allow agents to gain valuable context regarding the public health landscape of the counties they serve, enabling them to tailor their services accordingly. 
                                             This dashboard displays data on critical health variables that influence the well-being of Virginia's localities and the work of FCS agents. Overall, this project aims to empower FCS agents' leadership with the knowledge and insights necessary to make informed decisions and have an even larger positive impact on the well-being of individuals and families in Virginia.")),
-                                          p(strong("Optimizing Agents Terriories:"), 
+                                          p(strong("Optimizing Agent Territories:"), 
                                           p("This section presents the results of the optimization process, showcasing the agent territories on maps. These visual representations allow stakeholders to identify the areas where they should focus their efforts and explore the locations of newly assigned agents. By providing this interactive feature, stakeholders can make informed decisions based on the visual insights provided by the maps.")),
                                           
                           
@@ -692,6 +692,51 @@ ui <- navbarPage(#title = "DSPG 2023",
                                     h1(strong("Health Variables"), align = "center"),
                                     p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Service) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
                                     tabsetPanel(
+                                      tabPanel("Demographics", 
+                                               fluidRow(style = "margin: 20px;",
+                                                        h1(strong("Demographics"), align = "left", style = "font-size: 18px;"),
+                                                        p("Demographics are a vital factor to consider as a social determinant of health due to their significant impact on health outcomes and disparities. Demographic factors such as race, ethnicity, gender, age, income level, and education play a crucial role in shaping health disparities and influencing health behaviors, access to healthcare, and social contexts. By examining demographics, we gain insights into the unique challenges and needs of different population groups, allowing for targeted interventions, tailored healthcare services, and the development of policies that address the specific barriers and inequities faced by diverse communities. Understanding the intersectionality of demographics further enhances our understanding of how multiple factors interact to shape health outcomes and informs strategies for promoting health equity and improving overall health for all individuals and populations.", style = "padding-top:10px;")),
+                                               fluidRow(style = "margin: 6px;",
+                                                        align = "justify",
+                                                        column(3, 
+                                                               
+                                                               h4(strong("Summary")),
+                                                               textOutput("DemographicsDefinition")
+                                                               
+                                                        ) ,
+                                                        column(9, 
+                                                               selectInput("demographics", "Select Variable:", width = "50%", choices = c(
+                                                                 "Less 18 years old" = "per_less_than_18_years_of_age",
+                                                                 "More than 65 years old" = "per_65_and_over",
+                                                                 "Black" = "per_black",
+                                                                 "American Indian or Alaska Native" = "per_american_indian_or_alaska_native",
+                                                                 "Asian" = "per_asian",
+                                                                 "Hispanic" = "per_hispanic",
+                                                                 "Nonhispanic White" = "per_nonhispanic_white",
+                                                                 "Not Proficient in English" = "per_not_proficient_in_english"
+                                                               )
+                                                               ),
+                                                               radioButtons(inputId = "yearSelect_demo", label = "Select Year: ", 
+                                                                            choices = c("2016","2017", "2018", "2019", "2020"), 
+                                                                            selected = "2020", inline = TRUE),
+                                                               withSpinner(leafletOutput("demographicsvar", height = "500px")),
+                                                        )
+                                                        
+                                               ),
+                                               fluidRow(style = "margin: 12px;",
+                                                        align = "justify",
+                                                        column(3,
+                                                               h4(strong("Line Graph")),
+                                                               selectInput("county11", "Select County 1", choices = unique(va_avg$County2)),
+                                                               selectInput("county12", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
+                                                               
+                                                        ),
+                                                        column(9,
+                                                               plotlyOutput("comparison_plot_demo", height = "500px")
+                                                        )),
+                                               
+                                               
+                                      ),
                                       
                                       tabPanel("Health Outcomes", 
                                                fluidRow(style = "margin: 20px;",
@@ -925,51 +970,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                             ),
                             
                             ### 2.2.6 Subtab Demographics-----
-                            tabPanel("Demographics", 
-                                     fluidRow(style = "margin: 20px;",
-                                              h1(strong("Demographics"), align = "left", style = "font-size: 18px;"),
-                                              p("Demographics are a vital factor to consider as a social determinant of health due to their significant impact on health outcomes and disparities. Demographic factors such as race, ethnicity, gender, age, income level, and education play a crucial role in shaping health disparities and influencing health behaviors, access to healthcare, and social contexts. By examining demographics, we gain insights into the unique challenges and needs of different population groups, allowing for targeted interventions, tailored healthcare services, and the development of policies that address the specific barriers and inequities faced by diverse communities. Understanding the intersectionality of demographics further enhances our understanding of how multiple factors interact to shape health outcomes and informs strategies for promoting health equity and improving overall health for all individuals and populations.", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 6px;",
-                                              align = "justify",
-                                              column(3, 
-                                                     
-                                                     h4(strong("Summary")),
-                                                     textOutput("DemographicsDefinition")
-                                                     
-                                              ) ,
-                                              column(9, 
-                                                     selectInput("demographics", "Select Variable:", width = "50%", choices = c(
-                                                       "Less 18 years old" = "per_less_than_18_years_of_age",
-                                                       "More than 65 years old" = "per_65_and_over",
-                                                       "Black" = "per_black",
-                                                       "American Indian or Alaska Native" = "per_american_indian_or_alaska_native",
-                                                       "Asian" = "per_asian",
-                                                       "Hispanic" = "per_hispanic",
-                                                       "Nonhispanic White" = "per_nonhispanic_white",
-                                                       "Not Proficient in English" = "per_not_proficient_in_english"
-                                                     )
-                                                     ),
-                                                     radioButtons(inputId = "yearSelect_demo", label = "Select Year: ", 
-                                                                  choices = c("2016","2017", "2018", "2019", "2020"), 
-                                                                  selected = "2020", inline = TRUE),
-                                                     withSpinner(leafletOutput("demographicsvar", height = "500px")),
-                                              )
-                                                                           
-                            ),
-                            fluidRow(style = "margin: 12px;",
-                                     align = "justify",
-                                     column(3,
-                                            h4(strong("Line Graph")),
-                                            selectInput("county11", "Select County 1", choices = unique(va_avg$County2)),
-                                            selectInput("county12", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                            
-                                     ),
-                                     column(9,
-                                            plotlyOutput("comparison_plot_demo", height = "500px")
-                                     )),
-                            
-                            
-                 ),
+
                  ),
                  ),
                 ),
@@ -1070,7 +1071,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                                  "Diabetes" = "diabetes"),
                                                                      selected = "aggregate"
                                                          ),
-                                                         h4(strong("Description")),
+                                                         h4(strong("What Does the Map Show?")),
                                                          textOutput("territorydescription")
                                                   ),
                                                   
@@ -1108,7 +1109,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                                  "Diabetes" = "diabetes"),
                                                                      selected = "aggregate"
                                                          ),
-                                                         h4(strong("Description")),
+                                                         h4(strong("What Does the Map Show?")),
                                                          textOutput("territorydescription_snaped")
                                                   ),
 
@@ -1146,7 +1147,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                                 "Diabetes" = "diabetes"),
                                                                     selected = "aggregate"
                                                         ),
-                                                        h4(strong("Description")),
+                                                        h4(strong("What Does the Map Show?")),
                                                         textOutput("territorydescription_nonsnaped")
                                                  ),
 
@@ -1816,19 +1817,20 @@ server <- function(input, output) {
   
   output$territorydescription <- renderText({
   if (input$territory_type == "base" & input$zscore_type == "food") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from food insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard
+        their effectiveness. 
+    
+    These territories have also been created in regard
         to the model’s constraints on population, commute time, and VCE districts.
         Each color on the map corresponds to a distinct agent's territory. By
         hovering your cursor over a county, you can easily identify the agent
         responsible for serving that particular area. Furthermore, you can hover
         over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. Feel free to explore different
-        choices in the Agents/Health dropdowns to generate a new map!"
+        agent's contact details and home office."
   } else if (input$territory_type == "base" & input$zscore_type == "obese") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from obesity insecurity z-scores to optimize
         their effectiveness. These territories have also been created in regard
@@ -1837,10 +1839,9 @@ server <- function(input, output) {
         hovering your cursor over a county, you can easily identify the agent
         responsible for serving that particular area. Furthermore, you can hover
         over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. Feel free to explore different
-        choices in the Agents/Health dropdowns to generate a new map!"
+        agent's contact details and home office."
   } else if (input$territory_type == "base" && input$zscore_type == "inactivity") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from physical inactivity insecurity z-scores to optimize
         their effectiveness. These territories have also been created in regard
@@ -1849,10 +1850,9 @@ server <- function(input, output) {
         hovering your cursor over a county, you can easily identify the agent
         responsible for serving that particular area. Furthermore, you can hover
         over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. Feel free to explore different
-        choices in the Agents/Health dropdowns to generate a new map!"
+        agent's contact details and home office. "
   } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from aggregate z-scores to optimize
         their effectiveness. These territories have also been created in regard
@@ -1861,10 +1861,9 @@ server <- function(input, output) {
         hovering your cursor over a county, you can easily identify the agent
         responsible for serving that particular area. Furthermore, you can hover
         over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. Feel free to explore different
-        choices in the Agents/Health dropdowns to generate a new map!"
+        agent's contact details and home office. "
   } else if (input$territory_type == "base" & input$zscore_type == "lowbirth") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from low birthweight insecurity z-scores to optimize
         their effectiveness. These territories have also been created in regard
@@ -1873,10 +1872,9 @@ server <- function(input, output) {
         hovering your cursor over a county, you can easily identify the agent
         responsible for serving that particular area. Furthermore, you can hover
         over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. Feel free to explore different
-        choices in the Agents/Health dropdowns to generate a new map!"
+        agent's contact details and home office. "
   } else if (input$territory_type == "base" & input$zscore_type == "diabetes") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from diabetes insecurity z-scores to optimize
         their effectiveness. These territories have also been created in regard
@@ -1885,10 +1883,9 @@ server <- function(input, output) {
         hovering your cursor over a county, you can easily identify the agent
         responsible for serving that particular area. Furthermore, you can hover
         over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. Feel free to explore different
-        choices in the Agents/Health dropdowns to generate a new map!"
+        agent's contact details and home office. "
   } else if (input$territory_type == "one" & input$zscore_type == "food") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from food insecurity z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -1901,10 +1898,9 @@ server <- function(input, output) {
         about the FCS agent's contact details and home office. The blue cloud icons
         signify existing agents, while the red cloud icons indicate optimal new agent
         sites. The map now includes a newly designated agent location in Prince William County
-        .Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+        ."
   } else if (input$territory_type == "one" & input$zscore_type == "obese") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from obesity insecurity z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -1920,7 +1916,7 @@ server <- function(input, output) {
         .Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from physical inactivity z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -1936,7 +1932,7 @@ server <- function(input, output) {
         .Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from aggregate z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -1952,7 +1948,7 @@ server <- function(input, output) {
         .Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from low birthweight z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -1968,7 +1964,7 @@ server <- function(input, output) {
         .Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!."
   } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from diabetes z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -1984,7 +1980,7 @@ server <- function(input, output) {
         .Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "two" & input$zscore_type == "food") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from food insecurity z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -2000,7 +1996,7 @@ server <- function(input, output) {
         and Essex County .Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "two" & input$zscore_type == "obese") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from obesity z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -2016,7 +2012,7 @@ server <- function(input, output) {
         and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from physical inactivity z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -2032,7 +2028,7 @@ server <- function(input, output) {
         and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from aggregate z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -2048,7 +2044,7 @@ server <- function(input, output) {
         and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from low birthweight z-scores to optimize
         their effectiveness. These territories have also been created in regard to
@@ -2064,7 +2060,7 @@ server <- function(input, output) {
         and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
         generate a new map!"
   } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
-    "The map displayed on the right provides a visual representation of the
+    "The map shows the
         ideal territories assigned to FCS agents. These territories have been
         determined using data from diabetes z-scores to optimize
         their effectiveness. These territories have also been created in regard to
