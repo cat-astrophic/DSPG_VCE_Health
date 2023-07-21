@@ -765,7 +765,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                selectInput("county11", "Select County 1", choices = unique(va_avg$County2)),
                                                                selectInput("county12", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
                                                                
-                                                               selectInput("county_1", "Select County 3", choices = unique(va_avg$County2), selected = "Richmond City"),
+                                                               selectInput("county_1", "Select County 3", choices = unique(va_avg$County2), selected = "Bedford County"),
                                                                
                                                                
                                                         ),
@@ -806,7 +806,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                h4(strong("Line Graph")),
                                                                selectInput("county1", "Select County 1", choices = unique(va_avg$County2)),
                                                                selectInput("county2", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                               selectInput("County14", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
+                                                               selectInput("county14", "Select County 3", choices = unique(va_avg$County2), selected = "Bedford County"),
                                                                
                                                         ),
                                                         column(9,
@@ -860,7 +860,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      h4(strong("Line Graph")),
                                                      selectInput("county3", "Select County 1", choices = unique(va_avg$County2)),
                                                      selectInput("county4", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                     selectInput("County15", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
+                                                     selectInput("county15", "Select County 3", choices = unique(va_avg$County2), selected = "Bedford County"),
                                               ),
                                               column(9,
                                                      plotlyOutput("comparison_plot_access", height = "500px")
@@ -916,7 +916,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      h4(strong("Line Graph")),
                                                      selectInput("county5", "Select County 1", choices = unique(va_avg$County2)),
                                                      selectInput("county6", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                     selectInput("County16", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
+                                                     selectInput("County16", "Select County 3", choices = unique(va_avg$County2), selected = "Bedford City"),
                                               ),
                                               column(9,
                                                      plotlyOutput("comparison_plot_econ", height = "500px")
@@ -958,7 +958,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      h4(strong("Line Graph")),
                                                      selectInput("county7", "Select County 1", choices = unique(va_avg$County2)),
                                                      selectInput("county8", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                     selectInput("County17", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
+                                                     selectInput("County17", "Select County 3", choices = unique(va_avg$County2), selected = "Bedford City"),
                                               ),
                                               column(9,
                                                      plotlyOutput("comparison_plot_behavior", height = "500px")
@@ -1003,7 +1003,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                  h4(strong("Line Graph")),
                                                  selectInput("county9", "Select County 1", choices = unique(va_avg$County2)),
                                                  selectInput("county10", "Select County 2", choices = unique(va_avg$County2), selected = "Richmond City"),
-                                                 selectInput("County18", "Select County 3", choices = unique(va_avg$County2), selected = "Madison")
+                                                 selectInput("County18", "Select County 3", choices = unique(va_avg$County2), selected = "MBedford City"),
                                           ),
                                           column(9,
                                                  plotlyOutput("comparison_plot_envr", height = "500px")
@@ -1361,33 +1361,21 @@ server <- function(input, output) {
     mapping2(temp_outcome(), temp_year())
   })
   
-  comparison_plot_reactive <- reactive({
-    county1 <- input$county1
-    county2 <- input$county2
-    county14 <- input$county14
-    
-    if (temp_outcome() == "per_low_birthweight") {
-      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
-      return(comparison_plot)
-    } else if (temp_outcome() == "life_expectancy"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
-      return(comparison_plot)
-    } else if (temp_outcome() == "life_expectancy_gap"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
-      return(comparison_plot)
-    } else if (temp_outcome() == "life_expectancy_black"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
-      return(comparison_plot)
-    } else if (temp_outcome() == "life_expectancy_white"){
-      comparison_plot <- sdoh_line(va_avg, county1, county2, county14, temp_outcome())
-      return(comparison_plot)
-    } else {
-    return(NULL)
-    }
+  
+  county1 <- reactive({
+    input$county1
+  })
+  
+  county2 <- reactive({
+    input$county2
+  })
+  
+  county14 <- reactive({
+    input$county14
   })
   
   output$comparison_plot <- renderPlotly({
-    comparison_plot_reactive()
+    sdoh_line(county1(), county2(), county14(), temp_outcome())
   })
   
   output$VariableDefinition <- renderText({
@@ -1429,48 +1417,20 @@ server <- function(input, output) {
   })
  
   
-  comparison_plot_access_reactive <- reactive({
-    county3 <- input$county3
-    county4 <- input$county4
-    county15 <- input$county15
-    
-    if (temp_healthaccess() == "per_uninsured") {
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else if (temp_healthaccess() == "dentist_ratio"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot)
-    } else if (temp_healthaccess() == "mental_health_provider_ratio"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot)
-    } else if (temp_healthaccess() == "primary_care_physicians_ratio"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else if (temp_healthaccess() == "per_vaccinated"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else if (temp_healthaccess() == "per_with_annual_mammogram"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else if (temp_healthaccess() == "preventable_hospitalization_rate"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else if (temp_healthaccess() == "per_uninsured_children"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else if (temp_healthaccess() == "per_adults_with_diabetes"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else if (temp_healthaccess() == "chlamydia_rate"){
-      comparison_plot_access <- sdoh_line(va_avg, county3, county4, county15, temp_healthaccess())
-      return(comparison_plot_access)
-    } else {
-      return(NULL)
-    }
+  county3 <- reactive({
+    input$county3
+  })
+  
+  county4 <- reactive({
+    input$county4
+  })
+  
+  county15 <- reactive({
+    input$county15
   })
   
   output$comparison_plot_access <- renderPlotly({
-    comparison_plot_access_reactive()
+    sdoh_line(county3(), county4(), county15(), temp_healthaccess())
   })
   
   output$HealthAccessVariableDefinition <- renderText({
@@ -1561,39 +1521,20 @@ server <- function(input, output) {
     mapping2(temp_econ(), temp_econyear())
   })
   
-  comparison_plot_econ_reactive <- reactive({
-    county5 <- input$county5
-    county6 <- input$county6
-    county16 <- input$county16
-    
-    if (temp_econ() == "per_unemployed") {
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
-      return(comparison_plot_econ)
-    } else if (temp_econ() == "per_children_in_poverty"){
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
-      return(comparison_plot_econ)
-    } else if (temp_econ() == "per_food_insecure"){
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
-      return(comparison_plot_econ)
-    } else if (temp_econ() == "median_household_income"){
-     comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
-      return(comparison_plot_econ)
-    } else if (temp_econ() == "median_household_income_black"){
-      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
-      return(comparison_plot_econ)
-    } else if (temp_econ() == "median_household_income_white"){
-      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
-      return(comparison_plot_econ)
-    } else if (temp_econ() == "median_household_income_hispanic"){
-      comparison_plot_econ <- sdoh_line(va_avg, county5, county6, county16, temp_econ())
-      return(comparison_plot_econ)
-    } else {
-      return(NULL)
-    }
+  county5 <- reactive({
+    input$county5
+  })
+  
+  county6 <- reactive({
+    input$county6
+  })
+  
+  county16 <- reactive({
+    input$county16
   })
   
   output$comparison_plot_econ <- renderPlotly({
-    comparison_plot_econ_reactive()
+    sdoh_line(county5(), county6(), county16(), temp_econ())
   })
   
 
@@ -1631,37 +1572,22 @@ server <- function(input, output) {
     mapping2(temp_healthbehaviors(), temp_behavioryear())
   })
   
-  comparison_plot_behavior_reactive <- reactive({
-    county7 <- input$county7
-    county8 <- input$county8
-    county17 <- input$county17
-    
-    if (temp_healthbehaviors() == "per_adults_reporting_currently_smoking") {
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
-      return(comparison_plot_behavior)
-    } else if (temp_healthbehaviors() == "per_excessive_drinking"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
-      return(comparison_plot_behavior)
-    } else if (temp_healthbehaviors() == "per_driving_deaths_with_alcohol_involvement"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
-      return(comparison_plot_behavior)
-    } else if (temp_healthbehaviors() == "per_physically_inactive"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
-      return(comparison_plot_behavior)
-    } else if (temp_healthbehaviors() == "per_adults_with_obesity"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
-      return(comparison_plot_behavior)
-    } else if (temp_healthbehaviors() == "teen_birth_rate"){
-      comparison_plot_behavior <- sdoh_line(va_avg, county7, county8, county17, temp_healthbehaviors())
-      return(comparison_plot_behavior)
-    } else {
-      return(NULL)
-    }
+  county7 <- reactive({
+    input$county7
+  })
+  
+  county8 <- reactive({
+    input$county8
+  })
+  
+  county17 <- reactive({
+    input$county17
   })
   
   output$comparison_plot_behavior <- renderPlotly({
-    comparison_plot_behavior_reactive()
+    sdoh_line(county7(), county8(), county17(), temp_healthbehaviors())
   })
+  
   output$HealthBehaviorsVariableDefinition <- renderText({
     if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
       "% Adults Reporting Currently Smoking: Percentage of adults who are current smokers (age-adjusted).
@@ -1712,39 +1638,21 @@ server <- function(input, output) {
     mapping2(temp_envr(), temp_envryear())
   })
   
-  comparison_plot_envr_reactive <- reactive({
-    county9 <- input$county9
-    county10 <- input$county10
-    county18 <- input$county18
-    
-    if (temp_envr() == "per_physical_distress") {
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
-      return(comparison_plot_envr)
-    } else if (temp_envr() == "per_mental_distress"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
-      return(comparison_plot_envr)
-    } else if (temp_envr() == "per_with_access_to_exercise_opportunities"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
-      return(comparison_plot_envr)
-    } else if (temp_envr() == "suicide_rate"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
-      return(comparison_plot_envr)
-    } else if (temp_envr() == "juvenile_arrests_rate"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
-      return(comparison_plot_envr)
-    } else if (temp_envr() == "per_insufficient_sleep"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
-      return(comparison_plot_envr)
-    } else if (temp_envr() == "per_severe_housing_problem"){
-      comparison_plot_envr <- sdoh_line(va_avg, county9, county10, county18, temp_envr())
-      return(comparison_plot_envr)
-    } else {
-      return(NULL)
-    }
+  
+  county9 <- reactive({
+    input$county9
+  })
+  
+  county10 <- reactive({
+    input$county10
+  })
+  
+  county18 <- reactive({
+    input$county18
   })
   
   output$comparison_plot_envr <- renderPlotly({
-    comparison_plot_envr_reactive()
+    sdoh_line(county9(), county10(), county18(), temp_envr())
   })
   output$EnvrVariableDefinition <- renderText({
     if (input$neighbor_envr == "per_physical_distress") {
