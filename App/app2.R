@@ -98,7 +98,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
 
   #load nonsnap terr
-  fcs_territories <- read.csv("./data/non_snap_results.csv")
+  fcs_territories <- read.csv("./data/non_snap_results1.csv")%>%
+    transform(Lat = as.numeric(Lat),
+              Long = as.numeric(Long))
   
  
   # read in va avg data
