@@ -71,7 +71,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
               Value = as.numeric(Value))
   
   # Load and preprocess the VCE agents location data
-  agents_sf <- read.csv("./data/vce_agents.csv") %>% st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
+  agents_sf <- read.csv("./data/vce_agents.csv") %>% 
+    st_as_sf(  coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant") %>% 
+    transform(type = as_factor(type))
   # Prepare labels for varibels of interest
   good_names <- c(   "Percent 65 and over","Percent American Indian or Alaska Native","Percent Asian","Percent Black",
                      "Percent Hispanic","Percent less than 18 years of age","Percent Nonhispanic-White","Percent not Proficient in English",
@@ -121,10 +123,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     # Join variable data with county geometry data
     var.counties <- left_join(va.counties, temp, by = 'GEOID')
-    
-    #separating snap agents
-    snap_agents <- agents_sf %>% filter(SNAP == 1)
-    non_snap <- agents_sf %>%  filter(SNAP == 0)
     # Identify the index of the selected variable
     idx <- which(unique(all_var_df$Variable) == variable)
     
@@ -144,14 +142,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       agents_sf$Job.Dept,
       agents_sf$Employee.Name,
       agents_sf$VT.Email
-    ) %>% lapply(htmltools::HTML)
-    
-    snap_agent_labels <- sprintf(
-      "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s <br/> SNAP-Ed Service Provided At: %s",
-      snap_agents$Job.Dept,
-      snap_agents$Employee.Name,
-      snap_agents$VT.Email,
-      snap_agents$SNAP.Ed
     ) %>% lapply(htmltools::HTML)
     
     # Wrap legend title if too long
@@ -188,22 +178,12 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                               direction = "auto")) %>%
       #map title
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", map_title, "</h2>")), position = "topright", data = NULL) %>% 
-      #adding fcs agent marker
-      addAwesomeMarkers(data = non_snap,
-                        lat = non_snap$Lat,
-                        lng = non_snap$Long,
-                        label = agent_labels,
-                        icon = agents_icon) %>%
-      addAwesomeMarkers(data= snap_agents,
-                        lat =snap_agents$Lat,
-                        lng = snap_agents$Long,
-                        label = snap_agent_labels,
-                        icon = snap_agents_icon) %>%
-      addAwesomeMarkers(data= agents_sf, lat= agents_sf$Lat, lng= agents_sf$Long, icon = icons, group= groups, label= agent_labels) %>% 
+      addAwesomeMarkers(data= agents_sf, lat= agents_sf$Lat, lng= agents_sf$Long, icon = ~icons[type], group= ~groups[type], label= agent_labels) %>% 
       addLayersControl(                                                                                                           
         overlayGroups = groups,
         options = layersControlOptions(collapsed = FALSE),
-        position= "topleft") %>% 
+        position= "topleft",
+        data= agents_sf) %>% 
             htmlwidgets::onRender("
         function() {
             $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:left\">Agent Type</label>');
@@ -211,7 +191,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     ") %>% 
       #legend for continious scale
       addLegend(pal = pal, values = ~Value, title = legend_title, position = "topright") %>%
-      #addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "topright") %>% 
+      addControl(htmltools::HTML( '<div style="background:grey; width: 10px; height: 10px;"></div><div>Missing values</div>'), position = "topright") %>% 
       #setting default map zoom
       setView(lng = -78.6568942, lat = 38.2315734, zoom = 6.8)
 }
