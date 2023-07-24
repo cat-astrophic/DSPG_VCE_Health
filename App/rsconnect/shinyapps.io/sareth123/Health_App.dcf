@@ -1,0 +1,13 @@
+name: Health_App
+title: Health_App
+username:
+account: sareth123
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9451120
+bundleId: 7453857
+url: https://sareth123.shinyapps.io/Health_App/
+when: 1689275191.776
+lastSyncTime: 1689275191.77601
+asMultiple: FALSE
+asStatic: FALSE
