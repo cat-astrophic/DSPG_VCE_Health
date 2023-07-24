@@ -104,8 +104,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   
  
   # read in va avg data
-  va_avg <- read.csv("./data/with_state_avg.csv") %>% 
-    filter(!(Year %in% c(2021, 2022)))
+  va_avg <- read.csv("./data/with_state_avg.csv") 
   
   #making icons for maps
   snap_agents_icon <- makeAwesomeIcon(icon = "home", library = "fa", iconColor = 'ivory', markerColor = "lightblue")
@@ -557,7 +556,10 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                        "Percent Limited Access to Healthy Foods","Percent Mental Distress","Percent Physical Distress",
                        "Percent Severe Housing Problems","Suicide Rate")
     va_avg <- read.csv("./data/with_state_avg.csv") %>%
-      filter(!(Year %in% c(2021, 2022)))
+    filter(!(Year %in% c(2021, 2022))) 
+    
+
+  
    
     # Filter data for the first selected county and variable
     selection1 <- va_avg[va_avg$County2 == county1 & va_avg$Variable == variable, ] %>% 
@@ -579,6 +581,22 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     avg <- va_avg[va_avg$County2 == "Virginia" & va_avg$Variable == variable, ] %>% 
       na.omit(cols= Value)
     
+    
+    
+    selection1$Value <- as.numeric(selection1$Value)
+    selection2$Value <- as.numeric(selection2$Value)
+    selection4$Value <- as.numeric(selection4$Value)
+    avg$Value <- as.numeric(avg$Value)
+    
+    # selection1 <- selection1[order(selection1$Value), ]
+    # selection2 <- selection2[order(selection2$Value), ]
+    # selection4 <- selection4[order(selection4$Value), ]
+    # avg <- avg[order(avg$Value), ]
+    # 
+   
+    
+    
+    
     # Identify the index of the selected variable
     idx <- which(unique(va_avg$Variable) == variable)
     
@@ -599,9 +617,6 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                 type = "scatter", mode = "lines", 
                 line = list(color = "#D02090", width = 4)) %>%
 
-      # add_trace(data = selection3, x = ~Year, y = ~Value, name = county3,
-      #           type = "scatter", mode = "lines",
-      #           line = list(color = "#7FFF00", width = 4)) %>%
       
       add_trace(data = selection4, x = ~Year, y = ~Value, name = county4,
                 type = "scatter", mode = "lines", 
@@ -617,7 +632,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     
     comparison_plot
   }
-
+  
 
 # 2. Define UI for application ------------------------------------------------------------
 ui <- navbarPage(#title = "DSPG 2023",
