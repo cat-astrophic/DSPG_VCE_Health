@@ -93,14 +93,14 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
   # territory data
   all_territories <- read.csv("./data/all_agent_solutions.csv")
   # snap territory data
-  snap_territories <- read.csv("./data/snap_results.csv")
+  snap_territories <- read.csv("./data/results_snap2.csv")
 
   #convert new agent locations to sf
   additional_agent_sf <- st_as_sf(all_territories, coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant" )
   additional_agent_sf$markerColor <- ifelse(additional_agent_sf$new_agent == 0, "blue", "red")
 
   #load nonsnap terr
-  fcs_territories <- read.csv("./data/non_snap_results1.csv")%>%
+  fcs_territories <- read.csv("./data/results_non_snap2.csv")%>%
     transform(Lat = as.numeric(Lat),
               Long = as.numeric(Long))
   
@@ -592,19 +592,19 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     comparison_plot <- plot_ly() %>%
       add_trace(data = selection1, x = ~Year, y = ~Value, name = county1,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#440154ff", width = 4)) %>%
+                line = list(color = "#8B2323", width = 4)) %>%
       add_trace(data = selection2, x = ~Year, y = ~Value, name = county2,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#7AD151FF", width = 4)) %>%
+                line = list(color = "#D02090", width = 4)) %>%
 
       
       add_trace(data = selection4, x = ~Year, y = ~Value, name = county4,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#22A884FF", width = 4)) %>%
+                line = list(color = "#D00", width = 4)) %>%
 
       add_trace(data = avg, x = ~Year, y = ~Value, name = "State Average",
                 type = "scatter", mode = "lines", 
-                line = list(color = "#FDE725FF", width = 4)) %>%
+                line = list(color = "#3F4788FF", width = 4)) %>%
       layout(title = map_title, 
              xaxis = list(tickvals= c(2016, 2017, 2018, 2019, 2020),title = 'Years'),
              yaxis = list(title = good_names[idx]),
@@ -1234,12 +1234,12 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                             p(strong("Behavioral Risk Factor Surveillance System (BRFSS)"),"BRFSS stands as the leading national platform for health-related telephone surveys. Its primary objective is to gather state-level data on health-related risk 
                                                             behaviors, chronic health conditions, and the utilization of preventive services among U.S. residents.")),
                                                      column(4,
-                                                            img(src = "cdc_stat.jpg", style = "display: inline; float: left;", width = "250px"),
+                                                            img(src = "cdc_stat.jpg", style = "display: inline; float: left;", width = "230px"),
                                                             p(strong("CDC National Center for Health Statistics(NCHS)"),"The NCHS is responsible for the collection, analysis, and dissemination of health data and statistics. NCHS focuses on providing timely, relevant, and accurate information 
                                                             that informs the public and assists in making program and policy decisions aimed at enhancing the health of our nation. Through its products and services, NCHS strives to contribute to the improvement of public health.
                                                             Our team used this data to dive deeper into the public health landscape of the Commonwealth.")),
                                                      column(4,
-                                                            img(src = "census.jpg", style = "display: inline; float: left;", width = "200px"),
+                                                            img(src = "census.jpg", style = "display: inline; float: left;", width = "230px"),
                                                             p(strong("United States Census Bureau"),"The primary objective of the Census Bureau is to fulfill its role as the foremost provider of high-quality data concerning the people and economy of the nation. Their mission centers 
                                                               around delivering data that encompasses an ideal combination of timeliness, relevance, quality, and cost-effectiveness. Our team used insightful data on the demographics of Virginia to enhance our dashboard's descriptiveness")),
                                                             
@@ -1252,20 +1252,16 @@ ui <- navbarPage(#title = "DSPG 2023",
 
                                              fluidRow(style = "margin: 6px;", align = "left",
                                                       column(4,
-                                                             img(src = "usda_ers.jpg", style = "display: inline; float: left;", width = "150px"),
+                                                             img(src = "usda_ers.jpg", style = "display: inline; float: left;", width = "230px"),
                                                              p(strong("USDA Economic Research Service (ERS)"),"The mission of the ERS, a part of the U.S. Department of Agriculture, is to proactively identify trends and emerging issues in agriculture, 
                                                                food, the environment, and rural America. Through conducting rigorous and unbiased economic research, the ERS aims to provide valuable insights that inform and enrich decision-making processes 
                                                                for both public and private sectors. The team used ERS data on the food environment in Virginia to help Agents better tailor their FCS programming .")),
                                                       column(4,
-                                                             img(src = "bureau_labor_stat.jpg", style = "display: inline; float: left;", width = "200px"),
+                                                             img(src = "bureau_labor_stat.jpg", style = "display: inline; float: left;", width = "230px"),
                                                              p(strong("Bureau of Labor Statistics (BLS)"),"The BLS is responsible for assessing labor market activity, working conditions, price fluctuations, and productivity 
                                                                within the U.S. economy. Their primary objective is to provide essential data that supports decision-making processes in both public and private sectors.By improving working conditions, expanding opportunities for meaningful employment, and 
                                                                ensuring the provision of work-related benefits and rights, they contribute to fostering the welfare of individuals and promoting their economic stability. The team looked at BLS data to analyze how economic stability in Virginians lives effects
                                                                their overall well-being and access to healthcare.")),
-                                                      column(4,
-                                                             img(src = "cms.jpg", style = "display: inline; float: left;", width = "200px"),
-                                                             p(strong("Centers of Medicare & Medicaid (CMS)"),"This CMS operates as a reliable partner and steward for the public, committed to promoting health equity, enhancing coverage, and elevating health outcomes.
-                                                               The team used CMS data to map healthcare access and coverage across the Commonwealth."))
                                                       
                                                       
                                    ),
@@ -1900,7 +1896,7 @@ server <- function(input, output) {
   output$territorydescription_snaped <- renderText({
     if (input$territory_type == "base" & input$zscore_type == "food") {
       HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and no new agents added.
+         <li> The map displays ideal territories assigned to SNAP-Ed agents based on food insecurity z-scores and no new agents added.
          <li> Territories are determined using data from food insecurity, population, commute time, and VCE districts while considering model constraints.
          <li> Each color on the map represents a unique FCS agent's territory.
          <li> User icon: FCS agent sites.
