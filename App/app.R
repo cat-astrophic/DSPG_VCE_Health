@@ -474,7 +474,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     idx2 <- which(unique(fcs_territories$non_snap_zcore_type) == zscore_type_non_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
-    territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
+    territory_title <- paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
 
     #making icon set for legend
     icons <- awesomeIconList(
@@ -573,10 +573,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     # selection4 <- selection4[order(selection4$Value), ]
     # avg <- avg[order(avg$Value), ]
     # 
-   
-    
-    
-    
+
     # Identify the index of the selected variable
     idx <- which(unique(va_avg$Variable) == variable)
     
@@ -592,19 +589,19 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     comparison_plot <- plot_ly() %>%
       add_trace(data = selection1, x = ~Year, y = ~Value, name = county1,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#8B2323", width = 4)) %>%
+                line = list(color = "#440154ff", width = 4)) %>%
       add_trace(data = selection2, x = ~Year, y = ~Value, name = county2,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#D02090", width = 4)) %>%
+                line = list(color = "#7AD151FF", width = 4)) %>%
 
       
       add_trace(data = selection4, x = ~Year, y = ~Value, name = county4,
                 type = "scatter", mode = "lines", 
-                line = list(color = "#D00", width = 4)) %>%
+                line = list(color = "#FDE725FF", width = 4)) %>%
 
       add_trace(data = avg, x = ~Year, y = ~Value, name = "State Average",
                 type = "scatter", mode = "lines", 
-                line = list(color = "#3F4788FF", width = 4)) %>%
+                line = list(color = "#2A788EFF", width = 4)) %>%
       layout(title = map_title, 
              xaxis = list(tickvals= c(2016, 2017, 2018, 2019, 2020),title = 'Years'),
              yaxis = list(title = good_names[idx]),
