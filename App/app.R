@@ -320,64 +320,64 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
 
   # snap territory function
   snap_territory <- function(territory_type_snaped, zscore_type_snaped) {
-    
+
     temp2 <- snap_territories[snap_territories$snap_territory_type == territory_type_snaped & snap_territories$snap_zscore_type == zscore_type_snaped, ]
-    
+
     #convert new agent locations to sf
-    additional_agent_sf <- temp2 %>% 
-      
+    additional_agent_sf <- temp2 %>%
+
       # Convert new agent locations to sf
       st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
-    
+
     #separating snap agents
     snap_agents <- additional_agent_sf%>% filter(new_agent == 0)
     new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
-    
+
     #assigning colors for each agent territory
     pal <- colorFactor(palette = c("#004949" , "#fc4e2a","#FDE725FF","#21214f","#332288",
-                                   
-                                   "#1f77b4", "#018571","#ffffb3","#9a5baf", "#B12A90FF", 
-                                   "#ffa500","#e7298a", "#c2df23"), 
+
+                                   "#1f77b4", "#018571","#ffffb3","#9a5baf", "#B12A90FF",
+                                   "#ffa500","#e7298a", "#c2df23","#ff69b4", "#8c4f96" ),
                        domain= snap_territories$Agent,
-                       levels= c( "Arlington","Franklin","Lynchburg City",
+                       levels= c( "Albemarle","Arlington","Franklin","Lynchburg City",
                                   "Newport News City","Pittsylvania",
                                   "Roanoke","Rockbridge","Virginia Beach City",
                                   "Washington","Northeast District Office", "Madison",
-                                  "Accomack", "Mathews"))
-    
+                                  "Warren", "Frederick", "Prince George"))
+
     # create labels for counties
     county_labels <- sprintf(
       "<strong>%s</strong><br/> Served by Agent From: %s",
       territory.counties$NAMELSAD,
       territory.counties$Agent
     ) %>% lapply(htmltools::HTML)
-    
+
     snap_agent_labels <- sprintf(
       "<strong>SNAP-Ed Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
       additional_agent_sf$Job.Dept,
       additional_agent_sf$Employee.Name,
       additional_agent_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
-    
+
     new_agent_labels <- sprintf(
       "<strong>New Agent Site </strong><br/>District Office: %s",
       additional_agent_sf$Job.Dept
     ) %>% lapply(htmltools::HTML)
-    
+
     #creating good title names
     idx2 <- which(unique(snap_territories$snap_zscore_type) == zscore_type_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS/SNAP-Ed Agent Territories based on",good_title_names[idx2], "Z-scores", sep= " ")
     #territory_title = paste("New VCE FCS Agent Territories based on",variable_title, "Z-scores")
-    
+
     #making icon set for legend
     icons <- awesomeIconList(
       `FCS/SNAP-Ed Agents` = snap_agents_icon,
       `New Agents` = new_agent_icon)
-    
+
     # create leaflet map
     leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -408,36 +408,36 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                            title = htmltools::tags$div(
                              style = 'font-size: 20px;',
                              'Agent Type:'),
-                           labelStyle = 'font-size: 14px;') %>% 
+                           labelStyle = 'font-size: 14px;') %>%
       setView(lng = -79.5, lat = 38.2315734, zoom = 6.5) %>%
       addControl(htmltools::HTML(paste0("<h3 style='margin:3px'>", territory_title, "</h2>")), position = "topright", data = NULL)
   }
-  # ONLY fcs territory function
+  #ONLY fcs territory function
   fcs_territory <- function(territory_type_non_snaped, zscore_type_non_snaped) {
-    
+
     temp2 <- fcs_territories[fcs_territories$non_snap_territory_type == territory_type_non_snaped & fcs_territories$non_snap_zscore_type == zscore_type_non_snaped, ]
-    
+
     #convert new agent locations to sf
-    additional_agent_sf <- temp2 %>% 
-      
+    additional_agent_sf <- temp2 %>%
+
       # Convert new agent locations to sf
       st_as_sf(coords = c("Long", "Lat"), remove = FALSE, crs = 4326, agr = "constant")
     #joining variable data with county geometry data
     territory.counties <- left_join(va.counties, temp2, by = 'NAMELSAD')
-    
+
     non_snap <- additional_agent_sf %>% filter(new_agent == 0)
     new_agent <- additional_agent_sf%>%  filter(new_agent == 1)
     #assigning colors for each agent territory
     pal <- colorFactor(palette = c("#fee08b" , "#fc4e2a","#35b779","#21214f","#332288",
-                                   
-                                   "#ff69b4", "#018571","#ffffb3","#006d2c", "#B12A90FF", "#4a9848", 
-                                   
-                                   "#488fc1", "#c2df23", "#004949","#924900" ,"#c44e52", "#fde0dd", 
-                                   
-                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#b31a1c", 
-                                   
-                                   "#e7298a","#FDE725FF", "#440154", "#f0fff0", "#3b528b", "#b31a1c" ), 
-                       
+
+                                   "#ff69b4", "#018571","#ffffb3","#006d2c", "#B12A90FF", "#4a9848",
+
+                                   "#488fc1", "#c2df23", "#004949","#924900" ,"#c44e52", "#fde0dd",
+
+                                   "#b3e183","#8e0152", "#8c4f96", "#f98e2b","#a1c9f4", "#1695a3", "#b31a1c",
+
+                                   "#e7298a","#FDE725FF", "#440154", "#f0fff0"),
+
                        domain= fcs_territories$Agent,
                        levels= c( "Albemarle","Amelia","Amherst", "Bedford",
                                   "Chesapeake City","Fairfax","Floyd","Gloucester",
@@ -446,9 +446,9 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
                                   "Orange","Patrick","Petersburg City",
                                   "Pulaski","Richmond City","Rockingham",
                                   "Spotsylvania","Virginia Beach City North","Warren",
-                                  "Bland", "Smyth", "Richmond", "Accomack"
-                       ))    
-    
+                                  "Arlington", "Rockbridge"
+                       ))
+
     # create labels for counties
     county_labels <- sprintf(
       "<strong>%s</strong><br/> Served by Agent From: %s",
@@ -456,7 +456,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       territory.counties$Agent
     ) %>% lapply(htmltools::HTML)
 
-    
+
     # create labels for agents
     agent_labels <- sprintf(
       "<strong>Agent Site </strong><br/>District Office: %s <br/> Agent Name: %s<br/> Contact Info: %s",
@@ -464,23 +464,23 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
       additional_agent_sf$Employee.Name,
       additional_agent_sf$VT.Email
     ) %>% lapply(htmltools::HTML)
-    
+
     new_agent_labels <- sprintf(
       "<strong>New Agent Site </strong><br/>District Office: %s",
       additional_agent_sf$Job.Dept
     ) %>% lapply(htmltools::HTML)
-    
+
     #creating good title names
     idx2 <- which(unique(fcs_territories$non_snap_zcore_type) == zscore_type_non_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title = paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
-    
+
     #making icon set for legend
     icons <- awesomeIconList(
       `FCS Agents` = agents_icon,
       `New Agents` = new_agent_icon)
-    
+
     # create leaflet map
     leaflet(data = territory.counties) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
@@ -1901,10 +1901,10 @@ server <- function(input, output) {
          <li> Each color on the map represents a unique FCS agent's territory.
          <li> User icon: FCS agent sites.
          <li> Home icon: FCS agents who work with SNAP-Ed.
-         
-         
+
+
           ")
-      
+
     } else if (input$territory_type == "base" & input$zscore_type == "obese") {
       HTML("<ul>
          <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and no new agents added.
@@ -1920,10 +1920,10 @@ server <- function(input, output) {
          <li> Each color on the map represents a unique FCS agent's territory.
          <li> User icon: FCS agent sites.
          <li> Home icon: FCS agents who work with SNAP-Ed.")
-      
+
     } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and no new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and no new agents added.
        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -1950,7 +1950,7 @@ server <- function(input, output) {
          <li> User icon: FCS agent sites.
          <li> Home icon: FCS agents who work with SNAP-Ed.
          <li> Star icon: New agent sites: Prince William County"
-         
+
       )
     } else if (input$territory_type == "one" & input$zscore_type == "obese") {
       HTML("<ul>
@@ -1960,7 +1960,7 @@ server <- function(input, output) {
          <li> User icon: FCS agent sites.
          <li> Home icon: FCS agents who work with SNAP-Ed.
          <li> Star icon: New agent sites: Frederick County"
-         
+
       )
     } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
       HTML("<ul>
@@ -1970,11 +1970,11 @@ server <- function(input, output) {
          <li> User icon: FCS agent sites.
          <li> Home icon: FCS agents who work with SNAP-Ed.
          <li> Star icon: New agent sites: Augusta County"
-         
+
       )
     } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added.
        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -1983,7 +1983,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added.
        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -1992,7 +1992,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and one new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and one new agents added.
        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -2001,7 +2001,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "two" & input$zscore_type == "food") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and two new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and two new agents added.
        <li> Territories are determined using data from all the food insecurity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -2010,7 +2010,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "two" & input$zscore_type == "obese") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and two new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and two new agents added.
        <li> Territories are determined using data from all the obesity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -2019,7 +2019,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and two new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and two new agents added.
        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -2028,7 +2028,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and two new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and two new agents added.
        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -2037,7 +2037,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and two new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and two new agents added.
        <li> Territories are determined using data from all the low birthweight z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -2046,7 +2046,7 @@ server <- function(input, output) {
        ")
     } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
       HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and two new agents added. 
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and two new agents added.
        <li> Territories are determined using data from all the diabetes z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
        <li> Each color on the map represents a unique FCS agent's territory.
        <li> User icon: FCS agent sites.
@@ -2056,7 +2056,7 @@ server <- function(input, output) {
     } else {
       "This map shows territories for no new agents."
     }
-  })
+ })
  # nonsnaped terr server-----
   observe({
     territory_type_non_snaped <- input$territory_type_non_snaped
@@ -2067,170 +2067,170 @@ server <- function(input, output) {
       map_non_snaped
     })
   })
-  output$territorydescription_nonsnaped <- renderText({
-    if (input$territory_type == "base" & input$zscore_type == "food") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and no new agents added.
-         <li> Territories are determined using data from food insecurity, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.
-         
-         
-          ")
-      
-    } else if (input$territory_type == "base" & input$zscore_type == "obese") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and no new agents added.
-         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.
-")
-    } else if (input$territory_type == "base" && input$zscore_type == "inactivity") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and no new agents added.
-         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.")
-      
-    } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and no new agents added. 
-       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.")
-    } else if (input$territory_type == "base" & input$zscore_type == "lowbirth") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and no new agents added.
-         <li> Territories are determined using data from percent of low birthweight, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.")
-    } else if (input$territory_type == "base" & input$zscore_type == "diabetes") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and no new agents added.
-         <li> Territories are determined using data from diabetes rates, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.")
-    } else if (input$territory_type == "one" & input$zscore_type == "food") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and one new agents added.
-         <li> Territories are determined using data from food insecurity rates, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.
-         <li> Star icon: New agent sites: Prince William County"
-         
-      )
-    } else if (input$territory_type == "one" & input$zscore_type == "obese") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and one new agents added.
-         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.
-         <li> Star icon: New agent sites: Frederick County"
-         
-      )
-    } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
-      HTML("<ul>
-         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and one new agents added.
-         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
-         <li> Each color on the map represents a unique FCS agent's territory.
-         <li> User icon: FCS agent sites.
-         <li> Home icon: FCS agents who work with SNAP-Ed.
-         <li> Star icon: New agent sites: Augusta County"
-         
-      )
-    } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
-       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County
-       ")
-    } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
-       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County
-       ")
-    } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and one new agents added. 
-       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County
-       ")
-    } else if (input$territory_type == "two" & input$zscore_type == "food") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and two new agents added. 
-       <li> Territories are determined using data from all the food insecurity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Prince William County, Essex County
-       ")
-    } else if (input$territory_type == "two" & input$zscore_type == "obese") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and two new agents added. 
-       <li> Territories are determined using data from all the obesity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County, Augusta County
-       ")
-    } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and two new agents added. 
-       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County, Augusta County
-       ")
-    } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and two new agents added. 
-       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County, Augusta County
-       ")
-    } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and two new agents added. 
-       <li> Territories are determined using data from all the low birthweight z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County, Augusta County
-       ")
-    } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
-      HTML("<ul>
-       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and two new agents added. 
-       <li> Territories are determined using data from all the diabetes z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
-       <li> Each color on the map represents a unique FCS agent's territory.
-       <li> User icon: FCS agent sites.
-       <li> Home icon: FCS agents who work with SNAP-Ed.
-       <li> Star icon: New agent sites: Frederick County, Augusta County
-       ")
-    } else {
-      "This map shows territories for no new agents."
-    }
-  })
+#   output$territorydescription_nonsnaped <- renderText({
+#     if (input$territory_type == "base" & input$zscore_type == "food") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and no new agents added.
+#          <li> Territories are determined using data from food insecurity, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.
+#          
+#          
+#           ")
+#       
+#     } else if (input$territory_type == "base" & input$zscore_type == "obese") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and no new agents added.
+#          <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.
+# ")
+#     } else if (input$territory_type == "base" && input$zscore_type == "inactivity") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and no new agents added.
+#          <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.")
+#       
+#     } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and no new agents added. 
+#        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.")
+#     } else if (input$territory_type == "base" & input$zscore_type == "lowbirth") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and no new agents added.
+#          <li> Territories are determined using data from percent of low birthweight, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.")
+#     } else if (input$territory_type == "base" & input$zscore_type == "diabetes") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and no new agents added.
+#          <li> Territories are determined using data from diabetes rates, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.")
+#     } else if (input$territory_type == "one" & input$zscore_type == "food") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and one new agents added.
+#          <li> Territories are determined using data from food insecurity rates, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.
+#          <li> Star icon: New agent sites: Prince William County"
+#          
+#       )
+#     } else if (input$territory_type == "one" & input$zscore_type == "obese") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and one new agents added.
+#          <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.
+#          <li> Star icon: New agent sites: Frederick County"
+#          
+#       )
+#     } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
+#       HTML("<ul>
+#          <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and one new agents added.
+#          <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+#          <li> Each color on the map represents a unique FCS agent's territory.
+#          <li> User icon: FCS agent sites.
+#          <li> Home icon: FCS agents who work with SNAP-Ed.
+#          <li> Star icon: New agent sites: Augusta County"
+#          
+#       )
+#     } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+#        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County
+#        ")
+#     } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+#        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County
+#        ")
+#     } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and one new agents added. 
+#        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County
+#        ")
+#     } else if (input$territory_type == "two" & input$zscore_type == "food") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and two new agents added. 
+#        <li> Territories are determined using data from all the food insecurity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Prince William County, Essex County
+#        ")
+#     } else if (input$territory_type == "two" & input$zscore_type == "obese") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and two new agents added. 
+#        <li> Territories are determined using data from all the obesity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County, Augusta County
+#        ")
+#     } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and two new agents added. 
+#        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County, Augusta County
+#        ")
+#     } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and two new agents added. 
+#        <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County, Augusta County
+#        ")
+#     } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and two new agents added. 
+#        <li> Territories are determined using data from all the low birthweight z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County, Augusta County
+#        ")
+#     } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
+#       HTML("<ul>
+#        <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and two new agents added. 
+#        <li> Territories are determined using data from all the diabetes z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+#        <li> Each color on the map represents a unique FCS agent's territory.
+#        <li> User icon: FCS agent sites.
+#        <li> Home icon: FCS agents who work with SNAP-Ed.
+#        <li> Star icon: New agent sites: Frederick County, Augusta County
+#        ")
+#     } else {
+#       "This map shows territories for no new agents."
+#     }
+#   })
   
 }
 
