@@ -680,30 +680,37 @@ ui <- navbarPage(#title = "DSPG 2023",
                 navbarMenu("Social Determinants of Health" ,
                             ### 2.2.0 Subtab Virginia Public Health Overview
                             tabPanel("Public Health Overview",
-                                     fluidRow(style = "margin: 12px;",
-                                              h1(strong("Public Health in Virginia"), align = "center"),
-                                              p("", style = "padding-top:10px;")),
-                                     fluidRow(style = "margin: 12px;",
-                                              align = "justify",
-                                              column(12,
-                                                     p("The field of public health is concerned with factors that influence the health and well-being of individuals and communities. One crucial category of factors that shapes health outcomes is the social determinants of health. According to the World Health Organization, social determinants of health are “the conditions in which people are born, grow, live, work and age”. Social determinants of health affect peoples’ ability to eat healthy foods, live healthy lifestyles, and access healthcare when needed. They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. They do so by shaping opportunities for good health, influencing the distribution of resources and power within society, and creating conditions that can either improve or erode individual and community health. "),
+                                     fluidRow(
+                                       style = "margin: 12px;",
+                                       h1(strong("Public Health in Virginia"), align = "center"),
+                                       p("", style = "padding-top:10px;")
+                                     ),
+                                     
+                                     fluidRow(
+                                       style = "margin: 12px;",
+                                       align = "justify",
+                                       column(12,
+                                              p("The field of public health is concerned with factors that influence the health and well-being of individuals and communities. One crucial category of factors that shape health outcomes is the social determinants of health. According to the World Health Organization, social determinants of health are “the conditions in which people are born, grow, live, work, and age”. These determinants affect peoples’ ability to eat healthy foods, live healthy lifestyles, and access healthcare when needed. They encompass a wide range of factors, including socioeconomic status, education, neighborhood, physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. They do so by shaping opportunities for good health, influencing the distribution of resources and power within society, and creating conditions that can either improve or erode individual and community health."),
+                                              column(6,
+                                                     h2("Social Determinants of Health in Virginia", align = "center"),
+                                                     p("Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, and motor vehicle crashes reduce the life expectancy of Virginians. Due to the contrasting urban and rural regions in Virginia, public health needs vary drastically across the Commonwealth. In wealthier localities with relatively better social determinants of health, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 municipalities was below the national average."),
+                                                     p("Spending about $95 per Capita, the Virginia Department of Health’s budget remains effectively unchanged for the past 20 years, when adjusted for inflation and population growth. Additionally, federal funding sometimes does not match the specific needs of localities. Federal funding often prioritizes diseases that draw the most attention, and while this benefits disease prevention at the national level, it unintentionally results in the underinvestment of many necessary local programs that affect social determinants of health."),
+                                                     p("For these reasons, the Family and Consumer Sciences (FCS) division of Virginia Cooperative Extension works to address these social determinants of health, particularly in communities with relatively poor social determinants of health. The data presented in the Social Determinants of Health component of this dashboard show the variation in social determinants of health and health outcomes across both time and space. FCS agents as well as the general public can use the Social Determinants of Health component of this dashboard to gain a better understanding of the needs of their communities, to determine the effects of various policies, and to learn about public health in the Commonwealth broadly.")
                                               ),
                                               column(6,
-                                                    h2("Social Determinants of Health", align = "center"),
-                                                    p("Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, and motor vehicle crashes reduce the life expectancy of Virginians. Due to the contrasting urban and rural regions in Virginia, public health needs vary drastically across the Commonwealth. In wealthier localities with relatively better social determinants of health, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 municipalities were below the national average. The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years.  "),
-                                                    
-                                                    ),
-                                              column(6,
-                                                     img(src = "sdoh.jpg", style = "display: inline; margin-right: 5px; ", width = "600px;", align = "center"))
-                                     
-                                               )
-                            ),
+                                                     img(src = "sdoh.jpg", style = "display: inline; margin-right: 5px;", width = "600px;", align = "center"),
+                                                     p("Figure 1: Social Determinants of Health Categories Explored", align = "center", style = "font-style: italic; font-size: 12px; margin-top: 5px;")
+                                              )
+                                              
+                                       ))),
+                                       
                  
                          
 
                            tabPanel("Dashboard",
                                     h1(strong("Health Variables"), align = "center"),
-                                    p("Below, you will find various variables that are considered important for understanding the social determinants of health. The variables are grouped into five different categories, each of which allows you to select different variables. The result will include a map displaying the selected variables, as well as the locations of FCS (Food and Consumer Sciences) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites.", align = "center"),
+                                    p("We have a range of health variables that help us understand the social determinants of health. These variables are categorized into five groups, and demographics, giving you the flexibility to select different variables. The result of your selection will be presented on an informative map, and a time series graph displaying the chosen variables, as well as the locations of FCS (Food and Consumer Sciences) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites. FCS agents are represented by user icons, while SNAP-Ed agents are depicted by home icons. The map will provide a comprehensive view of the social determinants of health and the geographical distribution of these agents, aiding in our efforts to optimize their services and promote community well-being.", align = "center"),
+                                   
                                     tabsetPanel(
                                       
                                       # 2.2.1 demographics -----
@@ -717,9 +724,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                
                                                                h4(strong("Summary")),
                                                                htmlOutput("DemographicsDefinition"),
-                                                               h6("References"),
-                                                               p(tags$small("Food Environment Index. (n.d.). County Health Rankings & Roadmaps. https://www.countyhealthrankings.org/explore-health-rankings/county-health-rankings-model/health-factors/health-behaviors/diet-and-exercise/food-environment-index?year=2023")),
-                                                               p("")
+                                                               # h6("References"),
+                                                               # p(tags$small("Food Environment Index. (n.d.). County Health Rankings & Roadmaps. https://www.countyhealthrankings.org/explore-health-rankings/county-health-rankings-model/health-factors/health-behaviors/diet-and-exercise/food-environment-index?year=2023")),
+                                                               # p("")
                                                                
                                                                
                                                         ) ,
@@ -998,6 +1005,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                            
 
                  ),
+                 fluidRow(style = "margin 12px;",
+                          align = "justify"),
+                          p("Note: All defnitions and summary are adopted from the County Health Rankings website: https://www.countyhealthrankings.org/explore-health-rankings/county-health-rankings-model/health-factors/health-behaviors/diet-and-exercise/food-environment-index?year=2023"),
                  ),
                 ),
                  
@@ -1008,7 +1018,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                              h1(strong("Agent Optimization Process"), align = "center")),
                                     fluidRow(style = "margin: 12px;",
                                              column(12,
-                                                    titlePanel(strong("Overview")),
+                                                    titlePanel("Overview"),
                                                     p("Our primary objective is to enhance the efficiency of FCS (Food and Consumer Sciences) agent efforts by strategically determining optimal territories for these agents to cover. Given that not all counties currently have FCS agents, our aim is to find the most effective way to allocate their efforts across different areas. 
                                                         We want to avoid situations where some agents are serving relatively well-off counties while others are burdened with multiple counties, some of which may be challenging to access due to long travel times."),
                                                         p("To achieve this goal, we will spatially optimize the distribution of existing agents, ensuring a balanced and equitable allocation of their services. This means identifying areas where FCS agents can make the most significant impact and where their services are most needed.
@@ -1025,13 +1035,13 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                         h1(strong("Programming"), align = "center"),
                                                         fluidRow(style = "margin: 12px;",
                                                              column(6,
-                                                                    h1(strong("Objective Function"), align = "center"),
+                                                                    h1("Objective Function", align = "center"),
                                                                     img(src = "equation.png", style = "display: inline; margin-right: 5px; ", width = "500px;", align = "center"),
                                                                     p("The objective of this model is to maximize the population-weighted need of each county, which serves as a measure of the overall demand for services in a given area. By maximizing this objective, the model aims to allocate resources in a way that addresses the varying needs of different counties effectively. To ensure a realistic and practical allocation, the model incorporates four constraints that capture the challenges faced by agents. These constraints are designed to limit the workload of agents and consider the constraints they encounter in their service provision."),
                                                                     tags$li(strong("Population:")),
                                                                     p("The population factor plays a crucial role in this mathematical program as it addresses the challenges faced by agents in serving counties with varying population densities. By setting a limit of 1.2 million people for each agent, we ensure that the workload is distributed fairly and that no agent becomes overwhelmed with an excessively large population to serve. This constraint helps to balance the distribution of agents across counties, considering their respective populations."),
                                                                     tags$li(strong("Distance:")),
-                                                                    p("The distance constraint is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need."),
+                                                                    p("The distance factor is another critical component of this model as it addresses the challenges related to geographical distances that agents must cover in their service provision. By imposing a constraint on the maximum distance an agent can travel, we ensure that the service coverage is feasible and practical in terms of travel time and logistics. The distance constraint acknowledges that agents have limitations on how far they can travel to reach the counties they serve. This constraint helps to account for the time and resources required for agents to travel between counties, ensuring that they can provide timely and efficient services to the populations in need."),
                                                                     tags$li(strong("Need:")),
                                                                     p("The need factor is specifically determined by the unique needs of each county. These needs are based on various social determinants of health variables. Given that each county requires different services, 
                                                                       it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
@@ -1040,7 +1050,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                       p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 120 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time."),
                                                                       tags$li(strong("Unique assignment")),
                                                                       p("The county assignment constraint ensures that every county is allocated to an agent, leaving no county without coverage. This constraint guarantees that each county receives the attention and support of an assigned agent. By assigning agents to specific counties, we can ensure that the unique needs and characteristics of each county are addressed, providing tailored services and resources to the communities within them. This approach promotes comprehensive coverage and equitable distribution of support across all counties, leaving no county overlooked or underserved."),
-                                                                      tags$li(strong("Population served less than 1.2 million")),
+                                                                      tags$li(strong("Population served less than 1.2 million people")),
                                                                       p("The population constraint serves as an important mechanism to ensure that agents are not overwhelmed with excessive workloads. By considering the varying population density, particularly in rural and urban areas, we can identify imbalances where some agents may be burdened with more individuals to assist, while others have a lighter workload. 
                                                                       This constraint helps maintain a fair distribution of responsibilities among agents, ensuring that they can effectively and efficiently serve the population within their capacity."),
                                                                       tags$li(strong("District(agent) = district(county)")),
@@ -1074,9 +1084,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                 fluidRow(
                                                   style = "margin: 12px;",
                                                   h1(strong("Results"), align = "center"),
-                                                  column(4,
+                                                  column(12,
                                                          p("This section shows the results for mapping FCS agents including those working with SNAP-Ed."),
-                                                          p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agent for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
+                                                          p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agents for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
                                                   )
                                                 ),
                                                 
@@ -1113,9 +1123,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                 fluidRow(
                                                   style = "margin: 12px;",
                                                   h1(strong("Results"), align = "center"),
-                                                  column(4,
+                                                  column(12,
                                                          p("This section shows the results for mapping FCS agents who only work with SNAP-Ed."),
-                                                         p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agent for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
+                                                         p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agents for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
                                                   )
                                                 ),
 
@@ -1152,7 +1162,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                fluidRow(
                                                  style = "margin: 12px;",
                                                  h1(strong("Results"), align = "center"),
-                                                 column(4,
+                                                 column(12,
                                                         p("This section shows the results for mapping other FCS agents who are not working with SNAP-Ed."),
                                                         p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agent for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
                                                  )
@@ -1641,7 +1651,7 @@ server <- function(input, output) {
     } else if(input$neighbor_envr == "per_insufficient_sleep"){
       HTML("% Insufficient Sleep: Percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).<br><br>
     Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being.")
-    } else if(input$neighbor_envr == "per_severe_housing_problem"){
+    } else if(input$neighbor_envr == "per_severe_housing_problems"){
       HTML("% Severe Housing Problems: Percentage of households with at least 1 of 4 housing problems: overcrowding, high housing costs, lack of kitchen facilities, or lack of plumbing facilities.<br><br>
     Life in the built environment, ought to be safe for a person to grow and develop in a healthy way. Inadequate housing can make negative contributions to health like infectious and chronic diseases, injuries, and poor child development. Households experiencing severe cost burdens are likely to face tradeoffs in meeting other basic needs which in turn can lead to mental/emotional strain.")
     } else {
