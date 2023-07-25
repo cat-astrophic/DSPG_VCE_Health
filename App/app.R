@@ -646,12 +646,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                                       
                                           p("VCE agents and volunteers strive to empower youth and Virginian farmers, guide sustainable resource management, and promote public health. VCE accomplishes these goals through programs that put research-based knowledge to work in people’s lives. VCE has a variety of programs like 4-H Youth Development, Family and Consumer Sciences, Community Viability, Agriculture and Natural Resources, Food, Nutrition, and Health, etc. in every county. VCE works on unique challenges Virginians face in partnership with governments and organizations to solve these issues in a way that benefits all people. With the expertise and knowledge from Virginia Tech and Virginia State University, VCE agents are able to tackle issues and foster community growth across the state. "),
                   
-                                          p(strong("Family Consumer Sciences:"),
+                                          p(strong("Family and Consumer Sciences:"),
                                           p("This project focuses on VCE's Family and Consumer Sciences Program and the agents supporting it. FCS programming addresses community needs, including Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents collaborate with various organizations to meet local residents' educational needs and make research-based knowledge applicable to their lives. "),
                                           p(strong("Supplemental Nutrition Assistance Program-Education: "),
-                                            p("We will also be focusing on SNAP-Ed agents. SNAP-Ed is a federally funded program that operates through partnerships with state and local organizations, including Cooperative Extension offices in Virginia.
-                                            Their primary goal is to promote healthy eating habits, improve food choices, and enhance food security among SNAP recipients."),
-                                   ))))),
+                                            p("SNAP-Ed agents play a vital role in promoting healthy eating habits, improving food choices, and enhancing food security among SNAP recipients, with a specific focus on women in low-income families. Through the federally funded program, operating in collaboration with state and local organizations, including Cooperative Extension offices in Virginia, these agents offer evidence-based nutrition education to participants. They conduct workshops, cooking demonstrations, and educational programs to educate women on the importance of a balanced diet, reading nutrition labels, and preparing affordable, nutritious meals. Additionally, SNAP-Ed agents teach practical skills related to food budgeting and planning, enabling participants to make the most of their resources and access fresh produce and healthy foods in their communities."
+                                              )))))), 
                                    column(6,
                                           h2(strong("Our Work"), align = "center"),
                                           p(strong("Purpose:")),
@@ -687,25 +686,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                                      fluidRow(style = "margin: 12px;",
                                               align = "justify",
                                               column(12,
-                                                     p("In the past 100 years, Virginia has seen tremendous growth in its public health sector, nevertheless, there are still many areas that are in need of significant improvement. 
-                                                       Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, gun violence, and motor vehicle crashes have plagued the welfare of the Commonwealth. Due to the contrasting urban and rural regions in Virginia, health varies drastically based on where Virginians reside. 
-                                                       In the more wealthy and populated localities, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 counties fell below the national average. 
-                                                       The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years. 
-                                                       Virginia struggles to provide clean air and water, safe roadways, protection from communicable diseases, and other essential public health services to the entire population of the Commonwealth."),
-                                                     p("Virginia’s unfavorable health outcomes can be attributed to the lack of public health funding and poor access to affordable healthcare. 
-                                                       The Joint Commission on Health Care found that Virginia ranks in the bottom third of states in public health spending. Spending about $95 per Capita, the Virginia Department 
-                                                       of Health’s budget has remained unchanged for the past 20 years, when adjusted for inflation and population growth. Additionally, federal funding sometimes do not match the specific needs of localities. 
-                                                       Federal funding often prioritizes diseases that draw the most attention and while this benefits disease prevention, it unintentionally results in the underinvestment of many needed programs that affect the social determinants of health. 
-                                                       Moreover, this lack of funding results in public health workforce shortages, and causes workers like VCE FCS agents to be overworked and overwhelmed by the needs of the population. 
-                                                       Staffing shortages inhibit local health departments from carrying out their responsibilities and prevent Virginians from getting the best care available.")
-                                                     ),
+                                                     p("The field of public health is concerned with factors that influence the health and well-being of individuals and communities. One crucial category of factors that shapes health outcomes is the social determinants of health. According to the World Health Organization, social determinants of health are “the conditions in which people are born, grow, live, work and age”. Social determinants of health affect peoples’ ability to eat healthy foods, live healthy lifestyles, and access healthcare when needed. They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. They do so by shaping opportunities for good health, influencing the distribution of resources and power within society, and creating conditions that can either improve or erode individual and community health. "),
+                                              ),
                                               column(6,
                                                     h2("Social Determinants of Health", align = "center"),
-                                                    p("The field of public health encompasses various factors that influence the health and well-being of individuals and communities. One crucial aspect that significantly shapes health outcomes is the social determinants of health.
-                                                      These determinants as defined by the World Health Organization (WHO) are the social, economic, and environmental conditions in which people are born, grow, live, work, and age.
-                                                      They encompass a wide range of factors, including socioeconomic status, education, neighborhood, and physical environment, access to healthcare, social support networks, and cultural norms. Understanding and addressing the social determinants of health is vital for promoting health 
-                                                      equity and reducing health disparities among different populations. While individual behaviors and genetics play a role in health outcomes, social determinants profoundly impact an individual's ability to lead a healthy life. 
-                                                      They shape opportunities for good health, influence the distribution of resources and power in society, and create conditions that can either support or hinder individual and community health.")
+                                                    p("Like other states, Virginia continues to battle multiple epidemics that have decreased the average life expectancy. Epidemics like COVID-19, opioids, and motor vehicle crashes reduce the life expectancy of Virginians. Due to the contrasting urban and rural regions in Virginia, public health needs vary drastically across the Commonwealth. In wealthier localities with relatively better social determinants of health, life expectancy surpasses the national average. However, in 2018, the average life expectancy in 80 of Virginia’s 133 municipalities were below the national average. The Virginia Public Health Association even found that life expectancy in the state’s capital varies by as much as 20 years.  "),
                                                     
                                                     ),
                                               column(6,
@@ -727,11 +712,15 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                         h1(strong("Demographics"), align = "left", style = "font-size: 18px;"),
                                                         p("Demographics are a vital factor to consider as a social determinant of health due to their significant impact on health outcomes and disparities. Demographic factors such as race, ethnicity, gender, age, income level, and education play a crucial role in shaping health disparities and influencing health behaviors, access to healthcare, and social contexts. By examining demographics, we gain insights into the unique challenges and needs of different population groups, allowing for targeted interventions, tailored healthcare services, and the development of policies that address the specific barriers and inequities faced by diverse communities. Understanding the intersectionality of demographics further enhances our understanding of how multiple factors interact to shape health outcomes and informs strategies for promoting health equity and improving overall health for all individuals and populations.", style = "padding-top:10px;")),
                                                fluidRow(style = "margin: 6px;",
-                                                        align = "justify",
+                                                        align = "left",
                                                         column(3, 
                                                                
                                                                h4(strong("Summary")),
-                                                               textOutput("DemographicsDefinition")
+                                                               htmlOutput("DemographicsDefinition"),
+                                                               h6("References"),
+                                                               p(tags$small("Food Environment Index. (n.d.). County Health Rankings & Roadmaps. https://www.countyhealthrankings.org/explore-health-rankings/county-health-rankings-model/health-factors/health-behaviors/diet-and-exercise/food-environment-index?year=2023")),
+                                                               p("")
+                                                               
                                                                
                                                         ) ,
                                                         column(9, 
@@ -781,7 +770,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                         align = "justify",
                                                         column(3,
                                                                h4(strong("Summary")),
-                                                               textOutput("VariableDefinition")),
+                                                               htmlOutput("VariableDefinition")),
                                                         column(9,
                                                                selectInput("Health_Outcomes", "Select Variable:", width = "50%", choices = c(
                                                                  "Low Birthweight" = "per_low_birthweight",
@@ -826,7 +815,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3, 
                                                     
                                                      h4(strong("Summary")),
-                                                     textOutput("HealthAccessVariableDefinition")
+                                                     htmlOutput("HealthAccessVariableDefinition"),
+                                                     h5("References:")
                                                     
                                               ) ,
                                               column(9, 
@@ -882,7 +872,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3, 
                                                      
                                                      h4(strong("Summary")),
-                                                     textOutput("EconomicStabilityVariableDefinition")
+                                                     htmlOutput("EconomicStabilityVariableDefinition")
                                                      
                                               ) ,
                                               column(9, 
@@ -927,7 +917,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3, 
                                                      
                                                      h4(strong("Summary")),
-                                                     textOutput("HealthBehaviorsVariableDefinition")
+                                                     htmlOutput("HealthBehaviorsVariableDefinition")
                                                      
                                               ) ,
                                               column(9, 
@@ -971,7 +961,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                               column(3, 
                                                      
                                                      h4(strong("Summary")),
-                                                     textOutput("EnvrVariableDefinition")
+                                                     htmlOutput("EnvrVariableDefinition")
                                                      
                                               ) ,
                                               column(9, 
@@ -1019,7 +1009,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                     fluidRow(style = "margin: 12px;",
                                              column(12,
                                                     titlePanel(strong("Overview")),
-                                                    p("Our primary objective is to enhance the efficiency of FCS (Food and Consumer Service) agent efforts by strategically determining optimal territories for these agents to cover. Given that not all counties currently have FCS agents, our aim is to find the most effective way to allocate their efforts across different areas. 
+                                                    p("Our primary objective is to enhance the efficiency of FCS (Food and Consumer Sciences) agent efforts by strategically determining optimal territories for these agents to cover. Given that not all counties currently have FCS agents, our aim is to find the most effective way to allocate their efforts across different areas. 
                                                         We want to avoid situations where some agents are serving relatively well-off counties while others are burdened with multiple counties, some of which may be challenging to access due to long travel times."),
                                                         p("To achieve this goal, we will spatially optimize the distribution of existing agents, ensuring a balanced and equitable allocation of their services. This means identifying areas where FCS agents can make the most significant impact and where their services are most needed.
                                                         Furthermore, we will also explore the possibility of establishing new FCS agent locations in areas where there is a high demand for their services. By identifying regions with the greatest need and potential impact, we can strategically deploy new agents to address the specific challenges faced by underserved communities."),
@@ -1084,8 +1074,9 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                 fluidRow(
                                                   style = "margin: 12px;",
                                                   h1(strong("Results"), align = "center"),
-                                                  column(12,
-                                                         p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
+                                                  column(4,
+                                                         p("This section shows the results for mapping FCS agents including those working with SNAP-Ed."),
+                                                          p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agent for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
                                                   )
                                                 ),
                                                 
@@ -1108,7 +1099,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                      selected = "aggregate"
                                                          ),
                                                          h4(strong("What Does the Map Show?")),
-                                                         textOutput("territorydescription")
+                                                         htmlOutput("territorydescription")
                                                   ),
                                                   
                                                   column(8,
@@ -1123,7 +1114,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                   style = "margin: 12px;",
                                                   h1(strong("Results"), align = "center"),
                                                   column(12,
-                                                         p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
+                                                         p("This section shows the results for mapping FCS agents who only work with SNAP-Ed."),
+                                                         p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agent for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
                                                   )
                                                 ),
 
@@ -1146,7 +1138,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                      selected = "aggregate"
                                                          ),
                                                          h4(strong("What Does the Map Show?")),
-                                                         textOutput("territorydescription_snaped")
+                                                         htmlOutput("territorydescription_snaped")
                                                   ),
 
                                                   column(8,
@@ -1161,7 +1153,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                  style = "margin: 12px;",
                                                  h1(strong("Results"), align = "center"),
                                                  column(12,
-                                                        p("Please submit different choices to the Agents/Health dropdowns to see a new map! ", style = "padding-top:20px;")
+                                                        p("This section shows the results for mapping other FCS agents who are not working with SNAP-Ed."),
+                                                        p("Please choose an agent type to observe the variations between zero, one, and two new agents, alongside the different health indices you wish to explore. Hover your cursor over a county to identify the responsible FCS agent for that area. You can also click on the icons to access pertinent information about the FCS agent's contact details and home office.", style = "padding-top:20px;")
                                                  )
                                                ),
 
@@ -1184,7 +1177,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                     selected = "aggregate"
                                                         ),
                                                         h4(strong("What Does the Map Show?")),
-                                                        textOutput("territorydescription_nonsnaped")
+                                                        htmlOutput("territorydescription_nonsnaped")
                                                  ),
 
                                                  column(8,
@@ -1373,27 +1366,28 @@ server <- function(input, output) {
     sdoh_line(county1(), county2(), county14(), temp_outcome())
   })
   
-  output$VariableDefinition <- renderText({
+  output$VariableDefinition <- renderUI({
     if (input$Health_Outcomes == "per_low_birthweight") {
-      "% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).
-      Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.
-      Preterm births, which occur before 37 weeks of gestation, contribute to low birthweight. Given the far-reaching consequences of low birthweight, it is crucial to address the underlying factors contributing to it. This involves efforts to improve access to quality prenatal care, promote proper nutrition, address maternal stress, reduce exposure to pollution, and provide support for substance misuse prevention and treatment during pregnancy. By addressing these factors, we can work towards reducing the occurrence of low birthweight and improving the long-term health outcomes for infants and their families."
+      HTML(paste("<p>% Low Birthweight: Percentage of live births with low birthweight (< 2,500 grams).</p>",
+                 "<p>Low birthweight is a significant public health indicator that reflects various factors related to maternal health, nutrition, healthcare delivery, and poverty. It is primarily attributed to two main causes: preterm births and intrauterine growth restrictions. Both of these conditions are associated with increased risks of infant morbidity and mortality.</p>",
+                 "<p>Preterm births, which occur before 37 weeks of gestation, contribute to low birthweight. Given the far-reaching consequences of low birthweight, it is crucial to address the underlying factors contributing to it. This involves efforts to improve access to quality prenatal care, promote proper nutrition, address maternal stress, reduce exposure to pollution, and provide support for substance misuse prevention and treatment during pregnancy. By addressing these factors, we can work towards reducing the occurrence of low birthweight and improving the long-term health outcomes for infants and their families.</p>"))
     } else if (input$Health_Outcomes == "life_expectancy") {
-      "Life Expectancy:  
-      Average number of years a person can expect to live. 
-      Life expectancy is a vital metric for assessing health outcomes as it provides valuable insights into the well-being of a population and the factors influencing lifespan. This measure not only informs us about the overall state of the population's health but also sheds light on the various determinants that can impact longevity. By analyzing life expectancy, we gain a comprehensive understanding of both the health status of a community and the underlying elements that shape the length of an individual's life.
-      In 2020, the life expectancy at birth for the total population of Virginia was 78.3 years, as reported by the Virginia Department of Health (VDH). 
-      However, this figure marked a decrease of 1.4 years compared to the previous year. The decline in life expectancy can be attributed to several factors, including the significant impact of the COVID-19 pandemic, which accounted for a large number of deaths. Additionally, unintentional injuries, heart disease, chronic liver disease and cirrhosis, diabetes, and Alzheimer's disease were significant contributors to the decrease in life expectancy. These causes reflect the complex nature of health outcomes and highlight the need for comprehensive efforts to address these factors and improve population health."
+      HTML(paste("<p>Life Expectancy:  
+                Average number of years a person can expect to live.</p>",
+                "<p>Life expectancy is a vital metric for assessing health outcomes as it provides valuable insights into the well-being of a population and the factors influencing lifespan. This measure not only informs us about the overall state of the population's health but also sheds light on the various determinants that can impact longevity. By analyzing life expectancy, we gain a comprehensive understanding of both the health status of a community and the underlying elements that shape the length of an individual's life.</p>",
+                "<p>In 2020, the life expectancy at birth for the total population of Virginia was 78.3 years, as reported by the Virginia Department of Health (VDH).</p>",
+                "<p>However, this figure marked a decrease of 1.4 years compared to the previous year. The decline in life expectancy can be attributed to several factors, including the significant impact of the COVID-19 pandemic, which accounted for a large number of deaths. Additionally, unintentional injuries, heart disease, chronic liver disease and cirrhosis, diabetes, and Alzheimer's disease were significant contributors to the decrease in life expectancy. These causes reflect the complex nature of health outcomes and highlight the need for comprehensive efforts to address these factors and improve population health.</p>"))
     } else if (input$Health_Outcomes == "life_expectancy_gap") {
-      "Life Expectancy Gap: The life expectancy gap is a measure obtained by calculating the disparity between the life expectancies of white and black populations. This disparity serves as a significant indicator of health inequalities between these two racial groups. Analyzing the life expectancy gap provides valuable insights into the existing disparities in health outcomes between white and black populations. By examining this gap, we can gain a deeper understanding of the prevailing health disparities and the need for targeted interventions to address the unequal health experiences of these racial groups."
+      HTML("<p>Life Expectancy Gap: The life expectancy gap is a measure obtained by calculating the disparity between the life expectancies of white and black populations. This disparity serves as a significant indicator of health inequalities between these two racial groups. Analyzing the life expectancy gap provides valuable insights into the existing disparities in health outcomes between white and black populations. By examining this gap, we can gain a deeper understanding of the prevailing health disparities and the need for targeted interventions to address the unequal health experiences of these racial groups.</p>")
     } else if (input$Health_Outcomes == "life_expectancy_black") {
-      "Life Expectancy Black: Avergae number of years a black person can expect to live. In 2020, the average life expectancy for individuals of the black race, as reported by the Virginia Department of Health, was 73.9 years. This figure represented a decrease of 2.4 years compared to the previous year, 2019. The life expectancy of the black population is an important measure that provides insights into the health outcomes and well-being of this specific racial group. By monitoring changes in life expectancy over time, we can identify trends and address the factors contributing to the decrease, aiming to improve the health and longevity of individuals belonging to the black race."
+      HTML(paste("<p>Life Expectancy Black: Average number of years a black person can expect to live.</p>",
+                 "<p>In 2020, the average life expectancy for individuals of the black race, as reported by the Virginia Department of Health, was 73.9 years. This figure represented a decrease of 2.4 years compared to the previous year, 2019. The life expectancy of the black population is an important measure that provides insights into the health outcomes and well-being of this specific racial group. By monitoring changes in life expectancy over time, we can identify trends and address the factors contributing to the decrease, aiming to improve the health and longevity of individuals belonging to the black race.</p>"))
     } else if (input$Health_Outcomes == "life_expectancy_white") {
-      "Life Expectancy White: Avergae number of years a white person can expect to live. 
-      In 2020, based on data from the Virginia Department of Health, the life expectancy was recorded as 78.9 years, indicating a decrease of 1.1 years compared to the previous year, 2019. This measure provides valuable information about the expected average lifespan within the population. By tracking changes in life expectancy over time, we can gain insights into health trends and factors that might contribute to the observed decrease, leading to potential interventions aimed at improving overall population health and well-being."
+      HTML(paste("<p>Life Expectancy White: Average number of years a white person can expect to live.</p>",
+                 "<p>In 2020, based on data from the Virginia Department of Health, the life expectancy was recorded as 78.9 years, indicating a decrease of 1.1 years compared to the previous year, 2019. This measure provides valuable information about the expected average lifespan within the population. By tracking changes in life expectancy over time, we can gain insights into health trends and factors that might contribute to the observed decrease, leading to potential interventions aimed at improving overall population health and well-being.</p>"))
     } else {
-      "Please select a health outcome."
-    } 
+      HTML("<p>Please select a health outcome.</p>")
+    }
   })  
 
   ## 3.2 Healthcare Access -----
@@ -1428,77 +1422,44 @@ server <- function(input, output) {
     sdoh_line(county3(), county4(), county15(), temp_healthaccess())
   })
   
-  output$HealthAccessVariableDefinition <- renderText({
+  output$HealthAccessVariableDefinition <- renderUI({
     if (input$Health_Access == "per_uninsured") {
-      "% Uninsured: Percentage of population under age 65 without health insurance.
-      The absence of health insurance coverage presents a notable obstacle in accessing essential healthcare services and maintaining 
-      financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health 
-      consequences as they receive less preventive care, and delayed treatment often leads to severe illnesses or other health complications. 
-      Moreover, being uninsured can have substantial financial implications, with many individuals unable to afford their medical expenses, 
-      leading to the accumulation of medical debt."
+      HTML(paste("<p>% Uninsured: Percentage of population under age 65 without health insurance.</p>",
+                 "<p>The absence of health insurance coverage presents a notable obstacle in accessing essential healthcare services and maintaining financial stability. According to a report by the Kaiser Family Foundation, individuals without insurance face significant health consequences as they receive less preventive care, and delayed treatment often leads to severe illnesses or other health complications. Moreover, being uninsured can have substantial financial implications, with many individuals unable to afford their medical expenses, leading to the accumulation of medical debt.</p>"))
     } else if (input$Health_Access == "dentist_ratio") {
-      "Dentist Ratio: Ratio of population to dentists.
-      Neglected dental diseases can result in significant health consequences, such as pain, infection, and tooth loss. 
-      While the inadequacy of dental providers represents just one of the barriers to accessing oral healthcare, a substantial 
-      portion of the nation faces shortages in this field. According to the Health Resources and Services Administration, as of December 
-      2022, there were 7,313 designated Dental Health Professional Shortage Areas (HPSAs), encompassing a total population of 70 million 
-      individuals affected by these shortages."
+      HTML(paste("<p>Dentist Ratio: Ratio of population to dentists.</p>",
+                 "<p>Neglected dental diseases can result in significant health consequences, such as pain, infection, and tooth loss. While the inadequacy of dental providers represents just one of the barriers to accessing oral healthcare, a substantial portion of the nation faces shortages in this field. According to the Health Resources and Services Administration, as of December 2022, there were 7,313 designated Dental Health Professional Shortage Areas (HPSAs), encompassing a total population of 70 million individuals affected by these shortages.</p>"))
     } else if (input$Health_Access == "mental_health_provider_ratio") {
-      "Mental Health Provider Ratio: Ratio of population to mental health providers.
-      Accessing healthcare involves more than just financial coverage; it also necessitates access to healthcare providers. 
-      Approximately thirty percent of the population resides in a county designated as a Mental Health Professional Shortage Area, 
-      indicating significant deficiencies in mental health providers. With the mental health parity provisions of the Affordable Care Act 
-      expanding coverage for mental health services, there is growing concern about exacerbated workforce shortages in this field."
+      HTML(paste("<p>Mental Health Provider Ratio: Ratio of population to mental health providers.</p>",
+                 "<p>Accessing healthcare involves more than just financial coverage; it also necessitates access to healthcare providers. Approximately thirty percent of the population resides in a county designated as a Mental Health Professional Shortage Area, indicating significant deficiencies in mental health providers. With the mental health parity provisions of the Affordable Care Act expanding coverage for mental health services, there is growing concern about exacerbated workforce shortages in this field.</p>"))
     } else if (input$Health_Access == "primary_care_physicians_ratio") {
-      "Primary Care Physicians Ratio: Ratio of population to primary care physicians
-      Access to healthcare is not solely reliant on financial coverage; it also requires access to healthcare providers. 
-      While an abundance of specialist physicians has been linked to increased utilization of services, including potentially unnecessary 
-      ones, having an adequate number of primary care physicians is crucial for delivering preventive and primary care. 
-      Additionally, primary care providers play a vital role in referring patients to appropriate specialty care when necessary. 
-      Thus, ensuring sufficient availability of primary care physicians is essential for facilitating timely and appropriate 
-      healthcare services."
+      HTML(paste("<p>Primary Care Physicians Ratio: Ratio of population to primary care physicians.</p>",
+                 "<p>Access to healthcare is not solely reliant on financial coverage; it also requires access to healthcare providers. While an abundance of specialist physicians has been linked to increased utilization of services, including potentially unnecessary ones, having an adequate number of primary care physicians is crucial for delivering preventive and primary care. Additionally, primary care providers play a vital role in referring patients to appropriate specialty care when necessary. Thus, ensuring sufficient availability of primary care physicians is essential for facilitating timely and appropriate healthcare services.</p>"))
     } else if (input$Health_Access == "per_vaccinated"){
-      "% Vaccinated: Percentage of fee-for-service (FFS) Medicare enrollees that had an annual flu vaccination.
-      Influenza is a potentially severe illness that can result in hospitalization and death. 
-      Each year, millions of people experience influenza infections, hundreds of thousands require hospitalization due to the flu, 
-      and thousands lose their lives to the disease.
-      The most effective method to prevent influenza and lower the chances of flu-related illness, hospitalization,
-      and death is through an annual flu vaccine. It is recommended that individuals aged 6 months and older receive a seasonal 
-      flu vaccine every year. Specifically, individuals over the age of 65 are strongly encouraged to get vaccinated as they face a 
-      higher risk of developing severe complications from the flu."
+      HTML(paste("<p>% Vaccinated: Percentage of fee-for-service (FFS) Medicare enrollees that had an annual flu vaccination.</p>",
+                 "<p>Influenza is a potentially severe illness that can result in hospitalization and death. Each year, millions of people experience influenza infections, hundreds of thousands require hospitalization due to the flu, and thousands lose their lives to the disease.</p>",
+                 "<p>The most effective method to prevent influenza and lower the chances of flu-related illness, hospitalization, and death is through an annual flu vaccine. It is recommended that individuals aged 6 months and older receive a seasonal flu vaccine every year. Specifically, individuals over the age of 65 are strongly encouraged to get vaccinated as they face a higher risk of developing severe complications from the flu.</p>"))
     } else if (input$Health_Access == "per_with_annual_mammogram"){
-      "% with Annual Mammogram: Percentage of female Medicare enrollees ages 65-74 that received an annual mammography screening.
-      Research indicates that undergoing mammography screening can significantly reduce breast cancer mortality, particularly among older 
-      women. The recommendation or referral from a physician, along with satisfaction with healthcare providers, plays a significant role 
-      in encouraging breast cancer screening. Presently, women aged 45-54 are advised to undergo mammograms annually, while women aged 55 
-      and older are recommended to have mammograms every two years."
+      HTML(paste("<p>% with Annual Mammogram: Percentage of female Medicare enrollees ages 65-74 that received an annual mammography screening.</p>",
+                 "<p>Research indicates that undergoing mammography screening can significantly reduce breast cancer mortality, particularly among older women. The recommendation or referral from a physician, along with satisfaction with healthcare providers, plays a significant role in encouraging breast cancer screening. Presently, women aged 45-54 are advised to undergo mammograms annually, while women aged 55 and older are recommended to have mammograms every two years.</p>"))
     } else if (input$Health_Access == "preventable_hospitalization_rate"){
-      "Preventable Hospitalization Rate: Rate of hospital stays for ambulatory-care sensitive conditions per 100,000 Medicare enrollees. 
-      When people are hospitalized for conditions that could have been treated in outpatient settings, 
-      it suggests that they did not have access to quality healthcare outside of hospitals. 
-      This could also mean that they relied heavily on emergency rooms and urgent care centers instead of regular healthcare providers. 
-      Preventable hospital stays can be seen as a measure of both the quality of care and the ability to access primary 
-      healthcare services."
+      HTML(paste("<p>Preventable Hospitalization Rate: Rate of hospital stays for ambulatory-care sensitive conditions per 100,000 Medicare enrollees.</p>",
+                 "<p>When people are hospitalized for conditions that could have been treated in outpatient settings, it suggests that they did not have access to quality healthcare outside of hospitals. This could also mean that they relied heavily on emergency rooms and urgent care centers instead of regular healthcare providers. Preventable hospital stays can be seen as a measure of both the quality of care and the ability to access primary healthcare services.</p>"))
     } else if (input$Health_Access == "chlamydia_rate"){
-      "Chlamydia_rate: Number of newly diagnosed chlamydia cases per 100,000 population.
-      Unsafe sexual activity is linked to the incidence rates of chlamydia, which is the most prevalent bacterial sexually transmitted infection (STI) in North America. Chlamydia can lead to serious health consequences such as tubal infertility, ectopic pregnancy, pelvic inflammatory disease, and chronic pelvic pain. The impact of STIs, including chlamydia, extends beyond physical health and can result in increased morbidity and mortality, with higher risks of cervical cancer, infertility, and premature death. Moreover, the economic burden on society due to STIs is significant.
-      Addressing chlamydia rates is crucial for promoting health equity, as underserved communities, particularly adolescent minority women, are disproportionately affected by this infection. Taking measures to prevent and treat chlamydia in these vulnerable populations is essential to ensure equal access to reproductive health care and improve overall health outcomes."  
+      HTML(paste("<p>Chlamydia_rate: Number of newly diagnosed chlamydia cases per 100,000 population.</p>",
+                 "<p>Unsafe sexual activity is linked to the incidence rates of chlamydia, which is the most prevalent bacterial sexually transmitted infection (STI) in North America. Chlamydia can lead to serious health consequences such as tubal infertility, ectopic pregnancy, pelvic inflammatory disease, and chronic pelvic pain. The impact of STIs, including chlamydia, extends beyond physical health and can result in increased morbidity and mortality, with higher risks of cervical cancer, infertility, and premature death. Moreover, the economic burden on society due to STIs is significant.</p>",
+                 "<p>Addressing chlamydia rates is crucial for promoting health equity, as underserved communities, particularly adolescent minority women, are disproportionately affected by this infection. Taking measures to prevent and treat chlamydia in these vulnerable populations is essential to ensure equal access to reproductive health care and improve overall health outcomes.</p>"))
     } else if (input$Health_Access == "per_uninsured_adults"){
-      "% Uninsured Adults: Percentage of adults under age 65 without health insurance."
+      HTML("<p>% Uninsured Adults: Percentage of adults under age 65 without health insurance.</p>")
     } else if (input$Health_Access == "per_uninsured_children"){
-      "% Uninsured Children: Percentage of children under age 19 without health insurance. 
-      The absence of health insurance coverage poses a substantial obstacle to accessing necessary healthcare and maintaining 
-      financial stability. being uninsured can have severe financial implications, with many individuals unable to afford 
-      their medical expenses, resulting in the accumulation of medical debt. This issue is particularly notable among uninsured children, 
-      who are less likely to receive timely preventive care, such as vaccinations and well-child visits. "
+      HTML(paste("<p>% Uninsured Children: Percentage of children under age 19 without health insurance.</p>",
+                 "<p>The absence of health insurance coverage poses a substantial obstacle to accessing necessary healthcare and maintaining financial stability. Being uninsured can have severe financial implications, with many individuals unable to afford their medical expenses, resulting in the accumulation of medical debt. This issue is particularly notable among uninsured children, who are less likely to receive timely preventive care, such as vaccinations and well-child visits.</p>"))
     } else if (input$Health_Access == "per_adults_with_diabetes"){
-      "% Adults with Diabetes- Percentage of adults aged 20 and above with diagnosed diabetes (age-adjusted).
-      Diabetes is a chronic condition known to have broad impacts on physical, social, and mental well-being, and causes significant 
-      morbidity and mortality in the United States.The Centers for Disease Control and Prevention (CDC) reports that people with diabetes are at high
-      risk of heart disease, stroke, and other complications such as kidney failure, blindness, and amputation of a foot, toe, or leg."
+      HTML(paste("<p>% Adults with Diabetes: Percentage of adults aged 20 and above with diagnosed diabetes (age-adjusted).</p>",
+                 "<p>Diabetes is a chronic condition known to have broad impacts on physical, social, and mental well-being, and causes significant morbidity and mortality in the United States. The Centers for Disease Control and Prevention (CDC) reports that people with diabetes are at high risk of heart disease, stroke, and other complications such as kidney failure, blindness, and amputation of a foot, toe, or leg.</p>"))
     } else {
-      "nothing :)"
-    } 
+      HTML("<p>Nothing selected. :)</p>")
+    }
   }) 
   
   
@@ -1536,24 +1497,26 @@ server <- function(input, output) {
   
   output$EconomicStabilityVariableDefinition <- renderText({
     if (input$econ_stab == "per_unemployed") {
-      "Unemployment rate: The unemployment rate reflects the economic and social conditions influencing an individual’s well-being. Employment provides economic stability. Unemployment, on the other hand, is a stressor that could worsen one’s health. It not only limits people’s access to quality healthcare but also is a burden on mental health as people tend to feel more depressed without a job."
+      HTML("<p>Unemployment rate: The unemployment rate reflects the economic and social conditions influencing an individual’s well-being.</p>", 
+          "</p> Employment provides economic stability. Unemployment, on the other hand, is a stressor that could worsen one’s health. It not only limits people’s access to quality healthcare but also is a burden on mental health as people tend to feel more depressed without a job.</p>")
     } else if (input$econ_stab == "per_children_in_poverty") {
-      "% Children in poverty: This variable measures the percentage of people under the age of 18 in poverty. Children living in poverty have less access to health resources. Understanding this variable could tell us a lot more about the overall health and well-being of a community. It is an important indicator of socioeconomic disparities and can provide insights into the level of economic inequality and social support systems.
-      A high percentage of children in poverty suggests that a significant portion of the younger population is living in disadvantaged conditions. These children may face challenges in accessing quality education, nutritious food, stable housing, and healthcare services. Living in poverty can have long-lasting effects on a child's physical and mental health, educational attainment, and overall development. "
+      HTML("<p>% Children in poverty: This variable measures the percentage of people under the age of 18 in poverty. </p>",
+           "</p> Children living in poverty have less access to health resources. Understanding this variable could tell us a lot more about the overall health and well-being of a community. It is an important indicator of socioeconomic disparities and can provide insights into the level of economic inequality and social support systems.</p><p>A high percentage of children in poverty suggests that a significant portion of the younger population is living in disadvantaged conditions. These children may face challenges in accessing quality education, nutritious food, stable housing, and healthcare services. Living in poverty can have long-lasting effects on a child's physical and mental health, educational attainment, and overall development.</p>")
     } else if (input$econ_stab == "per_food_insecure") {
-      "% Food Insecure: Percentage of population who lack adequate access to food. Lack of consistent access to food is associated with adverse health consequences, including weight gain and premature mortality. This issue extends beyond simply having enough food and encompasses the ability of individuals and families to provide balanced meals, including fruits and vegetables. By considering the accessibility and affordability of nutritious food, we can address barriers to healthy eating and improve overall health outcomes.
-      When examining food insecurity, it is essential to go beyond assessing whether individuals had a continuous food supply in the past year. This measure also takes into account the challenges individuals face in acquiring and preparing well-rounded meals that meet their nutritional needs. It recognizes that access to healthy food options, such as fresh fruits and vegetables, can be limited for individuals and families experiencing food insecurity."
+      HTML("<p>% Food Insecure: Percentage of population who lack adequate access to food. </p>",
+          "</p> Lack of consistent access to food is associated with adverse health consequences, including weight gain and premature mortality. This issue extends beyond simply having enough food and encompasses the ability of individuals and families to provide balanced meals, including fruits and vegetables. By considering the accessibility and affordability of nutritious food, we can address barriers to healthy eating and improve overall health outcomes.</p><p>When examining food insecurity, it is essential to go beyond assessing whether individuals had a continuous food supply in the past year. This measure also takes into account the challenges individuals face in acquiring and preparing well-rounded meals that meet their nutritional needs. It recognizes that access to healthy food options, such as fresh fruits and vegetables, can be limited for individuals and families experiencing food insecurity.</p>")
     } else if (input$econ_stab == "median_household_income") {
-      "Median Household Income: Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease."
+      HTML("<p>Median Household Income: The income where half of households in a county earn more and half of households earn less.</p>",
+           "</p> Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease.</p>")
     } else if (input$econ_stab == "median_household_income_black") {
-        "Median Household Income Black: " 
+      HTML("<p>Median Household Income Black: The income where half of households in a county earn more and half of households earn less for black population.</p>")
     } else if (input$econ_stab == "median_household_income_white") {
-      "Median Household Income White: "  
+      HTML("<p>Median Household Income White: The income where half of households in a county earn more and half of households earn less for white population. </p>")
     } else if (input$econ_stab == "median_household_income_hispanic") {
-      "Median Household Income Hispanic: "   
+      HTML("<p>Median Household Income Hispanic: The income where half of households in a county earn more and half of households earn less for Hispanic population.</p>")
     } else {
-      "Please select a health variable."
-    } 
+      HTML("<p>Please select a health variable.</p>")
+    }
   }) 
   ## 3.4 Health Behaviors-----
   temp_healthbehaviors <- reactive({
@@ -1585,41 +1548,47 @@ server <- function(input, output) {
   
   output$HealthBehaviorsVariableDefinition <- renderText({
     if (input$health_behaviors == "per_adults_reporting_currently_smoking") {
-      "% Adults Reporting Currently Smoking: Percentage of adults who are current smokers (age-adjusted).
-      According to the County Health Rankings, every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several 
-      cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. 
-      Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. 
-      It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives."
+      HTML("<p>% Adults Reporting Currently Smoking: Percentage of adults who are current smokers (age-adjusted).</p>",
+           
+           "</p> According to the County Health Rankings, every year, approximately 480,000 premature deaths are directly linked to smoking. Cigarette smoking is a known cause of several 
+    cancers, cardiovascular disease, respiratory conditions, and adverse health outcomes, including low birthweight. 
+    Monitoring the prevalence of tobacco use in the population is crucial as it serves as an indicator of potential health risks. 
+    It helps communities identify the need for cessation programs and evaluate the effectiveness of existing tobacco control initiatives.</p>")
     } else if (input$health_behaviors == "per_excessive_drinking") {
-      "% Excessive Drinking: Percentage of adults reporting binge or heavy drinking (age-adjusted).
-      Nearly 1 in 6 American adults are considered binge drinkers. 
-      Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, 
-      hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden 
-      infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes."
+      HTML("<p>% Excessive Drinking: Percentage of adults reporting binge or heavy drinking (age-adjusted). </p>",
+    "</p> Nearly 1 in 6 American adults are considered binge drinkers. 
+    Excessive alcohol consumption poses a significant risk for various adverse health outcomes. These include alcohol poisoning, 
+    hypertension, acute myocardial infarction, sexually transmitted infections, unintended pregnancy, fetal alcohol syndrome, sudden 
+    infant death syndrome, suicide, interpersonal violence, and motor vehicle crashes.</p>")
     } else if (input$health_behaviors == "per_driving_deaths_with_alcohol_involvement") {
-      "% Driving Deaths with Alcohol Involvement: Percentage of driving deaths with alcohol involvement.
-      This variable directly measures the relationship between alcohol and motor vehicle crash deaths. 
-      Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, 
-      which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor 
-      vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 
-      cause 27% of all alcohol-impaired deaths."
+      HTML("<p>% Driving Deaths with Alcohol Involvement: Percentage of driving deaths with alcohol involvement.</p>",
+    "</p>This variable directly measures the relationship between alcohol and motor vehicle crash deaths. 
+    Alcohol is a substance that reduces the function of the brain, impairing thinking, reasoning, and muscle coordination, 
+    which are essential to operating a vehicle safely. In 2018, approximately 10,500 Americans were killed in alcohol-related motor 
+    vehicle crashes. The annual cost of alcohol-related crashes totals more than $44 billion. Drivers between the ages of 21 and 24 
+    cause 27% of all alcohol-impaired deaths.</p>")
     } else if (input$health_behaviors == "per_physically_inactive") {
-      "% Physically Inactive: Percentage of adults age 18 and over reporting no leisure-time physical activity (age-adjusted).
-      Physical inactivity is highly associated with increased risk of health conditions such as Type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and shortened life expectancy. Physical activity is associated with improved sleep, cognitive ability, bone, and musculoskeletal health, and reduced risk of dementia."
+      HTML("<p>% Physically Inactive: Percentage of adults age 18 and over reporting no leisure-time physical activity (age-adjusted).</p>",
+           
+   "</p> Physical inactivity is highly associated with increased risk of health conditions such as Type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and shortened life expectancy. Physical activity is associated with improved sleep, cognitive ability, bone, and musculoskeletal health, and reduced risk of dementia.</p>")
     } else if (input$health_behaviors == "per_adults_with_obesity") {
-      "% Adults with Obesity: This variable measures the percentage of the adult population (age 18 and older) that reports a body mass index (BMI) greater than or equal to 30 kg/m2 (age-adjusted).
-      Adult obesity is a persistent condition that raises the likelihood of various health risks, including hypertension, heart disease, type 2 diabetes, respiratory issues, chronic inflammation, mental illness, and certain cancers.The development of obesity is influenced by a combination of environmental and individual factors. Environmental factors, such as the availability and affordability of nutrient-rich foods, the extent of fast-food advertising, and societal attitudes regarding weight stigma, can significantly impact the prevalence and risk of obesity."
+      HTML("<p>% Adults with Obesity: This variable measures the percentage of the adult population (age 18 and older) that reports a body mass index (BMI) greater than or equal to 30 kg/m2 (age-adjusted).</p>",
+           
+    "</p> Adult obesity is a persistent condition that raises the likelihood of various health risks, including hypertension, heart disease, type 2 diabetes, respiratory issues, chronic inflammation, mental illness, and certain cancers.The development of obesity is influenced by a combination of environmental and individual factors. Environmental factors, such as the availability and affordability of nutrient-rich foods, the extent of fast-food advertising, and societal attitudes regarding weight stigma, can significantly impact the prevalence and risk of obesity.</p>")
     } else if (input$health_behaviors == "teen_birth_rate") {
-      "Teen Birth Rate: Number of births per 1,000 female population ages 15-19.
-      Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, 
-      family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be 
-      attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and 
-      experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, 
-      high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and 
-      employment opportunities."
+      HTML("<p>Teen Birth Rate: Number of births per 1,000 female population ages 15-19. </p>",
+           
+           "</p> Teenage pregnancy has been linked to detrimental health outcomes for both the mother and child, with impacts extending to partners, 
+    family members, and the wider community. The negative impacts of early childbearing on children and mothers can primarily be 
+    attributed to social disadvantage and adversity. Adolescent mothers face obstacles in pursuing education beyond high school and 
+    experience heightened mental and physical stress, along with a chronic lack of community support. Access to affordable, 
+    high-quality childcare and suitable transportation can pose additional challenges, further limiting their educational and 
+    employment opportunities.</p>")
     } else {
-      "Please select a health variable."
-    } 
+      HTML("<p>Please select a health variable.</p>")
+    }
+  
+  
   }) 
   ## 3.5 Neighborhood and Built Environment------
   temp_envr <- reactive({
@@ -1651,34 +1620,35 @@ server <- function(input, output) {
   })
   output$EnvrVariableDefinition <- renderText({
     if (input$neighbor_envr == "per_physical_distress") {
-      "% Physical Distress: Percentage of adults reporting 14 or more days of poor physical health per month (age-adjusted).
-      This variable offers valuable information on the overall well-being of adults in a community. 
-      Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity."
+      HTML("% Physical Distress: Percentage of adults reporting 14 or more days of poor physical health per month (age-adjusted).<br><br>
+    This variable offers valuable information on the overall well-being of adults in a community. <br>
+    Physical health is important for disease prevention, mental health, energy levels, independence, social engagement, and longevity.")
     } else if (input$neighbor_envr == "per_mental_distress") {
-      "% Mental Distress: Percentage of adults reporting 14 or more days of poor mental health per month (age-adjusted).
-      Mental health is a fundamental aspect of our overall well-being. It encompasses our emotional, psychological, and social well-being, and it affects how we think, feel, and act. Good mental health allows us to cope with the daily stresses of life, form positive relationships, make meaningful contributions to society, and navigate challenges effectively. Poor mental health can have detrimental effects on physical health, contributing to the development or exacerbation of various health conditions, including cardiovascular disease, weakened immune system, chronic pain, and digestive disorders."
+      HTML("% Mental Distress: Percentage of adults reporting 14 or more days of poor mental health per month (age-adjusted).<br><br>
+    Mental health is a fundamental aspect of our overall well-being. It encompasses our emotional, psychological, and social well-being, and it affects how we think, feel, and act. Good mental health allows us to cope with the daily stresses of life, form positive relationships, make meaningful contributions to society, and navigate challenges effectively. Poor mental health can have detrimental effects on physical health, contributing to the development or exacerbation of various health conditions, including cardiovascular disease, weakened immune system, chronic pain, and digestive disorders.")
     } else if (input$neighbor_envr == "per_access_to_exercise_opportunities") {
-      "% Access to Exercise Opportunities: Percentage of the population with adequate access to locations for physical activity.
-      Engaging in more physical activity has been linked to reduced risks of various health conditions, including type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and premature mortality. The built environment plays a crucial role in promoting physical activity, as individuals residing in close proximity to amenities such as sidewalks, parks, and gyms are more inclined to engage in regular exercise."
+      HTML("% Access to Exercise Opportunities: Percentage of the population with adequate access to locations for physical activity.<br><br>
+    Engaging in more physical activity has been linked to reduced risks of various health conditions, including type 2 diabetes, cancer, stroke, hypertension, cardiovascular disease, and premature mortality. The built environment plays a crucial role in promoting physical activity, as individuals residing in close proximity to amenities such as sidewalks, parks, and gyms are more inclined to engage in regular exercise.")
     } else if (input$neighbor_envr == "suicide_rate") {
-      "Suicide Rate: The number of deaths due to suicide per 100,000 population (age-adjusted)
-      Suicide rates provide information on the mental health of a community. Suicide has an overwhelming effect on the mental health of surviving community members, family members, and friends."
+      HTML("Suicide Rate: The number of deaths due to suicide per 100,000 population (age-adjusted).<br><br>
+    Suicide rates provide information on the mental health of a community. Suicide has an overwhelming effect on the mental health of surviving community members, family members, and friends.")
     } else if(input$neighbor_envr == "per_limited_access_to_healthy_foods"){
-      "% Limited Access to Healthy Foods: Percentage of population who are low-income and do not live close to a grocery store.
-      Extensive evidence indicates a robust correlation between living in a food desert and experiencing a higher prevalence of obesity and premature death. Supermarkets have traditionally been known to offer healthier food choices compared to convenience stores or smaller grocery stores. Moreover, limited access to fresh fruits and vegetables is directly linked to premature mortality."
+      HTML("% Limited Access to Healthy Foods: Percentage of population who are low-income and do not live close to a grocery store.<br><br>
+    Extensive evidence indicates a robust correlation between living in a food desert and experiencing a higher prevalence of obesity and premature death. Supermarkets have traditionally been known to offer healthier food choices compared to convenience stores or smaller grocery stores. Moreover, limited access to fresh fruits and vegetables is directly linked to premature mortality.")
     } else if(input$neighbor_envr == "juvenile_arrests_rate"){  
-      "Juvenile Arrests Rate: Rate of delinquency cases per 1,000 juveniles.
-      Juvenile arrests are the result of many factors such as policing strategies, local laws, community and family support, and individual behaviors. Youth who are arrested and incarcerated experience lower self-reported health, higher rates of infectious disease and stress-related illnesses, and higher body mass indices."
+      HTML("Juvenile Arrests Rate: Rate of delinquency cases per 1,000 juveniles.<br><br>
+    Juvenile arrests are the result of many factors such as policing strategies, local laws, community and family support, and individual behaviors. Youth who are arrested and incarcerated experience lower self-reported health, higher rates of infectious disease and stress-related illnesses, and higher body mass indices.")
     } else if(input$neighbor_envr == "per_insufficient_sleep"){
-      "% Insufficient Sleep: Percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).
-      Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being."
+      HTML("% Insufficient Sleep: Percentage of adults who report fewer than 7 hours of sleep on average (age-adjusted).<br><br>
+    Sleep plays a vital role in maintaining a healthy lifestyle, and insufficient sleep can have significant adverse effects on both personal health and the well-being of others. Persistent sleep deprivation has been associated with various chronic health conditions, including heart disease, kidney disease, high blood pressure, and stroke. It is also linked to psychiatric disorders such as depression and anxiety, as well as risky behavior and an increased risk of suicide. Recognizing the importance of adequate sleep is crucial for promoting overall well-being.")
     } else if(input$neighbor_envr == "per_severe_housing_problem"){
-      "% Severe Housing Problems: Percentage of households with at least 1 of 4 housing problems: overcrowding, high housing costs, lack of kitchen facilities, or lack of plumbing facilities.
-      Life in the built environment, ought to be safe for a person to grow and develop in a healthy way. Inadequate housing can make negative contributions to health like infectious and chronic diseases, injuries, and poor child development. Households experiencing severe cost burdens are likely to face tradeoffs in meeting other basic needs which in turn can lead to mental/emotional strain."
-      } else {
+      HTML("% Severe Housing Problems: Percentage of households with at least 1 of 4 housing problems: overcrowding, high housing costs, lack of kitchen facilities, or lack of plumbing facilities.<br><br>
+    Life in the built environment, ought to be safe for a person to grow and develop in a healthy way. Inadequate housing can make negative contributions to health like infectious and chronic diseases, injuries, and poor child development. Households experiencing severe cost burdens are likely to face tradeoffs in meeting other basic needs which in turn can lead to mental/emotional strain.")
+    } else {
       "Please select a health variable."
-    } 
-  }) 
+    }
+  })
+  
   ## 3.6 Demographics-----
   temp_demo <- reactive({
     input$demographics
@@ -1706,34 +1676,36 @@ server <- function(input, output) {
   output$comparison_plot_demo <- renderPlotly({
     sdoh_line(county11(), county12(), county_1(), temp_demo())
   })
-  output$DemographicsDefinition <- renderText({
+  output$DemographicsDefinition <- renderUI({
     if (input$demographics == "per_less_than_18_years_of_age") {
-      " % Less than 18 Years of Age: Percentage of population below 18 years of age.
-      Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population. Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions."
+      HTML(paste("<p>% Less than 18 Years of Age: Percentage of population below 18 years of age.</p>",
+                 "<p>Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population. Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions.</p>"))
     } else if (input$demographics == "per_65_and_over") {
-      "% 65 and Over:Percentage of the population ages 65 and older.
-      Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population.  Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions."
+      HTML(paste("<p>% 65 and Over:Percentage of the population ages 65 and older.</p>",
+                 "<p>Measuring the percentage of the population in different age groups is crucial for healthcare planning, understanding population dynamics, economic projections, social policy development, and public safety considerations. It enables policymakers, researchers, and service providers to make informed decisions and develop targeted strategies that address the unique needs and challenges of specific age cohorts within a population.  Policymakers can anticipate the demand for healthcare services, such as pediatric care, geriatric care, and specialized services for specific age-related conditions.</p>"))
     } else if (input$demographics == "per_hispanic") {
-      "% Hispanic: Percentage of the population self-identifying as Hispanic.
-      Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
+      HTML(paste("<p>% Hispanic: Percentage of the population self-identifying as Hispanic.</p>",
+                 "<p>Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups.</p>"))
     } else if (input$demographics == "per_asian") {
-      "% Asian: Percentage of the population self-identifying as Asian.
-      Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
+      HTML(paste("<p>% Asian: Percentage of the population self-identifying as Asian.</p>",
+                 "<p>Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups.</p>"))
     } else if (input$demographics == "per_nonhispanic_white") {
-      "% Nonhispanic White: Percentage of population self-identifying as non-Hispanic white.
-      Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
-    } else if (input$demographics == "per_american_indian_or_alaska_native"){
-      "% American Indian or Alaska Native: Percentage of population self-identifying as American Indian or Alaska Native.
-      Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
+      HTML(paste("<p>% Nonhispanic White: Percentage of population self-identifying as non-Hispanic white.</p>",
+                 "<p>Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups.</p>"))
+    } else if (input$demographics == "per_american_indian_or_alaska_native") {
+      HTML(paste("<p>% American Indian or Alaska Native: Percentage of population self-identifying as American Indian or Alaska Native.</p>",
+                 "<p>Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups.</p>"))
     } else if (input$demographics == "per_black") {
-      "% Black: Percentage of the population self-identifying as non-Hispanic Black or African American.
-    Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups."
+      HTML(paste("<p>% Black: Percentage of the population self-identifying as non-Hispanic Black or African American.</p>",
+                 "<p>Collecting data on ethnicity helps identify disparities and inequalities that may exist among different ethnic groups. By measuring and analyzing this information, policymakers and organizations can identify areas where certain ethnic groups may face discrimination, bias, or disadvantage. This data can guide the development of targeted policies and interventions aimed at reducing inequality and promoting equal opportunities for all ethnic groups.</p>"))
     } else if (input$demographics == "per_not_proficient_in_english") {
-      "% Not Proficient in English: Percentage of the population aged 5 and over who reported speaking English less than 'well'. Understanding the number of individuals who are not proficient in English helps identify the language needs of a population. It allows policymakers, educators, and service providers to develop appropriate strategies and resources to ensure effective communication and equal access to essential services, such as healthcare, education, legal services, employment, and government programs. By recognizing language diversity and addressing language barriers, societies can promote inclusivity and equitable access to opportunities and resources.
-      "
+      HTML(paste("<p>% Not Proficient in English: Percentage of the population aged 5 and over who reported speaking English less than 'well'. Understanding the number of individuals who are not proficient in English helps identify the language needs of a population. It allows policymakers, educators, and service providers to develop appropriate strategies and resources to ensure effective communication and equal access to essential services, such as healthcare, education, legal services, employment, and government programs. By recognizing language diversity and addressing language barriers, societies can promote inclusivity and equitable access to opportunities and resources.</p>"))
     } else {
-      "Please select a health variable."
-    } 
+      HTML("<p>Please select a health variable.</p>")
+    }
+  
+  
+ 
   }) 
  ## 3.7 server territory maps----
   observe({
@@ -1748,263 +1720,164 @@ server <- function(input, output) {
   
   output$territorydescription <- renderText({
   if (input$territory_type == "base" & input$zscore_type == "food") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from food insecurity z-scores to optimize
-        their effectiveness. 
-    
-    These territories have also been created in regard
-        to the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By
-        hovering your cursor over a county, you can easily identify the agent
-        responsible for serving that particular area. Furthermore, you can hover
-        over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office."
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and no new agents added.
+         <li> Territories are determined using data from food insecurity, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         
+         
+          ")
+
   } else if (input$territory_type == "base" & input$zscore_type == "obese") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from obesity insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard
-        to the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By
-        hovering your cursor over a county, you can easily identify the agent
-        responsible for serving that particular area. Furthermore, you can hover
-        over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office."
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and no new agents added.
+         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+")
   } else if (input$territory_type == "base" && input$zscore_type == "inactivity") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from physical inactivity insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard
-        to the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By
-        hovering your cursor over a county, you can easily identify the agent
-        responsible for serving that particular area. Furthermore, you can hover
-        over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. "
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and no new agents added.
+         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
+    
   } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from aggregate z-scores to optimize
-        their effectiveness. These territories have also been created in regard
-        to the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By
-        hovering your cursor over a county, you can easily identify the agent
-        responsible for serving that particular area. Furthermore, you can hover
-        over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. "
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and no new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.")
   } else if (input$territory_type == "base" & input$zscore_type == "lowbirth") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from low birthweight insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard
-        to the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By
-        hovering your cursor over a county, you can easily identify the agent
-        responsible for serving that particular area. Furthermore, you can hover
-        over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. "
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and no new agents added.
+         <li> Territories are determined using data from percent of low birthweight, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
   } else if (input$territory_type == "base" & input$zscore_type == "diabetes") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from diabetes insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard
-        to the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By
-        hovering your cursor over a county, you can easily identify the agent
-        responsible for serving that particular area. Furthermore, you can hover
-        over the cloud icons to access relevant information regarding the FCS
-        agent's contact details and home office. "
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and no new agents added.
+         <li> Territories are determined using data from diabetes rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
   } else if (input$territory_type == "one" & input$zscore_type == "food") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from food insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and one new agents added.
+         <li> Territories are determined using data from food insecurity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Prince William County"
 
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes a newly designated agent location in Prince William County
-        ."
+        )
   } else if (input$territory_type == "one" & input$zscore_type == "obese") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from obesity insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes a newly designated agent location in Frederick County
-        .Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and one new agents added.
+         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Frederick County"
+         
+    )
   } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from physical inactivity z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes a newly designated agent location in Augusta County
-        .Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and one new agents added.
+         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Augusta County"
+         
+    )
   } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from aggregate z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes a newly designated agent location in Frederick County
-        .Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
   } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from low birthweight z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes a newly designated agent location in Frederick County
-        .Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!."
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
   } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from diabetes z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes a newly designated agent location in Frederick County
-        .Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
   } else if (input$territory_type == "two" & input$zscore_type == "food") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from food insecurity z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes newly designated agent locations in Prince William County
-        and Essex County .Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the food insecurity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Prince William County, Essex County
+       ")
   } else if (input$territory_type == "two" & input$zscore_type == "obese") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from obesity z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes newly designated agent locations in Frederick County
-        and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the obesity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
   } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from physical inactivity z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes newly designated agent locations in Frederick County
-        and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
   } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from aggregate z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes newly designated agent locations in Frederick County
-        and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and two new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
   } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from low birthweight z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes newly designated agent locations in Frederick County
-        and Augusta County.Feel free to explore different choices in the Agents/Health dropdowns to
-        generate a new map!"
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and two new agents added. 
+       <li> Territories are determined using data from all the low birthweight z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
   } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
-    "The map shows the
-        ideal territories assigned to FCS agents. These territories have been
-        determined using data from diabetes z-scores to optimize
-        their effectiveness. These territories have also been created in regard to
-        the model’s constraints on population, commute time, and VCE districts.
-        Each color on the map corresponds to a distinct agent's territory. By hovering
-        your cursor over a county, you can easily identify the agent responsible for
-        serving that particular area.
-
-        Furthermore, you can hover over the cloud icons to access relevant information
-        about the FCS agent's contact details and home office. The blue cloud icons
-        signify existing agents, while the red cloud icons indicate optimal new agent
-        sites. The map now includes newly designated agent locations in Frederick County
-        and Augusta County."
+    HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and two new agents added. 
+       <li> Territories are determined using data from all the diabetes z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
   } else {
     "This map shows territories for no new agents."
   }
@@ -2019,6 +1892,171 @@ server <- function(input, output) {
       map_snaped
     })
   })
+
+  output$territorydescription_snaped <- renderText({
+    if (input$territory_type == "base" & input$zscore_type == "food") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and no new agents added.
+         <li> Territories are determined using data from food insecurity, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         
+         
+          ")
+      
+    } else if (input$territory_type == "base" & input$zscore_type == "obese") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and no new agents added.
+         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+")
+    } else if (input$territory_type == "base" && input$zscore_type == "inactivity") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and no new agents added.
+         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
+      
+    } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and no new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.")
+    } else if (input$territory_type == "base" & input$zscore_type == "lowbirth") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and no new agents added.
+         <li> Territories are determined using data from percent of low birthweight, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
+    } else if (input$territory_type == "base" & input$zscore_type == "diabetes") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and no new agents added.
+         <li> Territories are determined using data from diabetes rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
+    } else if (input$territory_type == "one" & input$zscore_type == "food") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and one new agents added.
+         <li> Territories are determined using data from food insecurity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Prince William County"
+         
+      )
+    } else if (input$territory_type == "one" & input$zscore_type == "obese") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and one new agents added.
+         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Frederick County"
+         
+      )
+    } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and one new agents added.
+         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Augusta County"
+         
+      )
+    } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
+    } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
+    } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "food") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the food insecurity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Prince William County, Essex County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "obese") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the obesity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and two new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and two new agents added. 
+       <li> Territories are determined using data from all the low birthweight z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and two new agents added. 
+       <li> Territories are determined using data from all the diabetes z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else {
+      "This map shows territories for no new agents."
+    }
+  })
  # nonsnaped terr server-----
   observe({
     territory_type_non_snaped <- input$territory_type_non_snaped
@@ -2029,7 +2067,170 @@ server <- function(input, output) {
       map_non_snaped
     })
   })
-
+  output$territorydescription_nonsnaped <- renderText({
+    if (input$territory_type == "base" & input$zscore_type == "food") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and no new agents added.
+         <li> Territories are determined using data from food insecurity, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         
+         
+          ")
+      
+    } else if (input$territory_type == "base" & input$zscore_type == "obese") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and no new agents added.
+         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+")
+    } else if (input$territory_type == "base" && input$zscore_type == "inactivity") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and no new agents added.
+         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
+      
+    } else if (input$territory_type == "base" & input$zscore_type == "aggregate") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and no new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.")
+    } else if (input$territory_type == "base" & input$zscore_type == "lowbirth") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and no new agents added.
+         <li> Territories are determined using data from percent of low birthweight, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
+    } else if (input$territory_type == "base" & input$zscore_type == "diabetes") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and no new agents added.
+         <li> Territories are determined using data from diabetes rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.")
+    } else if (input$territory_type == "one" & input$zscore_type == "food") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and one new agents added.
+         <li> Territories are determined using data from food insecurity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Prince William County"
+         
+      )
+    } else if (input$territory_type == "one" & input$zscore_type == "obese") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and one new agents added.
+         <li> Territories are determined using data from obesity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Frederick County"
+         
+      )
+    } else if (input$territory_type == "one" & input$zscore_type == "inactivity") {
+      HTML("<ul>
+         <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and one new agents added.
+         <li> Territories are determined using data from physical inactivity rates, population, commute time, and VCE districts while considering model constraints.
+         <li> Each color on the map represents a unique FCS agent's territory.
+         <li> User icon: FCS agent sites.
+         <li> Home icon: FCS agents who work with SNAP-Ed.
+         <li> Star icon: New agent sites: Augusta County"
+         
+      )
+    } else if (input$territory_type == "one" & input$zscore_type == "aggregate") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
+    } else if (input$territory_type == "one" & input$zscore_type == "lowbirth") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
+    } else if (input$territory_type == "one" & input$zscore_type == "diabetes") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and one new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "food") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on food insecurity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the food insecurity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Prince William County, Essex County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "obese") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on obesity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the obesity z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "inactivity") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on physical inactivity z-scores and two new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "aggregate") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on aggregate z-scores and two new agents added. 
+       <li> Territories are determined using data from all the aggregated z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "lowbirth") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on low birthweight z-scores and two new agents added. 
+       <li> Territories are determined using data from all the low birthweight z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else if (input$territory_type == "two" & input$zscore_type == "diabetes") {
+      HTML("<ul>
+       <li> The map displays ideal territories assigned to FCS agents based on diabetes z-scores and two new agents added. 
+       <li> Territories are determined using data from all the diabetes z-scores of the five health variables, population, commute time, and VCE districts while considering model constraints.
+       <li> Each color on the map represents a unique FCS agent's territory.
+       <li> User icon: FCS agent sites.
+       <li> Home icon: FCS agents who work with SNAP-Ed.
+       <li> Star icon: New agent sites: Frederick County, Augusta County
+       ")
+    } else {
+      "This map shows territories for no new agents."
+    }
+  })
   
 }
 
