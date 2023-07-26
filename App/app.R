@@ -36,7 +36,7 @@ library(sf)
 options(scipen=999)
 library(htmlwidgets)
 library(fontawesome) 
-
+library(bslib)
 
 #options(shiny.maxRequestSize = 80*1024^2)
 
@@ -615,6 +615,11 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
 ui <- navbarPage(#title = "DSPG 2023",
                  selected = "overview",
                  theme = shinytheme("lumen"),
+                 #theme = bs_theme(bootswatch = "flatly"),
+                 # theme = bs_theme(fg = "#000000",
+                 #          bg = "#FFEFEF",
+                 #          primary = "#660000",
+                 #          secondary = "#FF6600"),
                  tags$head(tags$style('.selectize-dropdown {z-index: 10000}')), 
                  useShinyjs(),
                  
@@ -639,26 +644,26 @@ ui <- navbarPage(#title = "DSPG 2023",
                                             p("Virginia Cooperative Extension (VCE) was established in 1914 and has since been committed to bringing the resources of Virginia Tech and Virginia State University to the people of the Commonwealth. VCE has"),
                                           tags$li("107 offices"),
                                           tags$li("11 Agriculture Research Extension centers"), 
-                                          tags$li("6 4-H centers throughout the state"),
-                                      
+                                          tags$li("6 4-H centers"),
+                                          
                                           p("VCE agents and volunteers strive to empower youth and Virginian farmers, guide sustainable resource management, and promote public health. VCE accomplishes these goals through programs that put research-based knowledge to work in people’s lives. VCE has a variety of programs like 4-H Youth Development, Family and Consumer Sciences, Community Viability, Agriculture and Natural Resources, Food, Nutrition, and Health, etc. in every county. VCE works on unique challenges Virginians face in partnership with governments and organizations to solve these issues in a way that benefits all people. With the expertise and knowledge from Virginia Tech and Virginia State University, VCE agents are able to tackle issues and foster community growth across the state. "),
                   
                                           p(strong("Family and Consumer Sciences:"),
                                           p("This project focuses on VCE's Family and Consumer Sciences Program and the agents supporting it. FCS programming addresses community needs, including Nutrition/Wellness, Family Financial Education, and Family and Human Development. FCS agents collaborate with various organizations to meet local residents' educational needs and make research-based knowledge applicable to their lives. "),
                                           p(strong("Supplemental Nutrition Assistance Program-Education: "),
-                                            p("SNAP-Ed agents play a vital role in promoting healthy eating habits, improving food choices, and enhancing food security among SNAP recipients, with a specific focus on women in low-income families. Through the federally funded program, operating in collaboration with state and local organizations, including Cooperative Extension offices in Virginia, these agents offer evidence-based nutrition education to participants. They conduct workshops, cooking demonstrations, and educational programs to educate women on the importance of a balanced diet, reading nutrition labels, and preparing affordable, nutritious meals. Additionally, SNAP-Ed agents teach practical skills related to food budgeting and planning, enabling participants to make the most of their resources and access fresh produce and healthy foods in their communities."
+                                            p("FCS also include SNAP-Ed agents who play a vital role in promoting healthy eating habits, improving food choices, and enhancing food security among SNAP recipients, with a specific focus on women in low-income families. Through the federally funded program, these agents offer evidence-based nutrition education to participants. They conduct workshops, cooking demonstrations, and educational programs to educate women on the importance of a balanced diet, reading nutrition labels, and preparing affordable, nutritious meals. Additionally, SNAP-Ed agents teach practical skills related to food budgeting and planning, enabling participants to make the most of their resources and access fresh produce and healthy foods in their communities."
                                               )))))), 
                                    column(6,
                                           h2(strong("Our Work"), align = "center"),
                                           p(strong("Purpose:")),
                                           p("Our team designed an interactive dashboard to aid VCE FCS agents in identifying areas in Virginia that needed more support. The dashboard helped stakeholders gain a better understanding of community needs, enabling agents to identify specific areas of need for each county in Virginia. The resource aimed to support VCE FCS agents in improving the overall health of Virginia communities."),
-                                          p("We utilized publicly accessible data, including Virginia health rankings, to provide stakeholders with a comprehensive understanding of the factors influencing family health in Virginia. Our focus was on various variables aligning with the five determinants of health and health outcomes. Additionally, we mapped these variables alongside existing data on Virginia Cooperative Extension (VCE) agents to identify areas where VCE agents could provide additional support to their communities."),
+                                          p("We utilized publicly accessible data, including Virginia health rankings, to provide stakeholders with a comprehensive understanding of the factors influencing family health in Virginia. Our focus was on various variables aligning with the five determinants of health and health outcomes. Additionally, we mapped these variables alongside existing data on VCE agents to identify areas where VCE agents could provide additional support to their communities.Overall, this project aims to empower FCS agents' leadership with the knowledge and insights necessary to make informed decisions and have an even larger positive impact on the well-being of individuals and families in Virginia."),
                                           
                                           h2(strong("Dashboard Aims"), align = "center"),
                                          
                                           p(strong("Social Determinants of Health:"),
                                           p("This interactive dashboard will allow agents to gain valuable context regarding the public health landscape of the counties they serve, enabling them to tailor their services accordingly. 
-                                            This dashboard displays data on critical health variables that influence the well-being of Virginia's localities and the work of FCS agents. Overall, this project aims to empower FCS agents' leadership with the knowledge and insights necessary to make informed decisions and have an even larger positive impact on the well-being of individuals and families in Virginia.")),
+                                            This dashboard displays data on critical health variables that influence the well-being of Virginia's localities and the work of FCS agents. Through this dashboard, FCS agents can interact with various social determinants of health variables and make informed decisions and deliver more targeted and effective support to the communities they serve.")),
                                           p(strong("Optimizing Agent Territories:"), 
                                           p("This section presents the results of the optimization process, showcasing the agent territories on maps. These visual representations allow stakeholders to identify the areas where they should focus their efforts and explore the locations of newly assigned agents. By providing this interactive feature, stakeholders can make informed decisions based on the visual insights provided by the maps.")),
                                           
@@ -695,7 +700,7 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                      p("For these reasons, the Family and Consumer Sciences (FCS) division of Virginia Cooperative Extension works to address these social determinants of health, particularly in communities with relatively poor social determinants of health. The data presented in the Social Determinants of Health component of this dashboard show the variation in social determinants of health and health outcomes across both time and space. FCS agents as well as the general public can use the Social Determinants of Health component of this dashboard to gain a better understanding of the needs of their communities, to determine the effects of various policies, and to learn about public health in the Commonwealth broadly.")
                                               ),
                                               column(6,
-                                                     img(src = "sdoh.jpg", style = "display: inline; margin-right: 5px;", width = "600px;", align = "center"),
+                                                     img(src = "sdoh.jpg", style = "display: inline; margin-right: 5px;", width = "500px;", align = "center"),
                                                      p("Figure 1: Social Determinants of Health Categories Explored", align = "center", style = "font-style: italic; font-size: 12px; margin-top: 5px;")
                                               )
                                               
@@ -706,7 +711,7 @@ ui <- navbarPage(#title = "DSPG 2023",
 
                            tabPanel("Dashboard",
                                     h1(strong("Health Variables"), align = "center"),
-                                    p("We have a range of health variables that help us understand the social determinants of health. These variables are categorized into five groups, and demographics, giving you the flexibility to select different variables. The result of your selection will be presented on an informative map, and a time series graph displaying the chosen variables, as well as the locations of FCS (Food and Consumer Sciences) and SNAP-Ed (Supplemental Nutrition Assistance Program Education) agent sites. FCS agents are represented by user icons, while SNAP-Ed agents are depicted by home icons. The map will provide a comprehensive view of the social determinants of health and the geographical distribution of these agents, aiding in our efforts to optimize their services and promote community well-being.", align = "center"),
+                                    p("We have a range of health variables that help us understand the social determinants of health. These variables are categorized into five groups(not including demographics) giving you the flexibility to select different variables. The result of your selection will be presented on a map, and a time series graph as well as the locations of FCS and SNAP-Ed agent sites. FCS agents are represented by user icons, while SNAP-Ed agents are depicted by home icons. The map will provide a comprehensive view of the social determinants of health and the geographical distribution of these agents, aiding in our efforts to optimize their services and promote community well-being.", align = "center"),
                                    
                                     tabsetPanel(
                                       
@@ -1004,7 +1009,11 @@ ui <- navbarPage(#title = "DSPG 2023",
                  ),
                  fluidRow(style = "margin 12px;",
                           align = "justify"),
-                          p("Note: All defnitions and summary are adopted from the County Health Rankings website: https://www.countyhealthrankings.org/explore-health-rankings/county-health-rankings-model/health-factors/health-behaviors/diet-and-exercise/food-environment-index?year=2023"),
+                          p("Note: All defnitions and summaries are adopted from the County Health Rankings website: https://www.countyhealthrankings.org/explore-health-rankings/county-health-rankings-model/health-factors/health-behaviors/diet-and-exercise/food-environment-index?year=2023"),
+                 fluidRow(align = "center",
+                          p(tags$small(em('Last updated: July 2023')))
+                 ), 
+                 
                  ),
                 ),
                  
@@ -1023,12 +1032,12 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                         p("In addition to optimizing the allocation of FCS agents, our methodology will extend to SNAP-Ed (Supplemental Nutrition Assistance Program Education) agents. Since SNAP-Ed agents work with families who have limited financial means, we aim to provide them with valuable insights into where their resources should be allocated most effectively. By focusing on specific groups with income levels below $2,000, SNAP-Ed agents can tailor their efforts to serve those who need assistance the most. By considering both SNAP-Ed and FCS agents together, we can achieve a comprehensive approach that optimizes the impact of their collective efforts. This integrated approach will enable us to better address the diverse needs of various communities and create a more efficient and equitable distribution of services."),
                                                         p("Ultimately, our objective is to empower agents with the necessary tools and data-driven insights to make informed decisions about resource allocation. By strategically positioning FCS and SNAP-Ed agents and identifying areas with the highest potential for impact, we can work towards improving the overall well-being of communities and promoting health and nutrition for those who need it most."),
                                                         p(strong("Workflow:")),
-                                                        tags$li("Perform a literature review to understand the role of FCS and identify which SDoH variables are relevant to the work that FCS does"),
-                                                        tags$li("Identify health outcomes that FCS agents can affect"),
-                                                        tags$li("Create an aggregate measure of need within communities through a health index: aggregate z-score"),
-                                                        tags$li("Use current FCS agent locations and isochrone maps to determine how accessible FCS agents are to their communities"),
-                                                        tags$li("Use a mathematical programming model to optimize the assignment of counties to FCS agents"),
-                                                        tags$li("Use a mathematical programming model to determine the best locations for adding new FCS agents to Virginia"),
+                                                        tags$li("Performed a literature review to understand the role of FCS and identify which SDoH variables are relevant to the work that FCS does"),
+                                                        tags$li("Identified health outcomes that FCS agents can affect"),
+                                                        tags$li("Created an aggregate measure of need within communities through a health index: aggregate z-score"),
+                                                        tags$li("Used current FCS agent locations and isochrone maps to determine how accessible FCS agents are to their communities"),
+                                                        tags$li("Used a mathematical programming model to optimize the assignment of counties to FCS agents"),
+                                                        tags$li("Used a mathematical programming model to determine the best locations for adding new FCS agents to Virginia"),
                                                         h1(strong("Programming"), align = "center"),
                                                         fluidRow(style = "margin: 12px;",
                                                              column(6,
@@ -1044,7 +1053,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                                       it is impractical for agents to handle all the problems alone. To address this issue, we developed a health index by aggregating z-scores. These z-scores are calculated using five key social determinants of health variables: obesity, food insecurity, diabetes, low birthweight, and physical inactivity. Although there are many other variables to consider, we believe that focusing on these health variables allows FCS agents to make a significant impact."),
                                                                       h1(strong("Constraints"), align = "center"),
                                                                       tags$li(strong("Commute time less than 120 minutes")),
-                                                                      p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 120 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time."),
+                                                                      p("The time constraint is implemented to ensure that agents do not have to endure excessive travel times exceeding 120 minutes. This constraint aims to optimize efficiency by minimizing the commuting burden placed on agents. By limiting travel distances, agents can allocate more time to engage with and serve their assigned communities effectively. This constraint helps maintain a reasonable work-life balance for agents, allowing them to maximize their availability and dedicate their efforts to fulfilling their responsibilities within a manageable time.
+                                                                        Note that we increased the time to 180 minutes when we run the results for SNAP-Ed and FCS only agents because there were areas that did not get assigned an agent because it takes more than two hours to get there."),
                                                                       tags$li(strong("Unique assignment")),
                                                                       p("The county assignment constraint ensures that every county is allocated to an agent, leaving no county without coverage. This constraint guarantees that each county receives the attention and support of an assigned agent. By assigning agents to specific counties, we can ensure that the unique needs and characteristics of each county are addressed, providing tailored services and resources to the communities within them. This approach promotes comprehensive coverage and equitable distribution of support across all counties, leaving no county overlooked or underserved."),
                                                                       tags$li(strong("Population served less than 1.2 million people")),
@@ -1069,13 +1079,16 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                         img(src = "vce_districts.jpg", style = "display: inline; margin-right: 5px;", width = "700px")
                                                         ))
                                                            )
-                                                               )
+                                                               ),
+                                    fluidRow(align = "center",
+                                             p(tags$small(em('Last updated: July 2023')))
+                                    ),
                                                                  ),
                                                             
                             
                  
                             ### 2.4.2 Subtab Results ----
-                            tabPanel("Where Should New Agents Be?",
+                            tabPanel("Where Should Agents Be?",
                                      tabsetPanel(
                                        tabPanel("FCS and SNAP-Ed Agents",
                                                 fluidRow(
@@ -1193,7 +1206,10 @@ ui <- navbarPage(#title = "DSPG 2023",
                                                  )
                                                )
                                       )
-                                     )
+                                     ),
+                                     fluidRow(align = "center",
+                                              p(tags$small(em('Last updated: July 2023')))
+                                     ),
                             )),
                             
                  
