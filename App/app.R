@@ -620,7 +620,8 @@ ui <- navbarPage(#title = "DSPG 2023",
                  #          bg = "#FFEFEF",
                  #          primary = "#660000",
                  #          secondary = "#FF6600"),
-                 tags$head(tags$style('.selectize-dropdown {z-index: 10000}')), 
+                 #tags$head(tags$style('.selectize-dropdown {z-index: 10000}')), 
+                  tags$head(tags$style('DSPG 2023')), 
                  useShinyjs(),
                  
                  ## 2.1 Tab Overview--------------------------------------------
