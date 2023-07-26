@@ -1532,11 +1532,14 @@ server <- function(input, output) {
       HTML("<p>Median Household Income: The income where half of households in a county earn more and half of households earn less.</p>",
            "</p> Income impacts health outcomes in many ways. It is one of the most important factors that affect other factors such as housing, education, and food.  Higher income provides individuals with greater access to healthcare services such as health insurance, medical treatments, and medication. Higher income also affects one’s eating behaviors. Having money to buy healthier food can decrease the risk of nutrition-related health conditions such as obesity, diabetes, and heart disease.</p>")
     } else if (input$econ_stab == "median_household_income_black") {
-      HTML("<p>Median Household Income Black: The income where half of households in a county earn more and half of households earn less for black population.</p>")
+      HTML("<p>Median Household Income Black: The income where half of households in a county earn more and half of households earn less for black population.</p>",
+          "<p> The examination of household income disparities among different racial groups is essential for comprehending the complex dynamics of socioeconomic inequality. By delving into these differences, we gain valuable insights into the challenges faced by various communities and the potential impact on their overall well-being. Addressing these gaps can lead to more equitable policies and initiatives aimed at creating a fairer and more inclusive society for everyone. </p> ")
     } else if (input$econ_stab == "median_household_income_white") {
-      HTML("<p>Median Household Income White: The income where half of households in a county earn more and half of households earn less for white population. </p>")
+      HTML("<p>Median Household Income White: The income where half of households in a county earn more and half of households earn less for white population. </p>",
+           "</p> The examination of household income disparities among different racial groups is essential for comprehending the complex dynamics of socioeconomic inequality. By delving into these differences, we gain valuable insights into the challenges faced by various communities and the potential impact on their overall well-being. Addressing these gaps can lead to more equitable policies and initiatives aimed at creating a fairer and more inclusive society for everyone.</p>")
     } else if (input$econ_stab == "median_household_income_hispanic") {
-      HTML("<p>Median Household Income Hispanic: The income where half of households in a county earn more and half of households earn less for Hispanic population.</p>")
+      HTML("<p>Median Household Income Hispanic: The income where half of households in a county earn more and half of households earn less for Hispanic population.</p>",
+           "</p> The examination of household income disparities among different racial groups is essential for comprehending the complex dynamics of socioeconomic inequality. By delving into these differences, we gain valuable insights into the challenges faced by various communities and the potential impact on their overall well-being. Addressing these gaps can lead to more equitable policies and initiatives aimed at creating a fairer and more inclusive society for everyone.</p>")
     } else {
       HTML("<p>Please select a health variable.</p>")
     }
