@@ -471,7 +471,7 @@ jscode <- 'var x = document.getElementsByClassName("navbar-brand");
     ) %>% lapply(htmltools::HTML)
 
     #creating good title names
-    idx2 <- which(unique(fcs_territories$non_snap_zcore_type) == zscore_type_non_snaped)
+    idx2 <- which(unique(fcs_territories$non_snap_zscore_type) == zscore_type_non_snaped)
     good_title_names <- c("Aggregate", "Obesity", "Diabetes", "Food Insecurity", "Physical Inactivity", "Low Birthweight")
     # create title for the map
     territory_title <- paste("Optimized VCE FCS Agent Sites based on",good_title_names[idx2], "Z-scores", sep= " ")
