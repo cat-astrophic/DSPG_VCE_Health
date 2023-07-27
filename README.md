@@ -1,5 +1,5 @@
 # DSPG_VCE_Health
-ShinyApp folder provides code and data to replicate the interactive dashboard of the project. You can also visit the website of our website **https://aaec-vt.shinyapps.io/dspg23VCEhealth/**
+ShinyApp folder provides code and data to replicate the interactive dashboard of the project. You can also visit the website of our project **https://aaec-vt.shinyapps.io/dspg23VCEhealth/**
 
 
 # VT Data Science for the Public Good
