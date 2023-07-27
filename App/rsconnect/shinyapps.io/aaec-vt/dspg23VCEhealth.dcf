@@ -1,0 +1,13 @@
+name: dspg23VCEhealth
+title: dspg23VCEhealth
+username:
+account: aaec-vt
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9491092
+bundleId: 7500093
+url: https://aaec-vt.shinyapps.io/dspg23VCEhealth/
+when: 1690399496.65433
+lastSyncTime: 1690399496.65435
+asMultiple: FALSE
+asStatic: FALSE
